@@ -1,0 +1,149 @@
+[
+  {
+    "title": "Aurora UI",
+    "style": "aurora",
+    "buildType": "overview",
+    "file": "aurora/index.md",
+    "source": "https://superdesign.dev/styles/aurora"
+  },
+  {
+    "title": "Bento Grid",
+    "style": "bento-grid",
+    "buildType": "overview",
+    "file": "bento-grid/index.md",
+    "source": "https://superdesign.dev/styles/bento-grid"
+  },
+  {
+    "title": "Brutalism ui components",
+    "style": "brutalism",
+    "buildType": "components",
+    "file": "brutalism/components.md",
+    "source": "https://superdesign.dev/styles/brutalism/components"
+  },
+  {
+    "title": "Brutalism ecommerce",
+    "style": "brutalism",
+    "buildType": "ecommerce",
+    "file": "brutalism/ecommerce.md",
+    "source": "https://superdesign.dev/styles/brutalism/ecommerce"
+  },
+  {
+    "title": "Brutalism",
+    "style": "brutalism",
+    "buildType": "overview",
+    "file": "brutalism/index.md",
+    "source": "https://superdesign.dev/styles/brutalism"
+  },
+  {
+    "title": "Brutalism login page",
+    "style": "brutalism",
+    "buildType": "login",
+    "file": "brutalism/login.md",
+    "source": "https://superdesign.dev/styles/brutalism/login"
+  },
+  {
+    "title": "Brutalism pricing page",
+    "style": "brutalism",
+    "buildType": "pricing",
+    "file": "brutalism/pricing.md",
+    "source": "https://superdesign.dev/styles/brutalism/pricing"
+  },
+  {
+    "title": "Brutalism website",
+    "style": "brutalism",
+    "buildType": "website",
+    "file": "brutalism/website.md",
+    "source": "https://superdesign.dev/styles/brutalism/website"
+  },
+  {
+    "title": "Claymorphism",
+    "style": "claymorphism",
+    "buildType": "overview",
+    "file": "claymorphism/index.md",
+    "source": "https://superdesign.dev/styles/claymorphism"
+  },
+  {
+    "title": "Dark Mode UI",
+    "style": "dark-mode",
+    "buildType": "overview",
+    "file": "dark-mode/index.md",
+    "source": "https://superdesign.dev/styles/dark-mode"
+  },
+  {
+    "title": "Glassmorphism mobile app",
+    "style": "glassmorphism",
+    "buildType": "app",
+    "file": "glassmorphism/app.md",
+    "source": "https://superdesign.dev/styles/glassmorphism/app"
+  },
+  {
+    "title": "Glassmorphism card",
+    "style": "glassmorphism",
+    "buildType": "card",
+    "file": "glassmorphism/card.md",
+    "source": "https://superdesign.dev/styles/glassmorphism/card"
+  },
+  {
+    "title": "Glassmorphism dashboard",
+    "style": "glassmorphism",
+    "buildType": "dashboard",
+    "file": "glassmorphism/dashboard.md",
+    "source": "https://superdesign.dev/styles/glassmorphism/dashboard"
+  },
+  {
+    "title": "Glassmorphism",
+    "style": "glassmorphism",
+    "buildType": "overview",
+    "file": "glassmorphism/index.md",
+    "source": "https://superdesign.dev/styles/glassmorphism"
+  },
+  {
+    "title": "Glassmorphism login",
+    "style": "glassmorphism",
+    "buildType": "login",
+    "file": "glassmorphism/login.md",
+    "source": "https://superdesign.dev/styles/glassmorphism/login"
+  },
+  {
+    "title": "Glassmorphism pricing",
+    "style": "glassmorphism",
+    "buildType": "pricing",
+    "file": "glassmorphism/pricing.md",
+    "source": "https://superdesign.dev/styles/glassmorphism/pricing"
+  },
+  {
+    "title": "Glassmorphism website",
+    "style": "glassmorphism",
+    "buildType": "website",
+    "file": "glassmorphism/website.md",
+    "source": "https://superdesign.dev/styles/glassmorphism/website"
+  },
+  {
+    "title": "Minimalist Web Design",
+    "style": "minimalist-web-design",
+    "buildType": "overview",
+    "file": "minimalist-web-design/index.md",
+    "source": "https://superdesign.dev/styles/minimalist-web-design"
+  },
+  {
+    "title": "Neumorphism",
+    "style": "neumorphism",
+    "buildType": "overview",
+    "file": "neumorphism/index.md",
+    "source": "https://superdesign.dev/styles/neumorphism"
+  },
+  {
+    "title": "Retro Web Design",
+    "style": "retro",
+    "buildType": "overview",
+    "file": "retro/index.md",
+    "source": "https://superdesign.dev/styles/retro"
+  },
+  {
+    "title": "Skeuomorphism",
+    "style": "skeuomorphism",
+    "buildType": "overview",
+    "file": "skeuomorphism/index.md",
+    "source": "https://superdesign.dev/styles/skeuomorphism"
+  }
+]

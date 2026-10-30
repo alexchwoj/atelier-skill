@@ -1,0 +1,21 @@
+# Reference material and leftovers kept locally, never published
+_archive/
+/atelier-test/
+/tests/
+
+# Script output
+.atelier/
+palette.html
+
+# Tooling
+node_modules/
+__pycache__/
+*.pyc
+*.log
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

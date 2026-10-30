@@ -1,0 +1,21 @@
+{
+  "name": "atelier",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An agent skill for designing and building websites that look designed, not generated.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node tools/build-library.mjs",
+    "find": "node atelier/scripts/find.mjs",
+    "lint": "node atelier/scripts/lint.mjs",
+    "shot": "node atelier/scripts/shot.mjs",
+    "install-skill": "node install.mjs"
+  },
+  "bin": {
+    "atelier-skill": "install.mjs"
+  },
+  "repository": "github:alexchwoj/atelier-skill"
+}

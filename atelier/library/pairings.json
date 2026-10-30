@@ -1,0 +1,6204 @@
+[
+ {
+  "display": "Inter",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 190,
+  "moods": {
+   "minimal": 55,
+   "brutalist": 12,
+   "bold": 24,
+   "corporate": 21,
+   "playful": 3,
+   "techy": 25,
+   "luxury": 30,
+   "editorial": 38,
+   "cinematic": 12,
+   "retro": 9,
+   "organic": 52,
+   "futuristic": 10
+  },
+  "themes": {
+   "dark": 54,
+   "mixed": 79,
+   "light": 57
+  },
+  "examples": [
+   "library/prompts/3d/facet-glass.md",
+   "library/prompts/agency/creative-studio.md",
+   "library/prompts/agency/intelligent-operations.md",
+   "library/prompts/ai-assistant/deepthink.md",
+   "library/prompts/ai-builder/ridgeai.md",
+   "library/prompts/ai/ai-image-generator-ui.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 45,
+  "moods": {
+   "luxury": 16,
+   "editorial": 17,
+   "organic": 22,
+   "techy": 14,
+   "corporate": 4,
+   "futuristic": 2,
+   "bold": 6,
+   "minimal": 8,
+   "brutalist": 2,
+   "cinematic": 1
+  },
+  "themes": {
+   "dark": 10,
+   "light": 23,
+   "mixed": 12
+  },
+  "examples": [
+   "library/prompts/background/delizoso-elegant-italian-3d-restaurant-copy.md",
+   "library/prompts/button/pillbox-a-gradient-button-system-that-pops.md",
+   "library/prompts/card/modern-card-based-ftp-manager.md",
+   "library/prompts/carousel/sgw-enhanced-modal-interaction.md",
+   "library/prompts/chat/cardiosync-ai-heart-health-chatbot.md",
+   "library/prompts/cta/solra-centered-gradient-sunset-cta-legibility-fixed.md"
+  ]
+ },
+ {
+  "display": "Fraunces",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 29,
+  "moods": {
+   "editorial": 26,
+   "organic": 21,
+   "luxury": 10,
+   "minimal": 8,
+   "futuristic": 1,
+   "bold": 1,
+   "brutalist": 1,
+   "techy": 1,
+   "playful": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "light": 19,
+   "mixed": 7,
+   "dark": 3
+  },
+  "examples": [
+   "library/prompts/chat/warm-terracotta-ai-chat-interface.md",
+   "library/prompts/cta/atelier-design-spoken-into-being-editorial-serif-burgundy.md",
+   "library/prompts/faq/questions-set-in-serif-an-editorial-faq.md",
+   "library/prompts/footer/cream-paper-and-coral-mega-footer.md",
+   "library/prompts/footer/ember-and-cream-editorial-serif-footer.md",
+   "library/prompts/footer/wayfinder.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 28,
+  "moods": {
+   "minimal": 5,
+   "techy": 6,
+   "organic": 6,
+   "editorial": 5,
+   "luxury": 6,
+   "cinematic": 4,
+   "corporate": 1,
+   "retro": 1,
+   "bold": 3,
+   "futuristic": 1,
+   "brutalist": 2
+  },
+  "themes": {
+   "light": 3,
+   "dark": 14,
+   "mixed": 11
+  },
+  "examples": [
+   "library/prompts/chat/ai-chat-workspace-ui-emerald-agent-builder-with-live-preview.md",
+   "library/prompts/cta/halo-aurora-glass-cta-band.md",
+   "library/prompts/dashboard/glassmorphism-dashboard-frosted-sunrise-analytics-ui.md",
+   "library/prompts/faq/questions-answered-aurora-glass-faq.md",
+   "library/prompts/footer/aqua-aurora-frosted-glass-footer.md",
+   "library/prompts/footer/sunset-glow-wordmark-mega-footer.md"
+  ]
+ },
+ {
+  "display": "Instrument Serif",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 23,
+  "moods": {
+   "minimal": 3,
+   "cinematic": 4,
+   "corporate": 1,
+   "luxury": 5,
+   "editorial": 5,
+   "organic": 1,
+   "techy": 3,
+   "brutalist": 1,
+   "futuristic": 1,
+   "bold": 2
+  },
+  "themes": {
+   "mixed": 12,
+   "light": 3,
+   "dark": 8
+  },
+  "examples": [
+   "library/prompts/agency/velorah.md",
+   "library/prompts/ai/agent-wave.md",
+   "library/prompts/app/adhd-planner.md",
+   "library/prompts/contact-us/build-with-us.md",
+   "library/prompts/email-marketing/email-marketing.md",
+   "library/prompts/health/wellness-devicex.md"
+  ]
+ },
+ {
+  "display": "Poppins",
+  "body": "Poppins",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 20,
+  "moods": {
+   "retro": 2,
+   "playful": 8,
+   "organic": 13,
+   "bold": 4,
+   "luxury": 1,
+   "techy": 2,
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 5,
+   "light": 13,
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/3d/design-world.md",
+   "library/prompts/button/button-studio-a-playful-button-system.md",
+   "library/prompts/creative/honey-bee.md",
+   "library/prompts/crypto-hero/vaultra-hero.md",
+   "library/prompts/form/tell-us-how-it-felt-superflow-feedback-radiopastel-survey.md",
+   "library/prompts/hero-section/bloom-ai.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "Archivo",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 19,
+  "moods": {
+   "brutalist": 8,
+   "bold": 6,
+   "organic": 7,
+   "editorial": 8,
+   "techy": 2,
+   "futuristic": 2,
+   "cinematic": 4,
+   "luxury": 3,
+   "minimal": 2
+  },
+  "themes": {
+   "mixed": 9,
+   "dark": 7,
+   "light": 3
+  },
+  "examples": [
+   "library/prompts/button/hardstop-buttons-with-a-spine-a-brutalist-button-system.md",
+   "library/prompts/carousel/section-green-integration-carousel-from-typebeatfun-inspired-page.md",
+   "library/prompts/footer/acid-lime-on-ink-giant-wordmark-footer.md",
+   "library/prompts/form/red-on-cream-editorial-announcement-email.md",
+   "library/prompts/hero-section/landing-page-hero-blueprint-spec-sheet-developer-tool-site.md",
+   "library/prompts/hero-section/lumina-interactive-hero.md"
+  ]
+ },
+ {
+  "display": "JetBrains Mono",
+  "body": "JetBrains Mono",
+  "displayCategory": "mono",
+  "bodyCategory": "mono",
+  "uses": 18,
+  "moods": {
+   "techy": 7,
+   "corporate": 2,
+   "editorial": 4,
+   "minimal": 6,
+   "luxury": 4,
+   "bold": 3,
+   "brutalist": 5,
+   "cinematic": 2,
+   "organic": 2,
+   "futuristic": 2
+  },
+  "themes": {
+   "dark": 4,
+   "mixed": 7,
+   "light": 7
+  },
+  "examples": [
+   "library/prompts/chat/ragindex-ai-chat-interface-neutral-professional-b73b0d.md",
+   "library/prompts/dashboard/ccfe-league-dashboard-ultra-detail-fm-edition.md",
+   "library/prompts/dashboard/minimalist-monospace-dashboard.md",
+   "library/prompts/hero-section/framewatch-or-matrix-enhanced-hero.md",
+   "library/prompts/hero/cyberpunk-reveal.md",
+   "library/prompts/landing-page/motherduck-saas-landing-page.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 17,
+  "moods": {
+   "techy": 2,
+   "editorial": 8,
+   "luxury": 8,
+   "bold": 4,
+   "organic": 3,
+   "cinematic": 4,
+   "brutalist": 1,
+   "minimal": 2,
+   "retro": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "dark": 7,
+   "mixed": 7,
+   "light": 3
+  },
+  "examples": [
+   "library/prompts/analytics/data-signal.md",
+   "library/prompts/dashboard/newsprint-fitness-dashboard-enhanced-navigation.md",
+   "library/prompts/ecommerce/chirag-chhatbar-ecommerce-growth-expert.md",
+   "library/prompts/form/orion-or-contacts-list.md",
+   "library/prompts/hero-section/estudio.md",
+   "library/prompts/hero-section/gulfselite.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "JetBrains Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 16,
+  "moods": {
+   "techy": 15,
+   "brutalist": 4,
+   "futuristic": 1,
+   "corporate": 4,
+   "playful": 1,
+   "minimal": 10,
+   "organic": 2,
+   "editorial": 3,
+   "bold": 2,
+   "luxury": 3
+  },
+  "themes": {
+   "dark": 12,
+   "light": 1,
+   "mixed": 3
+  },
+  "examples": [
+   "library/prompts/chat/chat-ui-with-sidebar-navigation.md",
+   "library/prompts/dashboard/ai-system-configuration-console.md",
+   "library/prompts/dashboard/analytics-dashboard.md",
+   "library/prompts/dashboard/candlebiz-industrial-enterprise-chartjs-analytics.md",
+   "library/prompts/dashboard/linear-inspired-developer-tool-dashboard.md",
+   "library/prompts/dashboard/predictai-results-analysis-dashboard.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Space Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 15,
+  "moods": {
+   "luxury": 2,
+   "brutalist": 4,
+   "minimal": 5,
+   "techy": 7,
+   "editorial": 1,
+   "futuristic": 8,
+   "retro": 1,
+   "bold": 3,
+   "corporate": 3,
+   "cinematic": 1
+  },
+  "themes": {
+   "mixed": 5,
+   "dark": 8,
+   "light": 2
+  },
+  "examples": [
+   "library/prompts/animation/interactive-prompt-based-particle-text.md",
+   "library/prompts/automotive/veyra-electric.md",
+   "library/prompts/cybersecurity/cyber-layer.md",
+   "library/prompts/footer/ink-and-paper-mono-slim-bar-footer.md",
+   "library/prompts/hero-section/formula-genius-enhanced-conversion-hero.md",
+   "library/prompts/landing-page/lumengrid-ship-the-startup-site-before-the-demo-ends-neon-grid-retro-future.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Space Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 13,
+  "moods": {
+   "playful": 1,
+   "brutalist": 1,
+   "techy": 1,
+   "bold": 1,
+   "organic": 4,
+   "cinematic": 1,
+   "editorial": 2,
+   "minimal": 2,
+   "luxury": 2,
+   "futuristic": 1
+  },
+  "themes": {
+   "mixed": 5,
+   "light": 1,
+   "dark": 7
+  },
+  "examples": [
+   "library/prompts/button/buttons-that-catch-the-light-aurora-frosted-glass-button-system.md",
+   "library/prompts/dashboard/neubrutalism-dashboard-bold-candy-analytics-ui-with-hard-shadows.md",
+   "library/prompts/form/say-hello-through-glass-aurora-contact.md",
+   "library/prompts/hero-section/coverflow-carousels-that-turn-heads-dark-coverflow-aurora.md",
+   "library/prompts/hero-section/voices-from-the-canvas-aurora-carousel.md",
+   "library/prompts/landing-page/forge-launch-waitlist-dark-warm-ember.md"
+  ]
+ },
+ {
+  "display": "General Sans",
+  "body": "General Sans",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 13,
+  "moods": {
+   "techy": 2,
+   "minimal": 4,
+   "corporate": 2,
+   "bold": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 4,
+   "light": 8,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/power-ai.md",
+   "library/prompts/layout/account-setup-flow-progressive-disclosure-layout.md",
+   "library/prompts/layout/action-centered-home.md",
+   "library/prompts/layout/bottom-sheet-creation-flow.md",
+   "library/prompts/layout/cart-drawer-essential-slide-in.md",
+   "library/prompts/layout/cart-drawer-upselling.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "JetBrains Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 11,
+  "moods": {
+   "minimal": 6,
+   "luxury": 3,
+   "cinematic": 2,
+   "retro": 1,
+   "brutalist": 2,
+   "techy": 5,
+   "futuristic": 2,
+   "organic": 2,
+   "bold": 2,
+   "editorial": 4
+  },
+  "themes": {
+   "dark": 7,
+   "mixed": 3,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/animated-landing-page-dark-console-with-a-self-drawing-network-diagram.md",
+   "library/prompts/ecommerce/techpro-laptops-store.md",
+   "library/prompts/hero-section/lockain.md",
+   "library/prompts/login-page/developer-tool-dashboardonboarding.md",
+   "library/prompts/misc/hardu-brutalist-tech-edition.md",
+   "library/prompts/misc/orbital-integration-ecosystem.md"
+  ]
+ },
+ {
+  "display": "Outfit",
+  "body": "Outfit",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 11,
+  "moods": {
+   "techy": 2,
+   "cinematic": 2,
+   "minimal": 3,
+   "organic": 1,
+   "editorial": 4,
+   "playful": 1,
+   "luxury": 1,
+   "bold": 6,
+   "brutalist": 1
+  },
+  "themes": {
+   "light": 6,
+   "mixed": 5
+  },
+  "examples": [
+   "library/prompts/dashboard/fintech-dashboard-with-line-chart.md",
+   "library/prompts/hero-section/comai.md",
+   "library/prompts/landing-page/1brain.md",
+   "library/prompts/landing-page/noname.md",
+   "library/prompts/misc/fixit-buddy-category-selection.md",
+   "library/prompts/navbar/staggered-menu-navigation-update.md"
+  ]
+ },
+ {
+  "display": "Manrope",
+  "body": "Manrope",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 10,
+  "moods": {
+   "techy": 4,
+   "minimal": 1,
+   "organic": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "dark": 2,
+   "light": 8
+  },
+  "examples": [
+   "library/prompts/dashboard/bento-dashboard-dark-graphite-analytics-overview-fuchsia-accent.md",
+   "library/prompts/ecommerce/ltx-video.md",
+   "library/prompts/hero-section/ihouse.md",
+   "library/prompts/layout/bottom-tab-navigation-core-app-shell.md",
+   "library/prompts/layout/fab-navigation.md",
+   "library/prompts/layout/gesture-first-navigation-system.md"
+  ]
+ },
+ {
+  "display": "Inter Tight",
+  "body": "Inter Tight",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 9,
+  "moods": {
+   "organic": 1,
+   "bold": 2,
+   "corporate": 2,
+   "techy": 1,
+   "editorial": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "mixed": 3,
+   "light": 4,
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/creator-platform/reelmark.md",
+   "library/prompts/crypto/vela-terms-hero.md",
+   "library/prompts/hiking-app/lauberhorn-ridge.md",
+   "library/prompts/landing-page/marke-agencywebflowio.md",
+   "library/prompts/landing-page/prompt.md",
+   "library/prompts/login-page/form-ui-multi-step-business-account-application-that-only-asks-what-it-could-not.md"
+  ]
+ },
+ {
+  "display": "Nunito",
+  "body": "Nunito",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 9,
+  "moods": {
+   "playful": 5,
+   "bold": 2,
+   "corporate": 1,
+   "organic": 7,
+   "editorial": 2,
+   "luxury": 2,
+   "minimal": 1
+  },
+  "themes": {
+   "light": 6,
+   "dark": 1,
+   "mixed": 2
+  },
+  "examples": [
+   "library/prompts/form/loop-say-hello-we-dont-bite-friendly-illustrated-sky.md",
+   "library/prompts/hero-section/naseeb-soft-pastel-hero-screen.md",
+   "library/prompts/landing-page/gas-pos-management-system-landing.md",
+   "library/prompts/login-page/bloomly-illustrated-friendly-sky-split-signup.md",
+   "library/prompts/login-page/plume-sign-in-to-your-design-canvas.md",
+   "library/prompts/mobile-app/claymorphism-mobile-app-pastel-habit-tracker-home.md"
+  ]
+ },
+ {
+  "display": "Inter Tight",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 8,
+  "moods": {
+   "retro": 1,
+   "corporate": 3,
+   "bold": 5,
+   "editorial": 2,
+   "luxury": 2,
+   "organic": 2,
+   "cinematic": 4,
+   "minimal": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "mixed": 5,
+   "dark": 2,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/3d/cast-and-render.md",
+   "library/prompts/ai/halden-ai-teammate-hero.md",
+   "library/prompts/creative/petalyx.md",
+   "library/prompts/editorial/velia.md",
+   "library/prompts/hero-section/azaka.md",
+   "library/prompts/hero-section/gates.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 8,
+  "moods": {
+   "techy": 4,
+   "corporate": 4,
+   "luxury": 1,
+   "editorial": 2,
+   "bold": 1,
+   "organic": 2,
+   "brutalist": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "mixed": 6,
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/dashboard/atria-projects-dashboard.md",
+   "library/prompts/dashboard/edtech-pro-dashboard-strict-reproduction.md",
+   "library/prompts/footer/cobalt-and-paper-mega-footer.md",
+   "library/prompts/login-page/bento-configuration-dashboard.md",
+   "library/prompts/misc/deep-blue-hierarchy.md",
+   "library/prompts/misc/shopnova-full-messaging-suite-copy.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "JetBrains Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 7,
+  "moods": {
+   "luxury": 1,
+   "minimal": 3,
+   "techy": 5,
+   "futuristic": 1,
+   "editorial": 2,
+   "organic": 2,
+   "corporate": 1
+  },
+  "themes": {
+   "dark": 5,
+   "mixed": 1,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/jarvis-os-executive-dashboard.md",
+   "library/prompts/misc/aegiswaf-top-ip-monitoring-widget.md",
+   "library/prompts/misc/blucap-glass-edition.md",
+   "library/prompts/misc/genesearch-pro-or-precision-analysis.md",
+   "library/prompts/misc/icd-plan-izleme-dark-triage-and-tam-hafta.md",
+   "library/prompts/misc/pipo-bot.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Fraunces",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 6,
+  "moods": {
+   "editorial": 6,
+   "minimal": 3,
+   "organic": 5
+  },
+  "themes": {
+   "light": 5,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/button/editorial-buttons-underline-studies.md",
+   "library/prompts/carousel/atelier-vermillion-editorial-burgundy-agency-website.md",
+   "library/prompts/form/the-atelier-brief-an-editorial-intake-form-set-like-a-letter.md",
+   "library/prompts/hero-section/atelier-the-brief-designs-itself-editorial-serif-burgundy.md",
+   "library/prompts/portfolio/loam-warm-earthy-organic-agency-website.md",
+   "library/prompts/testimonial/the-quote-set-in-burgundy.md"
+  ]
+ },
+ {
+  "display": "Instrument Serif",
+  "body": "Instrument Serif",
+  "displayCategory": "serif",
+  "bodyCategory": "serif",
+  "uses": 6,
+  "moods": {
+   "bold": 1,
+   "luxury": 1,
+   "editorial": 1,
+   "minimal": 2,
+   "organic": 1,
+   "cinematic": 1
+  },
+  "themes": {
+   "mixed": 3,
+   "light": 1,
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/curated/rare-gallery.md",
+   "library/prompts/hero-section/asme.md",
+   "library/prompts/hero/stillmind.md",
+   "library/prompts/landing-page/animated-luxury-serif-landing-page-near-black-and-ice-blue-with-a-scroll-advance.md",
+   "library/prompts/landing-page/innovation.md",
+   "library/prompts/style/observe-see-the-shape-of-the-noise.md"
+  ]
+ },
+ {
+  "display": "Anton",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 5,
+  "moods": {
+   "editorial": 3,
+   "brutalist": 2,
+   "bold": 1,
+   "organic": 2,
+   "luxury": 1,
+   "playful": 1,
+   "minimal": 1,
+   "futuristic": 1,
+   "cinematic": 1,
+   "retro": 1,
+   "techy": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "light": 2,
+   "dark": 1,
+   "mixed": 2
+  },
+  "examples": [
+   "library/prompts/3d-website/3d-collectible-hero.md",
+   "library/prompts/misc/kpop-idol.md",
+   "library/prompts/navbar/voltkind-we-build-bold-brands-online.md",
+   "library/prompts/print/animated-scroll-printed-product-page-warm-cream-and-red-editorial-with-a-horizon.md",
+   "library/prompts/skill/slide-deck.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "DM Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 5,
+  "moods": {
+   "techy": 2,
+   "luxury": 1,
+   "corporate": 1,
+   "editorial": 1,
+   "organic": 4
+  },
+  "themes": {
+   "dark": 2,
+   "light": 3
+  },
+  "examples": [
+   "library/prompts/animation/dso-neumorphic-panel.md",
+   "library/prompts/animation/neumorphic-prompt-optimization-results.md",
+   "library/prompts/animation/prompt-optimizer-light-neumorphism.md",
+   "library/prompts/dashboard/dark-navy-multimedia-repository-dashboard.md",
+   "library/prompts/style/neumorphism.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "Space Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 5,
+  "moods": {
+   "brutalist": 4,
+   "bold": 4,
+   "organic": 2,
+   "editorial": 2,
+   "minimal": 2
+  },
+  "themes": {
+   "light": 2,
+   "mixed": 2,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/faq/questions-answered-loudly-a-brutalist-faq.md",
+   "library/prompts/form/send-us-the-brief-brutalist-contact-form.md",
+   "library/prompts/landing-page/animated-editorial-landing-page-condensed-poster-type-with-scroll-pinned-dark-an.md",
+   "library/prompts/login-page/sign-in-blockwork-brutalist-acid-login.md",
+   "library/prompts/modal/overlay-modal-design-built-loud-brutalist-acid.md"
+  ]
+ },
+ {
+  "display": "Instrument Serif",
+  "body": "Instrument Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 5,
+  "moods": {
+   "minimal": 3,
+   "cinematic": 1,
+   "luxury": 2,
+   "editorial": 1,
+   "organic": 1,
+   "brutalist": 1,
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 2,
+   "dark": 3
+  },
+  "examples": [
+   "library/prompts/hero-section/blueai.md",
+   "library/prompts/landing-page/kova.md",
+   "library/prompts/landing-page/prodflow-or-elite-engineering-studio.md",
+   "library/prompts/music/vinyl.md",
+   "library/prompts/saas/digitwist-ai-builder.md"
+  ]
+ },
+ {
+  "display": "Sora",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 5,
+  "moods": {
+   "minimal": 1,
+   "organic": 3,
+   "editorial": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 3,
+   "mixed": 1,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/coral-gradient-product-launch-email.md",
+   "library/prompts/mobile-app/editorial-music-player-now-playing.md",
+   "library/prompts/mobile-app/fitness-tracker-mobile-app-home-with-activity-rings.md",
+   "library/prompts/pricing/aurora-glass-saas-pricing.md",
+   "library/prompts/pricing/midnight-navy-fintech-pricing-656a6d.md"
+  ]
+ },
+ {
+  "display": "Geist",
+  "body": "Geist",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 4,
+  "moods": {
+   "minimal": 1
+  },
+  "themes": {
+   "mixed": 3,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/agency/talent-collective.md",
+   "library/prompts/hero/equilibrium.md",
+   "library/prompts/hero/immersive-ocean.md",
+   "library/prompts/landing-page/ai-image-generator-ui-light-studio-app-with-prompt-composer.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Roboto",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 4,
+  "moods": {
+   "brutalist": 1,
+   "retro": 2,
+   "techy": 1,
+   "editorial": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 2,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/ai/fastshot.md",
+   "library/prompts/landing-page/ommod.md",
+   "library/prompts/portfolio/atelier-unit.md",
+   "library/prompts/saas/intelligent-performance.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "Manrope",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 4,
+  "moods": {
+   "luxury": 3,
+   "editorial": 2,
+   "organic": 2,
+   "retro": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "light": 2,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/animation/kru-profile-unified-glassmorphism.md",
+   "library/prompts/animation/motion-music-player.md",
+   "library/prompts/background/zorex-or-futuristic-3d-clothing-experience.md",
+   "library/prompts/misc/aiworkspaceislands-v2-copy.md"
+  ]
+ },
+ {
+  "display": "Manrope",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 4,
+  "moods": {
+   "luxury": 2,
+   "corporate": 1,
+   "bold": 2,
+   "organic": 1,
+   "cinematic": 1,
+   "retro": 1,
+   "minimal": 2,
+   "futuristic": 1,
+   "techy": 1
+  },
+  "themes": {
+   "dark": 1,
+   "mixed": 3
+  },
+  "examples": [
+   "library/prompts/dashboard/dinar-gold-admin-customer-data-entry.md",
+   "library/prompts/dashboard/vrindavan-chandrodaya-temple-asset-manager.md",
+   "library/prompts/hero-section/pixelworld.md",
+   "library/prompts/misc/modern-minimal-risk-gauge.md"
+  ]
+ },
+ {
+  "display": "Archivo Black",
+  "body": "Space Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 4,
+  "moods": {
+   "brutalist": 4,
+   "bold": 2,
+   "playful": 2,
+   "organic": 1
+  },
+  "themes": {
+   "light": 3,
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/footer/acid-yellow-neo-brutalist-mega-footer.md",
+   "library/prompts/login-page/formset-make-the-account-then-make-the-work.md",
+   "library/prompts/navbar/hyperblok-maximalist-vibrant-agency-website.md",
+   "library/prompts/pricing/warm-neo-brutalist-saas-pricing-cbd596.md"
+  ]
+ },
+ {
+  "display": "Roboto",
+  "body": "Roboto",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 4,
+  "moods": {
+   "editorial": 3,
+   "futuristic": 1,
+   "bold": 2,
+   "luxury": 1,
+   "cinematic": 2,
+   "minimal": 1,
+   "brutalist": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 2,
+   "mixed": 2
+  },
+  "examples": [
+   "library/prompts/hero-section/mfc.md",
+   "library/prompts/saas/anveril.md",
+   "library/prompts/skill/hero-window-composition.md",
+   "library/prompts/style/material.md"
+  ]
+ },
+ {
+  "display": "Public Sans",
+  "body": "Public Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 4,
+  "moods": {
+   "bold": 1,
+   "corporate": 2,
+   "minimal": 1
+  },
+  "themes": {
+   "light": 2,
+   "mixed": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/layout/checkout-page-standard-two-column.md",
+   "library/prompts/layout/classic-product-page.md",
+   "library/prompts/logistics/freight-scroll-hero.md",
+   "library/prompts/misc/hdnet-professional-internet-services.md"
+  ]
+ },
+ {
+  "display": "Bricolage Grotesque",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 4,
+  "moods": {
+   "minimal": 1,
+   "bold": 2,
+   "editorial": 1,
+   "organic": 2
+  },
+  "themes": {
+   "mixed": 3,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/login-page/login-page-ui-split-screen-electric-cobalt-brand-panel.md",
+   "library/prompts/portfolio/bento-grid-portfolio-personal-link-in-bio-profile.md",
+   "library/prompts/print/risograph-pricing-page-bold-spot-ink-saas-plans.md",
+   "library/prompts/testimonial/wall-of-love-testimonial-section-amber-star-masonry.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Outfit",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 4,
+  "moods": {
+   "luxury": 4,
+   "editorial": 4
+  },
+  "themes": {
+   "light": 2,
+   "mixed": 2
+  },
+  "examples": [
+   "library/prompts/misc/institutional-about-page-link-update.md",
+   "library/prompts/misc/research-and-discovery-deep-archive.md",
+   "library/prompts/navbar/colobus-curio-or-integrated-navigation-1d77ec.md",
+   "library/prompts/navbar/contact-page-navigation-update.md"
+  ]
+ },
+ {
+  "display": "Sora",
+  "body": "Sora",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "brutalist": 1,
+   "retro": 1,
+   "bold": 1,
+   "futuristic": 1,
+   "corporate": 2,
+   "cinematic": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/agency/neural-pathway.md",
+   "library/prompts/hero-section/ocode.md",
+   "library/prompts/hero-section/sentinel-ai.md"
+  ]
+ },
+ {
+  "display": "Instrument Serif",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "bold": 1,
+   "luxury": 2,
+   "editorial": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/agency/northstar.md",
+   "library/prompts/landing-page/codenest-coding-platform.md",
+   "library/prompts/landing-page/coverdash-editorial-insurtech-landing.md"
+  ]
+ },
+ {
+  "display": "Playfair",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "minimal": 3,
+   "brutalist": 2,
+   "organic": 1,
+   "bold": 2,
+   "corporate": 2,
+   "editorial": 2,
+   "luxury": 2,
+   "cinematic": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/ai/orbit-flora.md",
+   "library/prompts/misc/northlight-or-blue-gradient-hands.md",
+   "library/prompts/style/luxury.md"
+  ]
+ },
+ {
+  "display": "Outfit",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "luxury": 2,
+   "organic": 1,
+   "futuristic": 1,
+   "techy": 1,
+   "playful": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1,
+   "mixed": 2
+  },
+  "examples": [
+   "library/prompts/animation/nexa-ai-premium-animated-experience.md",
+   "library/prompts/misc/lazuri-or-premium-interactive-isp-experience.md",
+   "library/prompts/style/playful.md"
+  ]
+ },
+ {
+  "display": "Lato",
+  "body": "Lato",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "cinematic": 1,
+   "retro": 1,
+   "editorial": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 3
+  },
+  "examples": [
+   "library/prompts/background/parallax-stars-background.md",
+   "library/prompts/layout/skimbuster-adjusted-layout-position.md",
+   "library/prompts/misc/yosef-realty-luxury-residences.md"
+  ]
+ },
+ {
+  "display": "Anton",
+  "body": "Oswald",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "editorial": 2,
+   "bold": 2,
+   "cinematic": 1
+  },
+  "themes": {
+   "dark": 2,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/carousel/landing-page-ui-bold-athletic-performance-brand-charcoal-volt-lime.md",
+   "library/prompts/form/movie-poster-film-premiere-invite-email.md",
+   "library/prompts/presentation/editorial-magazine-pitch-deck.md"
+  ]
+ },
+ {
+  "display": "Instrument Sans",
+  "body": "Instrument Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "minimal": 2,
+   "techy": 1,
+   "editorial": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "dark": 1,
+   "mixed": 1,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/horizon-minimalist-command-dashboard.md",
+   "library/prompts/fintech-landing/nuvo.md",
+   "library/prompts/misc/unsplash-linearzed-redesign.md"
+  ]
+ },
+ {
+  "display": "Archivo Black",
+  "body": "Space Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 3,
+  "moods": {
+   "brutalist": 3,
+   "techy": 1,
+   "bold": 2,
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 3
+  },
+  "examples": [
+   "library/prompts/dashboard/leadflow-dashboard-with-navigation.md",
+   "library/prompts/pricing/carousel-design-brutalist-slider.md",
+   "library/prompts/style/kinetic-orange-style.md"
+  ]
+ },
+ {
+  "display": "JetBrains Mono",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "mono",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "minimal": 1,
+   "cinematic": 2,
+   "techy": 2,
+   "luxury": 2,
+   "editorial": 2,
+   "futuristic": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/dashboard/pocket-dashboard-pencil-sketch-loader-ae15dd.md",
+   "library/prompts/dashboard/sector-deep-dive-or-semiconductor-industry-dashboard.md",
+   "library/prompts/landing-page/reign-agentic-or-unified-cinematic-homepage.md"
+  ]
+ },
+ {
+  "display": "JetBrains Mono",
+  "body": "Inter",
+  "displayCategory": "mono",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "corporate": 1,
+   "editorial": 1,
+   "luxury": 1,
+   "techy": 1,
+   "minimal": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 3
+  },
+  "examples": [
+   "library/prompts/dashboard/telecom-crm-application-shell.md",
+   "library/prompts/misc/editorial-feature-announcement.md",
+   "library/prompts/website/neo-museum.md"
+  ]
+ },
+ {
+  "display": "Instrument Serif",
+  "body": "Barlow",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "minimal": 1,
+   "cinematic": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "light": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/aetheris-voyage.md",
+   "library/prompts/hero/visual-hero.md",
+   "library/prompts/landing-page/digital-experiences.md"
+  ]
+ },
+ {
+  "display": "Cormorant Garamond",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "futuristic": 2,
+   "retro": 1,
+   "corporate": 1,
+   "cinematic": 1,
+   "luxury": 3,
+   "editorial": 1,
+   "organic": 1,
+   "minimal": 1,
+   "brutalist": 1
+  },
+  "themes": {
+   "mixed": 2,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/apos.md",
+   "library/prompts/misc/conseil-intelligent-jewel-tone.md",
+   "library/prompts/style/tectonic-style.md"
+  ]
+ },
+ {
+  "display": "Open Sans",
+  "body": "Open Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "corporate": 3,
+   "luxury": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/misc/command-center.md",
+   "library/prompts/misc/porto-itapoa-news-component-c4e6fe.md",
+   "library/prompts/portfolio/portfolio-de-servicos.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "luxury": 2,
+   "organic": 2,
+   "minimal": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "light": 3
+  },
+  "examples": [
+   "library/prompts/misc/elitehire-premium-executive-recruitment.md",
+   "library/prompts/misc/mindfy-ritual-phase-4-insight.md",
+   "library/prompts/misc/premium-wellness-home.md"
+  ]
+ },
+ {
+  "display": "Crimson Pro",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 3,
+  "moods": {
+   "editorial": 2,
+   "luxury": 2,
+   "corporate": 1,
+   "retro": 1,
+   "minimal": 1,
+   "techy": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 2,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/refined-legal-professional-litigation-suite.md",
+   "library/prompts/mobile-app/antica-trattoria-rustica-mobile-optimized.md",
+   "library/prompts/portfolio/premium-dual-theme-developer-portfolio.md"
+  ]
+ },
+ {
+  "display": "HelveticaNowDisplay-Medium",
+  "body": "HelveticaNowDisplayW01-Rg",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 2,
+  "moods": {},
+  "themes": {
+   "light": 1,
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/3d/3d-character-studio.md",
+   "library/prompts/hero/retro-futurist.md"
+  ]
+ },
+ {
+  "display": "Schibsted Grotesk",
+  "body": "Schibsted Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {},
+  "themes": {
+   "mixed": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/ai/agent-hero.md",
+   "library/prompts/mobile-app/mobile-app-ui-photo-editor-on-an-18percent-grey-card.md"
+  ]
+ },
+ {
+  "display": "Newsreader",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "editorial": 2,
+   "retro": 1,
+   "techy": 2,
+   "bold": 1,
+   "luxury": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "light": 1,
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/ai/scanner-comparison.md",
+   "library/prompts/hero-section/landing-page-hero-editorial-restraint-saas-product-site-with-embedded-dashboard.md"
+  ]
+ },
+ {
+  "display": "Kanit",
+  "body": "Kanit",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "brutalist": 1,
+   "futuristic": 1,
+   "editorial": 1,
+   "bold": 2
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/background/mmdz-dj-and-3d-creator-portfolio-critical-fix.md",
+   "library/prompts/portfolio/3d-portfolio.md"
+  ]
+ },
+ {
+  "display": "Cabinet Grotesk",
+  "body": "Satoshi",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 2,
+  "moods": {
+   "minimal": 1,
+   "cinematic": 1,
+   "techy": 1,
+   "bold": 2,
+   "organic": 2,
+   "luxury": 1,
+   "retro": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/carousel/insidepov-3d-video-carousel-code.md",
+   "library/prompts/hero-section/speed-hero-section-with-content.md"
+  ]
+ },
+ {
+  "display": "Figtree",
+  "body": "Figtree",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "organic": 1,
+   "techy": 1
+  },
+  "themes": {
+   "dark": 1,
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/claymorphism-analytics-dashboard-soft-sage-clay-ui.md",
+   "library/prompts/hero/creative-portfolio.md"
+  ]
+ },
+ {
+  "display": "Geist",
+  "body": "Geist Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 2,
+  "moods": {
+   "techy": 2,
+   "brutalist": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/dashboard/dashboard-003.md",
+   "library/prompts/style/ascii-hero.md"
+  ]
+ },
+ {
+  "display": "Montserrat",
+  "body": "Open Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "brutalist": 1,
+   "retro": 1,
+   "techy": 1,
+   "editorial": 1,
+   "bold": 1,
+   "futuristic": 1,
+   "cinematic": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "light": 1,
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/fun-facts-live-retro-punk-dashboard.md",
+   "library/prompts/hero-section/3dview.md"
+  ]
+ },
+ {
+  "display": "Helvetica Neue ME",
+  "body": "Helvetica Neue ME",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 2,
+  "moods": {
+   "cinematic": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/editorial/vectrus-energy.md",
+   "library/prompts/portfolio/personal-showcase.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Roboto",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "brutalist": 1,
+   "organic": 1,
+   "bold": 2,
+   "minimal": 1,
+   "retro": 1,
+   "techy": 1
+  },
+  "themes": {
+   "light": 2
+  },
+  "examples": [
+   "library/prompts/environmental/trueearth.md",
+   "library/prompts/fintech/sellix.md"
+  ]
+ },
+ {
+  "display": "Libre Franklin",
+  "body": "Libre Franklin",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "cinematic": 2,
+   "editorial": 2,
+   "luxury": 2,
+   "minimal": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/form/cinematic-grayscale-newsletter-email.md",
+   "library/prompts/hero-section/cinematic-grayscale-editorial-landing-page-12ccaa.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Outfit",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "bold": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 2
+  },
+  "examples": [
+   "library/prompts/hero-section/digital-epoch.md",
+   "library/prompts/hero/intelligentx.md"
+  ]
+ },
+ {
+  "display": "Instrument Serif",
+  "body": "DM Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "cinematic": 1,
+   "organic": 2,
+   "editorial": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "light": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/laura.md",
+   "library/prompts/login-page/login-001.md"
+  ]
+ },
+ {
+  "display": "Urbanist",
+  "body": "Urbanist",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "cinematic": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/nikki.md",
+   "library/prompts/hero/network-hero.md"
+  ]
+ },
+ {
+  "display": "Archivo Black",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "bold": 1,
+   "playful": 1,
+   "retro": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/pop-art-landing-page-comic-halftone-product-site-yellow-red.md",
+   "library/prompts/presentation/dark-keynote-product-proof-deck.md"
+  ]
+ },
+ {
+  "display": "DM Serif Display",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "luxury": 1,
+   "brutalist": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "dark": 1,
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero/cozypaws.md",
+   "library/prompts/style/minimalist-beta-capture.md"
+  ]
+ },
+ {
+  "display": "Helvetica Now Display Bold",
+  "body": "Inter",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {},
+  "themes": {
+   "mixed": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero/portal.md",
+   "library/prompts/hero/vaultshield.md"
+  ]
+ },
+ {
+  "display": "Anton",
+  "body": "Archivo",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "bold": 1
+  },
+  "themes": {
+   "light": 1,
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/history/oda-hero.md",
+   "library/prompts/logistics/freight-services-hero.md"
+  ]
+ },
+ {
+  "display": "DM Sans",
+  "body": "DM Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "editorial": 2,
+   "luxury": 2,
+   "bold": 1,
+   "brutalist": 1,
+   "techy": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "dark": 1,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/cupidbox-premium-dark-landing-page.md",
+   "library/prompts/landing-page/curio.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Playfair Display",
+  "displayCategory": "serif",
+  "bodyCategory": "serif",
+  "uses": 2,
+  "moods": {
+   "luxury": 2,
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 2
+  },
+  "examples": [
+   "library/prompts/landing-page/hover-reveal-effect.md",
+   "library/prompts/misc/cubemotel-or-sustainable-modular-holidays-green-and-gold-palette.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1,
+   "brutalist": 1,
+   "techy": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/landing-page/lap-gadgets-hp-ht03xl-battery-landing-page.md",
+   "library/prompts/skill/carousell-design.md"
+  ]
+ },
+ {
+  "display": "Bebas Neue",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "luxury": 1,
+   "futuristic": 2,
+   "editorial": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1,
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/misc/advice-atara-mall-promotions-page.md",
+   "library/prompts/navbar/advice-atara-mall-services-rich-menu.md"
+  ]
+ },
+ {
+  "display": "Quicksand",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "futuristic": 1,
+   "organic": 2,
+   "playful": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/aquatica-frutiger-aero-experience.md",
+   "library/prompts/misc/kid-friendly-english-summer-camp-adventure.md"
+  ]
+ },
+ {
+  "display": "Syne",
+  "body": "Sora",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "luxury": 1,
+   "brutalist": 1,
+   "editorial": 2,
+   "minimal": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/argos-architectural-sonic-archive-mountain-landscape-edition.md",
+   "library/prompts/style/animated-landing-page-portal-hero-that-parts-to-uncover-a-full-bleed-image.md"
+  ]
+ },
+ {
+  "display": "Courier Prime",
+  "body": "Courier Prime",
+  "displayCategory": "mono",
+  "bodyCategory": "mono",
+  "uses": 2,
+  "moods": {
+   "brutalist": 2,
+   "techy": 1,
+   "retro": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 2
+  },
+  "examples": [
+   "library/prompts/misc/brutalist-phylogenetic-map-redesign.md",
+   "library/prompts/misc/retro-bitmap-os-system-preferences.md"
+  ]
+ },
+ {
+  "display": "Newsreader",
+  "body": "Space Grotesk",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "luxury": 2,
+   "futuristic": 2,
+   "editorial": 2
+  },
+  "themes": {
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/misc/cyber-serif-premium-digital-experience.md",
+   "library/prompts/style/cyber-serif-style.md"
+  ]
+ },
+ {
+  "display": "Geist",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {},
+  "themes": {
+   "light": 2
+  },
+  "examples": [
+   "library/prompts/misc/dentavoice-dental-charting-live-exam-state-update.md",
+   "library/prompts/navbar/atlas-nav.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Space Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1,
+   "cinematic": 1,
+   "bold": 2,
+   "minimal": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/misc/hollywood-screenplay-focus-group-session.md",
+   "library/prompts/misc/neuralflux-or-liquid-intelligence.md"
+  ]
+ },
+ {
+  "display": "Fraunces",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "organic": 1,
+   "brutalist": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 2
+  },
+  "examples": [
+   "library/prompts/misc/immoprojet-mediterranean-editorial-variation.md",
+   "library/prompts/mobile-app/neo-brutalist-food-delivery-checkout-e31201.md"
+  ]
+ },
+ {
+  "display": "Press Start 2P",
+  "body": "Inter",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "retro": 1,
+   "techy": 1,
+   "luxury": 1,
+   "brutalist": 1,
+   "editorial": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/misc/pokemon-tccny-gym-complete-implementation.md",
+   "library/prompts/portfolio/tccny-portfolio-reveal.md"
+  ]
+ },
+ {
+  "display": "League Spartan",
+  "body": "League Spartan",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "editorial": 2,
+   "luxury": 2,
+   "bold": 2,
+   "organic": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "light": 2
+  },
+  "examples": [
+   "library/prompts/misc/super-travel-premium-editorial-system.md",
+   "library/prompts/style/luxury-focused-design-system.md"
+  ]
+ },
+ {
+  "display": "Kalam",
+  "body": "Patrick Hand",
+  "displayCategory": "handwriting",
+  "bodyCategory": "handwriting",
+  "uses": 2,
+  "moods": {
+   "organic": 2,
+   "playful": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "light": 2
+  },
+  "examples": [
+   "library/prompts/navbar/fix-navigation-script-error.md",
+   "library/prompts/style/sketch.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Poppins",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "corporate": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1,
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/portfolio-builder/eclipsio.md",
+   "library/prompts/presentation/touchstim-pitch-deck-light-and-hopeful.md"
+  ]
+ },
+ {
+  "display": "Montserrat",
+  "body": "Poppins",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "minimal": 1,
+   "futuristic": 1,
+   "corporate": 1,
+   "luxury": 1,
+   "organic": 1
+  },
+  "themes": {
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/portfolio/riswan-kurniawan-portfolio-modern-corporate.md",
+   "library/prompts/portfolio/riswan-portfolio-anime-and-gsap-enhanced.md"
+  ]
+ },
+ {
+  "display": "Bebas Neue",
+  "body": "Instrument Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "editorial": 2
+  },
+  "themes": {
+   "mixed": 2
+  },
+  "examples": [
+   "library/prompts/presentation/editorial-report-deck-migrating-colour-band-nine-layout-system-bd3965.md",
+   "library/prompts/presentation/editorial-report-deck-migrating-colour-band-with-an-edge-cropped-headline.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Fraunces",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 2,
+  "moods": {
+   "playful": 1,
+   "organic": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "light": 1,
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/pricing/cream-and-sky-playful-saas-pricing-037451.md",
+   "library/prompts/pricing/warm-pastel-bento-saas-pricing-cc9419.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Sora",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "minimal": 1,
+   "organic": 1
+  },
+  "themes": {
+   "dark": 2
+  },
+  "examples": [
+   "library/prompts/pricing/emerald-4-tier-saas-pricing-table-f2a08a.md",
+   "library/prompts/pricing/warm-amber-dark-per-seat-saas-pricing-5b3fd4.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Manrope",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 2,
+  "moods": {
+   "futuristic": 1,
+   "bold": 2,
+   "minimal": 1,
+   "cinematic": 1,
+   "retro": 1
+  },
+  "themes": {
+   "light": 1,
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/style/red-noir-style.md",
+   "library/prompts/technology/intelligence-layer.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "Urbanist",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/3d-character/lumora-skyranger.md"
+  ]
+ },
+ {
+  "display": "Urbanist",
+  "body": "Questrial",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/3d/autumn-fox.md"
+  ]
+ },
+ {
+  "display": "Newsreader",
+  "body": "Nunito Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "retro": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/3d/feathers-atlas.md"
+  ]
+ },
+ {
+  "display": "Questrial",
+  "body": "Questrial",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/3d/mind-ai.md"
+  ]
+ },
+ {
+  "display": "Assistant",
+  "body": "Figtree",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "retro": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/3d/sakura-qr.md"
+  ]
+ },
+ {
+  "display": "Poppins",
+  "body": "Hanken Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/3d/space-planet.md"
+  ]
+ },
+ {
+  "display": "Geist Mono",
+  "body": "Geist Mono",
+  "displayCategory": "mono",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/404/skybridge-404.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "Inter Tight",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "corporate": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/agency/orvante-agency.md"
+  ]
+ },
+ {
+  "display": "Anta",
+  "body": "Anta",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "futuristic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/ai-saas/synthora-hero.md"
+  ]
+ },
+ {
+  "display": "BubbledotICG-FinePos",
+  "body": "Inter",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "retro": 1,
+   "bold": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/ai/ai-runtime.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Oswald",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "minimal": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/ai/palomar-labs.md"
+  ]
+ },
+ {
+  "display": "Syncopate",
+  "body": "Space Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "futuristic": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/animation/aether-ai-or-mountain-parallax-hero.md"
+  ]
+ },
+ {
+  "display": "Bebas Neue",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "brutalist": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/animation/agencia-or-glassmorphism-ui-update.md"
+  ]
+ },
+ {
+  "display": "IBM Plex Mono",
+  "body": "IBM Plex Mono",
+  "displayCategory": "mono",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "retro": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/animation/ascii-text.md"
+  ]
+ },
+ {
+  "display": "Archivo Black",
+  "body": "JetBrains Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "techy": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/animation/brutalist-site-showcase-auto-scroll-grid.md"
+  ]
+ },
+ {
+  "display": "DM Sans",
+  "body": "Ultra",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/animation/horizontal-scroll-editorial-themes.md"
+  ]
+ },
+ {
+  "display": "Outfit",
+  "body": "Space Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/animation/hyper-speed-loading-state.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/art/atrium-mtl.md"
+  ]
+ },
+ {
+  "display": "Unlock",
+  "body": "Roboto",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/authentication/keylight.md"
+  ]
+ },
+ {
+  "display": "Dongle",
+  "body": "Dongle",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/background/gooey-gradient-background.md"
+  ]
+ },
+ {
+  "display": "Londrina Solid",
+  "body": "Londrina Solid",
+  "displayCategory": "display",
+  "bodyCategory": "display",
+  "uses": 1,
+  "moods": {
+   "playful": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/button/creepy-button.md"
+  ]
+ },
+ {
+  "display": "Oswald",
+  "body": "DM Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "editorial": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/button/statisio-landing-page-content-and-button-update.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Archivo Black",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "bold": 1,
+   "brutalist": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/carousel/voltpress-ship-a-startup-site-that-screams-acid-maximalist.md"
+  ]
+ },
+ {
+  "display": "Hanken Grotesk",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/chat/ai-answer-engine-ui-rose-research-assistant-with-cited-answers-sources.md"
+  ]
+ },
+ {
+  "display": "Epilogue",
+  "body": "DM Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/creative-agency/playful-idea.md"
+  ]
+ },
+ {
+  "display": "Bamboly Demo",
+  "body": "Inter",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "retro": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/creative/sparkform.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Archivo",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/cta/acid-brutalist-skip-the-blank-page-cta-block.md"
+  ]
+ },
+ {
+  "display": "Sora",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "techy": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/dashboard-002.md"
+  ]
+ },
+ {
+  "display": "IBM Plex Mono",
+  "body": "IBM Plex Sans",
+  "displayCategory": "mono",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "techy": 1,
+   "minimal": 1,
+   "organic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/developer-dashboard-e-ink-paper-cicd-deployments-console.md"
+  ]
+ },
+ {
+  "display": "Syncopate",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "brutalist": 1,
+   "futuristic": 1,
+   "techy": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/fedmindy-or-empire-command-dashboard.md"
+  ]
+ },
+ {
+  "display": "Cairo",
+  "body": "Cairo",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "techy": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/glassmorphism-hr-dashboard.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Space Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "techy": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/hudson-mcdaniel-or-compact-elite-dashboard.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Ledger",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/ledger-equities-desk-trading-floor-watchlist.md"
+  ]
+ },
+ {
+  "display": "Rajdhani",
+  "body": "Tomorrow",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "futuristic": 1,
+   "cinematic": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/neon-edge-or-cinematic-dashboard.md"
+  ]
+ },
+ {
+  "display": "IBM Plex Sans Thai",
+  "body": "IBM Plex Sans Thai",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "editorial": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/sushify-admin-pro-mobile-optimized.md"
+  ]
+ },
+ {
+  "display": "Poppins",
+  "body": "Tomorrow",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/tablecloth-data-tables-you-actually-want-to-look-at.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Sora",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "techy": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/volt-electric-lime-fitness-dashboard-a7544c.md"
+  ]
+ },
+ {
+  "display": "Outfit",
+  "body": "JetBrains Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "luxury": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/xan-crm-invoices-list.md"
+  ]
+ },
+ {
+  "display": "JetBrains Mono",
+  "body": "Outfit",
+  "displayCategory": "mono",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "techy": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/dashboard/zenix-dashboard-refined-elegant-glass.md"
+  ]
+ },
+ {
+  "display": "Suisse Int'l",
+  "body": "Suisse Int'l",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "retro": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/data-intelligence/quantum-core.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Geist",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/design/custom-spaces.md"
+  ]
+ },
+ {
+  "display": "Bodoni Moda",
+  "body": "Caveat Brush",
+  "displayCategory": "serif",
+  "bodyCategory": "handwriting",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/ecommerce/animated-didone-landing-page-blush-and-dusty-pink-editorial-with-multiply-blende.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Poppins",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/ecommerce/vertex.md"
+  ]
+ },
+ {
+  "display": "Playfair",
+  "body": "Inter Tight",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/fashion/maren-hero.md"
+  ]
+ },
+ {
+  "display": "Orbitron",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "minimal": 1,
+   "brutalist": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/fashion/synth-mode.md"
+  ]
+ },
+ {
+  "display": "P22 Mackinac W01 Book",
+  "body": "Inter",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/finance/trustflow.md"
+  ]
+ },
+ {
+  "display": "Graphik LCG Regular Regular",
+  "body": "Manrope",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/fintech/aurex-finance.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Anton",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "brutalist": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/footer/fix-footer-email-visibility.md"
+  ]
+ },
+ {
+  "display": "Cormorant Garamond",
+  "body": "Poppins",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/footer/heritage-grove.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Cookie",
+  "displayCategory": "sans",
+  "bodyCategory": "handwriting",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/footer/ink-and-acid-mono-sitemap-footer.md"
+  ]
+ },
+ {
+  "display": "Google Sans Flex",
+  "body": "Google Sans Flex",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/footer/shipcraft-footer.md"
+  ]
+ },
+ {
+  "display": "Fraunces",
+  "body": "Archivo",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "cinematic": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/form/cinematic-editorial-newsletter-email.md"
+  ]
+ },
+ {
+  "display": "Sora",
+  "body": "Poppins",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/form/updated-contact-information-for-hiliox-energy.md"
+  ]
+ },
+ {
+  "display": "Oswald",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/halloween/hollowmere-halloween-descent.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Source Sans 3",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "minimal": 1,
+   "cinematic": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/aistudio.md"
+  ]
+ },
+ {
+  "display": "Instrument Sans",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "minimal": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/animated-hero-section-flowing-wave-line-saas-landing-background-tangerine-accent.md"
+  ]
+ },
+ {
+  "display": "Bricolage Grotesque",
+  "body": "Bricolage Grotesque",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "playful": 1,
+   "corporate": 1,
+   "bold": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/animated-memphis-landing-page-hero-bold-postmodern-product-site.md"
+  ]
+ },
+ {
+  "display": "Poppins",
+  "body": "Caveat",
+  "displayCategory": "sans",
+  "bodyCategory": "handwriting",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1,
+   "retro": 1,
+   "bold": 1,
+   "playful": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/chipmuk.md"
+  ]
+ },
+ {
+  "display": "Clash Display",
+  "body": "General Sans",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1,
+   "bold": 1,
+   "editorial": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/cloudb.md"
+  ]
+ },
+ {
+  "display": "Arimo",
+  "body": "Arimo",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "bold": 1,
+   "cinematic": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/dreamy.md"
+  ]
+ },
+ {
+  "display": "Feather Bold",
+  "body": "Nunito",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/duolingo-styleguide.md"
+  ]
+ },
+ {
+  "display": "Doto",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1,
+   "organic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/farcy.md"
+  ]
+ },
+ {
+  "display": "Tomorrow",
+  "body": "Tomorrow",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/healcure.md"
+  ]
+ },
+ {
+  "display": "Rajdhani",
+  "body": "PT Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/hero-left-text-and-full-width-banner.md"
+  ]
+ },
+ {
+  "display": "Praise",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "handwriting",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/loomly-sunset-spotlight-testimonial.md"
+  ]
+ },
+ {
+  "display": "Crimson Pro",
+  "body": "Public Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/lumina-or-premium-interactive-hero.md"
+  ]
+ },
+ {
+  "display": "Google Sans Flex",
+  "body": "Google Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "playful": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/mapple.md"
+  ]
+ },
+ {
+  "display": "Source Serif 4",
+  "body": "Figtree",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/picway.md"
+  ]
+ },
+ {
+  "display": "General Sans",
+  "body": "Geist",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "bold": 1,
+   "cinematic": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/plusgain.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Archivo",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/royal-hero-section.md"
+  ]
+ },
+ {
+  "display": "Jost",
+  "body": "Cinzel",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/taste.md"
+  ]
+ },
+ {
+  "display": "Schibsted Grotesk",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/transform-data.md"
+  ]
+ },
+ {
+  "display": "Sora",
+  "body": "Syne",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "cinematic": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero-section/zee-opticals-or-hero-image-alignment-fix.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Neue Haas Grotesk Text Pro",
+  "displayCategory": "sans",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero/ai-workflow-hero.md"
+  ]
+ },
+ {
+  "display": "Helvetica Regular",
+  "body": "Helvetica Regular",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "minimal": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/hero/audio-showcase.md"
+  ]
+ },
+ {
+  "display": "FSP DEMO - PODIUM Sharp 4.11",
+  "body": "Inter",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero/bold-studio.md"
+  ]
+ },
+ {
+  "display": "Gelasio",
+  "body": "Outfit",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "playful": 1,
+   "cinematic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero/camper-overnight.md"
+  ]
+ },
+ {
+  "display": "Garamond",
+  "body": "Geist",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero/organic-odyssey.md"
+  ]
+ },
+ {
+  "display": "Source Serif 4",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/hero/subscription-agency.md"
+  ]
+ },
+ {
+  "display": "Helvetica Now Text",
+  "body": "Roboto",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/hero/wellbeing-os.md"
+  ]
+ },
+ {
+  "display": "Askan Light",
+  "body": "Inter",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/hero/wellness-hero.md"
+  ]
+ },
+ {
+  "display": "Grandstander",
+  "body": "Grandstander",
+  "displayCategory": "display",
+  "bodyCategory": "display",
+  "uses": 1,
+  "moods": {
+   "playful": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/kids-show/meadowbell.md"
+  ]
+ },
+ {
+  "display": "Tomorrow",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "cinematic": 1,
+   "minimal": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/3d-animated-landing-hero.md"
+  ]
+ },
+ {
+  "display": "IBM Plex Mono",
+  "body": "Inter",
+  "displayCategory": "mono",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1,
+   "techy": 1,
+   "bold": 1,
+   "minimal": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/adamdev.md"
+  ]
+ },
+ {
+  "display": "Italiana",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/amee-paris.md"
+  ]
+ },
+ {
+  "display": "Unbounded",
+  "body": "Manrope",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/animated-dark-landing-page-geometric-display-type-with-a-scroll-traced-data-curv.md"
+  ]
+ },
+ {
+  "display": "Manrope",
+  "body": "Chivo Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "minimal": 1,
+   "organic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/animated-landing-page-generated-particle-field-with-masked-line-reveals.md"
+  ]
+ },
+ {
+  "display": "Familjen Grotesk",
+  "body": "Spline Sans Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/animated-landing-page-paper-catalogue-with-outline-type-and-blur-reveals.md"
+  ]
+ },
+ {
+  "display": "Martian Mono",
+  "body": "Martian Mono",
+  "displayCategory": "mono",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/animated-landing-page-rotating-product-between-a-split-condensed-wordmark.md"
+  ]
+ },
+ {
+  "display": "Fraunces",
+  "body": "Manrope",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/aura-os-launch-manifesto.md"
+  ]
+ },
+ {
+  "display": "Figtree",
+  "body": "Waterfall",
+  "displayCategory": "sans",
+  "bodyCategory": "handwriting",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "minimal": 1,
+   "cinematic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/circular-gallery.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Source Sans 3",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/fitners-ai-fitness-saas-homepage.md"
+  ]
+ },
+ {
+  "display": "Be Vietnam Pro",
+  "body": "Be Vietnam Pro",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "minimal": 1,
+   "bold": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/gnm-goc-nhin-moi-homepage.md"
+  ]
+ },
+ {
+  "display": "Open Sauce One",
+  "body": "Open Sauce One Bold",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "corporate": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/health-portal.md"
+  ]
+ },
+ {
+  "display": "Cormorant Garamond",
+  "body": "DM Mono",
+  "displayCategory": "serif",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "minimal": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/hello-world-studio-replica.md"
+  ]
+ },
+ {
+  "display": "Urbanist",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "brutalist": 1,
+   "cinematic": 1,
+   "bold": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/hybera.md"
+  ]
+ },
+ {
+  "display": "Special Elite",
+  "body": "Inter",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "techy": 1,
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/landing-page-ui-developer-documentation-site-as-a-library-card-catalog.md"
+  ]
+ },
+ {
+  "display": "Anton",
+  "body": "IBM Plex Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/landing-page-ui-event-ticket-website-where-your-name-is-laser-cut-into-a-metal-p.md"
+  ]
+ },
+ {
+  "display": "Source Serif 4",
+  "body": "Darker Grotesque",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/landing-page-ui-nonprofit-campaign-website-where-the-waiting-list-explains-its-o.md"
+  ]
+ },
+ {
+  "display": "League Spartan",
+  "body": "Poppins",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "playful": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/landing-page-ui-online-course-website-where-finished-modules-peel-off-a-sticker-.md"
+  ]
+ },
+ {
+  "display": "Funnel Display",
+  "body": "Inter Tight",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/landing-page-ui-podcast-website-where-every-episode-is-drawn-to-scale.md"
+  ]
+ },
+ {
+  "display": "Zilla Slab",
+  "body": "Karla",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/landing-page-ui-restaurant-website-where-the-seating-you-pick-rewrites-the-menu.md"
+  ]
+ },
+ {
+  "display": "Orbitron",
+  "body": "Sora",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/marx.md"
+  ]
+ },
+ {
+  "display": "Anybody",
+  "body": "Inter",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/meridian-landing-11-from-paper-responsive.md"
+  ]
+ },
+ {
+  "display": "DM Serif Display",
+  "body": "DM Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "organic": 1,
+   "editorial": 1,
+   "minimal": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/moss.md"
+  ]
+ },
+ {
+  "display": "Anton SC",
+  "body": "Space Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/neon-logic.md"
+  ]
+ },
+ {
+  "display": "Anton",
+  "body": "Condiment",
+  "displayCategory": "sans",
+  "bodyCategory": "handwriting",
+  "uses": 1,
+  "moods": {
+   "futuristic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/orbis-nft.md"
+  ]
+ },
+ {
+  "display": "Bodoni Moda",
+  "body": "Nunito",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1,
+   "bold": 1,
+   "editorial": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/porgas.md"
+  ]
+ },
+ {
+  "display": "Cal Sans",
+  "body": "Poppins",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "brutalist": 1,
+   "techy": 1,
+   "corporate": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/premium-dark-b2b-service-landing.md"
+  ]
+ },
+ {
+  "display": "Instrument Serif",
+  "body": "Almarai",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/prisma-creative-studio.md"
+  ]
+ },
+ {
+  "display": "Bebas Neue",
+  "body": "Bebas Neue",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "brutalist": 1,
+   "bold": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/qutiiz-digital-marketing-agency.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Outfit",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "cinematic": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/voidai-premium-ai-landing-page.md"
+  ]
+ },
+ {
+  "display": "JetBrains Mono",
+  "body": "Space Grotesk",
+  "displayCategory": "mono",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "techy": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/landing-page/voidcraft-internal-tools-agency.md"
+  ]
+ },
+ {
+  "display": "Outfit",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/layout/brilliant-layout-restructure-0a02c9.md"
+  ]
+ },
+ {
+  "display": "Kalam",
+  "body": "Kalam",
+  "displayCategory": "handwriting",
+  "bodyCategory": "handwriting",
+  "uses": 1,
+  "moods": {
+   "retro": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/layout/clean-horizontal-memory-layout.md"
+  ]
+ },
+ {
+  "display": "Azeret Mono",
+  "body": "Azeret Mono",
+  "displayCategory": "mono",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "minimal": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/layout/collection-page-visual-discovery-wall.md"
+  ]
+ },
+ {
+  "display": "Anton",
+  "body": "Space Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/layout/header-and-hero-layout-refinement.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Outfit",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/layout/lessoncraft-my-sidebar-and-animated-layout.md"
+  ]
+ },
+ {
+  "display": "General Sans",
+  "body": "Switzer",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/layout/overlay-exit-intent-overlay.md"
+  ]
+ },
+ {
+  "display": "Varela Round",
+  "body": "Heebo",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "playful": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/layout/partix-ai-optimized-mobile-layout-and-balanced-decorations.md"
+  ]
+ },
+ {
+  "display": "Switzer",
+  "body": "Switzer",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "minimal": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/layout/personalized-section-stack.md"
+  ]
+ },
+ {
+  "display": "Lora",
+  "body": "Lora",
+  "displayCategory": "serif",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "editorial": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/layout/split-detail-page.md"
+  ]
+ },
+ {
+  "display": "Cormorant Garamond",
+  "body": "Manrope",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "minimal": 1,
+   "cinematic": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/layout/terroir-or-natural-wine-boutique.md"
+  ]
+ },
+ {
+  "display": "Satoshi",
+  "body": "Satoshi",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "techy": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/layout/top-segmented-tab.md"
+  ]
+ },
+ {
+  "display": "Red Hat Display",
+  "body": "Red Hat Display",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/login-page/cutora.md"
+  ]
+ },
+ {
+  "display": "Crimson Pro",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "corporate": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/login-page/editorial-saas-onboarding.md"
+  ]
+ },
+ {
+  "display": "Space Mono",
+  "body": "Archivo",
+  "displayCategory": "mono",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "organic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/login-page/formcast-forms-that-dont-mumble.md"
+  ]
+ },
+ {
+  "display": "Unlock",
+  "body": "Inter",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/login-page/login-002.md"
+  ]
+ },
+ {
+  "display": "Libre Baskerville",
+  "body": "Manrope",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1,
+   "futuristic": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/login-page/luminous-ethereal-glassmorphism-onboarding.md"
+  ]
+ },
+ {
+  "display": "DM Serif Display",
+  "body": "JetBrains Mono",
+  "displayCategory": "serif",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "techy": 1,
+   "corporate": 1,
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/login-page/system-initialization-trust-and-transparency.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Notable",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "organic": 1,
+   "playful": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/bouncebee-refined-buzz-curve.md"
+  ]
+ },
+ {
+  "display": "Cinzel",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "futuristic": 1,
+   "organic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/candlekeephome.md"
+  ]
+ },
+ {
+  "display": "Crimson Pro",
+  "body": "Poppins",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1,
+   "minimal": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/checkmind-clinic-elegant-luxury-redesign.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Crimson Pro",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/como-trabalhamos-elegancia-moderna.md"
+  ]
+ },
+ {
+  "display": "Rubik Glitch",
+  "body": "Orbitron",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "futuristic": 1,
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/crypto-pop-dash-maximalist-cyberpunk.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Archivo",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "futuristic": 1,
+   "cinematic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/misc/ct-mission-control-cinematic-award-winning-redesign.md"
+  ]
+ },
+ {
+  "display": "Montserrat",
+  "body": "Nunito",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "corporate": 1,
+   "organic": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/dra-angela-replicada-sem-foto-e887d7.md"
+  ]
+ },
+ {
+  "display": "Oswald",
+  "body": "Spectral",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/misc/editorial-serif-receipt-email.md"
+  ]
+ },
+ {
+  "display": "Instrument Sans",
+  "body": "IBM Plex Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/fixtureatlas-pure-noir-editorial-catalog-corrected.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "techy": 1,
+   "cinematic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/foreshore-or-marine-foresight-platform-elite-polish.md"
+  ]
+ },
+ {
+  "display": "Bricolage Grotesque",
+  "body": "DM Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/goldlight-premium-refinement.md"
+  ]
+ },
+ {
+  "display": "Cinzel",
+  "body": "Crimson Pro",
+  "displayCategory": "serif",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "cinematic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/gothic-final-fantasy-youtube-banner.md"
+  ]
+ },
+ {
+  "display": "Poppins",
+  "body": "JetBrains Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "luxury": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/handlesgg.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Josefin Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/misc/magniknot-vibrant-art-deco.md"
+  ]
+ },
+ {
+  "display": "Dancing Script",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "handwriting",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/misc/modern-illustrator-linkedin-profile-header.md"
+  ]
+ },
+ {
+  "display": "General Sans",
+  "body": "Satoshi",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "minimal": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/modern-minimalist-home.md"
+  ]
+ },
+ {
+  "display": "Rajdhani",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "futuristic": 1,
+   "techy": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/neurofit-or-quantum-teleporting-ui.md"
+  ]
+ },
+ {
+  "display": "Libre Baskerville",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "corporate": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/northline-health-digital-growth-for-healthcare-providers.md"
+  ]
+ },
+ {
+  "display": "Outfit",
+  "body": "Geist Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "techy": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/ooto-templatewebflowio.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Cormorant Garamond",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "cinematic": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/misc/oran-cinematic-planifier-votre-voyage.md"
+  ]
+ },
+ {
+  "display": "Literata",
+  "body": "DM Mono",
+  "displayCategory": "serif",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/oryzoai.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "playful": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/phd-qualifying-exam-aim-3-in-vivo-strategy.md"
+  ]
+ },
+ {
+  "display": "Work Sans",
+  "body": "Space Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "techy": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/projets-technical-noir-global.md"
+  ]
+ },
+ {
+  "display": "VT323",
+  "body": "Press Start 2P",
+  "displayCategory": "mono",
+  "bodyCategory": "display",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "retro": 1,
+   "techy": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/retro-80s-pastel-terminal.md"
+  ]
+ },
+ {
+  "display": "IBM Plex Serif",
+  "body": "IBM Plex Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "brutalist": 1,
+   "techy": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/misc/specos-brutalist-monochrome.md"
+  ]
+ },
+ {
+  "display": "Courier Prime",
+  "body": "Jost",
+  "displayCategory": "mono",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "organic": 1,
+   "cinematic": 1,
+   "editorial": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/squircle-games-fully-responsive-high-contrast-design.md"
+  ]
+ },
+ {
+  "display": "Kalam",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "handwriting",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/the-forest-heart-interactive-pop-up-book.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Cinzel",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "bold": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/the-typographic-duel.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Lexend",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "bold": 1,
+   "organic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/misc/tidy-task-detail-desktop.md"
+  ]
+ },
+ {
+  "display": "Montserrat",
+  "body": "Montserrat",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "corporate": 1,
+   "luxury": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/misc/updated-tisp-corporate-logo-in-sidebar.md"
+  ]
+ },
+ {
+  "display": "Unlock",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/mobile-app/champagne-noir-paywall-65a2fd.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "DM Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "bold": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/mobile-app/gen-z-social-app.md"
+  ]
+ },
+ {
+  "display": "Crimson Pro",
+  "body": "Manrope",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1,
+   "minimal": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/mobile-app/gramota-shop-mobile-ui.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Oswald",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/mobile-app/mobile-app-ui-airline-boarding-pass-and-trip-screen.md"
+  ]
+ },
+ {
+  "display": "Cormorant Garamond",
+  "body": "Karla",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/mobile-app/mobile-app-ui-e-commerce-product-page-with-a-to-scale-size-guide.md"
+  ]
+ },
+ {
+  "display": "Quicksand",
+  "body": "Nunito",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "playful": 1,
+   "bold": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/mobile-app/pastel-bloom-onboarding-29fcbf.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Share Tech Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/mobile-app/skeuomorphism-music-player-tactile-leather-and-brass-now-playing-ui.md"
+  ]
+ },
+ {
+  "display": "Familjen Grotesk",
+  "body": "Karla",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/mobile-app/tactile-skeuomorphism-smart-home-app-putty-plastic-amber-glow-control-panel.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Instrument Serif",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/navbar/be-creative-or-premium-polished-navigation.md"
+  ]
+ },
+ {
+  "display": "Archivo Black",
+  "body": "Archivo",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/navbar/design-at-the-speed-of-prompt-brutalist-acid-navbar.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Newsreader",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "minimal": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/podcast/murmur.md"
+  ]
+ },
+ {
+  "display": "Libre Caslon Display",
+  "body": "Tomorrow",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "minimal": 1,
+   "brutalist": 1,
+   "retro": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/portfolio/bookshop.md"
+  ]
+ },
+ {
+  "display": "basis33",
+  "body": "Inter",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "retro": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/portfolio/digital-director.md"
+  ]
+ },
+ {
+  "display": "Hanken Grotesk",
+  "body": "Hanken Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/portfolio/gold-standard.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Roboto Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/portfolio/parallex.md"
+  ]
+ },
+ {
+  "display": "Newsreader",
+  "body": "Inter Tight",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "cinematic": 1,
+   "retro": 1,
+   "techy": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/portfolio/shelf-hero.md"
+  ]
+ },
+ {
+  "display": "Baloo 2",
+  "body": "Karla",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/presentation/catalogue-deck-script-crossing-through-a-rounded-display-headline.md"
+  ]
+ },
+ {
+  "display": "League Spartan",
+  "body": "Instrument Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/presentation/data-report-deck-narrow-rail-and-a-real-eight-row-table-at-poster-scale.md"
+  ]
+ },
+ {
+  "display": "Ledger",
+  "body": "Chivo",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/presentation/ledger-deck-two-colours-that-swap-roles-against-a-full-height-shelf-column.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Public Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "minimal": 1,
+   "brutalist": 1,
+   "bold": 1,
+   "organic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/presentation/minimal-swiss-field-notes-deck-a0e085.md"
+  ]
+ },
+ {
+  "display": "Sunflower",
+  "body": "Rubik Mono One",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "bold": 1,
+   "playful": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/presentation/poster-deck-rotated-colour-band-carrying-the-headline-sunflower-and-indigo.md"
+  ]
+ },
+ {
+  "display": "Instrument Sans",
+  "body": "Space Grotesk",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "bold": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/pricing/electric-lime-single-plan-saas-pricing-fd7f1e.md"
+  ]
+ },
+ {
+  "display": "JetBrains Mono",
+  "body": "IBM Plex Mono",
+  "displayCategory": "mono",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "techy": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/pricing/electric-phosphor-terminal-dev-tool-pricing-c8d515.md"
+  ]
+ },
+ {
+  "display": "Instrument Serif",
+  "body": "JetBrains Mono",
+  "displayCategory": "serif",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "minimal": 1,
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/pricing/hairline-mono-minimal-saas-pricing-3a43c5.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "Archivo Narrow",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "editorial": 1,
+   "minimal": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/pricing/swiss-editorial-newsprint-saas-pricing.md"
+  ]
+ },
+ {
+  "display": "Radley",
+  "body": "Anton",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/print/agency-website-bold-editorial-newspaper-broadsheet-studio-site.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "Anton",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "bold": 1,
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/print/animated-swiss-poster-landing-page-warm-paper-and-red-with-a-scroll-driven-live-.md"
+  ]
+ },
+ {
+  "display": "Archivo Black",
+  "body": "Anton",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "bold": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/print/cobalt-single-field-enrollment-promo-flyer-with-floating-cta-card.md"
+  ]
+ },
+ {
+  "display": "Playfair",
+  "body": "Playfair Display",
+  "displayCategory": "serif",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "cinematic": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/print/dark-editorial-three-typeface-film-festival-program-flyer.md"
+  ]
+ },
+ {
+  "display": "Archivo Black",
+  "body": "Public Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/print/gradient-column-modern-art-exhibition-poster.md"
+  ]
+ },
+ {
+  "display": "Oswald",
+  "body": "Great Vibes",
+  "displayCategory": "sans",
+  "bodyCategory": "handwriting",
+  "uses": 1,
+  "moods": {
+   "bold": 1,
+   "editorial": 1,
+   "brutalist": 1,
+   "organic": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/print/gritty-condensed-caps-motivational-quote-poster.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Playfair",
+  "displayCategory": "serif",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/print/vintage-serif-masthead-editorial-newspaper-poster.md"
+  ]
+ },
+ {
+  "display": "Playfair",
+  "body": "Anton",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/print/warm-terracotta-zebra-schedule-event-program-flyer.md"
+  ]
+ },
+ {
+  "display": "Silkscreen",
+  "body": "Geist",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/saas/agent-grove.md"
+  ]
+ },
+ {
+  "display": "Instrument Serif",
+  "body": "Manrope",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/saas/datacore-booking.md"
+  ]
+ },
+ {
+  "display": "Figtree",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/saas/quantum-lucid.md"
+  ]
+ },
+ {
+  "display": "Nimbus Sans TW01",
+  "body": "Nimbus Sans TW01",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "techy": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/saas/saas-value.md"
+  ]
+ },
+ {
+  "display": "Quantico",
+  "body": "Quantico",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/saas/scaling-platform.md"
+  ]
+ },
+ {
+  "display": "Readex Pro",
+  "body": "Readex Pro",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/saas/securify-data-security.md"
+  ]
+ },
+ {
+  "display": "Google Sans",
+  "body": "Roboto",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/saas/vexel.md"
+  ]
+ },
+ {
+  "display": "Helvetica Neue Light",
+  "body": "Helvetica Neue Light",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "retro": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/science/planetary-pulse.md"
+  ]
+ },
+ {
+  "display": "Anybody",
+  "body": "Anybody",
+  "displayCategory": "display",
+  "bodyCategory": "display",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/ski-gear/kairn.md"
+  ]
+ },
+ {
+  "display": "Clash Display",
+  "body": "Satoshi",
+  "displayCategory": "unknown",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "playful": 1,
+   "minimal": 1,
+   "brutalist": 1,
+   "organic": 1,
+   "futuristic": 1,
+   "cinematic": 1,
+   "retro": 1,
+   "techy": 1,
+   "bold": 1,
+   "corporate": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/skill/landing-page-saas.md"
+  ]
+ },
+ {
+  "display": "Instrument Serif",
+  "body": "Azeret Mono",
+  "displayCategory": "serif",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/animated-landing-page-cut-out-subject-rising-between-two-lines-of-split-display-.md"
+  ]
+ },
+ {
+  "display": "Newsreader",
+  "body": "Courier Prime",
+  "displayCategory": "serif",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/animated-landing-page-one-product-that-travels-the-whole-page.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "IBM Plex Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/animated-landing-page-poster-type-interlocked-with-a-product-photo.md"
+  ]
+ },
+ {
+  "display": "Architects Daughter",
+  "body": "Roboto Mono",
+  "displayCategory": "handwriting",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "techy": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/architectural-blueprint.md"
+  ]
+ },
+ {
+  "display": "Inter Tight",
+  "body": "JetBrains Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "techy": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/architectural-type-system-style.md"
+  ]
+ },
+ {
+  "display": "Anton",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "brutalist": 1,
+   "minimal": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/bold-editorial-design-style.md"
+  ]
+ },
+ {
+  "display": "Anton",
+  "body": "Anton",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "minimal": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/bold-editorial-style.md"
+  ]
+ },
+ {
+  "display": "Open Sans",
+  "body": "Montserrat",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "brutalist": 1,
+   "retro": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/style/bold-retro-modernism.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "JetBrains Mono",
+  "displayCategory": "serif",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "techy": 1,
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/clean-fluid.md"
+  ]
+ },
+ {
+  "display": "Newsreader",
+  "body": "Instrument Sans",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "brutalist": 1,
+   "organic": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/style/dark-avant-garde-style.md"
+  ]
+ },
+ {
+  "display": "Ranchers",
+  "body": "Space Mono",
+  "displayCategory": "display",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/disruptor-beta-launch.md"
+  ]
+ },
+ {
+  "display": "Lora",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "futuristic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/futuristic-sass-landing-page.md"
+  ]
+ },
+ {
+  "display": "Oswald",
+  "body": "Roboto Mono",
+  "displayCategory": "sans",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "organic": 1,
+   "futuristic": 1,
+   "techy": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/style/grunge-collage-motion.md"
+  ]
+ },
+ {
+  "display": "Syne",
+  "body": "Plus Jakarta Sans",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "brutalist": 1,
+   "organic": 1,
+   "futuristic": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/liquid-metal-style.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Inter Tight",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "playful": 1,
+   "minimal": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/style/modern-bold.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Source Serif 4",
+  "displayCategory": "serif",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "playful": 1,
+   "minimal": 1,
+   "cinematic": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/style/monochrome.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Anton",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "brutalist": 1,
+   "organic": 1,
+   "bold": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/nature-inspired-style.md"
+  ]
+ },
+ {
+  "display": "Space Grotesk",
+  "body": "Dela Gothic One",
+  "displayCategory": "sans",
+  "bodyCategory": "display",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/style/neo-brutalism-style.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Lora",
+  "displayCategory": "serif",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "organic": 1,
+   "cinematic": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/news-print.md"
+  ]
+ },
+ {
+  "display": "DM Serif Display",
+  "body": "Reenie Beanie",
+  "displayCategory": "serif",
+  "bodyCategory": "handwriting",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "organic": 1,
+   "editorial": 1,
+   "minimal": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/style/organic-modern-style.md"
+  ]
+ },
+ {
+  "display": "Manrope",
+  "body": "Instrument Serif",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/style/red-sun.md"
+  ]
+ },
+ {
+  "display": "Outfit",
+  "body": "Reenie Beanie",
+  "displayCategory": "sans",
+  "bodyCategory": "handwriting",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/style/softly-digital-wellness-app.md"
+  ]
+ },
+ {
+  "display": "Playfair Display",
+  "body": "Space Mono",
+  "displayCategory": "serif",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "luxury": 1,
+   "brutalist": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/style/tech-editorial.md"
+  ]
+ },
+ {
+  "display": "JetBrains Mono",
+  "body": "Fira Code",
+  "displayCategory": "mono",
+  "bodyCategory": "mono",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "futuristic": 1,
+   "retro": 1,
+   "techy": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/terminal.md"
+  ]
+ },
+ {
+  "display": "Plus Jakarta Sans",
+  "body": "Satoshi",
+  "displayCategory": "sans",
+  "bodyCategory": "unknown",
+  "uses": 1,
+  "moods": {
+   "techy": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/style/tidy-design-system-reusable-navigation.md"
+  ]
+ },
+ {
+  "display": "Inter",
+  "body": "Playfair Display",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "brutalist": 1,
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/style/warm-industrial-gray-style.md"
+  ]
+ },
+ {
+  "display": "Oswald",
+  "body": "Bebas Neue",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "retro": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/supply/logistics-freight.md"
+  ]
+ },
+ {
+  "display": "Archivo",
+  "body": "Ledger",
+  "displayCategory": "sans",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "brutalist": 1,
+   "bold": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/table/ledger01-tables-with-a-spine.md"
+  ]
+ },
+ {
+  "display": "Poppins",
+  "body": "Urbanist",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "organic": 1
+  },
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/tech/riverine.md"
+  ]
+ },
+ {
+  "display": "Orbitron-Medium",
+  "body": "Inter",
+  "displayCategory": "unknown",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "futuristic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/technology/cyber-ronin.md"
+  ]
+ },
+ {
+  "display": "Cascadia Mono",
+  "body": "Sora",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "luxury": 1,
+   "cinematic": 1,
+   "bold": 1
+  },
+  "themes": {
+   "dark": 1
+  },
+  "examples": [
+   "library/prompts/technology/signal-id.md"
+  ]
+ },
+ {
+  "display": "M PLUS Rounded 1c",
+  "body": "Inter",
+  "displayCategory": "sans",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "playful": 1,
+   "editorial": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/testimonial/candy-sky-glossy-testimonial-wall-of-love.md"
+  ]
+ },
+ {
+  "display": "Praise",
+  "body": "Fraunces",
+  "displayCategory": "handwriting",
+  "bodyCategory": "serif",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "organic": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/testimonial/praise-what-designers-say-when-the-canvas-answers-back.md"
+  ]
+ },
+ {
+  "display": "Special Elite",
+  "body": "Geist",
+  "displayCategory": "display",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {},
+  "themes": {
+   "mixed": 1
+  },
+  "examples": [
+   "library/prompts/travel/ai-trip-planner.md"
+  ]
+ },
+ {
+  "display": "Bodoni Moda",
+  "body": "Inter",
+  "displayCategory": "serif",
+  "bodyCategory": "sans",
+  "uses": 1,
+  "moods": {
+   "editorial": 1,
+   "bold": 1
+  },
+  "themes": {
+   "light": 1
+  },
+  "examples": [
+   "library/prompts/travel/tana-elephant.md"
+  ]
+ }
+]

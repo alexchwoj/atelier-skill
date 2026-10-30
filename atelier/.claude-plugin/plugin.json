@@ -1,0 +1,10 @@
+{
+  "name": "atelier",
+  "displayName": "Atelier",
+  "version": "1.0.0",
+  "description": "Design and build websites that look designed, not generated.",
+  "author": { "name": "alexchwoj", "url": "https://github.com/alexchwoj" },
+  "repository": "https://github.com/alexchwoj/atelier-skill",
+  "keywords": ["design", "frontend", "ui", "landing-page", "motion", "design-system"],
+  "skills": ["./"]
+}

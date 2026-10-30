@@ -1,0 +1,1975 @@
+[
+  {
+    "title": "Claude",
+    "category": "AI",
+    "file": "ai/claude.md"
+  },
+  {
+    "title": "Cohere",
+    "category": "AI",
+    "file": "ai/cohere.md"
+  },
+  {
+    "title": "ElevenLabs",
+    "category": "AI",
+    "file": "ai/elevenlabs.md"
+  },
+  {
+    "title": "Jobright",
+    "category": "AI",
+    "file": "ai/jobright.md"
+  },
+  {
+    "title": "MiniMax",
+    "category": "AI",
+    "file": "ai/minimax.md"
+  },
+  {
+    "title": "Mistral AI",
+    "category": "AI",
+    "file": "ai/mistral-ai.md"
+  },
+  {
+    "title": "Ollama",
+    "category": "AI",
+    "file": "ai/ollama.md"
+  },
+  {
+    "title": "OpenCode",
+    "category": "AI",
+    "file": "ai/opencode-ai.md"
+  },
+  {
+    "title": "Replicate",
+    "category": "AI",
+    "file": "ai/replicate.md"
+  },
+  {
+    "title": "Runway",
+    "category": "AI",
+    "file": "ai/runwayml.md"
+  },
+  {
+    "title": "Together AI",
+    "category": "AI",
+    "file": "ai/together-ai.md"
+  },
+  {
+    "title": "Voltagent",
+    "category": "AI",
+    "file": "ai/voltagent.md"
+  },
+  {
+    "title": "xAI",
+    "category": "AI",
+    "file": "ai/x-ai.md"
+  },
+  {
+    "title": "BMW M",
+    "category": "Automotive",
+    "file": "automotive/bmw-m.md"
+  },
+  {
+    "title": "BMW",
+    "category": "Automotive",
+    "file": "automotive/bmw.md"
+  },
+  {
+    "title": "Bugatti",
+    "category": "Automotive",
+    "file": "automotive/bugatti.md"
+  },
+  {
+    "title": "Ferrari",
+    "category": "Automotive",
+    "file": "automotive/ferrari.md"
+  },
+  {
+    "title": "Lamborghini",
+    "category": "Automotive",
+    "file": "automotive/lamborghini.md"
+  },
+  {
+    "title": "Renault",
+    "category": "Automotive",
+    "file": "automotive/renault.md"
+  },
+  {
+    "title": "Tesla",
+    "category": "Automotive",
+    "file": "automotive/tesla.md"
+  },
+  {
+    "title": "ClickHouse",
+    "category": "DevOps",
+    "file": "devops/clickhouse.md"
+  },
+  {
+    "title": "Composio",
+    "category": "DevOps",
+    "file": "devops/composio.md"
+  },
+  {
+    "title": "HashiCorp",
+    "category": "DevOps",
+    "file": "devops/hashicorp.md"
+  },
+  {
+    "title": "MongoDB",
+    "category": "DevOps",
+    "file": "devops/mongodb.md"
+  },
+  {
+    "title": "Oracle",
+    "category": "DevOps",
+    "file": "devops/oracle.md"
+  },
+  {
+    "title": "PostHog",
+    "category": "DevOps",
+    "file": "devops/posthog.md"
+  },
+  {
+    "title": "Sanity",
+    "category": "DevOps",
+    "file": "devops/sanity.md"
+  },
+  {
+    "title": "Sentry",
+    "category": "DevOps",
+    "file": "devops/sentry.md"
+  },
+  {
+    "title": "Supabase",
+    "category": "DevOps",
+    "file": "devops/supabase.md"
+  },
+  {
+    "title": "Airtable",
+    "category": "Design",
+    "file": "design/airtable.md"
+  },
+  {
+    "title": "Clay",
+    "category": "Design",
+    "file": "design/clay.md"
+  },
+  {
+    "title": "Figma",
+    "category": "Design",
+    "file": "design/figma.md"
+  },
+  {
+    "title": "Framer",
+    "category": "Design",
+    "file": "design/framer.md"
+  },
+  {
+    "title": "Miro",
+    "category": "Design",
+    "file": "design/miro.md"
+  },
+  {
+    "title": "Webflow",
+    "category": "Design",
+    "file": "design/webflow.md"
+  },
+  {
+    "title": "Cursor",
+    "category": "Developer Tools",
+    "file": "developer-tools/cursor.md"
+  },
+  {
+    "title": "Expo",
+    "category": "Developer Tools",
+    "file": "developer-tools/expo.md"
+  },
+  {
+    "title": "Lovable",
+    "category": "Developer Tools",
+    "file": "developer-tools/lovable.md"
+  },
+  {
+    "title": "Raycast",
+    "category": "Developer Tools",
+    "file": "developer-tools/raycast.md"
+  },
+  {
+    "title": "Superhuman",
+    "category": "Developer Tools",
+    "file": "developer-tools/superhuman.md"
+  },
+  {
+    "title": "Vercel",
+    "category": "Developer Tools",
+    "file": "developer-tools/vercel.md"
+  },
+  {
+    "title": "Warp",
+    "category": "Developer Tools",
+    "file": "developer-tools/warp.md"
+  },
+  {
+    "title": "Airbnb",
+    "category": "Ecommerce",
+    "file": "ecommerce/airbnb.md"
+  },
+  {
+    "title": "Meta",
+    "category": "Ecommerce",
+    "file": "ecommerce/meta.md"
+  },
+  {
+    "title": "mydealz",
+    "category": "Ecommerce",
+    "file": "ecommerce/mydealz.md"
+  },
+  {
+    "title": "Nike",
+    "category": "Ecommerce",
+    "file": "ecommerce/nike.md"
+  },
+  {
+    "title": "Shopify",
+    "category": "Ecommerce",
+    "file": "ecommerce/shopify.md"
+  },
+  {
+    "title": "Starbucks",
+    "category": "Ecommerce",
+    "file": "ecommerce/starbucks.md"
+  },
+  {
+    "title": "Binance",
+    "category": "Fintech",
+    "file": "fintech/binance.md"
+  },
+  {
+    "title": "Coinbase",
+    "category": "Fintech",
+    "file": "fintech/coinbase.md"
+  },
+  {
+    "title": "Kraken",
+    "category": "Fintech",
+    "file": "fintech/kraken.md"
+  },
+  {
+    "title": "Mastercard",
+    "category": "Fintech",
+    "file": "fintech/mastercard.md"
+  },
+  {
+    "title": "Mercury",
+    "category": "Fintech",
+    "file": "fintech/mercury.md"
+  },
+  {
+    "title": "NerdWallet",
+    "category": "Fintech",
+    "file": "fintech/nerdwallet.md"
+  },
+  {
+    "title": "Revolut",
+    "category": "Fintech",
+    "file": "fintech/revolut.md"
+  },
+  {
+    "title": "Stripe",
+    "category": "Fintech",
+    "file": "fintech/stripe.md"
+  },
+  {
+    "title": "Wise",
+    "category": "Fintech",
+    "file": "fintech/wise.md"
+  },
+  {
+    "title": "1win",
+    "category": "Media",
+    "file": "media/1win.md"
+  },
+  {
+    "title": "Al Jazeera",
+    "category": "Media",
+    "file": "media/aljazeera.md"
+  },
+  {
+    "title": "Apple",
+    "category": "Media",
+    "file": "media/apple.md"
+  },
+  {
+    "title": "DJI",
+    "category": "Media",
+    "file": "media/dji.md"
+  },
+  {
+    "title": "HP",
+    "category": "Media",
+    "file": "media/hp.md"
+  },
+  {
+    "title": "IBM",
+    "category": "Media",
+    "file": "media/ibm.md"
+  },
+  {
+    "title": "Nvidia",
+    "category": "Media",
+    "file": "media/nvidia.md"
+  },
+  {
+    "title": "Oura",
+    "category": "Media",
+    "file": "media/oura.md"
+  },
+  {
+    "title": "Pinterest",
+    "category": "Media",
+    "file": "media/pinterest.md"
+  },
+  {
+    "title": "PlayStation",
+    "category": "Media",
+    "file": "media/playstation.md"
+  },
+  {
+    "title": "SpaceX",
+    "category": "Media",
+    "file": "media/spacex.md"
+  },
+  {
+    "title": "Spotify",
+    "category": "Media",
+    "file": "media/spotify.md"
+  },
+  {
+    "title": "The Verge",
+    "category": "Media",
+    "file": "media/theverge.md"
+  },
+  {
+    "title": "Uber",
+    "category": "Media",
+    "file": "media/uber.md"
+  },
+  {
+    "title": "Vodafone",
+    "category": "Media",
+    "file": "media/vodafone.md"
+  },
+  {
+    "title": "Wired",
+    "category": "Media",
+    "file": "media/wired.md"
+  },
+  {
+    "title": "Cal.com",
+    "category": "SaaS",
+    "file": "saas/cal.md"
+  },
+  {
+    "title": "Intercom",
+    "category": "SaaS",
+    "file": "saas/intercom.md"
+  },
+  {
+    "title": "Linear",
+    "category": "SaaS",
+    "file": "saas/linear-app.md"
+  },
+  {
+    "title": "Mintlify",
+    "category": "SaaS",
+    "file": "saas/mintlify.md"
+  },
+  {
+    "title": "Notion",
+    "category": "SaaS",
+    "file": "saas/notion.md"
+  },
+  {
+    "title": "Resend",
+    "category": "SaaS",
+    "file": "saas/resend.md"
+  },
+  {
+    "title": "SAP",
+    "category": "SaaS",
+    "file": "saas/sap.md"
+  },
+  {
+    "title": "Slack",
+    "category": "SaaS",
+    "file": "saas/slack.md"
+  },
+  {
+    "title": "Zapier",
+    "category": "SaaS",
+    "file": "saas/zapier.md"
+  },
+  {
+    "title": "Dell 1996",
+    "category": "Retro",
+    "file": "retro/dell-1996.md"
+  },
+  {
+    "title": "Nintendo 2001",
+    "category": "Retro",
+    "file": "retro/nintendo-2001.md"
+  },
+  {
+    "title": "Electra",
+    "category": "Landing Page",
+    "file": "landing-page/electra.md"
+  },
+  {
+    "title": "Hybera",
+    "category": "Landing Page",
+    "file": "landing-page/hybera.md"
+  },
+  {
+    "title": "Leai Design",
+    "category": "Landing Page",
+    "file": "landing-page/leai-design.md"
+  },
+  {
+    "title": "Muse",
+    "category": "Landing Page",
+    "file": "landing-page/muse.md"
+  },
+  {
+    "title": "Vitara",
+    "category": "Hero Section",
+    "file": "hero-section/vitara.md"
+  },
+  {
+    "title": "Pofolio",
+    "category": "Hero Section",
+    "file": "hero-section/pofolio.md"
+  },
+  {
+    "title": "Fola Pastry",
+    "category": "Landing Page",
+    "file": "landing-page/fola-pastry.md"
+  },
+  {
+    "title": "ZyKabs",
+    "category": "Landing Page",
+    "file": "landing-page/zykabs.md"
+  },
+  {
+    "title": "Login 001",
+    "category": "Login Page",
+    "file": "login-page/login-001.md"
+  },
+  {
+    "title": "Login 002",
+    "category": "Login Page",
+    "file": "login-page/login-002.md"
+  },
+  {
+    "title": "Maven",
+    "category": "Landing Page",
+    "file": "landing-page/maven.md"
+  },
+  {
+    "title": "Amee Paris",
+    "category": "Landing Page",
+    "file": "landing-page/amee-paris.md"
+  },
+  {
+    "title": "Awesome",
+    "category": "Landing Page",
+    "file": "landing-page/awesome.md"
+  },
+  {
+    "title": "NONAME",
+    "category": "Landing Page",
+    "file": "landing-page/noname.md"
+  },
+  {
+    "title": "3DVIEW",
+    "category": "Hero Section",
+    "file": "hero-section/3dview.md"
+  },
+  {
+    "title": "Adam dev",
+    "category": "Landing Page",
+    "file": "landing-page/adamdev.md"
+  },
+  {
+    "title": "AI Studio",
+    "category": "Hero Section",
+    "file": "hero-section/aistudio.md"
+  },
+  {
+    "title": "Apos",
+    "category": "Hero Section",
+    "file": "hero-section/apos.md"
+  },
+  {
+    "title": "Blue AI",
+    "category": "Hero Section",
+    "file": "hero-section/blueai.md"
+  },
+  {
+    "title": "Chipmuk",
+    "category": "Hero Section",
+    "file": "hero-section/chipmuk.md"
+  },
+  {
+    "title": "Lockain",
+    "category": "Hero Section",
+    "file": "hero-section/lockain.md"
+  },
+  {
+    "title": "Login 003",
+    "category": "Login Page",
+    "file": "login-page/login-003.md"
+  },
+  {
+    "title": "OCODE",
+    "category": "Hero Section",
+    "file": "hero-section/ocode.md"
+  },
+  {
+    "title": "Plusgain",
+    "category": "Hero Section",
+    "file": "hero-section/plusgain.md"
+  },
+  {
+    "title": "Porgas",
+    "category": "Landing Page",
+    "file": "landing-page/porgas.md"
+  },
+  {
+    "title": "Butter NFT",
+    "category": "Landing Page",
+    "file": "landing-page/butternft.md"
+  },
+  {
+    "title": "Canbe",
+    "category": "Landing Page",
+    "file": "landing-page/canbe.md"
+  },
+  {
+    "title": "Depcoin",
+    "category": "Hero Section",
+    "file": "hero-section/depcoin.md"
+  },
+  {
+    "title": "Glassy",
+    "category": "Landing Page",
+    "file": "landing-page/glassy.md"
+  },
+  {
+    "title": "Helfy",
+    "category": "Hero Section",
+    "file": "hero-section/helfy.md"
+  },
+  {
+    "title": "Holechain",
+    "category": "Hero Section",
+    "file": "hero-section/holechain.md"
+  },
+  {
+    "title": "Mirola",
+    "category": "Landing Page",
+    "file": "landing-page/mirola.md"
+  },
+  {
+    "title": "Zero2One",
+    "category": "Landing Page",
+    "file": "landing-page/zero2one.md"
+  },
+  {
+    "title": "PixelWorld",
+    "category": "Hero Section",
+    "file": "hero-section/pixelworld.md"
+  },
+  {
+    "title": "Veyra Dashboard",
+    "category": "Dashboard",
+    "file": "dashboard/veyra-dashboard.md"
+  },
+  {
+    "title": "Dashboard 002",
+    "category": "Dashboard",
+    "file": "dashboard/dashboard-002.md"
+  },
+  {
+    "title": "NAXAS",
+    "category": "Hero Section",
+    "file": "hero-section/naxas.md"
+  },
+  {
+    "title": "Dashboard 003",
+    "category": "Dashboard",
+    "file": "dashboard/dashboard-003.md"
+  },
+  {
+    "title": "Estudio",
+    "category": "Hero Section",
+    "file": "hero-section/estudio.md"
+  },
+  {
+    "title": "Picway",
+    "category": "Hero Section",
+    "file": "hero-section/picway.md"
+  },
+  {
+    "title": "Zpeed",
+    "category": "Hero Section",
+    "file": "hero-section/zpeed.md"
+  },
+  {
+    "title": "OMMOD",
+    "category": "Landing Page",
+    "file": "landing-page/ommod.md"
+  },
+  {
+    "title": "MoveStudio",
+    "category": "Landing Page",
+    "file": "landing-page/movestudio.md"
+  },
+  {
+    "title": "Banana Mood",
+    "category": "Landing Page",
+    "file": "landing-page/banana-mood.md"
+  },
+  {
+    "title": "CoinCheck",
+    "category": "Landing Page",
+    "file": "landing-page/coincheck.md"
+  },
+  {
+    "title": "LosView",
+    "category": "Landing Page",
+    "file": "landing-page/losview.md"
+  },
+  {
+    "title": "Portfolio 001",
+    "category": "Landing Page",
+    "file": "landing-page/portfolio-001.md"
+  },
+  {
+    "title": "MFC",
+    "category": "Hero Section",
+    "file": "hero-section/mfc.md"
+  },
+  {
+    "title": "Dreamy",
+    "category": "Hero Section",
+    "file": "hero-section/dreamy.md"
+  },
+  {
+    "title": "MarX",
+    "category": "Landing Page",
+    "file": "landing-page/marx.md"
+  },
+  {
+    "title": "FaiPi",
+    "category": "Hero Section",
+    "file": "hero-section/faipi.md"
+  },
+  {
+    "title": "VR World",
+    "category": "Landing Page",
+    "file": "landing-page/vrworld.md"
+  },
+  {
+    "title": "Spotlight",
+    "category": "Hero Section",
+    "file": "hero-section/spotlight.md"
+  },
+  {
+    "title": "1Brain",
+    "category": "Landing Page",
+    "file": "landing-page/1brain.md"
+  },
+  {
+    "title": "SEATHE",
+    "category": "Hero Section",
+    "file": "hero-section/seathe.md"
+  },
+  {
+    "title": "Bingchiling",
+    "category": "Hero Section",
+    "file": "hero-section/bingchiling.md"
+  },
+  {
+    "title": "Geny",
+    "category": "Landing Page",
+    "file": "landing-page/geny.md"
+  },
+  {
+    "title": "Comai",
+    "category": "Hero Section",
+    "file": "hero-section/comai.md"
+  },
+  {
+    "title": "Hibou",
+    "category": "Landing Page",
+    "file": "landing-page/hibou.md"
+  },
+  {
+    "title": "MOSS",
+    "category": "Landing Page",
+    "file": "landing-page/moss.md"
+  },
+  {
+    "title": "MIHOME",
+    "category": "Landing Page",
+    "file": "landing-page/mihome.md"
+  },
+  {
+    "title": "CloudB",
+    "category": "Hero Section",
+    "file": "hero-section/cloudb.md"
+  },
+  {
+    "title": "OX Wallet",
+    "category": "Apps",
+    "file": "apps/oxwallet.md"
+  },
+  {
+    "title": "Mapple",
+    "category": "Hero Section",
+    "file": "hero-section/mapple.md"
+  },
+  {
+    "title": "HALAND",
+    "category": "Landing Page",
+    "file": "landing-page/haland-watch.md"
+  },
+  {
+    "title": "Metery",
+    "category": "Hero Section",
+    "file": "hero-section/metery.md"
+  },
+  {
+    "title": "Farcy",
+    "category": "Hero Section",
+    "file": "hero-section/farcy.md"
+  },
+  {
+    "title": "VAULT®",
+    "category": "Landing Page",
+    "file": "landing-page/vault.md"
+  },
+  {
+    "title": "Kova",
+    "category": "Landing Page",
+    "file": "landing-page/kova.md"
+  },
+  {
+    "title": "Curio",
+    "category": "Landing Page",
+    "file": "landing-page/curio.md"
+  },
+  {
+    "title": "Shelter",
+    "category": "Hero Section",
+    "file": "hero-section/shelter.md"
+  },
+  {
+    "title": "ESAI",
+    "category": "Hero Section",
+    "file": "hero-section/esai.md"
+  },
+  {
+    "title": "Seno",
+    "category": "Landing Page",
+    "file": "landing-page/seno.md"
+  },
+  {
+    "title": "Labs",
+    "category": "Hero Section",
+    "file": "hero-section/labs.md"
+  },
+  {
+    "title": "Skyline",
+    "category": "Landing Page",
+    "file": "landing-page/skyline.md"
+  },
+  {
+    "title": "Login 004",
+    "category": "Login Page",
+    "file": "login-page/login-004.md"
+  },
+  {
+    "title": "Zara",
+    "category": "Hero Section",
+    "file": "hero-section/zara.md"
+  },
+  {
+    "title": "Somic",
+    "category": "Landing Page",
+    "file": "landing-page/somic.md"
+  },
+  {
+    "title": "Taste",
+    "category": "Hero Section",
+    "file": "hero-section/taste.md"
+  },
+  {
+    "title": "Laura",
+    "category": "Hero Section",
+    "file": "hero-section/laura.md"
+  },
+  {
+    "title": "Azaka",
+    "category": "Hero Section",
+    "file": "hero-section/azaka.md"
+  },
+  {
+    "title": "EnergZ",
+    "category": "Landing Page",
+    "file": "landing-page/energz.md"
+  },
+  {
+    "title": "Nikki",
+    "category": "Hero Section",
+    "file": "hero-section/nikki.md"
+  },
+  {
+    "title": "Bass",
+    "category": "Landing Page",
+    "file": "landing-page/bass.md"
+  },
+  {
+    "title": "Ous",
+    "category": "Hero Section",
+    "file": "hero-section/ous.md"
+  },
+  {
+    "title": "Unsee",
+    "category": "Landing Page",
+    "file": "landing-page/unsee.md"
+  },
+  {
+    "title": "Marchie",
+    "category": "Landing Page",
+    "file": "landing-page/marchie.md"
+  },
+  {
+    "title": "ihouse",
+    "category": "Hero Section",
+    "file": "hero-section/ihouse.md"
+  },
+  {
+    "title": "Gates",
+    "category": "Hero Section",
+    "file": "hero-section/gates.md"
+  },
+  {
+    "title": "Agamemnon",
+    "category": "Landing Page",
+    "file": "landing-page/agamemnon.md"
+  },
+  {
+    "title": "Senson",
+    "category": "Landing Page",
+    "file": "landing-page/senson.md"
+  },
+  {
+    "title": "AI Builder Club",
+    "category": "Ai",
+    "file": "ai/ai-builder-club.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/ai-builder-club",
+    "site": "https://aibuilderclub.com/"
+  },
+  {
+    "title": "Alpine Circuit Green",
+    "category": "Misc",
+    "file": "misc/alpine-circuit-green.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/alpine-circuit-green",
+    "site": "https://www.skylineautomationsllc.com/"
+  },
+  {
+    "title": "Amber Dogo Dark",
+    "category": "Misc",
+    "file": "misc/amber-dogo-dark.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/amber-dogo-dark",
+    "site": "https://atlascanino.cl/"
+  },
+  {
+    "title": "Amber Runway Editorial",
+    "category": "Media",
+    "file": "media/amber-runway-editorial.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/amber-runway-editorial",
+    "site": "https://gwingz.squarespace.com/"
+  },
+  {
+    "title": "AnalogLaunchpad — Industrial Control Surface",
+    "category": "Design",
+    "file": "design/analoglaunchpad-industrial-control-surface.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/analoglaunchpad-industrial-control-surface"
+  },
+  {
+    "title": "Anthropic",
+    "category": "Media",
+    "file": "media/anthropic.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/anthropic",
+    "site": "https://anthropic.com/"
+  },
+  {
+    "title": "Apple",
+    "category": "Ecommerce",
+    "file": "ecommerce/apple.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/apple",
+    "site": "https://www.apple.com/"
+  },
+  {
+    "title": "ARK Software",
+    "category": "Misc",
+    "file": "misc/ark-software-989e1d.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/ark-software-989e1d"
+  },
+  {
+    "title": "Atelier Reveal | Pomodoro",
+    "category": "Design",
+    "file": "design/atelier-reveal-or-pomodoro.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/atelier-reveal-or-pomodoro"
+  },
+  {
+    "title": "AtlasCanino ALPHA",
+    "category": "Misc",
+    "file": "misc/atlas-canino-obsidian-and-amber.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/atlas-canino-obsidian-and-amber"
+  },
+  {
+    "title": "Backlit browser-frame noir",
+    "category": "Design",
+    "file": "design/backlit-browser-frame-noir.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/backlit-browser-frame-noir",
+    "site": "https://perryw-2023.webflow.io/"
+  },
+  {
+    "title": "بازپرس - میز کار بررسی‌کننده",
+    "category": "Fintech",
+    "file": "fintech/bazprs-myz-kar-brrsyknndh.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/bazprs-myz-kar-brrsyknndh"
+  },
+  {
+    "title": "Blackframe Cinematic",
+    "category": "Media",
+    "file": "media/blackframe-cinematic.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/blackframe-cinematic",
+    "site": "https://playbackstudio.framer.website/"
+  },
+  {
+    "title": "Blueprint Grotesk",
+    "category": "Misc",
+    "file": "misc/blueprint-grotesk.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/blueprint-grotesk",
+    "site": "https://heronaiapp.com/"
+  },
+  {
+    "title": "Blueprint Grotesk",
+    "category": "Misc",
+    "file": "misc/blueprint-grotesk-3125e9.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/blueprint-grotesk-3125e9",
+    "site": "https://heronaiapp.com/"
+  },
+  {
+    "title": "Blueprint Moss",
+    "category": "Misc",
+    "file": "misc/blueprint-moss.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/blueprint-moss",
+    "site": "https://www.nomic.ai/"
+  },
+  {
+    "title": "Cal.com",
+    "category": "Misc",
+    "file": "misc/calcom.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/calcom",
+    "site": "https://cal.com/"
+  },
+  {
+    "title": "Carousel Void",
+    "category": "Design",
+    "file": "design/carousel-void.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/carousel-void",
+    "site": "https://jesperlandberg.com/"
+  },
+  {
+    "title": "Chalk Canvas Grid",
+    "category": "Misc",
+    "file": "misc/chalk-canvas-grid.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/chalk-canvas-grid",
+    "site": "https://bencho.dev/"
+  },
+  {
+    "title": "Chalkboard Scheduling Grid",
+    "category": "Saas",
+    "file": "saas/chalkboard-scheduling-grid.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/chalkboard-scheduling-grid",
+    "site": "https://cal.com/"
+  },
+  {
+    "title": "Chalkline Grid Light",
+    "category": "Misc",
+    "file": "misc/chalkline-grid-light.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/chalkline-grid-light",
+    "site": "https://maelyn.eu/"
+  },
+  {
+    "title": "Charcoal Ledger",
+    "category": "Fintech",
+    "file": "fintech/charcoal-ledger.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/charcoal-ledger",
+    "site": "https://actbe.co.jp/"
+  },
+  {
+    "title": "Cherry Cloud Maximalism",
+    "category": "Misc",
+    "file": "misc/cherry-cloud-maximalism.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/cherry-cloud-maximalism",
+    "site": "https://loko.delivery/?gad_source=1&gad_campaignid=20181184509&gbraid=0AAAAAo4NbMUuUQfuAYt5GLq7mXw9R6GEk&gclid=CjwKCAjwl4HXBhAjEiwAHlpWhLRnl-PiStDLQfYm7cZrUrtXF87NGAZIoi2uf_eHlnLSJoGD03kVlxoCNCIQAvD_BwE"
+  },
+  {
+    "title": "Chirp Ledger",
+    "category": "Fintech",
+    "file": "fintech/chirp-ledger.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/chirp-ledger",
+    "site": "https://x.com/home"
+  },
+  {
+    "title": "Chrome Void",
+    "category": "Misc",
+    "file": "misc/chrome-void.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/chrome-void",
+    "site": "https://nogood.io/"
+  },
+  {
+    "title": "Circuit Black Racing Chrome",
+    "category": "Automotive",
+    "file": "automotive/circuit-black-racing-chrome.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/circuit-black-racing-chrome",
+    "site": "https://f1.audi.com.au/"
+  },
+  {
+    "title": "Clay",
+    "category": "Media",
+    "file": "media/clay.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/clay",
+    "site": "https://www.clay.com/"
+  },
+  {
+    "title": "Claymorphic Comic Ledger",
+    "category": "Fintech",
+    "file": "fintech/claymorphic-comic-ledger.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/claymorphic-comic-ledger",
+    "site": "https://www.creem.io/"
+  },
+  {
+    "title": "CMI Extended Components Library",
+    "category": "Misc",
+    "file": "misc/cmi-extended-components-library.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/cmi-extended-components-library"
+  },
+  {
+    "title": "CMI Foundational Components Library",
+    "category": "Misc",
+    "file": "misc/cmi-foundational-components-library.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/cmi-foundational-components-library"
+  },
+  {
+    "title": "CMI Member Card Component",
+    "category": "Misc",
+    "file": "misc/cmi-member-card-component.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/cmi-member-card-component"
+  },
+  {
+    "title": "Code Prompts Landing Page",
+    "category": "Ai",
+    "file": "ai/code-prompts-landing-page.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/code-prompts-landing-page"
+  },
+  {
+    "title": "Confetti minimal",
+    "category": "Media",
+    "file": "media/confetti-minimal.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/confetti-minimal",
+    "site": "https://www.designjoy.co/"
+  },
+  {
+    "title": "Connect Nocturne Coral",
+    "category": "Misc",
+    "file": "misc/connect-nocturne-coral.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/connect-nocturne-coral"
+  },
+  {
+    "title": "Corporate Deep-Cobalt Editorial",
+    "category": "Media",
+    "file": "media/corporate-deep-cobalt-editorial.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/corporate-deep-cobalt-editorial",
+    "site": "https://www.chevron.com/"
+  },
+  {
+    "title": "Corporate Ledger Blue",
+    "category": "Fintech",
+    "file": "fintech/corporate-ledger-blue.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/corporate-ledger-blue",
+    "site": "https://promo.bca.co.id/id/all/2026/09/29/15/Palem-Cinde"
+  },
+  {
+    "title": "Cream Island",
+    "category": "Misc",
+    "file": "misc/cream-island.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/cream-island",
+    "site": "https://tryalcove.com/"
+  },
+  {
+    "title": "Cream Island",
+    "category": "Misc",
+    "file": "misc/cream-island-c893c2.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/cream-island-c893c2",
+    "site": "https://tryalcove.com/"
+  },
+  {
+    "title": "Cursor",
+    "category": "Developer Tools",
+    "file": "developer-tools/cursor-2.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/cursor",
+    "site": "https://cursor.com/"
+  },
+  {
+    "title": "Deep-channel feed glass",
+    "category": "Saas",
+    "file": "saas/deep-channel-feed-glass.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/deep-channel-feed-glass",
+    "site": "https://dev.etmania.com/organizations"
+  },
+  {
+    "title": "Deep-space glass orbit",
+    "category": "Misc",
+    "file": "misc/deep-space-glass-orbit.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/deep-space-glass-orbit",
+    "site": "https://nebusec.ai/"
+  },
+  {
+    "title": "DeepSeek Harness - Premium Stone Institutional Workbench",
+    "category": "Misc",
+    "file": "misc/deepseek-harness-premium-stone-institutional-workbench.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/deepseek-harness-premium-stone-institutional-workbench"
+  },
+  {
+    "title": "Diagrammatic ledger light",
+    "category": "Fintech",
+    "file": "fintech/diagrammatic-ledger-light.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/diagrammatic-ledger-light",
+    "site": "https://hellomatik.com/?ref=minimal.gallery"
+  },
+  {
+    "title": "Dotted Glass Split",
+    "category": "Misc",
+    "file": "misc/dotted-glass-split.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/dotted-glass-split",
+    "site": "https://www.app.artd.pro/"
+  },
+  {
+    "title": "EddyReady Portfolio Update",
+    "category": "Design",
+    "file": "design/eddyready-portfolio-update.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/eddyready-portfolio-update"
+  },
+  {
+    "title": "Editorial Ivory Grid",
+    "category": "Media",
+    "file": "media/editorial-ivory-grid.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/editorial-ivory-grid",
+    "site": "https://www.isomeet.com/"
+  },
+  {
+    "title": "Ember Ledger",
+    "category": "Fintech",
+    "file": "fintech/ember-ledger.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/ember-ledger",
+    "site": "https://cryonix.framer.website/"
+  },
+  {
+    "title": "Ember Void Editorial",
+    "category": "Media",
+    "file": "media/ember-void-editorial.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/ember-void-editorial",
+    "site": "https://conversion.framer.media/"
+  },
+  {
+    "title": "Ember Void Editorial",
+    "category": "Media",
+    "file": "media/ember-void-editorial-363ba3.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/ember-void-editorial-363ba3",
+    "site": "https://conversion.framer.media/"
+  },
+  {
+    "title": "EOS Teknologi Diagnostic Poster",
+    "category": "Saas",
+    "file": "saas/eos-teknologi-diagnostic-poster.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/eos-teknologi-diagnostic-poster"
+  },
+  {
+    "title": "Faceted Plum Institutional",
+    "category": "Media",
+    "file": "media/faceted-plum-institutional.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/faceted-plum-institutional",
+    "site": "https://decennialgroup.com/"
+  },
+  {
+    "title": "Farmstand Pop",
+    "category": "Misc",
+    "file": "misc/farmstand-pop.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/farmstand-pop",
+    "site": "https://hungryharvest.net/"
+  },
+  {
+    "title": "Fieldwork Grotesk",
+    "category": "Media",
+    "file": "media/fieldwork-grotesk.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/fieldwork-grotesk",
+    "site": "https://runnamarket-tqthjbhw.manus.space/merchants"
+  },
+  {
+    "title": "Framer",
+    "category": "Developer Tools",
+    "file": "developer-tools/framer.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/framer",
+    "site": "https://framer.com/"
+  },
+  {
+    "title": "Frosted Sky Router",
+    "category": "Developer Tools",
+    "file": "developer-tools/frosted-sky-router.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/frosted-sky-router",
+    "site": "https://router.bynara.id/"
+  },
+  {
+    "title": "Halftone Ember Grid",
+    "category": "Media",
+    "file": "media/halftone-ember-grid.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/halftone-ember-grid",
+    "site": "https://www.cloudflare.com/"
+  },
+  {
+    "title": "Harbor Paper Console",
+    "category": "Misc",
+    "file": "misc/harbor-paper-console.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/harbor-paper-console",
+    "site": "https://tokenharbor.ai/"
+  },
+  {
+    "title": "Heyski",
+    "category": "Misc",
+    "file": "misc/heyski.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/heyski",
+    "site": "https://heyski.io/"
+  },
+  {
+    "title": "Həzm Sistemi Presentation Cover",
+    "category": "Developer Tools",
+    "file": "developer-tools/hezm-sistemi-presentation-cover.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/hezm-sistemi-presentation-cover"
+  },
+  {
+    "title": "Indigo Dossier",
+    "category": "Fintech",
+    "file": "fintech/indigo-dossier.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/indigo-dossier",
+    "site": "https://iuripiragibe.net/"
+  },
+  {
+    "title": "Institutional Blue Ledger",
+    "category": "Fintech",
+    "file": "fintech/institutional-blue-ledger.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/institutional-blue-ledger",
+    "site": "https://www.bca.co.id/"
+  },
+  {
+    "title": "Intelligence Ai",
+    "category": "Ai",
+    "file": "ai/intelligence-ai.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/intelligence-ai",
+    "site": "https://intelligence.ai/"
+  },
+  {
+    "title": "Island Capsule",
+    "category": "Media",
+    "file": "media/island-capsule.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/island-capsule",
+    "site": "https://notchbay.com/"
+  },
+  {
+    "title": "Klein Terminal Classical",
+    "category": "Developer Tools",
+    "file": "developer-tools/klein-terminal-classical.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/klein-terminal-classical",
+    "site": "https://hermes-agent.nousresearch.com/"
+  },
+  {
+    "title": "legora.com",
+    "category": "Media",
+    "file": "media/legoracom.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/legoracom"
+  },
+  {
+    "title": "Lenis.dev",
+    "category": "Media",
+    "file": "media/lenisdev.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/lenisdev",
+    "site": "https://lenis.dev/"
+  },
+  {
+    "title": "Linear",
+    "category": "Misc",
+    "file": "misc/linear.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/linear",
+    "site": "https://linear.app/"
+  },
+  {
+    "title": "Minimalist Electric Cyan Portfolio",
+    "category": "Design",
+    "file": "design/minimalist-electric-cyan-portfolio.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/minimalist-electric-cyan-portfolio"
+  },
+  {
+    "title": "Monochrome Etch",
+    "category": "Media",
+    "file": "media/monochrome-etch.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/monochrome-etch",
+    "site": "https://etchsalon.com/"
+  },
+  {
+    "title": "Musician Helper — Design System v0.1 · Final Visual Polish",
+    "category": "Media",
+    "file": "media/musician-helper-design-system-v01-final-visual-polish.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/musician-helper-design-system-v01-final-visual-polish"
+  },
+  {
+    "title": "Navy Ledger Editorial",
+    "category": "Fintech",
+    "file": "fintech/navy-ledger-editorial.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/navy-ledger-editorial",
+    "site": "https://realevate.agency/"
+  },
+  {
+    "title": "Neon DB",
+    "category": "Developer Tools",
+    "file": "developer-tools/neon-db.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/neon-db",
+    "site": "https://neon.com/"
+  },
+  {
+    "title": "Nocturne Codex",
+    "category": "Media",
+    "file": "media/nocturne-codex.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/nocturne-codex",
+    "site": "https://swarved-new.vercel.app/en"
+  },
+  {
+    "title": "Operational Noir",
+    "category": "Media",
+    "file": "media/operational-noir.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/operational-noir",
+    "site": "https://www.meuze.ai/"
+  },
+  {
+    "title": "Островок",
+    "category": "Misc",
+    "file": "misc/ostrovok.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/ostrovok",
+    "site": "https://ostrovok.ru/"
+  },
+  {
+    "title": "Overnight Thread Light",
+    "category": "Misc",
+    "file": "misc/overnight-thread-light.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/overnight-thread-light",
+    "site": "https://www.getstanley.ai/welcome"
+  },
+  {
+    "title": "Papercut Fable",
+    "category": "Misc",
+    "file": "misc/papercut-fable.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/papercut-fable",
+    "site": "https://www.missingpieceinvites.com/demos/whimsical"
+  },
+  {
+    "title": "Pastel Glass Console",
+    "category": "Misc",
+    "file": "misc/pastel-glass-console.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/pastel-glass-console",
+    "site": "https://sakaju.space/"
+  },
+  {
+    "title": "Periwinkle Console",
+    "category": "Saas",
+    "file": "saas/periwinkle-console.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/periwinkle-console",
+    "site": "https://staycloud.com/"
+  },
+  {
+    "title": "Petroleum Fluidity",
+    "category": "Misc",
+    "file": "misc/petroleum-fluidity.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/petroleum-fluidity",
+    "site": "https://brand-kit-rivm.ai.studio/"
+  },
+  {
+    "title": "Pixel-ledger blue",
+    "category": "Fintech",
+    "file": "fintech/pixel-ledger-blue.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/pixel-ledger-blue",
+    "site": "https://theaicourse.ai/self-paced?trakyo_id=VBESRYAi4o3wu2Fb"
+  },
+  {
+    "title": "Planetscale",
+    "category": "Misc",
+    "file": "misc/planetscale.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/planetscale",
+    "site": "https://planetscale.com/"
+  },
+  {
+    "title": "Preserve-jar playground",
+    "category": "Misc",
+    "file": "misc/preserve-jar-playground.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/preserve-jar-playground",
+    "site": "https://www.jamm.co/"
+  },
+  {
+    "title": "Quiet Ledger Minimal",
+    "category": "Fintech",
+    "file": "fintech/quiet-ledger-minimal.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/quiet-ledger-minimal",
+    "site": "https://www.dior.com/en_us/beauty/page/triaxe-bestseller.html"
+  },
+  {
+    "title": "Quiet ledger split-auth",
+    "category": "Fintech",
+    "file": "fintech/quiet-ledger-split-auth.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/quiet-ledger-split-auth",
+    "site": "https://dashboard.tsenta.com/dashboard"
+  },
+  {
+    "title": "Quiet plum auth",
+    "category": "Misc",
+    "file": "misc/quiet-plum-auth.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/quiet-plum-auth",
+    "site": "https://app.lola.ai/dashboard?chat=chat_803a17fa503f204f7bc2dcff4fc82794"
+  },
+  {
+    "title": "Quint Atelier — Timeless Editorial Redesign",
+    "category": "Media",
+    "file": "media/quint-atelier-timeless-editorial-redesign.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/quint-atelier-timeless-editorial-redesign"
+  },
+  {
+    "title": "Railway",
+    "category": "Media",
+    "file": "media/railway.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/railway",
+    "site": "https://railway.com/"
+  },
+  {
+    "title": "Ration-blue gate card",
+    "category": "Misc",
+    "file": "misc/ration-blue-gate-card.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/ration-blue-gate-card",
+    "site": "https://aj-portfolio-dashboard.vercel.app/"
+  },
+  {
+    "title": "Stripe",
+    "category": "Media",
+    "file": "media/rationed-aurora-light.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/rationed-aurora-light",
+    "site": "https://stripe.com/"
+  },
+  {
+    "title": "Rationed Blue Editorial",
+    "category": "Media",
+    "file": "media/rationed-blue-editorial.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/rationed-blue-editorial",
+    "site": "https://www.wftutor.school/"
+  },
+  {
+    "title": "Clickhouse",
+    "category": "Misc",
+    "file": "misc/rationed-voltage-dark.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/rationed-voltage-dark",
+    "site": "https://clickhouse.com/"
+  },
+  {
+    "title": "Redtigercam",
+    "category": "Automotive",
+    "file": "automotive/redtigercam.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/redtigercam"
+  },
+  {
+    "title": "Reference 1 — Practice Tests",
+    "category": "Misc",
+    "file": "misc/reference-1-practice-tests.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/reference-1-practice-tests",
+    "site": "https://the1550formula.com/"
+  },
+  {
+    "title": "Scatter-field white cabinet",
+    "category": "Design",
+    "file": "design/scatter-field-white-cabinet.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/scatter-field-white-cabinet",
+    "site": "https://www.gionatannese.com/"
+  },
+  {
+    "title": "Stack Ai",
+    "category": "Ai",
+    "file": "ai/stack-ai.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/stack-ai",
+    "site": "https://www.stackai.com/"
+  },
+  {
+    "title": "Sunlit Didone Editorial",
+    "category": "Media",
+    "file": "media/sunlit-didone-editorial.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/sunlit-didone-editorial",
+    "site": "https://www.donnamariella.net/"
+  },
+  {
+    "title": "Sunrise glass auth",
+    "category": "Misc",
+    "file": "misc/sunrise-glass-auth.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/sunrise-glass-auth",
+    "site": "https://app.clickup.com/90122085290/v/b/li/901222348389"
+  },
+  {
+    "title": "Supabase",
+    "category": "Misc",
+    "file": "misc/supabase.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/supabase",
+    "site": "https://supabase.com/"
+  },
+  {
+    "title": "Teal Ledger Corporate",
+    "category": "Fintech",
+    "file": "fintech/teal-ledger-corporate.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/teal-ledger-corporate",
+    "site": "https://smarthr.jp/"
+  },
+  {
+    "title": "Terminal Amber Ledger",
+    "category": "Fintech",
+    "file": "fintech/terminal-amber-ledger.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/terminal-amber-ledger",
+    "site": "https://www.aicutad.id/"
+  },
+  {
+    "title": "Terminal Cyan Ledger",
+    "category": "Fintech",
+    "file": "fintech/terminal-cyan-ledger.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/terminal-cyan-ledger",
+    "site": "https://cryptolab.framer.website/"
+  },
+  {
+    "title": "Terminal Ember",
+    "category": "Developer Tools",
+    "file": "developer-tools/terminal-ember.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/terminal-ember",
+    "site": "https://expand.ai/"
+  },
+  {
+    "title": "Terminal Flat",
+    "category": "Developer Tools",
+    "file": "developer-tools/terminal-flat.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/terminal-flat",
+    "site": "https://bun.com/docs/installation"
+  },
+  {
+    "title": "Terminal Flat",
+    "category": "Developer Tools",
+    "file": "developer-tools/terminal-flat-75e3ef.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/terminal-flat-75e3ef",
+    "site": "https://bun.com/docs/installation"
+  },
+  {
+    "title": "Terminal Transit Noir",
+    "category": "Developer Tools",
+    "file": "developer-tools/terminal-transit-noir.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/terminal-transit-noir",
+    "site": "https://www.torontotechweek.com/"
+  },
+  {
+    "title": "Terracotta arch editorial",
+    "category": "Media",
+    "file": "media/terracotta-arch-editorial.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/terracotta-arch-editorial",
+    "site": "https://archscale.webflow.io/"
+  },
+  {
+    "title": "Terracotta arch editorial",
+    "category": "Media",
+    "file": "media/terracotta-arch-editorial-144e46.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/terracotta-arch-editorial-144e46",
+    "site": "https://archscale.webflow.io/"
+  },
+  {
+    "title": "Terracotta arch editorial",
+    "category": "Media",
+    "file": "media/terracotta-arch-editorial-5658bc.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/terracotta-arch-editorial-5658bc",
+    "site": "https://archscale.webflow.io/home/home-b"
+  },
+  {
+    "title": "Terracotta arch editorial",
+    "category": "Media",
+    "file": "media/terracotta-arch-editorial-9a1505.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/terracotta-arch-editorial-9a1505",
+    "site": "https://archscale.webflow.io/"
+  },
+  {
+    "title": "Terracotta arch editorial",
+    "category": "Media",
+    "file": "media/terracotta-arch-editorial-c8c63e.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/terracotta-arch-editorial-c8c63e",
+    "site": "https://archscale.webflow.io/"
+  },
+  {
+    "title": "Therapist",
+    "category": "Media",
+    "file": "media/therapist.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/therapist",
+    "site": "https://www.brightmomentstherapy.com/"
+  },
+  {
+    "title": "trace.so",
+    "category": "Misc",
+    "file": "misc/traceso.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/traceso"
+  },
+  {
+    "title": "TradeBuilds CRM | Obsidian & Lime Edition (Split-Reverse)",
+    "category": "Saas",
+    "file": "saas/tradebuilds-crm-or-obsidian-and-lime-edition-split-reverse.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/tradebuilds-crm-or-obsidian-and-lime-edition-split-reverse"
+  },
+  {
+    "title": "Trattoria broadsheet",
+    "category": "Media",
+    "file": "media/trattoria-broadsheet.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/trattoria-broadsheet",
+    "site": "https://damaria-roma.webflow.io/"
+  },
+  {
+    "title": "Type-Foundry Ledger",
+    "category": "Fintech",
+    "file": "fintech/type-foundry-ledger.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/type-foundry-ledger",
+    "site": "https://www.fontshare.com/"
+  },
+  {
+    "title": "Vapi Ai",
+    "category": "Ai",
+    "file": "ai/vapi-ai.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/vapi-ai",
+    "site": "https://vapi.ai/"
+  },
+  {
+    "title": "Verdant Grid Corporate",
+    "category": "Misc",
+    "file": "misc/verdant-grid-corporate.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/verdant-grid-corporate",
+    "site": "https://sekhmetenergyindia.com/"
+  },
+  {
+    "title": "Vermillion Editorial Grid",
+    "category": "Media",
+    "file": "media/vermillion-editorial-grid.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/vermillion-editorial-grid",
+    "site": "https://www.brandvm.com/"
+  },
+  {
+    "title": "Viktor",
+    "category": "Misc",
+    "file": "misc/viktor.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/viktor",
+    "site": "https://viktor.com/"
+  },
+  {
+    "title": "Relevance Ai",
+    "category": "Ai",
+    "file": "ai/violet-ledger-interface.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/violet-ledger-interface",
+    "site": "https://relevanceai.com/"
+  },
+  {
+    "title": "Violet Ledger Interface",
+    "category": "Fintech",
+    "file": "fintech/violet-ledger-interface-031616.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/violet-ledger-interface-031616",
+    "site": "https://relevanceai.com/"
+  },
+  {
+    "title": "Violet Void Interface",
+    "category": "Misc",
+    "file": "misc/violet-void-interface.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/violet-void-interface",
+    "site": "https://easyfaceswap.com/"
+  },
+  {
+    "title": "Void-teal ledger glass",
+    "category": "Fintech",
+    "file": "fintech/void-teal-ledger-glass.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/void-teal-ledger-glass",
+    "site": "https://monthly-expense-tracker-6072.ai.studio/"
+  },
+  {
+    "title": "Void Violet Condensed",
+    "category": "Misc",
+    "file": "misc/void-violet-condensed.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/void-violet-condensed",
+    "site": "https://piyushkataria.framer.website/"
+  },
+  {
+    "title": "Voidframe console",
+    "category": "Ai",
+    "file": "ai/voidframe-console.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/voidframe-console",
+    "site": "https://brightplayground.my.id/dashboard"
+  },
+  {
+    "title": "Warm civic ledger",
+    "category": "Fintech",
+    "file": "fintech/warm-civic-ledger.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/warm-civic-ledger",
+    "site": "https://newtown.digital/"
+  },
+  {
+    "title": "Warm Coral Ledger",
+    "category": "Fintech",
+    "file": "fintech/warm-coral-ledger.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/warm-coral-ledger",
+    "site": "https://www.qasir.id/"
+  },
+  {
+    "title": "Warm Ember Timber",
+    "category": "Misc",
+    "file": "misc/warm-ember-timber.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/warm-ember-timber",
+    "site": "https://skladdoma.ru/"
+  },
+  {
+    "title": "Warm-frame portfolio light",
+    "category": "Media",
+    "file": "media/warm-frame-portfolio-light.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/warm-frame-portfolio-light",
+    "site": "https://deliver.framer.website/"
+  },
+  {
+    "title": "Warm hand-drawn craft studio",
+    "category": "Media",
+    "file": "media/warm-hand-drawn-craft-studio.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/warm-hand-drawn-craft-studio",
+    "site": "https://www.webild.io/templates/coffee-shop"
+  },
+  {
+    "title": "Warm-paper catalog light",
+    "category": "Media",
+    "file": "media/warm-paper-catalog-light.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/warm-paper-catalog-light",
+    "site": "https://future-of-work-with-ai.vercel.app/gallery"
+  },
+  {
+    "title": "Warm paw-print editorial",
+    "category": "Media",
+    "file": "media/warm-paw-print-editorial.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/warm-paw-print-editorial",
+    "site": "https://fond-nika.ru/"
+  },
+  {
+    "title": "WDI",
+    "category": "Ecommerce",
+    "file": "ecommerce/wdi.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/wdi",
+    "site": "https://worlddayinnovations.com/"
+  },
+  {
+    "title": "Wine & Ember Ledger",
+    "category": "Fintech",
+    "file": "fintech/wine-and-ember-ledger.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/wine-and-ember-ledger",
+    "site": "https://mozwebsites.com/"
+  },
+  {
+    "title": "Wine & Ember Ledger",
+    "category": "Fintech",
+    "file": "fintech/wine-and-ember-ledger-37657d.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/wine-and-ember-ledger-37657d",
+    "site": "https://mozwebsites.com/"
+  },
+  {
+    "title": "Wine & Ember Ledger",
+    "category": "Fintech",
+    "file": "fintech/wine-and-ember-ledger-ed9e8d.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/wine-and-ember-ledger-ed9e8d",
+    "site": "https://mozwebsites.com/sobre.html"
+  },
+  {
+    "title": "Wise",
+    "category": "Misc",
+    "file": "misc/wise.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/wise",
+    "site": "https://wise.com/"
+  },
+  {
+    "title": "Wisterias access panel",
+    "category": "Misc",
+    "file": "misc/wisterias-access-panel.md",
+    "mode": "light",
+    "source": "https://superdesign.dev/design-systems/wisterias-access-panel",
+    "site": "https://client.wisterias.co.uk/"
+  },
+  {
+    "title": "Wisterias access panel — Dark Mode",
+    "category": "Misc",
+    "file": "misc/wisterias-access-panel-dark-mode.md",
+    "mode": "dark",
+    "source": "https://superdesign.dev/design-systems/wisterias-access-panel-dark-mode"
+  }
+]

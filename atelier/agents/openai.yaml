@@ -1,0 +1,16 @@
+interface:
+  display_name: Atelier
+  short_description: Websites and UI that look designed, not generated. A studio from one idea, 200+ build prompts, 80+ brand systems.
+  default_prompts:
+    - "$atelier studio a booking app for climbing gyms"
+    - "$atelier a landing page for <product>"
+    - "$atelier a dark cinematic hero with a video background for <product>"
+    - "$atelier a pricing section that feels like Linear"
+    - "$atelier a HUD and pause menu for a sci-fi shooter"
+    - "$atelier critique <path or url>"
+    - "$atelier polish <path>"
+
+policy:
+  allow_implicit_invocation: true
+
+dependencies: []

@@ -1,0 +1,70 @@
+# Imagery
+
+What a page shows, and where it comes from. A page looks made when it shows the real thing (the place, the food, the object, the hands at work, the product running) and generated when it shows a gradient box, a drawing of a loaf, or a heading with nothing under it.
+
+## 1. What fills a page, in order
+
+1. **The user's own images and recordings.** They win every slot. Ask for them once.
+2. **Screenshots of the real product,** whenever it can be reached (a URL, a dev server, a project that runs with one command). Put it in a state that tells the story, capture it (`scripts/shot.mjs` on the route, or the harness's browser), check nothing private is visible (names, emails, tokens, file paths).
+3. **The product built** at full fidelity inside the page, only when there is nothing to capture yet. Sample data reads as sample (`example.com`, round amounts, "Example Kitchen").
+4. **Library photographs** as stand-ins: `node scripts/photos.mjs "<what the picture shows>"`. 755 photos from Wikimedia Commons, each CC0, public domain, CC BY or CC BY-SA, with a ready `<img>` and credit.
+5. **Generated images,** only when the harness has an image tool and the user is fine with it. Write the prompt from the concept's world (subject, light, lens, palette), never "a beautiful hero image".
+6. **Type at full scale,** when the page is about words.
+
+## 2. Which subjects want what
+
+- **A place, a material, food or drink, an object, a craft, the outdoors, an event, people at work:** photographs lead. The hero photo is the largest thing on the first screen. Two to four more carry the page, one large, each on its subject, with sections of pure material between them (a menu as rows, hours as a table, a statement).
+- **Software:** the product leads; the hero visual is its interface. One or two photographs may set the scene if each passes the deletion test: take it away and the page loses a fact. A city at night, a laptop on a desk or an office building fails it.
+- **Words** (docs, a manifesto, a letter, a type specimen): type carries it; one full-bleed photograph at most.
+
+A photograph never stands in for a fact: numbers, names and claims stay in type, and a stock face never stands in for a customer, a teammate or a testimonial.
+
+## 3. Library photos
+
+```bash
+node scripts/photos.mjs "hands kneading dough" --people hands --n 3
+node scripts/photos.mjs "harbour at dawn" --orient landscape --tone light --temp cool
+```
+
+- Search for the subject's **physical object**, not the category ("climbing chalk bag on a mat", not "fitness"). Re-ask in other words (the place, the material, the action) before settling for a near miss. One decisive photo beats five mediocre ones.
+- **Credit every photo used:** one "Photographs:" line in the footer with each printed credit. CC BY and CC BY-SA require it.
+- **Size and crop in CSS:** keep the `srcset`, set `sizes` to the layout, crop with `aspect-ratio` and `object-fit: cover`, steer with `object-position`.
+- **Hero photo:** remove `loading="lazy"`, add `fetchpriority="high"`; use the 1920 or 2560 width for full-bleed.
+- Never write an image URL from memory, and never hotlink paid stock. Verify any other URL resolves before shipping.
+
+## 4. Slots
+
+A picture the user will replace sits in a slot: `data-slot="hero"`, a `data-alt` describing what belongs there, and a real size (`aspect-ratio`). A slot always shows something (the user's image, a library photo or the product built); a slot showing nothing but a tinted box is an empty picture. No visible "your image here" labels: the handoff lists the slots.
+
+## 5. Treatment
+
+- Pick one treatment for all photos on a page, from the concept: full colour, a duotone in two palette colours, a warm or cool grade, black and white with one colour element. Apply it in CSS (`filter`, a blend layer) so the user's own photos get it too.
+- Text over photos sits on the calmest part of the image with a scrim (a gradient from the ink colour at 50 to 70% to transparent) and passes contrast on the result.
+- Round corners only if the page's radius language says so; image radius `min(1vw, var(--radius-card))`.
+- Photos take a quarter to a third of the page below the hero; never two photo-led sections in a row.
+
+## 6. Icons, illustration, 3D, video
+
+- **Icons:** one library (lucide by default; Phosphor or Tabler when the world wants a different stroke), one stroke weight, sized to the text they sit beside. Never emoji, never icons in coloured circles by reflex.
+- **Illustration:** only when the concept is illustration (a children's brand, an editorial voice), drawn in one consistent style, ideally by the user or a commissioned artist. Never inline-SVG drawings of objects, people or scenes as filler.
+- **Diagrams and charts** of real data or real systems are first-class material: draw them in SVG from the palette, labelled.
+- **3D and WebGL:** when the product is an object or the concept is spatial; bounded, lazy-loaded, with a static poster fallback.
+- **Video:** `autoplay muted loop playsinline` with a `poster`, under 2 MB for the hero (or streamed), paused off-screen and under reduced motion, with a pause control if it runs past 5 seconds.
+
+## 7. Texture
+
+Texture is a treatment with a budget, not ambience. Only when the concept's world is print or material (risograph, letterpress, film, ticket stock, a CRT):
+
+- **One texture family per page:** grain, halftone, misregistration, scanlines or a deckled edge. Never two.
+- **Opacity budget:** at most 0.08 page-wide, 0.15 inside one panel, 0.05 or nothing under running text. Never animated. `pointer-events: none; aria-hidden="true"` on overlays.
+- Pure CSS or an inline SVG filter; no image requests. Measure contrast on the textured result.
+
+```css
+.grain { position: relative; isolation: isolate; }
+.grain::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0.07; background-size: 180px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 -4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+```
+
+The colour matrix turns the noise into crisp specks that read at low opacity; on a dark ground change the first three rows' last value to 1 so the specks are light.

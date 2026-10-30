@@ -1,0 +1,14 @@
+{
+  "name": "atelier-skill",
+  "owner": { "name": "alexchwoj", "url": "https://github.com/alexchwoj" },
+  "description": "Atelier: an AI skill for designing websites that don't look AI-made.",
+  "plugins": [
+    {
+      "name": "atelier",
+      "source": "./atelier",
+      "description": "Design and build websites that look designed, not generated: a studio from one idea, 1,200+ proven prompts, 300+ design systems, motion, palettes, fonts and visual checks.",
+      "category": "design",
+      "tags": ["design", "frontend", "ui", "landing-page", "motion"]
+    }
+  ]
+}
