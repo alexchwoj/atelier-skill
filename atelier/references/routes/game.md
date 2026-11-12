@@ -16,6 +16,7 @@ Collect, and ask once for what is missing:
 
 ## 1. Load
 
+- `game/direction.md` always, first: the direction card, greybox before art, the layers of information, "in the style of X", how to present a mock and the amateur tells.
 - `game/principles.md` always: information tiers, diegetic and non-diegetic UI, readability over a moving world, the game's art direction as the UI's material.
 - `game/hud.md` for anything on screen during play.
 - `game/menus.md` for front-end and in-game menus.
@@ -31,7 +32,7 @@ The general craft (`foundations/craft.md` type and colour rules, `studio/color.m
 
 Run `studio/concept.md` with the game's world as the source: the UI's frames, type, colours and sounds are objects from that world (a sci-fi visor's projected glass, a fantasy grimoire's parchment and wax, a racing game's telemetry, a cozy farm's hand-painted wood).
 
-Then mine the prompt library for that world's material (`SKILL.md` § The inspiration pass). It has no game screens, but it is full of the surfaces game UI is made of: diagnostic consoles, terminals and telemetry for sci-fi and racing, glass and glow panels for visors, print and paper builds for grimoires and maps, retro and brutalist kits for arcade and pixel games. Search by the world's material (`find.mjs "industrial diagnostic interface dark" --type prompt`, `parts.mjs background "scanline grain glow"`, `parts.mjs type --mood retro`), open every close match whole (usually four to eight), and take frame language, number and label treatment, glow and grain recipes and motion timings, adjusted by `game/` for distance and readability. Then write the brief:
+For a realistic or sim register (racing sims, milsim, flight) skip the web prompt library: its neon and glass looks pull toward arcade; take the register from `game/hud.md` § 0 and the genre table instead, and say so on the References line. For stylised worlds, mine the prompt library for that world's material (`SKILL.md` § The inspiration pass). It has no game screens, but it is full of the surfaces game UI is made of: diagnostic consoles, terminals and telemetry for sci-fi and racing, glass and glow panels for visors, print and paper builds for grimoires and maps, retro and brutalist kits for arcade and pixel games. Search by the world's material (`find.mjs "industrial diagnostic interface dark" --type prompt`, `parts.mjs background "scanline grain glow"`, `parts.mjs type --mood retro`), open every close match whole (usually four to eight), and take frame language, number and label treatment, glow and grain recipes and motion timings, adjusted by `game/` for distance and readability. Then write the brief:
 
 ```
 WORLD        what the UI is made of in this game's fiction (material, era, culture)
@@ -50,9 +51,23 @@ Before any screen: tokens (colours, signal colours, type sizes for the target di
 
 On the web, render the kit as a single HTML gallery page and check it with `scripts/shot.mjs` at 1920×1080 and the target device. In an engine, build the kit as reusable prefabs/widgets/scenes (`game/tech.md`).
 
+**Sample data speaks the game.** In a mock for a named game, fill every slot with that game's own vocabulary: real map and location names, item and ammo names, mechanics, task wording, units and abbreviations as the game writes them (for an extraction shooter: the map, the extract names, the meds and grenades on the quick slots, the ammo type). This is fiction inside the game, not a claim about the user's business, so the web rule against invented facts does not apply; only avoid real player names and real people. Generic placeholders ("Rival 1", "Item A", "Gate") make a mock read as a template. For an original game, invent a small consistent vocabulary from its world and reuse it everywhere.
+
+**Show the systems, not only the minimum.** A mock exists to show what the HUD can do: include the game's signature systems (quick slots, task updates, squad, status effects) in the states they would plausibly appear in together, each in its own place and size, rather than a stripped screen.
+
+**A single-screen mock** ("show me the HUD over this capture") skips the full UI kit: build the one screen on the 16:9 stage, then offer the kit as the next step.
+
 ## 4. Screens
 
 Build in this order: the HUD in its busiest moment (combat, a race finish, a boss phase) over a real or representative game frame; then pause and settings; then the screens the loop visits most (inventory, shop, map); then the front end (title, main menu, save slots, loading); then results and failure.
+
+**A real game named** skips the Studio concept and directions steps (`studio/concept.md`, three directions): the world and its language already exist; the work is matching them.
+
+**A system the frame cannot honestly host** (an interaction menu with no object in front of the player, a kill feed with no fight) is left out or shown in a state where it would appear, and listed in the handoff.
+
+**The UI language of a real game:** the HUD has to look like it belongs in that game. Before designing, write down that game's own UI language from what you know of it and from the capture: letter case (Tarkov and most milsims speak in small tracked uppercase), type style (condensed, mono, italic), how big things are (hardcore games are tiny and dry; arcade racers are loud), plate shape and opacity, its colours, how dense it is and how panels appear (always on, or on a key). Match that language closely; the genre register in `game/hud.md` § 0 is only the fallback when you do not know the game. Design the content and layout yourself, and never copy its logos, icon art or licensed fonts (pick an open face of the same style).
+
+**The game frame:** use the user's own captures when they exist, as described in `game/hud.md` § 0b and on the 16:9 stage in § 0c. Otherwise render a representative frame yourself (canvas, WebGL or layered SVG in the game's palette and camera): here a drawn scene is the product, so the web rule against illustrations does not apply, and stock photography never stands in for gameplay. Skip `media.mjs` for the frame. Game HUDs also run at a fixed 16:9 scaled to the screen, so run `shot.mjs --kind game --sizes wide` and `lint.mjs --kind game`: they drop the small-text, tap-target and tracked-caps warnings that do not apply. Judge readability at the real viewing distance instead.
 
 Every screen is checked:
 - **with a controller only** (every element reachable, a visible focus, Back always works, focus remembered),

@@ -8,6 +8,8 @@
 //
 // Options: --weight 400  --italic  --size 200 (units per em of the output)  --tracking 0 (1/1000 em)
 //          --pad 0.08 (em)  --color currentColor  --file <ttf|otf|woff>  --out <file.svg>
+//          --glyphs: one <path> per letter (data-char, data-i) and each letter's box printed, so a
+//          letter can be swapped for the mark or coloured on its own
 // Needs the opentype.js package: npm i --no-save opentype.js (in the project) or npm i -g opentype.js.
 
 import fs from 'node:fs';
@@ -21,6 +23,7 @@ const opts = { weight: '400', size: '200', tracking: '0', pad: '0.08', color: 'c
 for (let i = 0; i < args.length; i++) {
   const a = args[i];
   if (a === '--italic') opts.italic = true;
+  else if (a === '--glyphs') opts.glyphs = true;
   else if (a.startsWith('--')) opts[a.slice(2)] = args[++i];
 }
 if (!opts.text || (!opts.font && !opts.file)) {
@@ -88,10 +91,13 @@ function pathData(p) {
 
 let x = 0;
 const parts = [];
+const letters = [];
+const chars = [...opts.text];
 glyphs.forEach((g, i) => {
   const p = g.getPath(x, 0, size);
   const d = p.commands.length ? pathData(p) : '';
   if (d) parts.push(d);
+  if (d) { const b = p.getBoundingBox(); letters.push({ i, char: glyphs.length === chars.length ? chars[i] : '', d, box: [b.x1, b.y1, b.x2 - b.x1, b.y2 - b.y1].map((v) => +v.toFixed(2)) }); }
   const kern = i < glyphs.length - 1 ? font.getKerningValue(g, glyphs[i + 1]) * scale : 0;
   x += g.advanceWidth * scale + kern + (i < glyphs.length - 1 ? tracking : 0);
 });
@@ -110,10 +116,17 @@ const vb = [bb.x1 - pad, bb.y1 - pad, bb.x2 - bb.x1 + 2 * pad, bb.y2 - bb.y1 + 2
 const title = opts.text.replace(/[<&>"]/g, (c) => ({ '<': '&lt;', '&': '&amp;', '>': '&gt;', '"': '&quot;' }[c]));
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.join(' ')}" role="img" aria-label="${title}">
   <title>${title}</title>
-  <path fill="${opts.color}" d="${parts.join(' ')}"/>
+${body()}
 </svg>
 `;
 
+function body() {
+  if (!opts.glyphs) return `  <path fill="${opts.color}" d="${parts.join(' ')}"/>`;
+  const rows = letters.map((l) => `    <path data-i="${l.i}" data-char="${l.char.replace(/"/g, '&quot;')}" d="${l.d}"/>`);
+  return `  <g fill="${opts.color}">\n${rows.join('\n')}\n  </g>`;
+}
+
+if (opts.glyphs) for (const l of letters) console.error(`letter ${l.i} "${l.char}"  box x ${l.box[0]} y ${l.box[1]} w ${l.box[2]} h ${l.box[3]}`);
 if (opts.out) {
   fs.writeFileSync(opts.out, svg);
   console.log(`wrote ${opts.out}  (${font.names.fullName?.en || opts.font}, viewBox ${vb.join(' ')}, aspect ${(vb[2] / vb[3]).toFixed(2)}:1)`);

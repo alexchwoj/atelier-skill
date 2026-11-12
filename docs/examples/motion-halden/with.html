@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halden & Co. | Timber houses, Oslo</title>
+<meta name="description" content="Halden & Co. is a small architecture studio in Oslo designing one-off timber houses in spruce, pine and larch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>
+  /* Before first paint: hide the pieces the entrance will bring in. No JS = the finished frame. */
+  (function () {
+    var d = document.documentElement;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen = false;
+    try { seen = sessionStorage.getItem('halden-intro') === '1'; } catch (e) {}
+    if (!reduce && !seen) {
+      d.classList.add('intro');
+      setTimeout(function () { d.classList.remove('intro'); }, 4000); /* safety net if the script below fails */
+    }
+  })();
+</script>
+<style>
+  :root {
+    --ground: #E7E3DA;
+    --ground-2: #DCD7CB;
+    --ink: #1A1917;
+    --ink-2: #4A4741;
+    --muted: #6E6A61;
+    --pigment: #9B3418;
+    --hair: rgba(26, 25, 23, .16);
+
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --mono: 'Azeret Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+    --wm: clamp(74px, min(17.5vw, 30svh), 258px);
+    --gutter: clamp(16px, 3.75vw, 48px);
+    --nav-h: 60px;
+
+    /* Motion: cinematic character, no overshoot anywhere */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --dur-press: 150ms;
+    --dur-modal: 250ms;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { overflow-x: clip; }
+  html { -webkit-text-size-adjust: 100%; scrollbar-color: var(--ink-2) var(--ground); }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--pigment); color: var(--ground); }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--pigment); outline-offset: 3px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 20;
+    height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    padding: 0 var(--gutter);
+    background: rgba(231, 227, 218, .78);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--hair);
+  }
+  .brand {
+    font-family: var(--serif); font-size: 19px; letter-spacing: -.015em;
+    text-decoration: none; line-height: 1; padding: 12px 0;
+  }
+  .brand b { font-weight: 400; color: var(--pigment); }
+  .nav ul { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .nav a.link {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px;
+    font-size: 12px; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; text-decoration: none;
+    background: linear-gradient(var(--pigment), var(--pigment)) no-repeat 12px calc(50% + 10px) / 0 1px;
+    transition: background-size 200ms var(--ease-out);
+  }
+  .nav .btn { min-height: 40px; padding: 0 16px; margin-left: 8px; }
+  @media (hover: hover) and (pointer: fine) {
+    .nav a.link:hover { background-size: calc(100% - 24px) 1px; }
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 48px; padding: 0 22px;
+    font: 500 12px/1 var(--mono); letter-spacing: .15em; text-transform: uppercase; text-decoration: none;
+    border: 1px solid var(--ink); border-radius: 0; cursor: pointer;
+    background: transparent; color: var(--ink);
+    transition: background-color 150ms ease, color 150ms ease, transform var(--dur-press) var(--ease-out);
+  }
+  .btn--fill { background: var(--ink); color: var(--ground); }
+  .btn:active { transform: scale(.97); }
+  .btn[disabled] { opacity: .55; cursor: not-allowed; }
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover { background: var(--ink); color: var(--ground); }
+    .btn--fill:hover { background: var(--pigment); border-color: var(--pigment); }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; isolation: isolate; overflow: clip;
+    margin-top: var(--nav-h);
+    min-height: calc(100svh - var(--nav-h));
+    background: var(--ground-2);
+  }
+
+  .copy {
+    position: relative; z-index: 4;
+    width: min(44vw, 560px);
+    padding: clamp(40px, 9svh, 96px) 0 120px var(--gutter);
+    min-height: calc(100svh - var(--nav-h));
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .eyebrow {
+    margin: 0 0 22px;
+    font-size: 12px; font-weight: 500; letter-spacing: .17em; text-transform: uppercase; color: var(--ink-2);
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(30px, 4vw, 56px); line-height: 1.02; letter-spacing: -.015em;
+    overflow-wrap: break-word; min-width: 0;
+  }
+  h1 .line { display: block; overflow: clip; padding-bottom: .06em; margin-bottom: -.06em; }
+  h1 .line > span { display: block; }
+  h1 em { font-style: italic; color: var(--pigment); }
+  .lede {
+    margin: 26px 0 0; max-width: 34ch;
+    font-size: 16px; line-height: 1.6; color: var(--ink-2);
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+  /* The art: split wordmark bracketing the house */
+  .art { position: absolute; inset: 0; z-index: 1; font-size: var(--wm); pointer-events: none; }
+  .wm {
+    position: absolute; right: var(--gutter); margin: 0;
+    font-family: var(--serif); font-weight: 400; font-size: 1em; line-height: .82; letter-spacing: -.015em;
+    white-space: nowrap; color: var(--ink);
+  }
+  .wm--top { top: clamp(24px, 5svh, 48px); z-index: 3; }
+  .wm--bot { bottom: clamp(20px, 4svh, 36px); z-index: 1; }
+  .wm--bot b { font-weight: 400; color: var(--pigment); }
+
+  .house {
+    position: absolute; z-index: 2;
+    top: calc(clamp(24px, 5svh, 48px) + .5em);
+    bottom: calc(clamp(20px, 4svh, 36px) + .6em);
+    right: calc(var(--gutter) + .72em);
+    aspect-ratio: 4 / 5;
+  }
+  .plate {
+    position: absolute; inset: 0; overflow: clip;
+    clip-path: polygon(0 34%, 50% 0, 100% 34%, 100% 100%, 0 100%);
+    background: var(--ground-2);
+  }
+  .plate img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 9% 50%;
+    filter: saturate(.86) contrast(1.02);
+  }
+  .boards { position: absolute; inset: -2px; /* outside the clip, same colour as the hero: invisible where the plate is not */ display: grid; grid-template-rows: repeat(12, 1fr); }
+  .boards i { display: block; margin-bottom: -1px; background: var(--ground-2); transform-origin: 100% 50%; transform: scaleX(0); }
+  .frame { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .frame path { fill: none; stroke: var(--pigment); stroke-width: .38; stroke-linejoin: miter; stroke-linecap: butt; }
+  .ground-line {
+    position: absolute; left: -18%; right: -18%; bottom: -1px; height: 1.5px;
+    background: var(--pigment); transform-origin: 0 50%;
+  }
+
+  .caption {
+    position: absolute; z-index: 4; left: var(--gutter); bottom: 22px;
+    max-width: min(40vw, 460px); margin: 0;
+    font-size: 12px; line-height: 1.5; color: var(--ink-2);
+  }
+  .caption a { text-underline-offset: 2px; }
+
+  /* Pre-paint states for the entrance (only when the head script added .intro) */
+  .intro .boards i { transform: scaleX(1); }
+  .intro .frame path { stroke-dasharray: 1 2; stroke-dashoffset: 1; }
+  .intro .ground-line { transform: scaleX(0); }
+  .intro h1 .line > span { transform: translateY(105%); }
+  .intro .lede, .intro .actions, .intro .caption, .intro .eyebrow { opacity: 0; }
+
+  /* ---------- Phone and narrow tablet: stack copy over the art ---------- */
+  @media (max-width: 900px) {
+    .copy { width: auto; min-height: 0; padding: 40px var(--gutter) 28px; }
+    .hero { display: flex; flex-direction: column; }
+    .art { position: relative; inset: auto; height: max(400px, 54svh); flex: none; }
+    .house { right: auto; left: 50%; translate: -50% 0; top: calc(16px + .55em); bottom: calc(16px + .45em); }
+    .wm--top { top: 16px; }
+    .wm--bot { bottom: 16px; }
+    .caption { position: static; max-width: none; padding: 4px var(--gutter) 24px; }
+  }
+  @media (max-width: 560px) {
+    .nav ul .hide-sm { display: none; }
+    .lede { font-size: 16px; }
+    .wm--top { right: auto; left: var(--gutter); }
+  }
+
+  /* ---------- Dialog ---------- */
+  dialog {
+    width: min(520px, calc(100vw - 32px)); max-height: calc(100svh - 32px);
+    padding: 0; border: 1px solid var(--ink); border-radius: 0;
+    background: var(--ground); color: var(--ink);
+  }
+  dialog::backdrop { background: rgba(26, 25, 23, .42); }
+  dialog[open] { animation: dlg-in var(--dur-modal) var(--ease-out); }
+  @keyframes dlg-in { from { opacity: 0; transform: translateY(8px); } }
+  .dlg-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; padding: 28px 28px 8px; }
+  .dlg-head h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1.05; letter-spacing: -.015em; }
+  .dlg-head h2 em { color: var(--pigment); }
+  .close {
+    flex: none; width: 44px; height: 44px; margin: -8px -10px 0 0; display: grid; place-items: center;
+    border: 0; background: transparent; color: var(--ink); cursor: pointer;
+  }
+  form { padding: 8px 28px 28px; display: grid; gap: 14px; }
+  .field { display: grid; gap: 6px; }
+  label { font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
+  input, textarea {
+    width: 100%; font: 16px/1.4 var(--mono); color: var(--ink); caret-color: var(--pigment);
+    background: var(--ground); border: 1px solid var(--ink-2); border-radius: 0; padding: 12px 12px; min-height: 48px;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+  input:focus-visible, textarea:focus-visible { outline: 2px solid var(--pigment); outline-offset: 1px; }
+  .hint { min-height: 1.4em; margin: 0; font-size: 12px; color: var(--pigment); }
+  .note { margin: 2px 0 0; font-size: 12px; color: var(--ink-2); }
+  .send { justify-self: start; min-width: 200px; position: relative; }
+  .send .lbl { transition: opacity 110ms var(--ease-out); }
+  .send.is-busy .lbl { opacity: 0; }
+  .send .busy { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity 200ms var(--ease-out) 70ms; }
+  .send.is-busy .busy { opacity: 1; }
+  .busy::after { content: ''; width: 14px; height: 14px; border: 1.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 800ms linear infinite; }
+  @keyframes spin { to { transform: rotate(1turn); } }
+  .done { padding: 8px 28px 32px; }
+  .done p { margin: 0 0 22px; color: var(--ink-2); }
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+    }
+    dialog[open] { animation: dlg-fade 150ms ease !important; }
+    .busy::after { animation-duration: 800ms !important; animation-iteration-count: infinite !important; }
+  }
+  @keyframes dlg-fade { from { opacity: 0; } }
+  @media (forced-colors: active) { .btn { border: 1px solid ButtonText; } .frame path, .ground-line { forced-color-adjust: auto; } }
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#top" aria-label="Halden & Co., home">Halden &amp; Co<b>.</b></a>
+  <nav aria-label="Main">
+    <ul>
+      <li class="hide-sm"><a class="link" href="#houses">Houses</a></li>
+      <li class="hide-sm"><a class="link" href="#practice">Practice</a></li>
+      <li><button class="btn" type="button" data-open-brief>Contact</button></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="copy">
+      <p class="eyebrow">Architects, Oslo</p>
+      <h1 id="hero-title" aria-label="Timber houses that weather into place.">
+        <span class="line" aria-hidden="true"><span>Timber houses that</span></span>
+        <span class="line" aria-hidden="true"><span><em>weather into place.</em></span></span>
+      </h1>
+      <p class="lede">A small studio designing one-off homes in spruce, pine and larch, from the first site walk to the last board.</p>
+      <div class="actions">
+        <button class="btn btn--fill" type="button" data-open-brief>Tell us about your site</button>
+        <a class="btn" href="#houses">See the houses</a>
+      </div>
+    </div>
+
+    <div class="art">
+      <p class="wm wm--top" aria-hidden="true">Halden</p>
+      <div class="house">
+        <div class="plate">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Timber_Cladded_House%2C_Ampney_Crucis_-_geograph.org.uk_-_6960047.jpg/1280px-Timber_Cladded_House%2C_Ampney_Crucis_-_geograph.org.uk_-_6960047.jpg"
+            srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Timber_Cladded_House%2C_Ampney_Crucis_-_geograph.org.uk_-_6960047.jpg/960px-Timber_Cladded_House%2C_Ampney_Crucis_-_geograph.org.uk_-_6960047.jpg 960w,
+                    https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Timber_Cladded_House%2C_Ampney_Crucis_-_geograph.org.uk_-_6960047.jpg/1280px-Timber_Cladded_House%2C_Ampney_Crucis_-_geograph.org.uk_-_6960047.jpg 1280w,
+                    https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Timber_Cladded_House%2C_Ampney_Crucis_-_geograph.org.uk_-_6960047.jpg/1920px-Timber_Cladded_House%2C_Ampney_Crucis_-_geograph.org.uk_-_6960047.jpg 1920w"
+            sizes="(max-width: 900px) 70vw, 36vw"
+            width="1280" height="835" fetchpriority="high"
+            alt="The gable end of a long house clad in pale horizontal larch boards, with a tall window at ground level, under a grey sky.">
+        </div>
+        <div class="boards" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <svg class="frame" viewBox="0 0 80 100" preserveAspectRatio="none" aria-hidden="true">
+          <path pathLength="1" d="M0 100 V34 L40 0"/>
+          <path pathLength="1" d="M80 100 V34 L40 0"/>
+        </svg>
+        <span class="ground-line" aria-hidden="true"></span>
+      </div>
+      <p class="wm wm--bot" aria-hidden="true">&amp; Co<b>.</b></p>
+    </div>
+
+    <p class="caption">Stand-in photograph until Halden’s own: a larch-clad house at Ampney Crucis by <a href="https://commons.wikimedia.org/wiki/File:Timber_Cladded_House,_Ampney_Crucis_-_geograph.org.uk_-_6960047.jpg">Des Blenkinsopp, CC BY-SA 2.0</a>.</p>
+  </section>
+</main>
+
+<dialog id="brief" aria-labelledby="brief-title">
+  <div class="dlg-head">
+    <h2 id="brief-title">Tell us about <em>your site.</em></h2>
+    <button class="close" type="button" data-close aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <form id="brief-form" novalidate>
+    <div class="field">
+      <label for="f-name">Your name</label>
+      <input id="f-name" name="name" type="text" autocomplete="name" required>
+    </div>
+    <div class="field">
+      <label for="f-email">Email</label>
+      <input id="f-email" name="email" type="email" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label for="f-site">Where is the plot?</label>
+      <input id="f-site" name="site" type="text" placeholder="Nesodden, a north-facing slope" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="f-msg">What should the house do for you?</label>
+      <textarea id="f-msg" name="message" rows="3"></textarea>
+    </div>
+    <p class="hint" id="f-hint" role="alert"></p>
+    <button class="btn btn--fill send" type="submit"><span class="lbl">Send to the studio</span><span class="busy" aria-hidden="true"></span></button>
+  </form>
+  <div class="done" id="brief-done" hidden>
+    <p id="done-text" tabindex="-1"></p>
+    <button class="btn" type="button" data-close>Close</button>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var rm = matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---------- Entrance: a seekable timeline (Web Animations, created paused) ----------
+     Tempo 120 BPM: beat 500ms, half 250, quarter 125. Times below are in ms. */
+  var EMPH = 'cubic-bezier(0.05, 0.7, 0.1, 1)';
+  var INOUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
+  var OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  var anims = [];
+  function add(el, kf, delay, duration, easing) {
+    if (!el) return;
+    anims.push(el.animate(kf, { delay: delay, duration: duration, easing: easing, fill: 'both' }));
+  }
+
+  function build() {
+    var q = function (s) { return document.querySelector(s); };
+    var lines = document.querySelectorAll('h1 .line > span');
+    var frame = document.querySelectorAll('.frame path');
+    var boards = Array.prototype.slice.call(document.querySelectorAll('.boards i')).reverse(); /* bottom board first */
+
+    /* Set-up: the site. The ground line is laid; the sentence begins. */
+    add(q('.ground-line'), [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], 0, 500, INOUT);
+    add(lines[0], [{ transform: 'translateY(105%)' }, { transform: 'translateY(0)' }], 0, 750, EMPH);
+    add(lines[1], [{ transform: 'translateY(105%)' }, { transform: 'translateY(0)' }], 125, 750, EMPH);
+    add(q('.eyebrow'), [{ opacity: 0 }, { opacity: 1 }], 0, 250, OUT);
+
+    /* Action: from the ends of the ground line, walls rise and the two pitches meet at the ridge. */
+    frame.forEach(function (p) {
+      add(p, [{ strokeDasharray: '1 2', strokeDashoffset: 1 }, { strokeDasharray: '1 2', strokeDashoffset: 0 }], 300, 450, INOUT);
+    });
+
+    /* Reaction (copy): the line under the head, then the actions, quiet and short. */
+    add(q('.lede'), [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], 500, 400, OUT);
+    add(q('.actions'), [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], 625, 400, OUT);
+
+    /* Action 2: the cladding goes on, board by board from the sill up. */
+    boards.forEach(function (b, i) {
+      add(b, [{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }], 750 + i * 25, 280, OUT);
+    });
+
+    /* Reaction: the name opens around the finished house. */
+    add(q('.wm--top'), [{ transform: 'translateY(.07em)' }, { transform: 'none' }], 750, 600, EMPH);
+    add(q('.wm--bot'), [{ transform: 'translateY(-.05em)' }, { transform: 'none' }], 750, 600, EMPH);
+    add(q('.caption'), [{ opacity: 0 }, { opacity: 1 }], 1125, 300, OUT);
+    /* Resolution: from about 1.4s, nothing moves. */
+
+    anims.forEach(function (a) { a.pause(); });
+    var end = Math.max.apply(null, anims.map(function (a) { return a.effect.getComputedTiming().endTime; }));
+    window.__timeline = {
+      duration: end / 1000,
+      seek: function (t) { anims.forEach(function (a) { a.currentTime = t * 1000; }); },
+      play: function () { anims.forEach(function (a) { a.currentTime = 0; a.play(); }); }
+    };
+    return end;
+  }
+
+  if (root.classList.contains('intro')) {
+    build();
+    root.classList.remove('intro');           /* the animations' fill now holds the first frame */
+    var start = function () { window.__timeline.play(); try { sessionStorage.setItem('halden-intro', '1'); } catch (e) {} };
+    var img = document.querySelector('.plate img');
+    /* Start when the photo is ready (or after 600ms at most) so the cladding never reveals an empty plate. */
+    var started = false;
+    var go = function () { if (!started) { started = true; requestAnimationFrame(start); } };
+    if (img.complete) go(); else { img.addEventListener('load', go); img.addEventListener('error', go); setTimeout(go, 600); }
+    /* Turning reduced motion on mid-way jumps to the finished frame. */
+    rm.addEventListener('change', function (e) { if (e.matches) anims.forEach(function (a) { a.finish(); }); });
+  } else {
+    /* Reduced motion, repeat visits and testing: the finished frame, seekable for the checker. */
+    build();
+    window.__timeline.seek(window.__timeline.duration);
+  }
+
+  /* ---------- Brief dialog ---------- */
+  var dlg = document.getElementById('brief');
+  var form = document.getElementById('brief-form');
+  var done = document.getElementById('brief-done');
+  var hint = document.getElementById('f-hint');
+  var send = form.querySelector('.send');
+  var opener = null;
+
+  document.querySelectorAll('[data-open-brief]').forEach(function (b) {
+    b.addEventListener('click', function () { opener = b; dlg.showModal(); document.getElementById('f-name').focus(); });
+  });
+  dlg.addEventListener('click', function (e) {
+    if (e.target.closest('[data-close]') || e.target === dlg) dlg.close();
+  });
+  dlg.addEventListener('close', function () {
+    if (!done.hidden) { form.reset(); form.hidden = false; done.hidden = true; }
+    hint.textContent = '';
+    if (opener) opener.focus();
+  });
+
+  /* No server here: this stands in for POST /api/brief and resolves after a real wait. */
+  function sendBrief(data) {
+    return new Promise(function (resolve) { setTimeout(function () { resolve({ ok: true, name: data.name }); }, 1400); });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = form.name.value.trim();
+    var email = form.email.value.trim();
+    if (!name) { hint.textContent = 'Add your name so we know who to answer.'; form.name.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { hint.textContent = 'That email looks incomplete. Check it and send again.'; form.email.focus(); return; }
+    hint.textContent = '';
+    send.disabled = true; send.classList.add('is-busy'); send.setAttribute('aria-busy', 'true');
+    sendBrief({ name: name, email: email, site: form.site.value, message: form.message.value }).then(function () {
+      send.disabled = false; send.classList.remove('is-busy'); send.removeAttribute('aria-busy');
+      form.hidden = true; done.hidden = false;
+      var t = document.getElementById('done-text');
+      t.textContent = 'Thank you, ' + name + '. Your note is with the studio, and the reply will go to ' + email + '.';
+      t.focus();
+    });
+  });
+})();
+</script>
+</body>
+</html>

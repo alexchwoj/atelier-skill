@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarkov raid HUD</title>
+<meta name="description" content="A 16:9 mock of an Escape from Tarkov in-raid HUD over a Woods capture, in four states: contact, checks, extract and clean.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* neutrals sampled from the frame's grade (#181815, #484638, #d4c6ab) */
+  --ink: #ebe7d8;
+  --ink-2: #c4bfac;
+  --ink-3: #8c8775;
+  --plate: rgb(14 14 11 / .7);
+  --plate-cell: rgb(14 14 11 / .74);
+  --rule: rgb(235 231 216 / .24);
+  --track: rgb(235 231 216 / .16);
+  /* one accent, one meaning: what is selected or current */
+  --accent: #dcc690;
+  /* signals, each paired with a word or a shape */
+  --ok: #a3c95f;       /* open, extracting */
+  --warn: #e3a843;     /* damaged, conditional */
+  --wound: #ec5b45;    /* bleeding, critical limb */
+  --face: "Saira Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --enter: cubic-bezier(0, 0, .2, 1);
+  --exit: cubic-bezier(.4, 0, 1, 1);
+}
+
+html, body { margin: 0; height: 100%; background: #0b0b09; overflow: clip; }
+body { display: grid; place-items: center; font-family: var(--face); color: var(--ink); font-synthesis: none; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent); color: #14130f; }
+
+.stage {
+  position: relative; width: min(100vw, 177.78svh); aspect-ratio: 16 / 9;
+  container-type: size; overflow: hidden; background: #181815;
+}
+.frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* 1 design pixel at 1920x1080 */
+.hud, .mock, .pain { --px: calc(100cqh / 1080); }
+.hud { position: absolute; inset: 0; pointer-events: none; }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* type scale at 1080p: label 14, value 16, figure 20, raid clock 26, countdown 44 */
+.label { font-size: calc(14 * var(--px)); line-height: 1.2; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); font-weight: 400; }
+.value { font-size: calc(16 * var(--px)); line-height: 1.25; font-weight: 400; }
+.fig { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+/* shape language: flat square plate, hairline top rule */
+.plate {
+  background: var(--plate);
+  border-top: max(1px, var(--px)) solid var(--rule);
+  padding: calc(10 * var(--px)) calc(12 * var(--px));
+  text-shadow: 0 1px 2px rgb(0 0 0 / .6);
+}
+
+/* segmented bar, echoing the game's own noise meter ticks */
+.bar { position: relative; height: calc(4 * var(--px)); background: var(--track); }
+.bar > i { position: absolute; inset: 0 auto 0 0; background: var(--ink-2); }
+.bar::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 2 * var(--px)), rgb(14 14 11 / .9) calc(10% - 2 * var(--px)) 10%); }
+
+/* contextual layer: appears on a state change, 200ms in, 150ms out */
+.ctx { opacity: 0; visibility: hidden; transform: translateY(calc(4 * var(--px)));
+  transition: opacity 150ms var(--exit), transform 150ms var(--exit), visibility 0s linear 150ms; }
+.stage[data-state="contact"] .s-contact,
+.stage[data-state="check"] .s-check,
+.stage[data-state="extract"] .s-extract {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity 200ms var(--enter), transform 200ms var(--enter), visibility 0s;
+}
+.stage:not([data-state="contact"]) .only-contact,
+.stage[data-state="contact"] .after-contact,
+.stage:not([data-state="check"]) .only-check,
+.stage:not([data-state="extract"]) .only-extract { display: none; }
+
+/* ---------- pain: meta layer, held while the wound is open ---------- */
+.pain { position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 72% 70% at 50% 48%, transparent 58%, rgb(70 8 4 / .30) 82%, rgb(40 4 2 / .55) 100%); }
+
+/* ---------- left column: health over effects, above the game's stance widget ---------- */
+.left { position: absolute; left: calc(48 * var(--px)); bottom: calc(248 * var(--px)); width: calc(232 * var(--px));
+  display: flex; flex-direction: column; gap: calc(6 * var(--px)); }
+
+.health-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: calc(8 * var(--px)); }
+.health-head .total { font-size: calc(20 * var(--px)); font-weight: 600; }
+.health-head .total small { font-size: calc(14 * var(--px)); color: var(--ink-2); font-weight: 400; }
+.body { display: grid; grid-template-columns: calc(62 * var(--px)) minmax(0, 1fr); gap: calc(14 * var(--px)); align-items: start; }
+.doll { width: 100%; height: auto; display: block; overflow: visible; }
+.doll .part { fill: rgb(0 0 0 / .35); stroke: rgb(235 231 216 / .42); stroke-width: 1; }
+.doll .full { fill: rgb(235 231 216 / .62); }
+.doll .hurt { fill: var(--warn); }
+.doll .crit { fill: var(--wound); }
+.doll .chip { fill: rgb(255 214 200 / .7); transform-box: fill-box; transform-origin: 50% 100%; }
+.stage[data-state="contact"] .doll .chip { animation: chip 420ms var(--exit) 520ms both; }
+@keyframes chip { to { transform: scaleY(0); } }
+
+.parts { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(1 * var(--px)); }
+.parts li { display: flex; justify-content: space-between; align-items: center; height: calc(18.6 * var(--px)); }
+.parts .label { font-size: calc(13.5 * var(--px)); }
+.parts .value { font-size: calc(15 * var(--px)); }
+.parts .hurt { color: var(--warn); }
+.parts .crit { color: var(--wound); font-weight: 600; }
+.parts .crit svg { width: calc(12 * var(--px)); height: calc(12 * var(--px)); margin-right: calc(4 * var(--px)); vertical-align: calc(-1 * var(--px)); }
+
+.needs { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: calc(10 * var(--px)); row-gap: calc(6 * var(--px)); align-items: center; margin-top: calc(10 * var(--px)); padding-top: calc(9 * var(--px)); border-top: max(1px, var(--px)) solid var(--track); }
+.needs .label { font-size: calc(13.5 * var(--px)); }
+.needs .value { font-size: calc(15 * var(--px)); text-align: right; }
+
+.effects { display: flex; flex-direction: column; gap: calc(4 * var(--px)); }
+.fx { display: flex; align-items: center; gap: calc(10 * var(--px)); padding: calc(6 * var(--px)) calc(12 * var(--px)) calc(6 * var(--px)) calc(6 * var(--px)); }
+.fx .ico { width: calc(26 * var(--px)); height: calc(26 * var(--px)); display: grid; place-items: center; background: rgb(0 0 0 / .45); flex-shrink: 0; }
+.fx .ico svg { width: calc(17 * var(--px)); height: calc(17 * var(--px)); }
+.fx .value { flex: 1; min-width: 0; }
+.fx .where { font-size: calc(14 * var(--px)); color: var(--ink-2); }
+.fx.bleed .ico { color: var(--wound); box-shadow: inset 0 0 0 max(1px, var(--px)) rgb(236 91 69 / .55); }
+.fx.pain-fx .ico { color: var(--warn); }
+.fx.kill .ico { color: var(--ink); }
+svg.i { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- top left: task update ---------- */
+.task { position: absolute; left: calc(48 * var(--px)); top: calc(40 * var(--px)); width: calc(300 * var(--px)); }
+.task .label { color: var(--accent); }
+.task .name { font-size: calc(18 * var(--px)); font-weight: 600; margin: calc(3 * var(--px)) 0 calc(2 * var(--px)); }
+.task .cond { display: flex; justify-content: space-between; gap: calc(12 * var(--px)); color: var(--ink-2); font-size: calc(15 * var(--px)); }
+.task .cond b { color: var(--ink); font-weight: 600; }
+
+/* ---------- top right: raid time and exfils, on a key ---------- */
+.exfils { position: absolute; right: calc(48 * var(--px)); top: calc(40 * var(--px)); width: calc(312 * var(--px)); }
+.clock { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: calc(8 * var(--px)); margin-bottom: calc(8 * var(--px)); border-bottom: max(1px, var(--px)) solid var(--track); }
+.clock .fig { font-size: calc(26 * var(--px)); font-weight: 600; line-height: 1; }
+.exits { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(3 * var(--px)); }
+.exits li { display: grid; grid-template-columns: calc(10 * var(--px)) minmax(0, 1fr) auto; gap: calc(10 * var(--px)); align-items: center; }
+.exits .value { white-space: nowrap; }
+.exits .state { font-size: calc(13.5 * var(--px)); letter-spacing: .08em; text-transform: uppercase; }
+.exits .open .state { color: var(--ok); }
+.exits .maybe .state, .exits .pay .state { color: var(--warn); }
+.mark { width: calc(10 * var(--px)); height: calc(10 * var(--px)); box-sizing: border-box; }
+.open .mark { background: var(--ok); }
+.maybe .mark { border: max(1px, calc(1.5 * var(--px))) solid var(--warn); background: linear-gradient(to top, var(--warn) 50%, transparent 50%); }
+.pay .mark { border: max(1px, calc(1.5 * var(--px))) solid var(--warn); }
+
+/* ---------- top centre: extraction countdown ---------- */
+.extract { position: absolute; left: 50%; top: calc(96 * var(--px)); width: calc(236 * var(--px)); translate: -50% 0; text-align: center; }
+.extract .label { color: var(--ok); }
+.extract .count { font-size: calc(44 * var(--px)); font-weight: 600; line-height: 1.05; color: var(--ok); margin: calc(2 * var(--px)) 0 calc(6 * var(--px)); }
+.extract .bar > i { background: var(--ok); width: 100%; transform-origin: 0 50%; }
+.extract .where { font-size: calc(15 * var(--px)); color: var(--ink-2); margin-top: calc(7 * var(--px)); }
+
+/* ---------- bottom centre: quick slots, on use ---------- */
+.quick { position: absolute; left: 50%; bottom: calc(40 * var(--px)); transform-origin: 50% 100%; display: flex; gap: calc(4 * var(--px)); translate: -50% 0; }
+.slot { position: relative; width: calc(86 * var(--px)); height: calc(52 * var(--px)); background: var(--plate-cell); border-top: max(1px, var(--px)) solid var(--rule); box-sizing: border-box; text-shadow: 0 1px 2px rgb(0 0 0 / .6); }
+.slot .key { position: absolute; left: calc(6 * var(--px)); top: calc(4 * var(--px)); font-size: calc(13 * var(--px)); color: var(--ink-2); font-weight: 600; }
+.slot .short { position: absolute; right: calc(7 * var(--px)); top: calc(4 * var(--px)); font-size: calc(15 * var(--px)); font-weight: 600; }
+.slot .res { position: absolute; right: calc(7 * var(--px)); bottom: calc(4 * var(--px)); font-size: calc(14 * var(--px)); color: var(--ink-2); }
+.slot.empty { background: rgb(14 14 11 / .45); }
+.slot.used { box-shadow: inset 0 calc(-2 * var(--px)) 0 var(--accent); }
+.slot.used .key { color: var(--accent); }
+
+/* ---------- bottom right: weapon, fire mode, mag check ---------- */
+.weapon { position: absolute; right: calc(48 * var(--px)); bottom: calc(40 * var(--px)); min-width: calc(250 * var(--px)); text-align: right; }
+.weapon .name { font-size: calc(15 * var(--px)); color: var(--ink-2); }
+.modes { display: flex; justify-content: flex-end; gap: calc(14 * var(--px)); margin-top: calc(3 * var(--px)); }
+.modes span { font-size: calc(18 * var(--px)); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.modes .on { color: var(--accent); font-weight: 600; box-shadow: inset 0 calc(-2 * var(--px)) 0 var(--accent); }
+.mag { display: flex; justify-content: flex-end; align-items: center; gap: calc(10 * var(--px)); margin-top: calc(8 * var(--px)); padding-top: calc(8 * var(--px)); border-top: max(1px, var(--px)) solid var(--track); }
+.mag svg { width: calc(16 * var(--px)); height: calc(24 * var(--px)); }
+.mag .est { font-size: calc(20 * var(--px)); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.mag .ammo { font-size: calc(15 * var(--px)); color: var(--ink-2); }
+
+/* ---------- review chrome, not part of the HUD ---------- */
+.mock { position: absolute; top: calc(8 * var(--px)); left: 50%; translate: -50% 0; display: flex; align-items: center; gap: calc(4 * var(--px));
+  padding: calc(4 * var(--px)); background: rgb(14 14 11 / .78); font-size: calc(13 * var(--px)); z-index: 10; }
+.mock .tag { color: var(--ink-3); padding: 0 calc(8 * var(--px)) 0 calc(6 * var(--px)); letter-spacing: .06em; text-transform: uppercase; }
+.mock button { font: inherit; font-size: calc(14 * var(--px)); color: var(--ink-2); background: transparent; border: 0; padding: calc(5 * var(--px)) calc(10 * var(--px)); cursor: pointer; transition: background-color 100ms linear, color 100ms linear; }
+.mock button kbd { font: inherit; color: var(--ink-3); margin-right: calc(6 * var(--px)); }
+.mock button:hover { color: var(--ink); background: rgb(235 231 216 / .08); }
+.mock button[aria-pressed="true"] { color: #14130f; background: var(--accent); }
+.mock button[aria-pressed="true"] kbd { color: #4a4433; }
+.mock button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.stage.bare .mock { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* no fades or rises: panels swap instantly, inactive ones leave the layout */
+  .ctx, .stage[data-state] .s-contact, .stage[data-state] .s-check, .stage[data-state] .s-extract { transform: none; transition: none; opacity: 1; visibility: visible; }
+  .stage[data-state="contact"] .ctx:not(.s-contact),
+  .stage[data-state="check"] .ctx:not(.s-check),
+  .stage[data-state="extract"] .ctx:not(.s-extract),
+  .stage[data-state="clean"] .ctx { display: none; }
+  .doll .chip { display: none; }
+}
+</style>
+</head>
+<body>
+<main class="stage" id="stage" data-state="contact">
+  <h1 class="sr">Escape from Tarkov raid HUD, mock over a Woods capture</h1>
+  <img class="frame" src="capture.jpg" width="1920" height="1080" alt="Woods at midday: a teammate stacks on a cabin doorway on the left while the player covers the dirt road with an ASh-12. The game's own stance, noise and stamina widget sits in the bottom-left corner.">
+
+  <div class="pain ctx s-contact" aria-hidden="true"></div>
+
+  <div class="hud">
+
+    <!-- left column: health on damage, effects while active -->
+    <div class="left">
+      <section class="health plate ctx s-contact" aria-label="Health, shown on damage">
+        <div class="health-head">
+          <span class="label">Health</span>
+          <span class="total fig">377<small>/440</small></span>
+        </div>
+        <div class="body">
+          <svg class="doll" viewBox="0 0 64 128" aria-hidden="true">
+            <!-- head 35/35 -->
+            <rect class="part" x="24" y="0" width="16" height="16"/>
+            <rect class="full" x="25" y="1" width="14" height="14"/>
+            <!-- thorax 85/85 -->
+            <rect class="part" x="18" y="19" width="28" height="30"/>
+            <rect class="full" x="19" y="20" width="26" height="28"/>
+            <!-- stomach 61/70 -->
+            <rect class="part" x="18" y="52" width="28" height="22"/>
+            <rect class="hurt" x="19" y="55.6" width="26" height="17.4"/>
+            <!-- left arm 22/60, bleeding -->
+            <rect class="part" x="4" y="19" width="11" height="50"/>
+            <rect class="chip" x="5" y="20" width="9" height="31"/>
+            <rect class="crit" x="5" y="51" width="9" height="17"/>
+            <!-- right arm 60/60 -->
+            <rect class="part" x="49" y="19" width="11" height="50"/>
+            <rect class="full" x="50" y="20" width="9" height="48"/>
+            <!-- left leg 65/65 -->
+            <rect class="part" x="18" y="77" width="13" height="51"/>
+            <rect class="full" x="19" y="78" width="11" height="49"/>
+            <!-- right leg 49/65 -->
+            <rect class="part" x="33" y="77" width="13" height="51"/>
+            <rect class="hurt" x="34" y="90" width="11" height="37"/>
+          </svg>
+          <ul class="parts">
+            <li><span class="label">Head</span><span class="value fig">35/35</span></li>
+            <li><span class="label">Thorax</span><span class="value fig">85/85</span></li>
+            <li><span class="label">Stomach</span><span class="value fig hurt">61/70</span></li>
+            <li><span class="label">Left arm</span><span class="value fig crit"><svg class="i" viewBox="0 0 24 24" aria-label="Bleeding" role="img"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>22/60</span></li>
+            <li><span class="label">Right arm</span><span class="value fig">60/60</span></li>
+            <li><span class="label">Left leg</span><span class="value fig">65/65</span></li>
+            <li><span class="label">Right leg</span><span class="value fig hurt">49/65</span></li>
+          </ul>
+        </div>
+        <div class="needs">
+          <span class="label">Hydration</span><div class="bar"><i style="width:48%"></i></div><span class="value fig">48</span>
+          <span class="label">Energy</span><div class="bar"><i style="width:71%"></i></div><span class="value fig">71</span>
+        </div>
+      </section>
+
+      <section class="effects ctx s-contact s-check s-extract" aria-label="Status effects">
+        <div class="fx bleed plate only-contact">
+          <span class="ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span>
+          <span class="value">Light bleeding</span><span class="where">Left arm</span>
+        </div>
+        <div class="fx pain-fx plate only-contact">
+          <span class="ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+          <span class="value">Pain</span><span class="where">Left arm</span>
+        </div>
+        <div class="fx kill plate only-check">
+          <span class="ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg></span>
+          <span class="value">Painkiller</span><span class="where fig">1:35</span>
+        </div>
+        <div class="fx kill plate only-extract">
+          <span class="ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg></span>
+          <span class="value">Painkiller</span><span class="where fig">0:48</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- top left: task update, on change -->
+    <section class="task plate ctx s-check" aria-label="Task update">
+      <div class="label">Task updated</div>
+      <div class="name">Shootout picnic</div>
+      <div class="cond"><span>Eliminate Scavs on Woods</span><b class="fig">6/15</b></div>
+    </section>
+
+    <!-- top right: raid time and exfils, on double-tap O -->
+    <section class="exfils plate ctx s-check" aria-label="Raid time and extraction points">
+      <div class="clock"><span class="label">Raid ends in</span><span class="fig">27:41</span></div>
+      <ul class="exits">
+        <li class="open"><span class="mark" aria-hidden="true"></span><span class="value">Outskirts</span><span class="state">Open</span></li>
+        <li class="open"><span class="mark" aria-hidden="true"></span><span class="value">UN Roadblock</span><span class="state">Open</span></li>
+        <li class="open"><span class="mark" aria-hidden="true"></span><span class="value">ZB-016</span><span class="state">Open</span></li>
+        <li class="maybe"><span class="mark" aria-hidden="true"></span><span class="value">RUAF Roadblock</span><span class="state">May be open</span></li>
+        <li class="pay"><span class="mark" aria-hidden="true"></span><span class="value">South V-Ex</span><span class="state">Needs payment</span></li>
+      </ul>
+    </section>
+
+    <!-- top centre: extraction countdown, inside the zone -->
+    <section class="extract plate ctx s-extract" aria-label="Extraction" aria-live="polite">
+      <div class="label" id="extract-label">Extracting</div>
+      <div class="count fig" id="count">5.8</div>
+      <div class="bar"><i id="count-bar" style="transform:scaleX(.725)"></i></div>
+      <div class="where">Outskirts</div>
+    </section>
+
+    <!-- bottom centre: quick slots, on use -->
+    <section class="quick ctx s-check" aria-label="Quick slots">
+      <div class="slot"><span class="key">4</span><span class="short">IFAK</span><span class="res fig">250/300</span></div>
+      <div class="slot"><span class="key">5</span><span class="short">CALOK-B</span><span class="res fig">3/3</span></div>
+      <div class="slot used"><span class="key">6</span><span class="short">Analgin</span><span class="res fig">3/4</span></div>
+      <div class="slot"><span class="key">7</span><span class="short">F-1</span></div>
+      <div class="slot"><span class="key">8</span><span class="short">RGD-5</span></div>
+      <div class="slot"><span class="key">9</span><span class="short">Zarya</span></div>
+      <div class="slot empty"><span class="key">0</span></div>
+    </section>
+
+    <!-- bottom right: weapon on fire-mode switch, mag check on Alt+T -->
+    <section class="weapon plate ctx s-contact s-check" aria-label="Weapon">
+      <div class="name">ASh-12 12.7x55 assault rifle</div>
+      <div class="modes" aria-label="Fire mode: auto"><span>Single</span><span class="on">Auto</span></div>
+      <div class="mag only-check">
+        <span class="ammo">PS12B</span>
+        <svg class="i" viewBox="0 0 16 24" aria-hidden="true" style="stroke-width:1.5"><path d="M4 2h8v3l1 17H3L4 5z"/><path d="M3.5 13h9l.5 9H3z" fill="currentColor" stroke="none"/></svg>
+        <span class="est">About half</span>
+      </div>
+    </section>
+
+  </div>
+
+  <nav class="mock" aria-label="Mock state">
+    <span class="tag">Mock</span>
+    <button type="button" data-set="contact" aria-pressed="true"><kbd>1</kbd>Contact</button>
+    <button type="button" data-set="check" aria-pressed="false"><kbd>2</kbd>Checks</button>
+    <button type="button" data-set="extract" aria-pressed="false"><kbd>3</kbd>Extract</button>
+    <button type="button" data-set="clean" aria-pressed="false"><kbd>4</kbd>Clean</button>
+  </nav>
+</main>
+
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const buttons = [...document.querySelectorAll('.mock button')];
+  const count = document.getElementById('count');
+  const bar = document.getElementById('count-bar');
+  const label = document.getElementById('extract-label');
+  const EXTRACT_SECONDS = 8;
+  let timer = null;
+
+  function stopCountdown() { clearInterval(timer); timer = null; }
+  function startCountdown() {
+    stopCountdown();
+    let left = EXTRACT_SECONDS;
+    label.textContent = 'Extracting';
+    const paint = () => {
+      count.textContent = Math.max(left, 0).toFixed(1);
+      bar.style.transform = `scaleX(${Math.max(left, 0) / EXTRACT_SECONDS})`;
+    };
+    paint();
+    timer = setInterval(() => {
+      left -= 0.1;
+      if (left <= 0) { left = 0; stopCountdown(); label.textContent = 'Leaving the raid'; }
+      paint();
+    }, 100);
+  }
+
+  function setState(next) {
+    if (!buttons.some(b => b.dataset.set === next)) return;
+    stage.dataset.state = next;
+    buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.set === next)));
+    if (next === 'extract') startCountdown(); else stopCountdown();
+    try { history.replaceState(null, '', `?state=${next}${stage.classList.contains('bare') ? '&bare' : ''}`); } catch (e) {}
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => setState(b.dataset.set)));
+  document.addEventListener('keydown', e => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    const map = { '1': 'contact', '2': 'check', '3': 'extract', '4': 'clean' };
+    if (map[e.key]) setState(map[e.key]);
+    if (e.key === 'h' || e.key === 'H') stage.classList.toggle('bare');
+  });
+
+  const params = new URLSearchParams(location.search);
+  if (params.has('bare')) stage.classList.add('bare');
+  setState(params.get('state') || 'contact');
+})();
+</script>
+</body>
+</html>

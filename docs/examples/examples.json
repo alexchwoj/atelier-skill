@@ -1,0 +1,200 @@
+[
+  {
+    "slug": "kabel-roehre",
+    "title": "Kabel & Röhre",
+    "kind": "Vintage synth workshop, Berlin · full landing page",
+    "request": "Make a landing page for Kabel & Röhre, a Berlin workshop that restores vintage analog synthesizers (Moog, Roland, Korg, ARP) and sells them with a one-year warranty. They also take in customers' gear for repair. I want it premium with lots of personality, nothing generic. Sections: hero, how we restore, instruments for sale, why us, and a form to book a slot and drop off gear.",
+    "group": "Websites"
+  },
+  {
+    "slug": "casa-lume",
+    "title": "Casa Lume",
+    "kind": "Architecture studio, Lisbon · first screen",
+    "request": "Casa Lume is an architecture studio in Lisbon that designs concrete-and-timber houses facing the Atlantic. Build the first screen of their landing page (nav + hero). The one action: book a studio visit. Make it look premium.",
+    "group": "Websites"
+  },
+  {
+    "slug": "relay",
+    "title": "Relay",
+    "kind": "AI agents for freight dispatch · first screen",
+    "request": "Relay: AI agents that handle freight dispatch, carrier emails and load booking for logistics teams. Build the first screen of the landing page (nav + hero). The one action: request early access. Make it look premium.",
+    "group": "Websites"
+  },
+  {
+    "slug": "koyo",
+    "title": "Kōyō",
+    "kind": "Matcha subscription · first screen",
+    "request": "Kōyō: ceremonial-grade matcha from Uji, sold direct to consumers by monthly subscription. Build the first screen of the landing page (nav + hero). The one action: start a subscription. Make it look premium.",
+    "group": "Websites"
+  },
+  {
+    "slug": "brasa",
+    "title": "Brasa",
+    "kind": "Argentine grill, Madrid · full landing page",
+    "request": "Make the landing page for Brasa, an Argentine grill in Madrid: wood-fired cuts, Mendoza wines and a counter facing the fire. Make it premium with character. Sections: hero, the menu (a few dishes), the fire (how we cook) and bookings.",
+    "group": "Websites"
+  },
+  {
+    "slug": "cuaderno",
+    "title": "Cuaderno",
+    "kind": "Study app for medical students · full landing page",
+    "request": "Landing page for Cuaderno, a study app for medical students: it turns notes and PDFs into spaced-repetition flashcards and asks exam-style questions. I want something modern that doesn't look like the typical SaaS. Sections: hero, how it works, a sample of the app, pricing (free and Pro at €6/month) and a final CTA.",
+    "group": "Websites"
+  },
+  {
+    "slug": "ines",
+    "title": "Inés Vidal",
+    "kind": "Architecture and landscape photographer · portfolio",
+    "request": "Portfolio for Inés Vidal, an architecture and landscape photographer in Barcelona. Very editorial, with the photos as the stars. Sections: cover, selected work (gallery), about, clients and commissions, and contact.",
+    "group": "Websites"
+  },
+  {
+    "slug": "tarkov-hud",
+    "group": "Game interfaces",
+    "title": "Escape from Tarkov",
+    "kind": "Extraction shooter · in-raid HUD over a capture",
+    "size": "wide",
+    "note": "Background: a press screenshot of the game, used only as the stage for the mock. Game and screenshot belong to their studio.",
+    "request": "Make a HUD for Escape from Tarkov using this capture as the background. Build it in HTML/CSS at 16:9 to see how it looks.",
+    "shotQuery": "?state=check&bare",
+    "solo": true
+  },
+  {
+    "slug": "dirt-rally",
+    "group": "Game interfaces",
+    "title": "DiRT Rally 2.0",
+    "kind": "Rallycross race · HUD over a capture",
+    "size": "wide",
+    "note": "Background: a press screenshot of the game, used only as the stage for the mock. Game and screenshot belong to their studio.",
+    "request": "Make a HUD for DiRT Rally 2.0, for this rallycross race. Use this capture as the background. Build it in HTML/CSS at 16:9 to see how it looks.",
+    "solo": true,
+    "shotQuery": "?state=split&bare"
+  },
+  {
+    "slug": "tarkov-inventory",
+    "group": "Game interfaces",
+    "title": "Escape from Tarkov inventory",
+    "kind": "Extraction shooter · in-raid inventory screen",
+    "size": "wide",
+    "request": "Design the Escape from Tarkov inventory screen (what you see when you press Tab in a raid): the character's gear, the rig and the backpack with their item grids, and the health status. Build it in HTML/CSS at 16:9.",
+    "solo": true
+  },
+  {
+    "slug": "molino",
+    "group": "Logos and brand",
+    "title": "Molino",
+    "kind": "Sourdough bakery that mills its own flour, Valencia · logo sheet",
+    "request": "Make the logo for Molino, a sourdough bakery in Valencia that mills its own flour. Show it on a page: the main logo large, the version on a dark background, the small icon (as a favicon or seal), the palette and the typography."
+  },
+  {
+    "slug": "vela",
+    "group": "Logos and brand",
+    "title": "Vela",
+    "kind": "Tax and savings app for freelancers · logo sheet",
+    "request": "Logo for Vela, an app that helps freelancers set aside tax and save from every payment they receive. It has to feel calm and trustworthy, nothing like generic fintech. Show it on a page: main logo large, dark version, app icon, palette and typography."
+  },
+  {
+    "slug": "ruido",
+    "group": "Logos and brand",
+    "title": "Ruido",
+    "kind": "Three-day electronic music festival, Mexico City · logo sheet",
+    "request": "Logo for Ruido, a three-day electronic music festival in an abandoned factory in Mexico City. Strong, with attitude. Show it on a page: main logo large, versions on light and dark, the small icon (for wristbands and social), palette and typography."
+  },
+  {
+    "slug": "marea",
+    "group": "Logos and brand",
+    "title": "Marea",
+    "kind": "Surf school for beginners and families, Fuerteventura · logo sheet",
+    "request": "Make the logo for Marea, a surf school in Fuerteventura for beginners and families. Show it on a page: the main logo large, the version on a dark background, the small icon (favicon or board sticker), the palette and the typography."
+  },
+  {
+    "slug": "deslop-kabel-roehre",
+    "group": "Deslop",
+    "title": "Kabel & Röhre, cleaned",
+    "kind": "An AI-made landing page, then deslop",
+    "labels": [
+      "Before",
+      "After deslop"
+    ],
+    "request": "This landing was made by an AI and it shows. Take out everything that looks AI-made and leave it right, without changing the concept or the real content.",
+    "note": "Removed: Est. 2011, serial numbers, calibration dates, section counters, a marquee, a fake booking success. Concept and logo unchanged."
+  },
+  {
+    "slug": "deslop-brasa",
+    "group": "Deslop",
+    "title": "Brasa, cleaned",
+    "kind": "An AI-made landing page, then deslop",
+    "labels": [
+      "Before",
+      "After deslop"
+    ],
+    "request": "This landing was made by an AI and it shows. Take out everything that looks AI-made and leave it right, without changing the concept or the real content.",
+    "note": "Removed: Est. 2024, eyebrows on every section, a coloured word in every heading, a ticker, a glow, a fake reservation confirmation."
+  },
+  {
+    "slug": "deslop-ruido",
+    "group": "Deslop",
+    "title": "Ruido, cleaned",
+    "kind": "An AI-made brand page, then deslop",
+    "labels": [
+      "Before",
+      "After deslop"
+    ],
+    "request": "This brand identity page was made by an AI and it shows. Take out everything that looks AI-made and leave it right, without changing the logo or the concept.",
+    "note": "Removed: coordinates, a serial number, numbered section labels, slogan triads, scanlines over the swatches. The logo is byte-identical."
+  },
+  {
+    "slug": "motion-halden",
+    "title": "Halden & Co.",
+    "kind": "Timber-house architects, Oslo · choreographed hero",
+    "request": "A landing page hero for 'Halden & Co.', a small architecture studio in Oslo that designs timber houses, with a choreographed entrance animation.",
+    "group": "Motion",
+    "video": true,
+    "note": "The house is built on load: ground line, frame, then the cladding board by board, on a 120 BPM grid. The finished frame is what reduced motion and no-JS show."
+  },
+  {
+    "slug": "motion-northline",
+    "title": "Northline",
+    "kind": "Hiking-route app · animated logo and Lottie",
+    "request": "An animated logo reveal for 'Northline', a hiking-route app, shown on a simple brand page. Also deliver the same animation as a Lottie JSON file (northline.json) next to the page.",
+    "group": "Motion",
+    "video": true,
+    "note": "The route draws the N up to its summit, then the name rises from the ground. The same timing ships as a Lottie file, checked frame by frame."
+  },
+  {
+    "slug": "motion-roastery",
+    "title": "Roastery",
+    "kind": "Coffee shop · add-to-bag button",
+    "request": "An 'Add to bag' button for an online specialty coffee roaster's product page, with satisfying click feedback: press, a short loading state while the request runs, and an added state. Show it in context on a minimal product card.",
+    "group": "Motion",
+    "video": true,
+    "note": "Press, a loading label that only appears for real waits, a drawn check, and a bean that lands in the bag where the count rolls up."
+  },
+  {
+    "slug": "motion-uploads",
+    "title": "Uploads",
+    "kind": "File-upload app · stacked toasts",
+    "request": "A toast notification system for a file-upload app. Several toasts can be on screen at once and stack (upload complete, upload failed with retry, uploading with progress). Include demo buttons to trigger each kind.",
+    "group": "Motion",
+    "video": true,
+    "note": "A folded deck that fans out on hover; each notice changes state in place, a failure jumps to the front, and retry resumes from where it stopped."
+  },
+  {
+    "slug": "motion-garden",
+    "title": "Kitchen garden planner",
+    "kind": "Task list · add, complete, reorder",
+    "request": "A task list for a vegetable-garden planner where tasks can be added, completed, deleted and reordered (drag, plus move up/down buttons), with animated list changes.",
+    "group": "Motion",
+    "video": true,
+    "note": "Adding is instant; a ticked job travels to Done above the rows it passes; drag follows the pointer and settles on a spring."
+  },
+  {
+    "slug": "motion-calder",
+    "title": "Ines Calder",
+    "kind": "Documentary photographer · page transitions",
+    "request": "A two-view portfolio for a documentary photographer in one HTML file: a work index (grid of projects) and a project detail view, with page transitions between them (open a project, go back).",
+    "group": "Motion",
+    "video": true,
+    "note": "The picture you click becomes the story: a shared-element transition in, a faster one back to the same spot in the grid."
+  }
+]

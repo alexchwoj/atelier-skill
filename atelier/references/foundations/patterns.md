@@ -56,7 +56,7 @@ img, video { display: block; max-width: 100%; height: auto; }
 ::selection { background: var(--color-accent); color: var(--color-accent-ink); }
 :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .container { width: 100%; max-width: calc(var(--container) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); box-sizing: border-box; }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; animation-timeline: auto !important; scroll-behavior: auto !important; } }
 ```
 
 **Tailwind v4:** the same values in `@theme { --color-paper: …; --font-display: …; }`, used as `bg-paper text-ink font-display`. **Tailwind v3:** under `theme.extend` in the config, pointing at the CSS variables.

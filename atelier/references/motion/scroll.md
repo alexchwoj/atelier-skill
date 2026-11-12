@@ -62,7 +62,7 @@ Split by word, not letter (calmer). Run after fonts load if line breaks matter. 
 
 ## 4. CSS scroll-driven patterns
 
-All inside `@supports (animation-timeline: view())` and `@media (prefers-reduced-motion: no-preference) and (min-width: 40rem)`. Use `linear` (scroll distance maps 1:1 to progress). Declare `animation-timeline` and `animation-range` after the `animation` shorthand, which resets them.
+All inside `@supports (animation-timeline: view())` and `@media (prefers-reduced-motion: no-preference) and (min-width: 40rem)`, with the finished state as the plain style: scroll timelines ignore durations, so the usual reduced-motion backstop does not stop them (`motion/accessibility.md` § 2). Use `linear` (scroll distance maps 1:1 to progress). Declare `animation-timeline` and `animation-range` after the `animation` shorthand, which resets them. A timeline on a page that cannot scroll is inactive and leaves its element at the start state: never let visibility depend on one.
 
 **Pinned steps** (a sticky panel whose steps light up in turn):
 

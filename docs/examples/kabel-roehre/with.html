@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kabel &amp; Röhre: vintage synthesizers restored in Berlin</title>
+<meta name="description" content="Kabel & Röhre restores vintage Moog, Roland, Korg and ARP synthesizers in Berlin, sells them with a one-year warranty, and repairs the instruments you bring in.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f0e0d'/%3E%3Cpath d='M3 22 L11 8 L11 22 L19 8 L19 22 L27 8 L27 22' fill='none' stroke='%23ea8a18' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Big+Shoulders+Display:wght@700;800;900&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#0f0e0d; --paper-2:#161412; --paper-3:#1e1b18;
+  --ink:#efe9e1; --ink-2:#c9c3be; --muted:#a49d97;
+  --amber:#ea8a18; --amber-hover:#ff9d36; --amber-ink:#160d07;
+  --rule:rgba(239,233,225,.14);
+  --tag:#e6d6ae; --tag-2:#d9c79a; --tag-ink:#1f1a12; --tag-rule:rgba(31,26,18,.28); --tag-mute:#5a4f3c;
+  --f-display:"Big Shoulders Display", "Arial Narrow", sans-serif;
+  --f-mono:"Martian Mono", ui-monospace, monospace;
+  --f-body:"Archivo", system-ui, sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gutter:clamp(16px,4vw,64px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--f-body);padding-bottom:96px}
+::selection{background:var(--amber);color:var(--amber-ink)}
+html{scrollbar-color:#3a342e var(--paper)}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+h1,h2,h3{margin:0;font-family:var(--f-display);text-transform:uppercase;font-weight:900;line-height:.9;letter-spacing:.005em;overflow-wrap:break-word;min-width:0}
+p{margin:0}
+.label{font:500 12px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--amber);color:var(--amber-ink);padding:10px 14px;z-index:50}
+.skip:focus{left:8px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:500 12px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:0;transition:background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn--amber{background:var(--amber);border-color:var(--amber);color:var(--amber-ink)}
+.btn--amber:hover{background:var(--amber-hover);border-color:var(--amber-hover);color:var(--amber-ink)}
+
+/* dock nav */
+.dock{transition:opacity .35s var(--ease),transform .35s var(--ease);position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:6px;padding:6px;background:rgba(22,20,18,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--rule);max-width:calc(100% - 32px)}
+.dock__mark{font:800 22px/1 var(--f-display);text-transform:uppercase;text-decoration:none;padding:0 14px;white-space:nowrap;display:flex;align-items:center;min-height:44px}
+.dock__mark span{color:var(--amber)}
+.dock a.dock__link{white-space:nowrap;font:500 12px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;text-decoration:none;padding:0 12px;min-height:44px;display:flex;align-items:center;color:var(--ink-2);border-bottom:1px solid transparent;transition:color .2s var(--ease),border-color .2s var(--ease)}
+.dock a.dock__link:hover{color:var(--ink);border-bottom-color:var(--amber)}
+.dock .btn{min-height:44px;padding:0 16px;white-space:nowrap}
+@media (min-width:861px){.motion .dock.is-tucked{opacity:0;transform:translate(-50%,24px);pointer-events:none}}
+@media (max-width:760px){.dock a.dock__link{display:none}.dock{width:calc(100% - 32px);justify-content:space-between}}
+
+/* hero */
+.hero{position:relative;height:100svh;min-height:640px;overflow:clip;isolation:isolate;background:#050505;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto 1fr;padding:clamp(28px,5vh,56px) var(--gutter) 0;gap:24px}
+.hero__copy{position:relative;z-index:4;max-width:44vw}
+.hero__copy .label{color:var(--amber);margin-bottom:20px}
+.hero h1{font-size:clamp(40px,min(5.4vw,8.6svh),82px)}
+.hero h1 .amber{color:var(--amber);display:block}
+.hero__lede{margin-top:18px;max-width:40ch;color:var(--ink-2)}
+.hero__actions{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px}
+.scope{position:relative;z-index:4;justify-self:end;width:min(100%,460px);margin:0}
+.scope__screen{position:relative;border:1px solid var(--rule);background:#0a0908;aspect-ratio:16/9}
+.scope canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.scope figcaption{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:10px}
+.scope figcaption p{font:400 13px/1.45 var(--f-body);color:var(--muted)}
+.scope .btn{min-height:44px;padding:0 14px;font-size:12px;flex:none}
+.scope .btn[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--amber-ink)}
+
+.word{grid-column:1/-1;position:relative;align-self:end;display:flex;justify-content:space-between;align-items:flex-end;font:900 clamp(84px,min(17vw,30svh),300px)/.74 var(--f-display);text-transform:uppercase;margin:0 calc(var(--gutter)*-0.4);height:clamp(220px,40svh,520px);pointer-events:none;user-select:none}
+.word__half{position:relative;transform:translate3d(var(--part,0),.06em,0);will-change:transform}
+.word__half--l{z-index:1;--dir:-1}
+.word__half--r{z-index:3;--dir:1}
+.word__amp{color:var(--amber)}
+.word__img{position:absolute;z-index:2;left:50%;bottom:5%;width:auto;height:88%;max-width:none;transform:translate3d(-50%,0,0) scale(var(--zoom,1));transform-origin:50% 100%;-webkit-mask:radial-gradient(closest-side,#000 72%,transparent 100%);mask:radial-gradient(closest-side,#000 72%,transparent 100%);filter:saturate(.85) contrast(1.06)}
+@media (max-width:860px){
+  .hero{grid-template-columns:minmax(0,1fr);padding-top:32px;height:auto;min-height:100svh}
+  .hero__copy{max-width:none}
+  .scope{justify-self:start;width:100%}
+  .word{height:clamp(220px,42svh,360px);font-size:clamp(64px,19vw,140px)}
+  .word__img{height:78%}
+}
+
+/* section shells */
+section{position:relative}
+.sec-pad{padding:clamp(88px,12vw,168px) var(--gutter)}
+.h2{font-size:clamp(46px,6.2vw,96px)}
+
+/* restore: pinned scope study */
+.restore{background:var(--paper)}
+.restore__track{height:420svh}
+.restore__stage{position:sticky;top:0;height:100svh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:clamp(14px,2.4vh,26px);padding:clamp(24px,4vh,48px) var(--gutter) 110px}
+.restore__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.restore__top .h2{max-width:13ch}
+.readout{display:grid;grid-template-columns:auto auto;gap:4px 18px;font:400 12px/1.5 var(--f-mono);color:var(--muted)}
+.readout b{font-weight:500;color:var(--amber);text-transform:uppercase}
+.bigscope{position:relative;border:1px solid var(--rule);background:#0a0908;min-height:0}
+.bigscope canvas{display:block;width:100%;height:100%}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule)}
+.steps li{padding:16px 18px 0 0;opacity:.38;transition:opacity .35s var(--ease)}
+.steps li.is-on{opacity:1}
+.steps h3{font-size:clamp(22px,2.2vw,32px);font-weight:800;line-height:1;margin-bottom:8px}
+.steps li.is-on h3{color:var(--amber)}
+.steps p{font-size:15px;line-height:1.5;color:var(--ink-2);max-width:34ch}
+@media (max-width:860px){
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .steps li{display:none;padding-top:14px}
+  .steps li.is-on{display:block}
+  .steps p{font-size:16px}
+}
+.no-pin .restore__track{height:auto}
+.no-pin .restore__stage{position:relative;height:auto;grid-template-rows:auto auto auto;padding-bottom:clamp(88px,12vw,168px)}
+.no-pin .bigscope{aspect-ratio:21/9}
+.no-pin .steps li{opacity:1;display:block}
+
+/* for sale: switcher */
+.sale{background:var(--paper-2);padding:clamp(72px,9vw,132px) var(--gutter)}
+.sale__tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--rule);margin-bottom:clamp(24px,4vw,48px)}
+.sale__tabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--muted);font:800 clamp(22px,2.6vw,38px)/1 var(--f-display);text-transform:uppercase;padding:14px 22px 14px 0;margin-right:22px;cursor:pointer;min-height:48px;transition:color .2s var(--ease),border-color .2s var(--ease)}
+.sale__tabs button:hover{color:var(--ink)}
+.sale__tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--amber)}
+.listing{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end}
+.listing[hidden]{display:none}
+.listing figure{margin:0}
+.listing img{width:100%;aspect-ratio:3/2;object-fit:cover;filter:saturate(.85) contrast(1.06)}
+.listing figcaption{margin-top:10px;font:400 13px/1.4 var(--f-body);color:var(--muted)}
+.listing h2{font-size:clamp(48px,6vw,96px);margin-bottom:18px}
+.listing__maker{font:500 12px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--amber);margin-bottom:14px}
+.specs{margin:0 0 22px;border-top:1px solid var(--rule)}
+.specs div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--rule)}
+.specs dt{color:var(--muted);font-size:15px}
+.specs dd{margin:0;text-align:right;font:400 13px/1.6 var(--f-mono);font-variant-numeric:tabular-nums}
+.listing__price{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
+.listing__price span:last-child{font:800 30px/1 var(--f-display);text-transform:uppercase}
+.sale__note{margin-top:clamp(28px,4vw,48px);color:var(--muted);font-size:15px;max-width:60ch}
+@media (max-width:860px){.listing{grid-template-columns:minmax(0,1fr)}}
+
+/* why us: asymmetric collage */
+.why{background:var(--paper)}
+.why__head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:clamp(40px,6vw,80px)}
+.why__head p{color:var(--ink-2);max-width:42ch}
+.collage{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(14px,2vw,28px);align-items:start}
+.collage figure{margin:0}
+.collage img{width:100%;object-fit:cover;filter:saturate(.85) contrast(1.06)}
+.collage figcaption{margin-top:8px;font-size:13px;color:var(--muted)}
+.c-big{grid-column:1/8;grid-row:1/3}.c-big img{aspect-ratio:4/3;object-position:70% 25%}
+.c-fact{border-top:1px solid var(--rule);padding-top:16px}
+.c-fact h3{font-size:clamp(28px,3vw,44px);font-weight:800;line-height:.95;margin-bottom:10px}
+.c-fact p{color:var(--ink-2);max-width:36ch}
+.c-f1{grid-column:8/13;grid-row:1}
+.c-f1 h3{font-size:clamp(56px,7vw,112px);color:var(--amber);line-height:.85}
+.c-small{grid-column:9/13;grid-row:2;align-self:end}.c-small img{aspect-ratio:3/2}
+.c-f2{grid-column:1/5;margin-top:clamp(24px,4vw,56px)}
+.c-f3{grid-column:5/9;margin-top:clamp(24px,4vw,56px)}
+.c-f4{grid-column:9/13;margin-top:clamp(24px,4vw,56px)}
+@media (max-width:860px){
+  .why__head{grid-template-columns:minmax(0,1fr)}
+  .collage>*{grid-column:1/-1 !important;grid-row:auto !important;margin-top:0 !important}
+  .c-big img{aspect-ratio:4/3}
+}
+
+/* booking ticket band */
+.book{background:var(--tag);color:var(--tag-ink);padding:clamp(80px,10vw,150px) var(--gutter);display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:clamp(24px,5vw,80px)}
+.book ::selection{background:var(--tag-ink);color:var(--tag)}
+.book :focus-visible{outline-color:var(--tag-ink)}
+.book__side{position:sticky;top:40px;align-self:start}
+.book__side .label{color:var(--tag-mute);margin-bottom:14px}
+.book__side p{font-size:16px;color:var(--tag-mute);max-width:28ch;margin-top:14px}
+.book h2{font-size:clamp(48px,6.4vw,104px);margin-bottom:clamp(28px,4vw,48px);max-width:12ch}
+.ticket{border:1.5px solid var(--tag-ink);background:var(--tag-2);position:relative;max-width:880px}
+.ticket::before{content:"";position:absolute;top:22px;left:22px;width:16px;height:16px;border-radius:50%;background:var(--tag);border:1.5px solid var(--tag-ink)}
+.ticket__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 22px 18px 56px;border-bottom:1.5px solid var(--tag-ink)}
+.ticket__head strong{font:900 26px/1 var(--f-display);text-transform:uppercase}
+.ticket__head span{font:400 12px/1.3 var(--f-mono);color:var(--tag-mute);text-align:right}
+.ticket fieldset{border:0;margin:0;padding:0}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.field{display:flex;flex-direction:column;gap:6px;padding:16px 22px;border-bottom:1px solid var(--tag-rule)}
+.grid2 .field:first-child{border-right:1px solid var(--tag-rule)}
+.field label,.field legend{font:500 12px/1.3 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--tag-mute);padding:0}
+.field input,.field textarea,.field select{appearance:none;background:transparent;border:0;border-bottom:1.5px solid rgba(31,26,18,.55);border-radius:0;color:var(--tag-ink);font:500 18px/1.4 var(--f-body);padding:6px 0;min-height:44px;width:100%}
+.field textarea{resize:vertical;min-height:96px}
+.field input:focus-visible,.field textarea:focus-visible,.field select:focus-visible{outline:2px solid var(--tag-ink);outline-offset:4px}
+.field select{background-image:linear-gradient(45deg,transparent 50%,var(--tag-ink) 50%),linear-gradient(135deg,var(--tag-ink) 50%,transparent 50%);background-position:calc(100% - 14px) 55%,calc(100% - 8px) 55%;background-size:6px 6px;background-repeat:no-repeat}
+.choice{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.choice label{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;border:1.5px solid var(--tag-ink);font:500 15px/1 var(--f-body);text-transform:none;letter-spacing:0;color:var(--tag-ink);cursor:pointer}
+.choice input{position:absolute;opacity:0;width:1px;height:1px}
+.choice input:checked+span::before{background:var(--tag-ink)}
+.choice span::before{content:"";display:inline-block;width:12px;height:12px;border:1.5px solid var(--tag-ink);border-radius:50%;margin-right:10px;vertical-align:-1px}
+.choice label:has(input:focus-visible){outline:2px solid var(--tag-ink);outline-offset:3px}
+.ticket__foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:18px 22px}
+.ticket__foot p{font-size:15px;color:var(--tag-mute);max-width:44ch}
+.btn--ink{background:var(--tag-ink);border-color:var(--tag-ink);color:var(--tag)}
+.btn--ink:hover{background:#000;color:var(--tag)}
+.form-status{padding:0 22px 18px;font-size:15px;font-weight:500}
+.form-status:empty{display:none}
+@media (max-width:860px){
+  .book{grid-template-columns:minmax(0,1fr)}
+  .book__side{position:static}
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  .grid2 .field:first-child{border-right:0}
+  .ticket__head span{display:none}
+}
+
+/* footer index */
+.foot{background:var(--paper);padding:clamp(56px,7vw,96px) var(--gutter) 40px;display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px;border-top:1px solid var(--rule)}
+.foot h2{font-size:clamp(36px,4vw,56px)}
+.foot h2 span{color:var(--amber)}
+.foot h3{font:500 12px/1.3 var(--f-mono);letter-spacing:.06em;color:var(--muted);margin-bottom:12px}
+.foot p,.foot li{font-size:15px;color:var(--ink-2)}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot a{text-underline-offset:3px;text-decoration-color:var(--amber)}
+.foot__credits{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:20px;font-size:13px;color:var(--muted);line-height:1.6}
+.foot__credits a{color:var(--muted)}
+@media (max-width:860px){.foot{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.foot>div:first-child{grid-column:1/-1}}
+
+/* reveal grammar (only when motion is allowed and JS runs) */
+.motion .rv{opacity:0;transform:translate3d(0,18px,0);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:calc(var(--i,0)*70ms)}
+.motion .rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="dock is-tucked" aria-label="Main">
+  <a class="dock__mark" href="#top" aria-label="Kabel und Röhre, top of page">Kabel<span>&amp;</span>Röhre</a>
+  <a class="dock__link" href="#restore">Restoration</a>
+  <a class="dock__link" href="#sale">For sale</a>
+  <a class="dock__link" href="#why">Why us</a>
+  <a class="btn btn--amber" href="#book">Book a bench slot</a>
+</nav>
+
+<main id="main">
+<header class="hero" id="top">
+  <div class="hero__copy">
+    <p class="label rv">Synthesizer workshop, Berlin</p>
+    <h1 class="rv" style="--i:1">Restored to<br>factory tune.<span class="amber">Warranted a year.</span></h1>
+    <p class="hero__lede rv" style="--i:2">We rebuild vintage Moog, Roland, Korg and ARP synths on our Berlin bench and sell them with twelve months’ warranty. Your own instrument is welcome too.</p>
+    <div class="hero__actions rv" style="--i:3">
+      <a class="btn btn--amber" href="#book">Book a bench slot</a>
+      <a class="btn" href="#sale">See what’s for sale</a>
+    </div>
+  </div>
+
+  <figure class="scope rv" style="--i:2">
+    <div class="scope__screen"><canvas id="heroScope" width="920" height="518" aria-label="Oscilloscope showing a sawtooth wave. Move across it to change pitch and filter."></canvas></div>
+    <figcaption>
+      <p id="heroRead">Drag across the screen: left to right is pitch, top to bottom closes the filter.</p>
+      <button class="btn" type="button" id="soundBtn" aria-pressed="false">Sound off</button>
+    </figcaption>
+  </figure>
+
+  <div class="word" aria-hidden="true">
+    <span class="word__half word__half--l">Kabel</span>
+    <img class="word__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Korg_Synthesizer_MS-20.jpg/1920px-Korg_Synthesizer_MS-20.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Korg_Synthesizer_MS-20.jpg/960px-Korg_Synthesizer_MS-20.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Korg_Synthesizer_MS-20.jpg/1920px-Korg_Synthesizer_MS-20.jpg 1920w" sizes="(max-width:860px) 120vw, 70vw" width="1920" height="1291" alt="" fetchpriority="high">
+    <span class="word__half word__half--r"><span class="word__amp">&amp;</span>Röhre</span>
+  </div>
+</header>
+
+<section class="restore" id="restore" aria-labelledby="restore-h">
+  <div class="restore__track">
+    <div class="restore__stage">
+      <div class="restore__top">
+        <h2 class="h2" id="restore-h">From hum to a clean saw</h2>
+        <div class="readout" aria-live="off">
+          <span>Signal</span><b id="sigName">Hum only</b>
+          <span>Pitch</span><b id="sigPitch">none</b>
+        </div>
+      </div>
+      <div class="bigscope"><canvas id="bigScope" aria-label="Oscilloscope trace that cleans up from mains hum to a stable sawtooth as the restoration steps advance."></canvas></div>
+      <ol class="steps" id="steps">
+        <li class="is-on"><h3>Listen first</h3><p>Every instrument is powered up slowly and played through before a screw comes out. We note what it does, not what the listing said.</p></li>
+        <li><h3>Recap and clean</h3><p>Dried capacitors come out. Pots, sliders, key contacts and jacks are cleaned and reseated.</p></li>
+        <li><h3>Calibrate</h3><p>Oscillators are trimmed to track across the keyboard; filters and envelopes go back to the service-manual figures.</p></li>
+        <li><h3>Burn in, then sell</h3><p>It runs on the bench before it is listed, then leaves with a year’s warranty.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sale" id="sale" aria-label="Instruments for sale">
+  <div class="sale__tabs" role="tablist" aria-label="Instruments">
+    <button type="button" role="tab" id="t-moog" aria-controls="p-moog" aria-selected="true">Minimoog</button>
+    <button type="button" role="tab" id="t-arp" aria-controls="p-arp" aria-selected="false" tabindex="-1">Odyssey</button>
+    <button type="button" role="tab" id="t-juno" aria-controls="p-juno" aria-selected="false" tabindex="-1">Juno-60</button>
+    <button type="button" role="tab" id="t-sh" aria-controls="p-sh" aria-selected="false" tabindex="-1">SH-101</button>
+    <button type="button" role="tab" id="t-ms" aria-controls="p-ms" aria-selected="false" tabindex="-1">MS-20</button>
+  </div>
+
+  <article class="listing" role="tabpanel" id="p-moog" aria-labelledby="t-moog">
+    <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/R.A.Moog_minimoog_2.jpg/1920px-R.A.Moog_minimoog_2.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/R.A.Moog_minimoog_2.jpg/960px-R.A.Moog_minimoog_2.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/R.A.Moog_minimoog_2.jpg/1920px-R.A.Moog_minimoog_2.jpg 1920w" sizes="(max-width:860px) 100vw, 62vw" width="1920" height="1440" loading="lazy" alt="A Minimoog Model D with walnut cheeks and its front panel tilted up."><figcaption>Minimoog Model D, stand-in photograph</figcaption></figure>
+    <div>
+      <p class="listing__maker">Moog</p>
+      <h2>Minimoog Model D</h2>
+      <dl class="specs">
+        <div><dt>Introduced</dt><dd>1970</dd></div>
+        <div><dt>Voices</dt><dd>Mono, 3 VCOs</dd></div>
+        <div><dt>Filter</dt><dd>24 dB ladder</dd></div>
+        <div><dt>Keys</dt><dd>44</dd></div>
+      </dl>
+      <p class="listing__price"><span class="label">Price</span><span>On request</span></p>
+      <a class="btn btn--amber" href="#book" data-ask="Moog Minimoog Model D">Ask about this one</a>
+    </div>
+  </article>
+
+  <article class="listing" role="tabpanel" id="p-arp" aria-labelledby="t-arp" hidden>
+    <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/ARP_Odyssey_Mk1_Black_Face.jpg/1920px-ARP_Odyssey_Mk1_Black_Face.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/ARP_Odyssey_Mk1_Black_Face.jpg/960px-ARP_Odyssey_Mk1_Black_Face.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/ARP_Odyssey_Mk1_Black_Face.jpg/1920px-ARP_Odyssey_Mk1_Black_Face.jpg 1920w" sizes="(max-width:860px) 100vw, 62vw" width="1920" height="1444" loading="lazy" alt="Black-face ARP Odyssey seen from above, rows of sliders over a short keyboard."><figcaption>ARP Odyssey, stand-in photograph</figcaption></figure>
+    <div>
+      <p class="listing__maker">ARP</p>
+      <h2>Odyssey</h2>
+      <dl class="specs">
+        <div><dt>Introduced</dt><dd>1972</dd></div>
+        <div><dt>Voices</dt><dd>Duophonic, 2 VCOs</dd></div>
+        <div><dt>Controls</dt><dd>Sliders and switches</dd></div>
+        <div><dt>Keys</dt><dd>37</dd></div>
+      </dl>
+      <p class="listing__price"><span class="label">Price</span><span>On request</span></p>
+      <a class="btn btn--amber" href="#book" data-ask="ARP Odyssey">Ask about this one</a>
+    </div>
+  </article>
+
+  <article class="listing" role="tabpanel" id="p-juno" aria-labelledby="t-juno" hidden>
+    <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Roland_Juno-60_%286935221445%29.jpg/1920px-Roland_Juno-60_%286935221445%29.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Roland_Juno-60_%286935221445%29.jpg/960px-Roland_Juno-60_%286935221445%29.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Roland_Juno-60_%286935221445%29.jpg/1920px-Roland_Juno-60_%286935221445%29.jpg 1920w" sizes="(max-width:860px) 100vw, 62vw" width="1920" height="1080" loading="lazy" alt="Close angle on a Roland Juno-60 panel: orange section bands, sliders and cream preset buttons."><figcaption>Roland Juno-60, stand-in photograph</figcaption></figure>
+    <div>
+      <p class="listing__maker">Roland</p>
+      <h2>Juno-60</h2>
+      <dl class="specs">
+        <div><dt>Introduced</dt><dd>1982</dd></div>
+        <div><dt>Voices</dt><dd>6, one DCO each</dd></div>
+        <div><dt>Effect</dt><dd>Chorus I and II</dd></div>
+        <div><dt>Keys</dt><dd>61</dd></div>
+      </dl>
+      <p class="listing__price"><span class="label">Price</span><span>On request</span></p>
+      <a class="btn btn--amber" href="#book" data-ask="Roland Juno-60">Ask about this one</a>
+    </div>
+  </article>
+
+  <article class="listing" role="tabpanel" id="p-sh" aria-labelledby="t-sh" hidden>
+    <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Roland_SH-101.jpg/1920px-Roland_SH-101.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Roland_SH-101.jpg/960px-Roland_SH-101.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Roland_SH-101.jpg/1920px-Roland_SH-101.jpg 1920w" sizes="(max-width:860px) 100vw, 62vw" width="1920" height="1440" loading="lazy" alt="A grey Roland SH-101 resting on a sheepskin rug."><figcaption>Roland SH-101, stand-in photograph</figcaption></figure>
+    <div>
+      <p class="listing__maker">Roland</p>
+      <h2>SH-101</h2>
+      <dl class="specs">
+        <div><dt>Introduced</dt><dd>1982</dd></div>
+        <div><dt>Voices</dt><dd>Mono, VCO and sub</dd></div>
+        <div><dt>Extras</dt><dd>Arpeggiator, sequencer</dd></div>
+        <div><dt>Keys</dt><dd>32</dd></div>
+      </dl>
+      <p class="listing__price"><span class="label">Price</span><span>On request</span></p>
+      <a class="btn btn--amber" href="#book" data-ask="Roland SH-101">Ask about this one</a>
+    </div>
+  </article>
+
+  <article class="listing" role="tabpanel" id="p-ms" aria-labelledby="t-ms" hidden>
+    <figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Korg_MS-20_VCO_Section.jpg/1920px-Korg_MS-20_VCO_Section.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Korg_MS-20_VCO_Section.jpg/960px-Korg_MS-20_VCO_Section.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Korg_MS-20_VCO_Section.jpg/1920px-Korg_MS-20_VCO_Section.jpg 1920w" sizes="(max-width:860px) 100vw, 62vw" width="1920" height="1014" loading="lazy" alt="Close view of the Korg MS-20 oscillator and filter knobs with their printed panel legends."><figcaption>Korg MS-20, stand-in photograph</figcaption></figure>
+    <div>
+      <p class="listing__maker">Korg</p>
+      <h2>MS-20</h2>
+      <dl class="specs">
+        <div><dt>Introduced</dt><dd>1978</dd></div>
+        <div><dt>Voices</dt><dd>Mono, 2 VCOs</dd></div>
+        <div><dt>Filters</dt><dd>High-pass and low-pass</dd></div>
+        <div><dt>Patch panel</dt><dd>Yes, on the right</dd></div>
+      </dl>
+      <p class="listing__price"><span class="label">Price</span><span>On request</span></p>
+      <a class="btn btn--amber" href="#book" data-ask="Korg MS-20">Ask about this one</a>
+    </div>
+  </article>
+
+  <p class="sale__note">These five show the kind of instrument we restore. What is ready to leave changes from week to week, so ask before you travel.</p>
+</section>
+
+<section class="why sec-pad" id="why" aria-labelledby="why-h">
+  <div class="why__head">
+    <h2 class="h2 rv" id="why-h">One bench, four makers</h2>
+    <p class="rv" style="--i:1">We only work on Moog, Roland, Korg and ARP. Narrow on purpose: the same circuits cross the bench every week, so faults get found, not guessed.</p>
+  </div>
+  <div class="collage">
+    <figure class="c-big rv"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Scope_soldering_iron_%28early_model%29.jpg/1920px-Scope_soldering_iron_%28early_model%29.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Scope_soldering_iron_%28early_model%29.jpg/960px-Scope_soldering_iron_%28early_model%29.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Scope_soldering_iron_%28early_model%29.jpg/1920px-Scope_soldering_iron_%28early_model%29.jpg 1920w" sizes="(max-width:860px) 100vw, 56vw" width="1920" height="1280" loading="lazy" alt="A hand holding an old soldering iron over a wooden bench, pliers and parts nearby."><figcaption>Bench work, stand-in photograph</figcaption></figure>
+    <div class="c-fact c-f1 rv" style="--i:1"><h3>12 months</h3><p>Every instrument we sell carries a year’s warranty. If it drifts, crackles or goes quiet, it comes back to the bench.</p></div>
+    <figure class="c-small rv" style="--i:2"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Minimoog_mixer.jpg" width="1600" height="1200" loading="lazy" alt="Minimoog mixer section: volume knobs, blue rocker switches and orange modulation switches."><figcaption>Minimoog mixer section</figcaption></figure>
+    <div class="c-fact c-f2 rv"><h3>Your own synth</h3><p>Bring in the instrument you already love. We find the fault, tell you what it needs, and repair it on the same bench.</p></div>
+    <div class="c-fact c-f3 rv" style="--i:1"><h3>Here in Berlin</h3><p>Drop it off by hand and collect it by hand. No courier between you and a fifty-year-old keyboard.</p></div>
+    <div class="c-fact c-f4 rv" style="--i:2"><h3>Try before you buy</h3><p>Book a slot and play the instrument you are after through the bench amp before you decide.</p></div>
+  </div>
+</section>
+
+<section class="book" id="book" aria-labelledby="book-h">
+  <div class="book__side">
+    <p class="label">Bench booking</p>
+    <p>Tell us what is coming in and what it is doing. We reply with a drop-off time.</p>
+  </div>
+  <div>
+    <h2 id="book-h">Book a slot, bring it in</h2>
+    <form class="ticket" id="ticket" novalidate>
+      <div class="ticket__head"><strong>Workshop ticket</strong><span>Kabel &amp; Röhre, Berlin</span></div>
+      <fieldset class="field">
+        <legend>I want to</legend>
+        <div class="choice">
+          <label><input type="radio" name="reason" value="repair" checked><span>Drop off my instrument for repair</span></label>
+          <label><input type="radio" name="reason" value="try"><span>Try an instrument for sale</span></label>
+        </div>
+      </fieldset>
+      <div class="grid2">
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label for="f-make">Maker</label>
+          <select id="f-make" name="make"><option>Moog</option><option>Roland</option><option>Korg</option><option>ARP</option><option>Other, ask first</option></select></div>
+        <div class="field"><label for="f-model">Model</label><input id="f-model" name="model" placeholder="Juno-60, Odyssey, MS-20…"></div>
+      </div>
+      <div class="field"><label for="f-fault">What is it doing?</label><textarea id="f-fault" name="fault" placeholder="Voice 4 is silent, the filter crackles when I turn it…"></textarea></div>
+      <div class="field"><label for="f-date">Preferred drop-off day</label><input id="f-date" name="date" type="date"></div>
+      <div class="ticket__foot">
+        <p>We confirm every slot by email before you travel.</p>
+        <button class="btn btn--ink" type="submit">Request a bench slot</button>
+      </div>
+      <p class="form-status" id="formStatus" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div>
+    <h2>Kabel<span>&amp;</span>Röhre</h2>
+    <p style="margin-top:12px;max-width:34ch">Vintage synthesizers restored, sold with a year’s warranty, and repaired in Berlin.</p>
+  </div>
+  <div><h3>Workshop</h3><ul><li>[Street and number]</li><li>[Postcode] Berlin</li></ul></div>
+  <div><h3>Hours</h3><ul><li>[Opening days]</li><li>By appointment</li></ul></div>
+  <div><h3>Contact</h3><ul><li><a href="mailto:hello@example.com">[workshop email]</a></li><li><a href="#book">Book a bench slot</a></li></ul></div>
+  <p class="foot__credits">Photographs, stand-ins from Wikimedia Commons: Korg MS-20 by Wilfredor (CC0); Minimoog by glacial23 (CC BY-SA 2.0); ARP Odyssey by Alison Cassidy (CC BY-SA 4.0); Juno-60 by deepsonic (CC BY 2.0); SH-101 by eternal jamzzzz (CC BY 2.0); MS-20 oscillator section by Zinnmann (CC BY-SA 3.0); soldering iron by Doug butler (CC BY-SA 4.0); Minimoog mixer by Ishmael Hallin (CC BY-SA 2.0).</p>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+  if (!reduce) root.classList.add('motion'); else root.classList.add('no-pin');
+
+  /* reveals: once, never reversed */
+  const rvs = document.querySelectorAll('.rv');
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    rvs.forEach(el => io.observe(el));
+  } else rvs.forEach(el => el.classList.add('in'));
+
+  const AMBER = '#ea8a18';
+  function grid(x, w, h) {
+    x.fillStyle = '#0a0908'; x.fillRect(0, 0, w, h);
+    x.strokeStyle = 'rgba(234,138,24,.13)'; x.lineWidth = 1;
+    for (let i = 1; i < 10; i++) { const gx = Math.round(w * i / 10) + .5; x.beginPath(); x.moveTo(gx, 0); x.lineTo(gx, h); x.stroke(); }
+    for (let i = 1; i < 8; i++) { const gy = Math.round(h * i / 8) + .5; x.beginPath(); x.moveTo(0, gy); x.lineTo(w, gy); x.stroke(); }
+    x.strokeStyle = 'rgba(234,138,24,.28)';
+    x.beginPath(); x.moveTo(0, h / 2 + .5); x.lineTo(w, h / 2 + .5); x.stroke();
+  }
+  function trace(x, w, h, fn) {
+    x.save(); x.strokeStyle = AMBER; x.lineWidth = Math.max(2, w / 420); x.shadowColor = AMBER; x.shadowBlur = 10; x.lineJoin = 'round';
+    x.beginPath();
+    for (let i = 0; i <= w; i += 2) { const y = h / 2 - fn(i / w) * h * 0.38; i ? x.lineTo(i, y) : x.moveTo(i, y); }
+    x.stroke(); x.restore();
+  }
+  // band-limited saw: sum of harmonics up to n
+  function saw(ph, n) { let s = 0; for (let k = 1; k <= n; k++) s += Math.sin(2 * Math.PI * k * ph) / k; return s * 0.62; }
+
+  /* hero scope: interactive */
+  const hc = document.getElementById('heroScope'), hx = hc.getContext('2d');
+  const read = document.getElementById('heroRead');
+  let cycles = 3, harm = 14, drift = 0, heroVisible = true, ac = null, osc = null, flt = null, gain = null, soundOn = false;
+  const freqOf = c => Math.round(55 * Math.pow(2, (c - 1) * 0.75 * 2)); // 55 Hz at 1 cycle, doubles each 0.67 cycle
+  function drawHero() {
+    const w = hc.width, h = hc.height; grid(hx, w, h);
+    trace(hx, w, h, t => saw(t * cycles + drift, harm));
+  }
+  function setFromPointer(e) {
+    const r = hc.getBoundingClientRect();
+    const px = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    const py = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
+    cycles = 1 + px * 5; harm = Math.max(1, Math.round(24 * (1 - py)));
+    const hz = freqOf(cycles), cutoff = Math.round(hz * harm);
+    read.textContent = `${hz} Hz saw, filter open to about ${cutoff >= 1000 ? (cutoff / 1000).toFixed(1) + ' kHz' : cutoff + ' Hz'}.`;
+    if (osc) { osc.frequency.setTargetAtTime(hz, ac.currentTime, .03); flt.frequency.setTargetAtTime(Math.max(80, cutoff), ac.currentTime, .03); }
+    if (reduce) drawHero();
+  }
+  hc.addEventListener('pointermove', setFromPointer);
+  hc.addEventListener('pointerdown', e => { hc.setPointerCapture(e.pointerId); setFromPointer(e); });
+  const sb = document.getElementById('soundBtn');
+  sb.addEventListener('click', () => {
+    soundOn = !soundOn; sb.setAttribute('aria-pressed', soundOn); sb.textContent = soundOn ? 'Sound on' : 'Sound off';
+    if (soundOn) {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      osc = ac.createOscillator(); osc.type = 'sawtooth'; osc.frequency.value = freqOf(cycles);
+      flt = ac.createBiquadFilter(); flt.type = 'lowpass'; flt.frequency.value = freqOf(cycles) * harm; flt.Q.value = 4;
+      gain = ac.createGain(); gain.gain.value = 0; gain.gain.setTargetAtTime(.08, ac.currentTime, .05);
+      osc.connect(flt).connect(gain).connect(ac.destination); osc.start(); ac.resume();
+    } else if (osc) { gain.gain.setTargetAtTime(0, ac.currentTime, .05); const o = osc; setTimeout(() => o.stop(), 300); osc = null; }
+  });
+  new IntersectionObserver(es => es.forEach(e => heroVisible = e.isIntersecting)).observe(hc);
+
+  /* hero wordmark parts on scroll; driven off viewport height */
+  const halves = document.querySelectorAll('.word__half'), img = document.querySelector('.word__img');
+  const dock = document.querySelector('.dock'); let dockFocus = false;
+  dock.addEventListener('focusin', () => { dockFocus = true; dock.classList.remove('is-tucked'); });
+  dock.addEventListener('focusout', () => { dockFocus = false; });
+
+  /* restoration scope: scroll-bound */
+  const bc = document.getElementById('bigScope'), bx = bc.getContext('2d');
+  const track = document.querySelector('.restore__track');
+  const steps = [...document.querySelectorAll('#steps li')];
+  const sigName = document.getElementById('sigName'), sigPitch = document.getElementById('sigPitch');
+  const names = ['Hum only', 'Crackle', 'Drifting', 'Locked'];
+  let prog = reduce ? 1 : 0, t0 = 0;
+  function sizeBig() { const r = bc.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); bc.width = Math.max(300, r.width * d); bc.height = Math.max(150, r.height * d); }
+  // pseudo-random noise that is stable per x
+  const noise = i => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return (s - Math.floor(s)) * 2 - 1; };
+  function drawBig(time) {
+    const w = bc.width, h = bc.height; grid(bx, w, h);
+    const p = prog, stage = Math.min(3, Math.floor(p * 4 + 0.0001));
+    const clean = Math.max(0, Math.min(1, (p - 0.5) / 0.4));       // calibrate -> locked
+    const crackle = Math.max(0, 1 - Math.abs(p - 0.3) / 0.22);      // peaks in step two
+    const hum = Math.max(0, 1 - p / 0.3);                           // fades out of step one
+    const sawAmt = Math.max(0, Math.min(1, (p - 0.2) / 0.3));
+    const wob = (1 - clean) * Math.sin(time / 700) * 0.35;
+    const cyc = 4 + wob;
+    const tt = reduce ? 0 : time / 4000;
+    trace(bx, w, h, u => {
+      const humS = Math.sin(2 * Math.PI * (u * 2 + tt)) * 0.18 * hum;
+      const sawS = saw(u * cyc + tt * (1 - clean), 18) * sawAmt * (0.6 + 0.4 * clean);
+      const n = noise(Math.floor(u * 260) + Math.floor(time / 90)) * 0.5 * crackle * (noise(Math.floor(u * 9) + Math.floor(time / 300)) > .2 ? 1 : .25);
+      return humS + sawS + n;
+    });
+    if (names[stage] !== sigName.textContent) {
+      sigName.textContent = names[stage];
+      sigPitch.textContent = stage === 0 ? 'none' : stage === 1 ? 'unstable' : stage === 2 ? 'drifting' : 'tracks the keys';
+      steps.forEach((li, i) => li.classList.toggle('is-on', reduce || i === stage));
+    }
+  }
+  sizeBig(); addEventListener('resize', () => { sizeBig(); if (reduce) drawBig(0); });
+
+  function onScroll() {
+    const vh = innerHeight, y = scrollY;
+    const k = Math.min(1, Math.max(0, y / (vh * 0.9)));
+    halves.forEach(el => el.style.setProperty('--part', `${(el.classList.contains('word__half--l') ? -1 : 1) * k * 15}vw`));
+    img.style.setProperty('--zoom', (1 + k * 0.12).toFixed(3));
+    dock.classList.toggle('is-tucked', y < vh * 0.35 && !dockFocus);
+    const r = track.getBoundingClientRect(), span = r.height - vh;
+    if (span > 0) prog = Math.min(1, Math.max(0, -r.top / span));
+  }
+
+  dock.classList.toggle('is-tucked', !reduce);
+  drawBig(0);
+  if (reduce) { drawHero(); drawBig(0); steps.forEach(li => li.classList.add('is-on')); sigName.textContent = names[3]; sigPitch.textContent = 'tracks the keys'; return; }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  let bigVisible = false;
+  new IntersectionObserver(es => es.forEach(e => bigVisible = e.isIntersecting)).observe(bc);
+  (function loop(time) {
+    if (heroVisible && !document.hidden) { drift = (time / 2600) % 1; drawHero(); }
+    if (bigVisible && !document.hidden) drawBig(time);
+    requestAnimationFrame(loop);
+  })(0);
+})();
+
+/* tabs */
+(() => {
+  const tabs = [...document.querySelectorAll('[role=tab]')];
+  function select(t, focus) {
+    tabs.forEach(b => { const on = b === t; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; document.getElementById(b.getAttribute('aria-controls')).hidden = !on; });
+    if (focus) t.focus();
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t));
+    t.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+    });
+  });
+  document.querySelectorAll('[data-ask]').forEach(a => a.addEventListener('click', () => {
+    const [make, ...model] = a.dataset.ask.split(' ');
+    document.querySelector('input[value=try]').checked = true;
+    document.getElementById('f-make').value = make;
+    document.getElementById('f-model').value = model.join(' ');
+  }));
+})();
+
+/* form: no backend yet, so it never pretends to send */
+document.getElementById('ticket').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target, s = document.getElementById('formStatus');
+  const bad = [...f.querySelectorAll('[required]')].find(i => !i.checkValidity());
+  if (bad) { s.textContent = `Please fill in ${bad.labels[0].textContent.toLowerCase()} so we can reply.`; bad.focus(); return; }
+  s.textContent = 'Not sent: this form is not connected yet. Please email the workshop directly for now.';
+});
+</script>
+</body>
+</html>

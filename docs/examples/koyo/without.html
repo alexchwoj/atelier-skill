@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kōyō — Ceremonial Matcha from Uji</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3efe6;
+    --paper-2:#ebe5d8;
+    --ink:#1d2219;
+    --ink-soft:#4c5246;
+    --matcha:#5f7a2e;
+    --matcha-deep:#2f3f1a;
+    --matcha-bright:#8fae3e;
+    --clay:#8a5a3c;
+    --line:rgba(29,34,25,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Inter,system-ui,sans-serif;
+    font-size:15px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.35;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.28 0 0 0 0 0.22 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .page{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+
+  /* NAV */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:28px 0;border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:baseline;gap:12px}
+  .brand-mark{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:500;letter-spacing:.02em}
+  .brand-jp{font-family:"Noto Serif JP",serif;font-size:13px;color:var(--ink-soft);letter-spacing:.2em}
+  .links{display:flex;gap:40px;font-size:13px;letter-spacing:.04em}
+  .links a{color:var(--ink-soft);transition:color .2s}
+  .links a:hover{color:var(--ink)}
+  .nav-cta{font-size:13px;font-weight:500;letter-spacing:.04em;padding:10px 20px;border:1px solid var(--ink);border-radius:999px;transition:background .25s,color .25s}
+  .nav-cta:hover{background:var(--ink);color:var(--paper)}
+
+  /* HERO */
+  .hero{flex:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,80px);align-items:center;padding:clamp(40px,6vh,80px) 0 clamp(32px,5vh,56px)}
+  .eyebrow{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--matcha)}
+  .eyebrow::before{content:"";width:32px;height:1px;background:currentColor}
+  h1{
+    font-family:"Cormorant Garamond",serif;font-weight:400;
+    font-size:clamp(48px,7.2vw,112px);line-height:.95;letter-spacing:-.02em;
+    margin:28px 0 28px;
+  }
+  h1 em{font-style:italic;color:var(--matcha)}
+  .lede{max-width:30em;font-size:17px;color:var(--ink-soft)}
+  .actions{display:flex;align-items:center;gap:28px;margin-top:44px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:14px;
+    background:var(--matcha-deep);color:var(--paper);
+    padding:18px 30px;border-radius:999px;font-weight:500;font-size:15px;letter-spacing:.01em;
+    box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 12px 30px -12px rgba(47,63,26,.6);
+    transition:transform .25s,box-shadow .25s,background .25s;
+  }
+  .btn:hover{background:#26341455;background:#263414;transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 18px 36px -14px rgba(47,63,26,.7)}
+  .btn svg{transition:transform .25s}
+  .btn:hover svg{transform:translateX(3px)}
+  .btn:focus-visible,.nav-cta:focus-visible{outline:2px solid var(--matcha-bright);outline-offset:3px}
+  .price{font-size:13px;color:var(--ink-soft);line-height:1.5}
+  .price strong{display:block;color:var(--ink);font-weight:500;font-size:15px}
+
+  .facts{display:flex;gap:40px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line);max-width:520px}
+  .fact dt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+  .fact dd{font-family:"Cormorant Garamond",serif;font-size:24px;margin-top:4px}
+
+  /* VISUAL */
+  .visual{position:relative;aspect-ratio:4/5;max-height:72vh;width:100%;justify-self:end}
+  .panel{
+    position:absolute;inset:0;border-radius:4px;overflow:hidden;
+    background:
+      radial-gradient(120% 80% at 30% 20%,#4a5e2a 0%,#2a3818 55%,#1a2410 100%);
+  }
+  .panel::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 100%,rgba(0,0,0,.35),transparent)}
+  .sun{position:absolute;width:38%;aspect-ratio:1;border-radius:50%;top:12%;right:14%;
+    background:radial-gradient(circle at 40% 40%,#e9c88f,#c98a4b 70%,#a86a35);opacity:.9;filter:blur(.3px)}
+  .bowl{position:absolute;left:50%;bottom:9%;width:82%;transform:translateX(-50%);z-index:2}
+  .vertical{
+    position:absolute;top:8%;left:8%;z-index:3;
+    writing-mode:vertical-rl;font-family:"Noto Serif JP",serif;font-size:15px;letter-spacing:.5em;color:rgba(243,239,230,.7)
+  }
+  .tag{
+    position:absolute;z-index:4;left:-28px;bottom:16%;
+    background:var(--paper);padding:16px 20px;border-radius:2px;
+    box-shadow:0 20px 40px -20px rgba(0,0,0,.35);min-width:200px
+  }
+  .tag small{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+  .tag span{font-family:"Cormorant Garamond",serif;font-size:20px}
+  .tag .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--matcha-bright);margin-right:8px;vertical-align:middle}
+
+  @media (max-width:900px){
+    .links{display:none}
+    .hero{grid-template-columns:1fr}
+    .visual{max-height:none;aspect-ratio:5/4;justify-self:stretch;order:-1}
+    .tag{left:12px;bottom:12px}
+    .facts{gap:28px}
+  }
+  @media (max-width:480px){
+    .brand-jp{display:none}
+    .facts{flex-wrap:wrap;gap:20px 28px}
+    .actions{gap:20px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+    .d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.28s}.d4{animation-delay:.4s}.d5{animation-delay:.5s}
+    @keyframes rise{to{opacity:1;transform:none}}
+    .steam path{animation:steam 6s ease-in-out infinite;opacity:.0}
+    .steam path:nth-child(2){animation-delay:2s}
+    .steam path:nth-child(3){animation-delay:4s}
+    @keyframes steam{0%{opacity:0;transform:translateY(10px)}40%{opacity:.5}100%{opacity:0;transform:translateY(-30px)}}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav aria-label="Primary">
+    <a href="#" class="brand" aria-label="Kōyō home">
+      <span class="brand-mark">Kōyō</span>
+      <span class="brand-jp">紅葉 · 宇治</span>
+    </a>
+    <div class="links">
+      <a href="#">The Matcha</a>
+      <a href="#">Our Farm</a>
+      <a href="#">Ritual</a>
+      <a href="#">Journal</a>
+    </div>
+    <a href="#subscribe" class="nav-cta">Subscribe</a>
+  </nav>
+
+  <main class="hero">
+    <section>
+      <p class="eyebrow reveal d1">Ceremonial grade · Uji, Kyoto</p>
+      <h1 class="reveal d2">The first harvest,<br><em>whisked</em> at home.</h1>
+      <p class="lede reveal d3">Shade-grown tencha, stone-milled in small lots by a fourth-generation Uji farm and shipped within days of grinding. One tin, every month, at the peak of its colour.</p>
+      <div class="actions reveal d4">
+        <a href="#subscribe" id="subscribe" class="btn">Start your subscription
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <p class="price"><strong>From $38 / month</strong>30g tin · pause or cancel anytime</p>
+      </div>
+      <dl class="facts reveal d5">
+        <div class="fact"><dt>Harvest</dt><dd>Ichibancha</dd></div>
+        <div class="fact"><dt>Shading</dt><dd>28 days</dd></div>
+        <div class="fact"><dt>Milled to ship</dt><dd>&lt; 7 days</dd></div>
+      </dl>
+    </section>
+
+    <div class="visual reveal d3" aria-hidden="true">
+      <div class="panel">
+        <div class="sun"></div>
+        <div class="vertical">一期一会</div>
+        <svg class="bowl" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="tea" cx="45%" cy="40%" r="65%">
+              <stop offset="0" stop-color="#b4cf5a"/>
+              <stop offset=".55" stop-color="#7f9e32"/>
+              <stop offset="1" stop-color="#4f6a1e"/>
+            </radialGradient>
+            <linearGradient id="clay" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#3a2a22"/>
+              <stop offset=".5" stop-color="#241812"/>
+              <stop offset="1" stop-color="#140d09"/>
+            </linearGradient>
+            <linearGradient id="glaze" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#6b4a36" stop-opacity=".9"/>
+              <stop offset="1" stop-color="#6b4a36" stop-opacity="0"/>
+            </linearGradient>
+            <filter id="foam"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .85 0 0 0 0 .92 0 0 0 0 .55 0 0 0 .55 -.1"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+          </defs>
+          <g class="steam" stroke="rgba(243,239,230,.6)" stroke-width="2" fill="none" stroke-linecap="round">
+            <path d="M170 60 C160 40, 185 30, 172 8"/>
+            <path d="M205 58 C195 36, 220 26, 206 2"/>
+            <path d="M240 62 C230 42, 252 32, 240 10"/>
+          </g>
+          <ellipse cx="200" cy="286" rx="150" ry="10" fill="rgba(0,0,0,.35)"/>
+          <path d="M40 100 C40 215, 110 280, 200 280 C290 280, 360 215, 360 100 Z" fill="url(#clay)"/>
+          <path d="M40 100 C42 150, 70 180, 110 196 C80 160, 70 130, 72 104 Z" fill="url(#glaze)" opacity=".7"/>
+          <path d="M150 272 Q200 286 250 272 L246 282 Q200 292 154 282 Z" fill="#1a110c"/>
+          <ellipse cx="200" cy="100" rx="160" ry="34" fill="#2b1d15"/>
+          <ellipse cx="200" cy="104" rx="146" ry="28" fill="url(#tea)"/>
+          <ellipse cx="200" cy="104" rx="146" ry="28" fill="#fff" filter="url(#foam)"/>
+          <ellipse cx="170" cy="98" rx="60" ry="10" fill="#d8ea9a" opacity=".25"/>
+        </svg>
+      </div>
+      <div class="tag"><small>This month's lot</small><span><i class="dot"></i>Okumidori · No. 14</span></div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

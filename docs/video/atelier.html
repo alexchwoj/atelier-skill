@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier, one request</title>
+<meta name="description" content="Four businesses ask an AI for a landing page and get the same one. With Atelier, each gets its own. 30 seconds, cut to Jimmy Edgar's PUZZLED.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* One idea: the same request, without and with. The pages are objects that travel: they slide in from
+     the right and stack, the stack opens into a grid, a red line turns each one into its own brand, they come
+     back full screen, and the rest of the work runs past on a strip, one card per beat. Nothing appears from
+     nowhere. Every frame is a pure function of time. */
+  :root { --paper: #fbf9f8; --ink: #141414; --muted: #5f5957; --red: #d3122b; --red-hi: #ff7a5c; }
+  html, body { margin: 0; height: 100%; background: #0d0d0d; overflow: hidden; }
+  #view { position: fixed; inset: 0; display: grid; place-items: center; }
+  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); color: var(--ink); font-family: "Inter Tight", system-ui, sans-serif; flex: none; }
+  .layer { position: absolute; inset: 0; }
+  .mask { display: block; overflow: clip; padding-bottom: .12em; margin-bottom: -.12em; }
+  .mask > span { display: inline-block; }
+  h1, p { margin: 0; }
+  .say { font-weight: 600; letter-spacing: -.05em; line-height: .98; }
+  .say em { font-style: normal; color: var(--red); }
+
+  /* a page: a full 1920x1080 frame, placed and scaled from its top-left corner */
+  .card { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; overflow: hidden; visibility: hidden;
+    background: #fff; box-shadow: 0 0 0 2px rgba(20, 20, 20, .1), 0 80px 140px -60px rgba(20, 20, 20, .55); will-change: transform; }
+  .inner { position: absolute; inset: 0; transform-origin: 50% 40%; }
+  .card img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .card .after { clip-path: inset(0 100% 0 0); }
+  .card .line { position: absolute; top: 0; bottom: 0; left: 0; width: 12px; margin-left: -6px; background: var(--red); box-shadow: 0 0 50px rgba(211, 18, 43, .7); opacity: 0; }
+  .card .name { position: absolute; left: 56px; bottom: 56px; padding: 22px 36px 26px; border-radius: 26px; background: rgba(20, 20, 20, .9); color: #fff;
+    font-size: 64px; font-weight: 600; letter-spacing: -.025em; white-space: nowrap; opacity: 0; }
+  .card .shade { position: absolute; inset: 0; background: #141414; opacity: 0; }
+
+  .chip { position: absolute; display: flex; align-items: center; gap: 18px; padding: 16px 26px 17px; border-radius: 16px; z-index: 50; visibility: hidden;
+    background: rgba(20, 20, 20, .92); color: #fff; font-size: 32px; font-weight: 500; letter-spacing: -.02em; white-space: nowrap; box-shadow: 0 20px 40px -20px rgba(0, 0, 0, .5); }
+  .chip b { font-weight: 600; }
+  .chip b.with { color: var(--red-hi); }
+  .chip i { width: 2px; height: 30px; background: rgba(255, 255, 255, .25); }
+  #chip { left: 48px; bottom: 48px; }
+  #slabel { left: 960px; top: 862px; }
+
+  .cap { position: absolute; left: 960px; top: 540px; z-index: 40; padding: 26px 44px 30px; border-radius: 28px; background: var(--paper); visibility: hidden;
+    box-shadow: 0 0 0 2px rgba(20, 20, 20, .08), 0 40px 80px -30px rgba(20, 20, 20, .45); white-space: nowrap; font-size: 92px; }
+  .cap .mask { position: absolute; left: 44px; top: 26px; }
+  .cap .sizer { visibility: hidden; }
+
+  /* the end */
+  #end { display: flex; flex-direction: column; align-items: center; justify-content: center; visibility: hidden; }
+  .lock { display: flex; align-items: center; gap: 44px; }
+  .tile { width: 200px; height: 200px; border-radius: 26%; background: linear-gradient(160deg, #ff7a5c, #c8102e); box-shadow: 0 40px 80px -30px rgba(160, 10, 30, .5); flex: none; }
+  .tile svg { display: block; width: 100%; height: 100%; }
+  .word { font-weight: 600; font-size: 200px; line-height: 1; letter-spacing: -.065em; padding-bottom: 12px; }
+  #tag { margin-top: 56px; font-weight: 500; font-size: 60px; letter-spacing: -.035em; }
+  #tag .w { display: inline-block; }
+  #tag .red { color: var(--red); }
+  #cmd { margin-top: 64px; font: 500 36px/1 "JetBrains Mono", ui-monospace, monospace; padding: 24px 32px; border-radius: 18px; background: var(--ink); color: #fff; white-space: pre; }
+  #cmd b { color: var(--red-hi); font-weight: 500; }
+  #agents { margin-top: 36px; font-size: 30px; color: var(--muted); letter-spacing: -.01em; }
+
+  #ui { position: fixed; left: 16px; bottom: 16px; display: none; gap: 10px; align-items: center; font: 14px system-ui; color: #ddd; }
+  #ui button { font: inherit; padding: 8px 14px; border: 0; border-radius: 999px; background: #fff; color: #111; cursor: pointer; }
+  #ui button:focus-visible, #big:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .play #ui { display: flex; }
+  #big { display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); font: 600 22px system-ui; padding: 18px 30px; border: 0; border-radius: 999px; background: var(--red); color: #fff; cursor: pointer; box-shadow: 0 20px 40px -16px rgba(0, 0, 0, .5); z-index: 5; }
+  .play #big:not([hidden]) { display: block; }
+</style>
+</head>
+<body>
+<div id="view"><div id="stage">
+
+  <h1 class="say" id="introText" style="position:absolute;left:150px;top:350px;font-size:150px"><span class="mask"><span>Four businesses ask an AI</span></span><span class="mask"><span>for a <em>landing page.</em></span></span></h1>
+
+  <div class="layer" id="cards"></div>
+
+  <div class="cap say" id="cap"><span class="sizer" id="capSizer">One page.</span><span class="mask"><span id="capA">One page.</span></span><span class="mask"><span id="capB">With Atelier, <em>four brands.</em></span></span></div>
+  <div class="chip" id="chip"><b id="chipWho">Without Atelier</b><i></i><span id="chipWhat"></span></div>
+  <div class="chip" id="slabel"><b class="with">With Atelier</b><i></i><span id="slabelWhat"></span></div>
+
+  <section class="layer" id="end">
+    <div class="lock" id="eLock">
+      <div class="tile" id="eTile"><svg viewBox="0 0 1024 1024" aria-hidden="true">
+        <path id="nib" d="M512 872 L318 548 Q300 516 318 486 L470 214 Q512 150 554 214 L706 486 Q724 516 706 548 Z" pathLength="1" fill="#fff" fill-opacity="0" stroke="#fff" stroke-width="26" stroke-linejoin="round" stroke-dasharray="1 1"/>
+        <path id="slit" d="M512 476 L512 872" pathLength="1" stroke="#d3122b" stroke-width="22" stroke-linecap="round" stroke-dasharray="1 1"/>
+        <circle id="dot" cx="512" cy="476" r="34" fill="#d3122b"/></svg></div>
+      <div class="word" id="eWord">Atelier</div>
+    </div>
+    <p id="tag">Websites that look <span class="red">designed,</span> not generated.</p>
+    <div id="cmd"><b>$</b> <span id="cmdText"></span><span id="caret">▍</span></div>
+    <p id="agents">Claude Code · Codex · Cursor · OpenCode · Gemini CLI</p>
+  </section>
+
+</div></div>
+<div id="ui"><button type="button" id="btn">Play</button><span id="time">0.00s</span><span>Space to play or pause</span></div>
+<button type="button" id="big">▶ Play</button>
+<audio id="song" src="../examples/Jimmy%20Edgar%20-%20PUZZLED.mp3" preload="auto"></audio>
+<script src="music.js"></script>
+<script>
+const M = window.MUSIC, P = M.period, DURATION = M.duration, EB = M.bars;
+const eb = (bar, beat = 0) => EB[bar] + beat * P;          // beat n of bar i: eight 4-beat bars, a snare on every beat
+const FINAL = 26.047;                                      // the last hit
+
+const clamp = (x, a = 0, z = 1) => Math.min(z, Math.max(a, x));
+const lerp = (a, z, u) => a + (z - a) * u;
+const out = (u) => 1 - Math.pow(1 - u, 3);
+const inOut = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+const quickIn = (u) => u * u * u;
+const back = (u) => { const c = 1.9; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); };
+const tw = (t, at, dur, f = out) => f(clamp((t - at) / dur));
+const $ = (id) => document.getElementById(id);
+const vis = (el, on) => { el.style.visibility = on ? 'visible' : 'hidden'; };
+
+// ---- the pages ----
+const WHO = {
+  'kabel-roehre': 'Synth repair workshop, Berlin', koyo: 'Matcha subscription, Kyoto', 'casa-lume': 'Architecture studio, Lisbon',
+  cuaderno: 'Study app for medical students', relay: 'AI agents for freight dispatch', brasa: 'Argentine grill, Madrid',
+  ines: 'Photographer, Barcelona', ruido: 'Music festival · logo', molino: 'Sourdough bakery · logo', marea: 'Surf school · logo',
+  'dirt-rally': 'Rally game · HUD', 'tarkov-hud': 'Extraction shooter · HUD',
+};
+const FOUR = ['kabel-roehre', 'koyo', 'casa-lume', 'cuaderno'];
+const MORE = ['relay', 'brasa', 'ines', 'ruido', 'molino', 'dirt-rally', 'tarkov-hud'];
+const card = (html) => { const d = document.createElement('div'); d.className = 'card'; d.innerHTML = `<div class="inner">${html}</div><span class="shade"></span>`; $('cards').append(d); return d; };
+const C = FOUR.map((s) => card(`<img src="stills/${s}-without.png" alt=""><img class="after" src="stills/${s}-with.png" alt=""><span class="line"></span><span class="name">${WHO[s]}</span>`));
+const S = MORE.map((s) => card(`<img src="stills/${s}-with.png" alt="">`));
+
+// place a page by its centre and scale; radius and shade in screen pixels and 0..1
+function put(el, { cx = 960, cy = 540, s = 1, r = 0, shade = 0, o = 1, z = 1, inner = 1 }) {
+  el.style.visibility = 'visible';
+  el.style.transform = `translate(${cx - 960 * s}px, ${cy - 540 * s}px) scale(${s})`;
+  el.style.borderRadius = `${r / s}px`;
+  el.style.opacity = o;
+  el.style.zIndex = z;
+  el.querySelector('.shade').style.opacity = shade;
+  el.querySelector('.inner').style.transform = inner === 1 ? '' : `scale(${inner})`;
+}
+const hide = (el) => { el.style.visibility = 'hidden'; };
+
+// ---- the timeline ----
+const ENTER = 0.42;                                          // a page sliding in lands on its beat
+const ARRIVE = FOUR.map((_, k) => eb(0, k + 1));             // from beat 2 of bar 0: the four pages without fly into the grid, one per beat
+// bar 1: the grid leans in slowly while it is read, and settles back before the wipes
+const gridZoom = (t) => 1 + 0.045 * inOut(clamp((t - eb(1)) / (4 * P))) * (1 - tw(t, eb(2) - 0.4, 0.4, inOut));
+const K = 0.43, CW = 1920 * K, CHT = 1080 * K, GAP = 28;
+const CELL = [0, 1, 2, 3].map((i) => [(1920 - CW) / 2 + ((i & 1) ? 1 : -1) * (CW + GAP) / 2, (1080 - CHT) / 2 + ((i >> 1) ? 1 : -1) * (CHT + GAP) / 2].map((v, j) => v + (j ? CHT : CW) / 2));
+const WIPE = (i) => eb(2, i * 0.5);                          // bar 2: one cell per half beat
+const OPEN = eb(3) - 0.5;                                    // the first cell opens to full screen on bar 3
+const BACK = [eb(3), eb(3, 2), eb(4), eb(4, 2)];             // bars 3-4: the four with, two beats each
+const STRIP = eb(5) - 0.55;                                  // the last page shrinks onto the strip
+const SS = 0.6, STEP = 1920 * SS + 56, SCY = 500;            // strip: card scale, spacing, centre line
+const EXIT = eb(7) - 0.5;
+const END = eb(7) - 0.05;
+
+// where a page sits in a stack: entering from the right, then pushed back by the next one
+function stacked(t, lands, i) {
+  const u = tw(t, lands[i] - ENTER, ENTER, inOut);
+  const v = i + 1 < lands.length ? tw(t, lands[i + 1] - ENTER, ENTER, inOut) : 0;
+  return { u, v, pose: { cx: 960 + 1980 * (1 - u) - 140 * v, s: 1 - 0.06 * v, r: 40 * (1 - u), shade: 0.4 * v, z: 10 + i } };
+}
+// the strip position: which card is centred, moving one card per beat through bars 5 and 6
+function stripAt(t) {
+  let p = 0;
+  for (let j = 1; j < 8; j++) p += tw(t, eb(5, j) - 0.45, 0.45, inOut);   // beat 0 is the last page landing on the strip
+  return p + 4 * tw(t, EXIT, 0.55, quickIn);
+}
+const stripPose = (i, p) => { const d = i - p; return { cx: 960 + d * STEP, cy: SCY, s: SS, r: 26, o: 1 - 0.55 * clamp(Math.abs(d)), z: 30 }; };
+
+function render(t) {
+  // intro: two lines rise on the first hits; the first page pushes them out to the left
+  // intro: two lines rise on the first hits and leave upward through their masks before the first page arrives
+  const gone = tw(t, ARRIVE[0] - 0.62, 0.32, inOut);
+  [...$('introText').querySelectorAll('.mask > span')].forEach((s, i) => {
+    s.style.transform = `translateY(${110 * (1 - tw(t, 0.113 + i * 0.3, 0.55)) - 115 * tw(t, ARRIVE[0] - 0.62 + i * 0.05, 0.3, inOut)}%)`;
+  });
+  vis($('introText'), t < ARRIVE[0]);
+
+  // the four pages
+  let chip = null;
+  C.forEach((el, i) => {
+    const w = tw(t, WIPE(i), 0.5, inOut);
+    el.querySelector('.after').style.clipPath = `inset(0 ${100 - 100 * w}% 0 0)`;
+    const line = el.querySelector('.line');
+    line.style.left = `${100 * w}%`; line.style.opacity = w > 0.001 && w < 0.999 ? 1 : 0;
+
+    const name = el.querySelector('.name');
+    name.style.opacity = 0;
+    if (t < OPEN) {                                          // bars 0-2: the pages land in the grid one per beat and stay
+      const g = tw(t, ARRIVE[i] - 0.5, 0.5, inOut);
+      if (g <= 0) return hide(el);
+      const pop = 0.035 * Math.sin(Math.PI * clamp((t - WIPE(i) - 0.25) / 0.5));
+      const z = gridZoom(t);
+      const cx = CELL[i][0] + 1500 * (1 - g), cy = CELL[i][1];
+      put(el, { cx: 960 + (cx - 960) * z, cy: 540 + (cy - 540) * z, s: K * z * (1 + pop), r: 22 * z, z: 10 + i });
+      name.style.opacity = tw(t, ARRIVE[i] + 0.05, 0.35) * (1 - tw(t, OPEN, 0.3));
+    } else if (t < STRIP) {                                  // bars 3-4: the cells open and come back full screen
+      const o = tw(t, OPEN, 0.5, inOut);
+      if (i === 0) name.style.opacity = 1 - tw(t, OPEN, 0.2);
+      if (i === 0) {
+        const { v } = stacked(t, BACK, 0);
+        if (v >= 1) return hide(el);
+        put(el, { cx: lerp(CELL[0][0], 960, o) - 140 * v, cy: lerp(CELL[0][1], 540, o), s: lerp(K, 1, o) * (1 - 0.06 * v), r: lerp(22, 0, o), shade: 0.4 * v, z: o < 1 ? 20 : 10,
+          inner: 1 + 0.04 * clamp((t - BACK[0]) / (2 * P)) });
+        if (o >= 1 && v <= 0) chip = { who: 'with', s: FOUR[0], at: BACK[0] };
+      } else {
+        const { u, v, pose } = stacked(t, BACK, i);
+        if (u > 0) {                                         // back in from the right, full size
+          if (v >= 1) return hide(el);
+          put(el, { ...pose, inner: 1 + 0.04 * clamp((t - BACK[i]) / (2 * P)) });
+          if (u >= 1 && v <= 0) chip = { who: 'with', s: FOUR[i], at: BACK[i] };
+        } else if (o < 1) {                                  // the other cells clear out to the right
+          put(el, { cx: CELL[i][0] + 1500 * o, cy: CELL[i][1], s: K, r: 22, o: 1 - o, z: 10 + i });
+        } else hide(el);
+      }
+    } else if (i === 3) {                                    // bar 5: the last page shrinks onto the strip
+      const f = tw(t, STRIP, 0.55, inOut), tgt = stripPose(0, stripAt(t));   // it is card 0 of the strip
+      put(el, { cx: lerp(960, tgt.cx, f), cy: lerp(540, tgt.cy, f), s: lerp(1, SS, f), r: lerp(0, 26, f), o: lerp(1, tgt.o, f), z: 31, inner: 1.04 });
+      if (tgt.cx < -700) hide(el);
+    } else hide(el);
+  });
+
+  // the strip: the rest of the work, one card per beat
+  const p = stripAt(t), onStrip = t >= STRIP;
+  S.forEach((el, i) => {
+    if (!onStrip) return hide(el);
+    const q = stripPose(i + 1, p);
+    if (q.cx < -700 || q.cx > 2620) return hide(el);
+    put(el, { ...q, inner: 1 + 0.03 * clamp(1 - Math.abs(i + 1 - p)) });
+  });
+  // its label: under the centred card, swapping as each card lands
+  {
+    const idx = Math.round(p) - 1, frac = Math.abs(p - Math.round(p));
+    const exit = tw(t, EXIT, 0.3);
+    const a = onStrip ? clamp(1 - 4 * frac) * (1 - exit) * tw(t, STRIP + 0.3, 0.3) : 0;
+    vis($('slabel'), a > 0.01);
+    $('slabelWhat').textContent = idx < 0 ? WHO.cuaderno : WHO[MORE[Math.min(idx, MORE.length - 1)]];
+    $('slabel').style.opacity = a;
+    $('slabel').style.transform = `translate(-50%, ${14 * (1 - a)}px)`;
+  }
+
+  // the full-screen chip slides in once a page has landed
+  vis($('chip'), !!chip);
+  if (chip) {
+    const a = tw(t, chip.at + 0.08, 0.4);
+    $('chipWho').textContent = chip.who === 'with' ? 'With Atelier' : 'Without Atelier';
+    $('chipWho').className = chip.who === 'with' ? 'with' : '';
+    $('chipWhat').textContent = WHO[chip.s];
+    $('chip').style.opacity = a;
+    $('chip').style.transform = `translateX(${-36 * (1 - a)}px)`;
+  }
+
+  // the caption over the grid: "One page." pops in on beat 1 of bar 1, "four brands" once the wipes land
+  {
+    const a = tw(t, eb(1, 0.5), 0.5, back), aOut = tw(t, eb(2) - 0.3, 0.3, inOut);
+    const b = tw(t, eb(2, 2), 0.5, back), bOut = tw(t, OPEN - 0.3, 0.3, inOut);
+    const showA = a > 0 && aOut < 1, showB = b > 0 && bOut < 1;
+    vis($('cap'), showA || showB);
+    $('capA').style.transform = `translateY(${110 * (1 - clamp(a * 1.4)) - 110 * aOut}%)`;
+    $('capB').style.transform = `translateY(${110 * (1 - clamp(b * 1.4)) - 110 * bOut}%)`;
+    $('capSizer').textContent = showB ? 'With Atelier, four brands.' : 'One page.';
+    const k = showA ? [a, aOut] : [b, bOut];
+    $('cap').style.opacity = Math.min(1, 3 * k[0], 3 * (1 - k[1]));
+    $('cap').style.transform = `translate(-50%, -50%) scale(${lerp(0.82, 1, k[0]) * lerp(1, 0.9, k[1])})`;
+  }
+
+  // the end: the mark springs in and draws itself, the name opens beside it, the line rises word by word,
+  // the install command types itself on the last hit
+  vis($('end'), t >= END);
+  if (t >= END) {
+    const a = tw(t, END, 0.7, back);
+    $('eTile').style.opacity = tw(t, END, 0.15);
+    $('eTile').style.transform = `scale(${lerp(0.4, 1, a)}) rotate(${lerp(-14, 0, a)}deg)`;
+    $('nib').style.strokeDashoffset = 1 - inOut(clamp((t - END - 0.1) / 0.6));
+    $('nib').style.fillOpacity = out(clamp((t - END - 0.65) / 0.3));
+    $('nib').style.strokeOpacity = 1 - clamp((t - END - 0.8) / 0.2);
+    $('slit').style.strokeDashoffset = 1 - out(clamp((t - END - 0.75) / 0.3));
+    $('dot').style.transform = `scale(${tw(t, END + 0.95, 0.4, back)})`; $('dot').style.transformOrigin = '512px 476px';
+    const slide = tw(t, END + 0.55, 0.65, inOut), half = ($('eWord').offsetWidth + 44) / 2;
+    $('eLock').style.transform = `translateX(${half * (1 - slide)}px)`;
+    $('eWord').style.clipPath = `inset(-10% ${100 - 100 * slide}% -10% 0)`;
+    $('eWord').style.transform = `translateX(${-60 * (1 - slide)}px)`;
+    [...$('tag').querySelectorAll('.w')].forEach((w, i) => {
+      const u = tw(t, eb(7, 2) + i * 0.06, 0.55);
+      w.style.opacity = u; w.style.transform = `translateY(${30 * (1 - u)}px)`;
+    });
+    const c = tw(t, FINAL - 0.05, 0.45, back);
+    $('cmd').style.opacity = clamp(c * 2); $('cmd').style.transform = `translateY(${24 * (1 - c)}px) scale(${lerp(0.94, 1, c)})`;
+    const txt = 'npx github:alexchwoj/atelier-skill';
+    $('cmdText').textContent = txt.slice(0, Math.floor(clamp((t - FINAL - 0.1) / 0.75) * txt.length));
+    $('caret').style.opacity = Math.floor(t * 2.6) % 2 ? 0.25 : 1;
+    const g = tw(t, FINAL + P, 0.7);
+    $('agents').style.opacity = g; $('agents').style.transform = `translateY(${16 * (1 - g)}px)`;
+  }
+}
+
+// split the closing line into words so they can rise one after another
+$('tag').innerHTML = $('tag').innerHTML.replace(/(<span class="red">[^<]*<\/span>|[^\s<]+)/g, '<span class="w">$1</span>');
+
+window.__timeline = { duration: DURATION, seek: (t) => { render(t); return true; } };
+
+function fit() { $('stage').style.transform = `scale(${Math.min(innerWidth / 1920, innerHeight / 1080)})`; }
+addEventListener('resize', fit); fit();
+
+const song = $('song');
+if (!/\brender\b/.test(location.search)) {
+  document.documentElement.classList.add('play');
+  const btn = $('btn'), big = $('big');
+  const toggle = () => { if (song.paused) { if (song.ended || song.currentTime > DURATION - 0.1) song.currentTime = 0; song.play(); } else song.pause(); };
+  btn.onclick = toggle; big.onclick = toggle;
+  addEventListener('keydown', (e) => { if (e.code === 'Space') { e.preventDefault(); toggle(); } });
+  song.onplay = () => { btn.textContent = 'Pause'; big.hidden = true; };
+  song.onpause = () => { btn.textContent = 'Play'; big.hidden = false; big.textContent = song.ended ? '↻ Play again' : '▶ Play'; };
+  song.onended = song.onpause;
+  // reduced motion: show the last frame, still, until play is pressed
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const loop = () => { const t = song.paused && still && !song.currentTime ? DURATION : song.currentTime; render(t); $('time').textContent = song.currentTime.toFixed(2) + 's'; requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
+} else render(0);
+</script>
+</body>
+</html>

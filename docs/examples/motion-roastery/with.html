@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yirgacheffe Kochere, whole bean</title>
+<meta name="description" content="A washed Yirgacheffe from Ethiopia. Pick a bag size and add it to your bag.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* palette.mjs --from #6b3e26 (roast brown), paper nudged toward a warmer, less pink hue */
+  --color-paper: oklch(97.2% 0.009 70);
+  --color-paper-2: oklch(94.6% 0.012 66);
+  --color-card: oklch(98.8% 0.005 70);
+  --color-rule: oklch(88.5% 0.012 55);
+  --color-muted: oklch(50% 0.014 48);
+  --color-ink-2: oklch(40% 0.014 48);
+  --color-ink: oklch(20.5% 0.015 48);
+  --color-ink-press: oklch(27% 0.018 48);
+  --color-crema: oklch(83% 0.085 70);
+  --color-focus: oklch(55% 0.113 48);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px;
+  --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px;
+
+  --radius-card: 18px;
+  --radius-btn: 11px;  /* Graphite lg radius */
+  --radius-pill: 999px;
+
+  /* motion: confident character, house tokens */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 150ms;
+  --spring-pop: var(--ease-out);
+  --dur-spring-pop: 420ms;
+  --shadow: 0 1px 2px oklch(20% 0.015 48 / 0.06), 0 24px 48px -32px oklch(20% 0.015 48 / 0.28);
+}
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    /* spring.mjs 0.35 0.4: 6.8% overshoot, inside the success budget */
+    --spring-pop: linear(0, 0.0073 1.2%, 0.0299 2.5%, 0.065 3.8%, 0.1176 5.3%, 0.1711 6.6%, 0.2345 8%, 0.5029 13.5%, 0.6185 16%, 0.7265 18.6%, 0.816 21.1%, 0.8904 23.6%, 0.9497 26.1%, 0.9964 28.7%, 1.0316 31.5%, 1.0484 33.5%, 1.0603 35.7%, 1.0666 38%, 1.0679 40.6%, 1.059 45.6%, 1.0158 59.6%, 1.0012 67.7%, 0.9954 78.5%, 1);
+    --dur-spring-pop: 659ms;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100svh;
+  background: var(--color-paper); color: var(--color-ink);
+  font: 400 16px/1.55 var(--font-body);
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+  display: grid; grid-template-rows: auto 1fr auto;
+}
+::selection { background: var(--color-crema); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+img { display: block; max-width: 100%; height: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* header */
+.top {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-md);
+  padding: 0 clamp(16px, 4vw, 40px); min-height: 64px;
+  background: oklch(97.2% 0.009 70 / 0.9);
+  border-bottom: 1px solid var(--color-rule);
+}
+@supports (backdrop-filter: blur(1px)) {
+  .top { background: oklch(97.2% 0.009 70 / 0.78); backdrop-filter: saturate(160%) blur(12px); }
+}
+.wordmark {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font: 400 22px/1 var(--font-display); font-variation-settings: "opsz" 72;
+  letter-spacing: -0.02em; color: var(--color-ink); text-decoration: none;
+}
+.bag {
+  position: relative; display: inline-flex; align-items: center; gap: var(--space-xs);
+  min-height: 44px; padding: 0 var(--space-sm) 0 var(--space-xs);
+  border-radius: var(--radius-btn); color: var(--color-ink); text-decoration: none;
+  font-weight: 600; font-size: 15px;
+  transition: background-color 150ms ease;
+}
+@media (hover: hover) and (pointer: fine) { .bag:hover { background: var(--color-paper-2); } }
+.bag-icon { width: 24px; height: 24px; flex-shrink: 0; display: block; }
+.bag-glyph { display: inline-grid; place-items: center; width: 28px; height: 28px; }
+.bag-glyph.is-pop { animation: bag-pop var(--dur-spring-pop) var(--spring-pop); }
+@keyframes bag-pop { from { transform: scale(0.84) translateY(2px); } }
+.count {
+  display: inline-grid; overflow: clip; height: 22px; min-width: 22px; padding: 0 6px;
+  border-radius: var(--radius-pill); background: var(--color-ink); color: var(--color-paper);
+  font-size: 12.5px; line-height: 22px; text-align: center; font-variant-numeric: tabular-nums;
+}
+.count[data-empty] { background: var(--color-paper-2); color: var(--color-ink-2); }
+.count > span { grid-area: 1 / 1; transition: transform 260ms var(--ease-out), opacity 160ms var(--ease-out); }
+.count > .leaving { transform: translateY(-100%); opacity: 0; }
+.count > .entering { transform: translateY(100%); opacity: 0; transition: none; }
+
+/* product card */
+main { display: grid; place-items: center; padding: clamp(24px, 6vw, 96px) clamp(16px, 4vw, 40px); }
+.card {
+  width: min(100%, 920px);
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow);
+  overflow: clip;
+}
+.photo { margin: 0; position: relative; background: var(--color-paper-2); min-height: 100%; }
+.photo img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 5; }
+.body {
+  display: flex; flex-direction: column; gap: var(--space-lg);
+  padding: clamp(24px, 4vw, 48px);
+  min-width: 0;
+}
+.origin { margin: 0; color: var(--color-muted); font-size: 15px; }
+h1 {
+  margin: var(--space-2xs) 0 0;
+  font: 400 clamp(34px, 4.2vw, 46px)/1.04 var(--font-display);
+  font-variation-settings: "opsz" 144;
+  letter-spacing: -0.025em; text-wrap: balance;
+  overflow-wrap: break-word; min-width: 0;
+}
+.notes { margin: 0; color: var(--color-ink-2); max-width: 34ch; text-wrap: pretty; }
+.notes b { font-weight: 600; color: var(--color-ink); }
+
+.choose { border: 0; margin: 0; padding: 0; min-width: 0; }
+.choose legend { padding: 0; margin-bottom: var(--space-xs); font-size: 15px; color: var(--color-muted); }
+.seg {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+  padding: 4px; border: 1px solid var(--color-rule); border-radius: 14px;
+}
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg label {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; border-radius: 10px; cursor: pointer;
+  font-size: 15px; color: var(--color-ink-2);
+  transition: background-color 120ms ease, color 120ms ease;
+}
+@media (hover: hover) and (pointer: fine) { .seg input:not(:checked) + label:hover { background: var(--color-paper-2); color: var(--color-ink); } }
+.seg input:checked + label { background: var(--color-paper-2); color: var(--color-ink); font-weight: 600; box-shadow: inset 0 0 0 1px var(--color-rule); }
+.seg input:focus-visible + label { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+.buy { display: grid; gap: var(--space-sm); margin-top: auto; }
+.price-row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-md); }
+.price-row span:first-child { color: var(--color-muted); font-size: 15px; }
+.fill {
+  color: var(--color-muted); outline: 1px dashed var(--color-rule); outline-offset: 3px; border-radius: 2px;
+  font-weight: 600; font-size: 17px;
+}
+
+/* the button: Graphite solid grammar in espresso, Stateful's idle → pressed → loading → done lifecycle */
+.add {
+  position: relative;
+  display: inline-grid; place-items: center; width: 100%;
+  min-height: 54px; padding: 0 var(--space-lg);
+  border: 1px solid transparent; border-radius: var(--radius-btn);
+  background: var(--color-ink); color: var(--color-paper);
+  font: 600 16px/1 var(--font-body); letter-spacing: -0.006em;
+  cursor: pointer; overflow: clip;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 180ms ease, transform var(--dur-press) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .add:hover { background: oklch(14% 0.014 48); } }
+.add:active:not([aria-disabled="true"]) { transform: scale(0.97); background: var(--color-ink-press); }
+.add:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; transition: none; }
+.add[aria-busy="true"] { cursor: progress; }
+.add[data-state="done"] { background: var(--color-ink-press); }
+
+.add > span {
+  grid-area: 1 / 1; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  white-space: nowrap;
+  transition: opacity 200ms var(--ease-out), transform 260ms var(--ease-out), filter 200ms var(--ease-out);
+}
+.add > span:not([data-s="idle"]) { opacity: 0; transform: translateY(-60%); filter: blur(2px); }
+.add:is([data-state="loading"], [data-state="done"]) > [data-s="idle"],
+.add[data-state="done"] > [data-s="loading"],
+.add[data-state="idle"] > [data-s="done"] {
+  opacity: 0; transform: translateY(60%); filter: blur(2px); transition-duration: 120ms;
+}
+.add[data-state="idle"] > [data-s="done"] { transform: translateY(-60%); }
+.add[data-state="idle"] > [data-s="idle"],
+.add[data-state="loading"] > [data-s="loading"],
+.add[data-state="done"] > [data-s="done"] { opacity: 1; transform: none; filter: none; transition-delay: 70ms; }
+
+.add .lead { width: 18px; height: 18px; flex-shrink: 0; }
+.spin {
+  width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
+  border: 2px solid oklch(97% 0.009 70 / 0.28); border-top-color: var(--color-paper);
+}
+.add[data-state="loading"] .spin { animation: spin 700ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.ok { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: var(--color-crema); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ok > * { stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.add[data-state="done"] .ok circle { animation: ok-draw 280ms var(--ease-out) 70ms both; }
+.add[data-state="done"] .ok path { animation: ok-draw 220ms var(--ease-out) 240ms both; }
+@keyframes ok-draw { to { stroke-dashoffset: 0; } }
+
+.after { margin: 0; min-height: 1.55em; font-size: 15px; color: var(--color-muted); }
+.after a { color: var(--color-ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+/* the bean that travels to the bag */
+.bean-x, .bean-y { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 500; will-change: transform; }
+.bean-y svg { display: block; width: 16px; height: 16px; margin: -8px 0 0 -8px; }
+
+footer { padding: var(--space-lg) clamp(16px, 4vw, 40px) var(--space-xl); color: var(--color-muted); font-size: 13px; }
+footer a { color: inherit; }
+
+@media (max-width: 760px) {
+  .card { grid-template-columns: minmax(0, 1fr); }
+  .photo img { aspect-ratio: 16 / 10; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+  }
+  /* soften: the label swap becomes a short crossfade without travel or blur */
+  .add > span { transform: none !important; filter: none !important; transition: opacity 150ms ease !important; transition-delay: 0ms !important; }
+  .count > span { transform: none !important; transition: opacity 150ms ease !important; }
+  /* keep: the spinner reports a real wait */
+  .spin { animation-duration: 900ms !important; animation-iteration-count: infinite !important; }
+  /* remove: the press scale, the bag pop, the drawn check (shown whole) */
+  .add:active { transform: none !important; }
+  .bag-glyph.is-pop { animation: none !important; }
+  .ok > * { stroke-dashoffset: 0; animation: none !important; }
+}
+@media (forced-colors: active) { .add, .seg { border: 1px solid CanvasText; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="wordmark" href="#product" aria-label="Roastery, home">Roastery</a>
+  <a class="bag" href="#product" id="bag" aria-label="Bag, 0 items">
+    <span class="bag-glyph" id="bagGlyph">
+      <svg class="bag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5.5 8h13l-1 12.2a1 1 0 0 1-1 .8h-9a1 1 0 0 1-1-.8z"/>
+        <path d="M9 8V6.5a3 3 0 0 1 6 0V8"/>
+      </svg>
+    </span>
+    <span>Bag</span>
+    <span class="count" id="count" data-empty aria-hidden="true"><span>0</span></span>
+  </a>
+</header>
+
+<main id="product">
+  <article class="card" aria-labelledby="name">
+    <figure class="photo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/D%C3%BClmen%2C_Privatr%C3%B6sterei_Schr%C3%B6er%2C_Kaffeebohnen_--_2018_--_0547.jpg/960px-D%C3%BClmen%2C_Privatr%C3%B6sterei_Schr%C3%B6er%2C_Kaffeebohnen_--_2018_--_0547.jpg"
+           srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/D%C3%BClmen%2C_Privatr%C3%B6sterei_Schr%C3%B6er%2C_Kaffeebohnen_--_2018_--_0547.jpg/500px-D%C3%BClmen%2C_Privatr%C3%B6sterei_Schr%C3%B6er%2C_Kaffeebohnen_--_2018_--_0547.jpg 500w, https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/D%C3%BClmen%2C_Privatr%C3%B6sterei_Schr%C3%B6er%2C_Kaffeebohnen_--_2018_--_0547.jpg/960px-D%C3%BClmen%2C_Privatr%C3%B6sterei_Schr%C3%B6er%2C_Kaffeebohnen_--_2018_--_0547.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/D%C3%BClmen%2C_Privatr%C3%B6sterei_Schr%C3%B6er%2C_Kaffeebohnen_--_2018_--_0547.jpg/1280px-D%C3%BClmen%2C_Privatr%C3%B6sterei_Schr%C3%B6er%2C_Kaffeebohnen_--_2018_--_0547.jpg 1280w"
+           sizes="(max-width: 760px) 100vw, 480px"
+           width="960" height="640" alt="Medium roast coffee beans filling the frame, close up">
+    </figure>
+
+    <div class="body">
+      <div>
+        <p class="origin">Washed, from Yirgacheffe, Ethiopia</p>
+        <h1 id="name">Yirgacheffe Kochere</h1>
+      </div>
+      <p class="notes"><b>Bergamot, apricot and black tea.</b> Light roast for filter, whole bean.</p>
+
+      <fieldset class="choose">
+        <legend>Bag size</legend>
+        <div class="seg">
+          <input type="radio" name="size" id="s-250" value="250 g" checked><label for="s-250">250&nbsp;g</label>
+          <input type="radio" name="size" id="s-1000" value="1 kg"><label for="s-1000">1&nbsp;kg</label>
+        </div>
+      </fieldset>
+
+      <div class="buy">
+        <div class="price-row">
+          <span>Price</span>
+          <span class="fill" data-fill="price">Price to confirm</span>
+        </div>
+        <button class="add" id="add" type="button" data-state="idle">
+          <span data-s="idle">
+            <svg class="lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l-1 12.2a1 1 0 0 1-1 .8h-9a1 1 0 0 1-1-.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+            Add to bag
+          </span>
+          <span data-s="loading" aria-hidden="true"><i class="spin"></i>Adding…</span>
+          <span data-s="done" aria-hidden="true">
+            <svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><circle pathLength="1" cx="12" cy="12" r="10"/><path pathLength="1" d="M7.5 12.5l3 3 6-6.5"/></svg>
+            <span id="doneLabel">Added to bag</span>
+          </span>
+        </button>
+        <p class="after" id="after"></p>
+        <p class="sr-only" role="status" aria-live="polite" id="live"></p>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer>
+  Photo: <a href="https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Privatr%C3%B6sterei_Schr%C3%B6er,_Kaffeebohnen_--_2018_--_0547.jpg">coffee beans</a> by Dietmar Rabich, CC BY-SA 4.0. This demo sends nothing: the bag request is simulated in the page.
+</footer>
+
+<script>
+(() => {
+  const btn = document.getElementById('add');
+  const count = document.getElementById('count');
+  const bag = document.getElementById('bag');
+  const bagGlyph = document.getElementById('bagGlyph');
+  const live = document.getElementById('live');
+  const after = document.getElementById('after');
+  const doneLabel = document.getElementById('doneLabel');
+  const rm = matchMedia('(prefers-reduced-motion: reduce)');
+
+  let items = 0;
+  let busy = false;
+  let resetTimer = 0;
+
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const size = () => document.querySelector('input[name="size"]:checked').value;
+
+  // Stand-in for POST /cart: a real wait that succeeds.
+  const addToBag = (sku) => wait(850 + Math.random() * 400).then(() => ({ ok: true, sku }));
+
+  function setState(s) {
+    btn.dataset.state = s;
+    if (s === 'loading') { btn.setAttribute('aria-busy', 'true'); btn.setAttribute('aria-disabled', 'true'); }
+    else { btn.removeAttribute('aria-busy'); btn.removeAttribute('aria-disabled'); }
+  }
+
+  function setCount(n) {
+    const old = count.lastElementChild;
+    const next = document.createElement('span');
+    next.textContent = n;
+    next.className = 'entering';
+    count.appendChild(next);
+    count.toggleAttribute('data-empty', n === 0);
+    next.getBoundingClientRect();
+    next.className = '';
+    old.className = 'leaving';
+    setTimeout(() => old.remove(), 300);
+    bag.setAttribute('aria-label', `Bag, ${n} ${n === 1 ? 'item' : 'items'}`);
+  }
+
+  function popBag() {
+    bagGlyph.classList.remove('is-pop');
+    void bagGlyph.offsetWidth;
+    bagGlyph.classList.add('is-pop');
+  }
+
+  // A single bean leaves the button and drops into the bag: x and y on separate clocks so it arcs.
+  function flyBean() {
+    return new Promise((resolve) => {
+      const a = btn.getBoundingClientRect();
+      const b = bagGlyph.getBoundingClientRect();
+      const x0 = a.left + a.width / 2, y0 = a.top + a.height / 2;
+      const x1 = b.left + b.width / 2, y1 = b.top + b.height / 2 + 2;
+      const dx = x1 - x0, dy = y1 - y0;
+      const dist = Math.hypot(dx, dy);
+      const dur = Math.round(Math.min(720, 260 + 0.45 * dist)); // distance sets the duration
+
+      const ox = document.createElement('div'); ox.className = 'bean-x';
+      const oy = document.createElement('div'); oy.className = 'bean-y';
+      oy.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><ellipse cx="8" cy="8" rx="5" ry="6.6" fill="oklch(30% 0.05 48)"/><path d="M8 2.2c-1.6 2-1.6 4 0 5.8s1.6 3.8 0 5.8" fill="none" stroke="oklch(83% 0.085 70)" stroke-width="1.1" stroke-linecap="round"/></svg>';
+      ox.appendChild(oy);
+      document.body.appendChild(ox);
+
+      // Rise first, curl across, then a short drop into the bag (apex kept on screen).
+      const lift = Math.max(0, Math.min(18, y1 - 6));
+      ox.animate(
+        [
+          { transform: `translate(${x0}px, 0)`, easing: 'cubic-bezier(0.55, 0, 0.35, 1)' },
+          { transform: `translate(${x1}px, 0)`, offset: 0.82 },
+          { transform: `translate(${x1}px, 0)` }
+        ],
+        { duration: dur, fill: 'both' }
+      );
+      const fy = oy.animate(
+        [
+          { transform: `translateY(${y0}px) scale(1) rotate(0deg)`, opacity: 0, easing: 'cubic-bezier(0.25, 0.6, 0.35, 1)' },
+          { opacity: 1, offset: 0.1 },
+          { transform: `translateY(${y1 - lift}px) scale(0.85) rotate(80deg)`, offset: 0.8, easing: 'cubic-bezier(0.55, 0, 1, 0.45)' },
+          { transform: `translateY(${y1}px) scale(0.6) rotate(110deg)`, opacity: 1, offset: 0.95 },
+          { transform: `translateY(${y1}px) scale(0.5) rotate(110deg)`, opacity: 0 }
+        ],
+        { duration: dur, fill: 'both' }
+      );
+      fy.onfinish = () => { ox.remove(); resolve(); };
+    });
+  }
+
+  btn.addEventListener('click', async () => {
+    if (busy) return;
+    busy = true;
+    clearTimeout(resetTimer);
+    after.textContent = '';
+    const chosen = size();
+
+    const request = addToBag(`yirgacheffe-kochere-${chosen}`);
+    // Show the loading label only if the request outlasts 150ms, then keep it at least 300ms.
+    let shownAt = 0;
+    const show = setTimeout(() => { setState('loading'); shownAt = performance.now(); }, 150);
+    const res = await request;
+    clearTimeout(show);
+    if (shownAt) { const left = 300 - (performance.now() - shownAt); if (left > 0) await wait(left); }
+
+    if (res.ok) {
+      items += 1;
+      doneLabel.textContent = `Added ${chosen.replace(' ', ' ')} bag`;
+      setState('done');
+      live.textContent = `Added Yirgacheffe Kochere, ${chosen}, to your bag. ${items} ${items === 1 ? 'item' : 'items'} in your bag.`;
+      after.innerHTML = `${items} ${items === 1 ? 'bag' : 'bags'} in your bag. <a href="#bag">Go to checkout</a>`;
+
+      const land = () => { popBag(); setCount(items); };
+      if (rm.matches) land();
+      else { await wait(60); flyBean().then(land); }
+
+      busy = false;
+      resetTimer = setTimeout(() => setState('idle'), 2600);
+    }
+  });
+})();
+</script>
+</body>
+</html>

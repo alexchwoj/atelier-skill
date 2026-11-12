@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garden jobs this week</title>
+<meta name="description" content="A vegetable-garden planner task list: add, tick off, delete and reorder this week's jobs by dragging or with move buttons.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Paper planner palette (base prompt), ink-2 and accent-strong darkened for 4.5:1 text */
+  --paper: #faf7f2;
+  --panel: #f3eee6;
+  --ink: #1a1714;
+  --ink-2: #6b6259;
+  --ink-3: #8b8178;
+  --rule: #e6dfd4;
+  --rule-strong: #d6ccbe;
+  --accent: #c4623d;
+  --accent-strong: #a94e2c;
+  --accent-ink: #fffaf3;
+
+  /* Four job families: sow, water, tend, harvest */
+  --sow: #7a8a6f;     --sow-tint: #eef0e8;     --sow-ink: #4a5741;
+  --water: #6f8299;   --water-tint: #ebeef1;   --water-ink: #435469;
+  --tend: #cf9749;    --tend-tint: #f8eedf;    --tend-ink: #7a5418;
+  --harvest: #c4623d; --harvest-tint: #f7e9e1; --harvest-ink: #8a3f22;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px;
+  --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px;
+  --radius: 10px; --radius-sm: 6px; --radius-pill: 999px;
+  --shadow: 0 1px 2px oklch(20% 0.01 60 / 0.06);
+  --shadow-lift: 0 10px 24px -8px oklch(25% 0.03 50 / 0.28), 0 2px 6px oklch(25% 0.02 50 / 0.10);
+
+  /* Motion: confident character, tokens x1 */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 150ms;
+  --dur-shift: 200ms;
+  --dur-mark: 220ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: var(--rule-strong) var(--paper); }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  font-synthesis: none; -webkit-font-smoothing: antialiased;
+  min-height: 100svh;
+  accent-color: var(--accent-strong); caret-color: var(--accent-strong);
+}
+::selection { background: var(--harvest-tint); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
+button, input, select { font: inherit; color: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+svg.i { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+/* Top bar */
+.top {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; gap: var(--space-sm);
+  height: 68px; padding: 0 var(--space-lg);
+  background: color-mix(in oklab, var(--paper) 90%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.mark { width: 32px; height: 32px; border-radius: 9px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; flex-shrink: 0; }
+.mark svg.i { width: 19px; height: 19px; }
+.brand { font-family: var(--font-display); font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+.brand span { font-weight: 400; color: var(--ink-2); }
+.status {
+  margin-left: auto; display: inline-flex; align-items: center; gap: var(--space-xs);
+  font-size: 14px; color: var(--ink-2); min-height: 32px; padding: 0 var(--space-sm);
+  border: 1px solid var(--rule); border-radius: var(--radius-pill); background: var(--paper);
+}
+.status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sow); transition: background-color 200ms ease; }
+.status[data-state="saving"] .dot { background: var(--tend); }
+.status[data-state="idle"] { visibility: hidden; }
+
+/* Layout */
+.shell {
+  display: grid; grid-template-columns: 264px minmax(0, 1fr);
+  min-height: calc(100svh - 68px);
+}
+.side {
+  background: var(--panel); border-right: 1px solid var(--rule);
+  padding: var(--space-xl) var(--space-lg); display: flex; flex-direction: column; gap: var(--space-xl);
+}
+.side h2 { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 0 0 var(--space-sm); letter-spacing: -0.01em; }
+.kinds { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2xs); }
+.kinds li { display: flex; align-items: center; gap: var(--space-sm); min-height: 36px; font-size: 15px; }
+.kinds .swatch { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.kinds .n { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.side p { margin: 0; font-size: 15px; color: var(--ink-2); max-width: 30ch; }
+kbd { font-family: var(--font-body); font-size: 13px; padding: 1px 6px; border: 1px solid var(--rule-strong); border-bottom-width: 2px; border-radius: 5px; background: var(--paper); color: var(--ink); white-space: nowrap; }
+
+.main { padding: var(--space-xl) clamp(16px, 5vw, 64px) var(--space-2xl); min-width: 0; }
+.col { max-width: 760px; }
+h1 {
+  font-family: var(--font-display); font-weight: 600; font-size: clamp(34px, 5vw, 48px);
+  line-height: 1.05; letter-spacing: -0.025em; margin: 0; text-wrap: balance;
+  overflow-wrap: break-word; min-width: 0;
+}
+h1 span { font-weight: 400; color: var(--ink-2); }
+.lede { margin: var(--space-sm) 0 0; color: var(--ink-2); max-width: 56ch; text-wrap: pretty; }
+
+/* Add form */
+.add {
+  margin-top: var(--space-xl);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: var(--space-xs);
+  padding: var(--space-xs); border: 1px solid var(--rule-strong); border-radius: 14px; background: #fffdf9;
+  transition: border-color 150ms ease;
+}
+.add:focus-within { border-color: var(--ink-3); }
+.add input[type="text"] {
+  min-width: 0; height: 44px; border: 0; background: transparent; padding: 0 var(--space-sm);
+  font-size: 17px; border-radius: 8px;
+}
+.add input[type="text"]::placeholder { color: var(--ink-3); }
+.add input[type="text"]:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 0; }
+.add select {
+  height: 44px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper);
+  padding: 0 34px 0 var(--space-sm); font-size: 15px; appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b6259' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-size: 16px; background-position: right 10px center; cursor: pointer;
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs);
+  height: 44px; padding: 0 var(--space-md); border: 0; border-radius: var(--radius);
+  background: var(--accent-strong); color: var(--accent-ink); font-weight: 600; font-size: 15px; cursor: pointer;
+  transition: transform var(--dur-press) var(--ease-out), background-color 150ms ease;
+}
+.btn:active:not(:disabled) { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #95441f; } }
+.field-note { min-height: 22px; margin: var(--space-2xs) 0 0 var(--space-sm); font-size: 14px; color: var(--harvest-ink); }
+
+/* Groups */
+.group { margin-top: var(--space-xl); }
+.group-head { display: flex; align-items: baseline; gap: var(--space-sm); padding-bottom: var(--space-xs); border-bottom: 1px solid var(--rule); margin-bottom: var(--space-sm); }
+.group-head h2 { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.015em; margin: 0; }
+.group-head .count { color: var(--ink-2); font-variant-numeric: tabular-nums; font-size: 15px; }
+.group.done { margin-top: var(--space-2xl); }
+
+.list { list-style: none; margin: 0; padding: 0; position: relative; display: flex; flex-direction: column; gap: var(--space-xs); }
+.empty { color: var(--ink-2); font-size: 15px; padding: var(--space-md) 0; margin: 0; }
+.list:not(:empty) + .empty { display: none; }
+
+/* Task row (base: tinted block + 3px family bar) */
+.task { position: relative; z-index: 1; }
+.task.shifting { transition: transform var(--dur-shift) var(--ease-out); }
+.task.lifted, .task.travelling { z-index: 10; }
+.card {
+  display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center;
+  gap: var(--space-2xs); min-height: 60px; padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-2xs);
+  background: var(--tint); border-radius: var(--radius); border-left: 3px solid var(--bar);
+  transition: transform 150ms var(--ease-out), box-shadow 150ms var(--ease-out);
+}
+.task[data-kind="sow"]     { --tint: var(--sow-tint);     --bar: var(--sow);     --kind-ink: var(--sow-ink); }
+.task[data-kind="water"]   { --tint: var(--water-tint);   --bar: var(--water);   --kind-ink: var(--water-ink); }
+.task[data-kind="tend"]    { --tint: var(--tend-tint);    --bar: var(--tend);    --kind-ink: var(--tend-ink); }
+.task[data-kind="harvest"] { --tint: var(--harvest-tint); --bar: var(--harvest); --kind-ink: var(--harvest-ink); }
+.task.lifted .card { transform: scale(1.03); box-shadow: var(--shadow-lift); }
+.task.travelling .card { box-shadow: var(--shadow-lift); }
+
+.ib {
+  width: 40px; height: 44px; display: inline-grid; place-items: center; border: 0; background: transparent;
+  border-radius: var(--radius-sm); color: var(--ink-2); cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, transform var(--dur-press) var(--ease-out);
+}
+.ib:active:not(:disabled) { transform: scale(0.94); }
+.ib:disabled { color: var(--rule-strong); cursor: not-allowed; }
+@media (hover: hover) and (pointer: fine) {
+  .ib:not(:disabled):hover { background: color-mix(in oklab, var(--bar) 16%, transparent); color: var(--ink); }
+  .ib.del:not(:disabled):hover { color: var(--harvest-ink); }
+}
+.grip { cursor: grab; touch-action: none; width: 32px; }
+.task.lifted .grip { cursor: grabbing; }
+
+.check { position: relative; width: 44px; height: 44px; display: grid; place-items: center; cursor: pointer; }
+.check input { appearance: none; -webkit-appearance: none; margin: 0; width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid var(--ink-3); background: var(--paper); cursor: pointer; transition: background-color 150ms ease, border-color 150ms ease; }
+.check input:checked { background: var(--bar); border-color: var(--bar); }
+.check svg { position: absolute; width: 14px; height: 14px; fill: none; stroke: #fffdf9; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.check svg path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset var(--dur-mark) var(--ease-out); }
+.check input:checked + svg path { stroke-dashoffset: 0; }
+
+.text { min-width: 0; padding: var(--space-2xs) var(--space-xs) var(--space-2xs) var(--space-2xs); }
+.title {
+  display: block; font-weight: 600; font-size: 16px; line-height: 1.35; overflow-wrap: break-word;
+  text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: transparent;
+  transition: text-decoration-color var(--dur-mark) ease, color var(--dur-mark) ease;
+}
+.kind { display: block; font-size: 14px; color: var(--kind-ink); margin-top: 1px; }
+.task.is-done .title { text-decoration-color: var(--ink-2); color: var(--ink-2); }
+.actions { display: flex; align-items: center; }
+.list.done-list .card { grid-template-columns: auto minmax(0, 1fr) auto; padding-left: var(--space-xs); }
+.list.done-list .grip, .list.done-list .move { display: none; }
+
+/* Toast */
+.toast {
+  position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); z-index: 500;
+  display: flex; align-items: center; gap: var(--space-md);
+  padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-md);
+  background: var(--ink); color: var(--paper); border-radius: 12px; box-shadow: var(--shadow-lift);
+  font-size: 15px; max-width: calc(100% - 32px);
+  transform: translate(-50%, 12px); opacity: 0; pointer-events: none;
+  transition: transform 150ms var(--ease-out), opacity 150ms var(--ease-out);
+}
+.toast.on { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; transition-duration: 220ms, 160ms; }
+.toast span { min-width: 0; overflow-wrap: anywhere; }
+.toast button {
+  height: 40px; padding: 0 var(--space-sm); border: 1px solid #5a524b; border-radius: 8px; background: transparent; color: var(--paper);
+  font-weight: 600; cursor: pointer; flex-shrink: 0;
+}
+.toast button:focus-visible { outline-color: #f0b496; }
+@media (hover: hover) and (pointer: fine) { .toast button:hover { background: #2c2723; } }
+
+.nojs { margin-top: var(--space-md); font-size: 15px; color: var(--ink-2); }
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .side { order: 2; border-right: 0; border-top: 1px solid var(--rule); padding: var(--space-xl) clamp(16px, 5vw, 64px); flex-direction: row; flex-wrap: wrap; gap: var(--space-xl); }
+  .side > section { flex: 1 1 240px; }
+}
+@media (max-width: 599px) {
+  .top { padding: 0 16px; }
+  .brand span { display: none; }
+  .add { grid-template-columns: minmax(0, 1fr) auto; }
+  .add input[type="text"] { grid-column: 1 / -1; }
+  .card { grid-template-columns: auto auto minmax(0, 1fr); grid-template-areas: "grip check text" ". . actions"; row-gap: 0; }
+  .card .grip { grid-area: grip; }
+  .card .check { grid-area: check; }
+  .card .text { grid-area: text; }
+  .card .actions { grid-area: actions; justify-content: flex-end; margin-top: calc(var(--space-2xs) * -1); }
+  .list.done-list .card { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "check text actions"; }
+  .ib { width: 44px; }
+}
+
+/* Reduced motion: movement removed, colour and opacity kept */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+  .toast, .title, .status .dot, .check input { transition-property: opacity, color, text-decoration-color, background-color, border-color !important; transition-duration: 150ms !important; }
+  .toast, .toast.on { transform: translate(-50%, 0); }
+  .task.lifted .card { transform: none; }
+}
+@media (forced-colors: active) { .card { border: 1px solid CanvasText; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="mark" aria-hidden="true">
+    <svg class="i" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>
+  </span>
+  <span class="brand">Kitchen garden <span>planner</span></span>
+  <span class="status" id="status" data-state="idle"><span class="dot" aria-hidden="true"></span><span id="status-text">Saved</span></span>
+</header>
+
+<div class="shell">
+  <aside class="side" aria-label="Legend and shortcuts">
+    <section>
+      <h2>Kinds of job</h2>
+      <ul class="kinds">
+        <li><span class="swatch" style="background:var(--sow)"></span>Sow and plant<span class="n" data-tally="sow">0</span></li>
+        <li><span class="swatch" style="background:var(--water)"></span>Water and feed<span class="n" data-tally="water">0</span></li>
+        <li><span class="swatch" style="background:var(--tend)"></span>Tend and protect<span class="n" data-tally="tend">0</span></li>
+        <li><span class="swatch" style="background:var(--harvest)"></span>Harvest<span class="n" data-tally="harvest">0</span></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Reordering</h2>
+      <p>Drag a job by its handle, or use the arrows. From the keyboard, focus a job and press <kbd>Alt</kbd> + <kbd>↑</kbd> or <kbd>↓</kbd>.</p>
+    </section>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="col">
+      <h1>Garden jobs <span>this week</span></h1>
+      <p class="lede">Put the jobs that can’t wait at the top. Tick one off and it drops into the done pile below.</p>
+
+      <form class="add" id="add" autocomplete="off" novalidate>
+        <label class="sr-only" for="new-title">New job</label>
+        <input type="text" id="new-title" name="title" placeholder="Add a job, like “Thin the beetroot”" maxlength="120">
+        <label class="sr-only" for="new-kind">Kind of job</label>
+        <select id="new-kind" name="kind">
+          <option value="sow">Sow and plant</option>
+          <option value="water">Water and feed</option>
+          <option value="tend" selected>Tend and protect</option>
+          <option value="harvest">Harvest</option>
+        </select>
+        <button class="btn" type="submit">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          Add job
+        </button>
+      </form>
+      <p class="field-note" id="add-note" aria-live="polite"></p>
+      <noscript><p class="nojs">Reordering, ticking off and adding jobs need JavaScript. The list below is this week’s plan.</p></noscript>
+
+      <section class="group" aria-labelledby="todo-h">
+        <div class="group-head"><h2 id="todo-h">To do</h2><span class="count" id="todo-count"></span></div>
+        <ul class="list todo-list" id="todo" aria-labelledby="todo-h">
+          <li class="task" data-id="t1" data-kind="sow"><div class="card"><span class="text"><span class="title">Sow a second row of carrots in bed 2</span><span class="kind">Sow and plant</span></span></div></li>
+          <li class="task" data-id="t2" data-kind="water"><div class="card"><span class="text"><span class="title">Water the greenhouse tomatoes at the roots</span><span class="kind">Water and feed</span></span></div></li>
+          <li class="task" data-id="t3" data-kind="tend"><div class="card"><span class="text"><span class="title">Net the kale before the cabbage whites find it</span><span class="kind">Tend and protect</span></span></div></li>
+          <li class="task" data-id="t4" data-kind="harvest"><div class="card"><span class="text"><span class="title">Pick the broad beans while the pods are small</span><span class="kind">Harvest</span></span></div></li>
+          <li class="task" data-id="t5" data-kind="tend"><div class="card"><span class="text"><span class="title">Earth up the early potatoes</span><span class="kind">Tend and protect</span></span></div></li>
+          <li class="task" data-id="t6" data-kind="sow"><div class="card"><span class="text"><span class="title">Start lettuce in modules for the gap in bed 4</span><span class="kind">Sow and plant</span></span></div></li>
+        </ul>
+        <p class="empty">Nothing left on the list. Add the next job above.</p>
+      </section>
+
+      <section class="group done" aria-labelledby="done-h">
+        <div class="group-head"><h2 id="done-h">Done</h2><span class="count" id="done-count"></span></div>
+        <ul class="list done-list" id="done" aria-labelledby="done-h">
+          <li class="task is-done" data-id="t7" data-kind="tend"><div class="card"><span class="text"><span class="title">Turn the compost heap</span><span class="kind">Tend and protect</span></span></div></li>
+        </ul>
+        <p class="empty">Jobs you tick off land here.</p>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span id="toast-text"></span>
+  <button type="button" id="toast-undo">Undo</button>
+</div>
+<div class="sr-only" id="announce" aria-live="polite"></div>
+
+<script>
+(() => {
+  const todo = document.getElementById('todo');
+  const done = document.getElementById('done');
+  const announceEl = document.getElementById('announce');
+  const KIND = { sow: 'Sow and plant', water: 'Water and feed', tend: 'Tend and protect', harvest: 'Harvest' };
+  const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  const EASE_FLIP = 'cubic-bezier(0, 0, 0.32, 1)';
+  const EASE_IN_OUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
+  const rm = matchMedia('(prefers-reduced-motion: reduce)');
+  let reduce = rm.matches;
+  rm.addEventListener('change', (e) => { reduce = e.matches; });
+
+  /* ---------- Simulated backend: a real wait that succeeds ---------- */
+  const status = document.getElementById('status');
+  const statusText = document.getElementById('status-text');
+  let pending = 0, showTimer = 0, shownAt = 0, hideTimer = 0;
+  function api(op, payload) {
+    pending++;
+    clearTimeout(hideTimer);
+    if (pending === 1 && status.dataset.state !== 'saving') {
+      showTimer = setTimeout(() => { status.dataset.state = 'saving'; statusText.textContent = 'Saving…'; shownAt = performance.now(); }, 200);
+    }
+    const wait = 450 + Math.random() * 500;
+    return new Promise((resolve) => setTimeout(() => resolve({ ok: true, op, payload }), wait)).then((res) => {
+      pending--;
+      if (pending === 0) {
+        clearTimeout(showTimer);
+        const finish = () => { status.dataset.state = 'saved'; statusText.textContent = 'Saved'; };
+        if (status.dataset.state === 'saving') {
+          const left = Math.max(0, 300 - (performance.now() - shownAt));
+          setTimeout(() => { if (pending === 0) finish(); }, left);
+        } else finish();
+      }
+      return res;
+    });
+  }
+
+  /* ---------- Rendering ---------- */
+  const ICON = {
+    grip: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg>',
+    up: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>',
+    down: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+    trash: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>'
+  };
+  let seq = 100;
+  function build(li) {
+    const title = li.querySelector('.title').textContent;
+    const isDone = li.classList.contains('is-done');
+    li.tabIndex = -1;
+    li.setAttribute('aria-label', title);
+    li.querySelector('.card').innerHTML =
+      `<button class="ib grip" type="button" aria-label="Drag to reorder ${esc(title)}">${ICON.grip}</button>` +
+      `<label class="check"><input type="checkbox" ${isDone ? 'checked' : ''} aria-label="Done: ${esc(title)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M20 6 9 17l-5-5"/></svg></label>` +
+      `<span class="text"><span class="title">${esc(title)}</span><span class="kind">${KIND[li.dataset.kind]}</span></span>` +
+      `<span class="actions"><button class="ib move" type="button" data-dir="-1" aria-label="Move up">${ICON.up}</button>` +
+      `<button class="ib move" type="button" data-dir="1" aria-label="Move down">${ICON.down}</button>` +
+      `<button class="ib del" type="button" aria-label="Delete ${esc(title)}">${ICON.trash}</button></span>`;
+    return li;
+  }
+  function esc(s) { return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+  function make(title, kind) {
+    const li = document.createElement('li');
+    li.className = 'task'; li.dataset.id = 'n' + (seq++); li.dataset.kind = kind;
+    li.innerHTML = '<div class="card"><span class="text"><span class="title"></span></span></div>';
+    li.querySelector('.title').textContent = title;
+    return build(li);
+  }
+  document.querySelectorAll('.task').forEach(build);
+
+  const rows = (list) => [...list.children].filter((n) => n.classList.contains('task') && !n.classList.contains('leaving'));
+  function refresh() {
+    const t = rows(todo), d = rows(done);
+    document.getElementById('todo-count').textContent = t.length ? `${t.length} left` : '';
+    document.getElementById('done-count').textContent = d.length ? `${d.length} ticked off` : '';
+    t.forEach((li, i) => {
+      li.querySelector('[data-dir="-1"]').disabled = i === 0;
+      li.querySelector('[data-dir="1"]').disabled = i === t.length - 1;
+    });
+    const counts = { sow: 0, water: 0, tend: 0, harvest: 0 };
+    t.forEach((li) => counts[li.dataset.kind]++);
+    document.querySelectorAll('[data-tally]').forEach((n) => { n.textContent = counts[n.dataset.tally]; });
+  }
+  refresh();
+  function announce(msg) { announceEl.textContent = ''; requestAnimationFrame(() => { announceEl.textContent = msg; }); }
+
+  /* ---------- FLIP: rows that stay slide to their new places ---------- */
+  function snapshot() {
+    const m = new Map();
+    document.querySelectorAll('.task').forEach((li) => m.set(li, li.getBoundingClientRect()));
+    return m;
+  }
+  function play(before, { traveller = null } = {}) {
+    if (reduce) return;
+    document.querySelectorAll('.task').forEach((li) => {
+      if (li.classList.contains('leaving')) return;
+      const a = before.get(li); if (!a) return;
+      li.getAnimations().forEach((an) => { if (an.id === 'flip') an.cancel(); });
+      const b = li.getBoundingClientRect();
+      const dy = a.top - b.top;
+      if (Math.abs(dy) < 0.5) return;
+      const isT = li === traveller;
+      const dist = Math.abs(dy);
+      const duration = isT ? Math.min(480, 340 + 0.15 * dist) : Math.min(320, 240 + 0.1 * dist);
+      if (isT) li.classList.add('travelling');
+      const an = li.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }],
+        { duration, easing: isT ? EASE_IN_OUT : EASE_FLIP });
+      an.id = 'flip';
+      if (isT) an.finished.then(() => li.classList.remove('travelling'), () => li.classList.remove('travelling'));
+    });
+  }
+  function enter(li) {
+    if (reduce) { li.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 150, easing: 'ease' }); return; }
+    li.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 120, easing: EASE_OUT });
+    li.animate([{ transform: 'translateY(-10px)' }, { transform: 'none' }], { duration: 260, easing: EASE_OUT, composite: 'add' });
+  }
+
+  /* ---------- Add (optimistic) ---------- */
+  const form = document.getElementById('add');
+  const input = document.getElementById('new-title');
+  const note = document.getElementById('add-note');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = input.value.trim().replace(/\s+/g, ' ');
+    if (!title) { note.textContent = 'Write the job first, then add it.'; input.focus(); return; }
+    note.textContent = '';
+    const li = make(title, document.getElementById('new-kind').value);
+    const before = snapshot();
+    todo.prepend(li);
+    refresh();
+    play(before);
+    enter(li);
+    input.value = '';
+    announce(`Added “${title}” at the top of To do.`);
+    api('add', { id: li.dataset.id, title });
+  });
+  input.addEventListener('input', () => { if (note.textContent) note.textContent = ''; });
+
+  /* ---------- Complete: mark, hold, then travel to the other pile ---------- */
+  const travelTimers = new WeakMap();
+  document.addEventListener('change', (e) => {
+    const box = e.target.closest('.check input'); if (!box) return;
+    const li = box.closest('.task');
+    const title = li.querySelector('.title').textContent;
+    li.classList.toggle('is-done', box.checked);
+    clearTimeout(travelTimers.get(li));
+    const target = box.checked ? done : todo;
+    const hold = reduce ? 0 : 260;
+    travelTimers.set(li, setTimeout(() => {
+      if (li.parentElement === target) return;
+      const before = snapshot();
+      if (box.checked) done.prepend(li); else todo.append(li);
+      refresh();
+      play(before, { traveller: li });
+      box.focus({ preventScroll: true });
+      if (!reduce) li.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }, hold));
+    announce(box.checked ? `“${title}” done, moved to Done.` : `“${title}” back on To do.`);
+    api(box.checked ? 'complete' : 'reopen', { id: li.dataset.id });
+  });
+
+  /* ---------- Delete with undo ---------- */
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toast-text');
+  const undoBtn = document.getElementById('toast-undo');
+  let lastDeleted = null, toastTimer = 0, toastLeft = 0, toastStart = 0;
+  function remove(li) {
+    const list = li.parentElement;
+    const idx = rows(list).indexOf(li);
+    const title = li.querySelector('.title').textContent;
+    const neighbours = rows(list);
+    const focusNext = neighbours[idx + 1] || neighbours[idx - 1];
+    const before = snapshot();
+    const top = li.offsetTop, left = li.offsetLeft, w = li.offsetWidth;
+    li.classList.add('leaving');
+    li.style.cssText = `position:absolute;top:${top}px;left:${left}px;width:${w}px;pointer-events:none;z-index:0`;
+    refresh();
+    play(before);
+    const out = reduce
+      ? li.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150, easing: 'ease', fill: 'forwards' })
+      : li.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(0.97)' }], { duration: 180, easing: EASE_OUT, fill: 'forwards' });
+    out.finished.then(() => { li.remove(); li.style.cssText = ''; li.classList.remove('leaving'); li.getAnimations().forEach((a) => a.cancel()); });
+    (focusNext ? focusNext.querySelector('.del') : input).focus({ preventScroll: true });
+    lastDeleted = { li, list, idx };
+    showToast(`Deleted “${title}”`);
+    api('delete', { id: li.dataset.id });
+  }
+  function showToast(msg) {
+    toastText.textContent = msg;
+    toast.classList.add('on');
+    toastLeft = 6000; armToast();
+  }
+  function armToast() { clearTimeout(toastTimer); toastStart = performance.now(); toastTimer = setTimeout(hideToast, toastLeft); }
+  function pauseToast() { clearTimeout(toastTimer); toastLeft = Math.max(1500, toastLeft - (performance.now() - toastStart)); }
+  function hideToast() { clearTimeout(toastTimer); toast.classList.remove('on'); lastDeleted = null; }
+  toast.addEventListener('pointerenter', pauseToast);
+  toast.addEventListener('pointerleave', () => { if (toast.classList.contains('on')) armToast(); });
+  toast.addEventListener('focusin', pauseToast);
+  toast.addEventListener('focusout', () => { if (toast.classList.contains('on')) armToast(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && toast.classList.contains('on')) hideToast(); });
+  undoBtn.addEventListener('click', () => {
+    if (!lastDeleted) return;
+    const { li, list, idx } = lastDeleted;
+    li.getAnimations().forEach((a) => a.cancel());
+    li.classList.remove('leaving'); li.style.cssText = '';
+    const before = snapshot();
+    const r = rows(list);
+    list.insertBefore(li, r[idx] || null);
+    refresh(); play(before); enter(li);
+    hideToast();
+    li.querySelector('.del').focus({ preventScroll: true });
+    announce(`Restored “${li.querySelector('.title').textContent}”.`);
+    api('restore', { id: li.dataset.id, index: idx });
+  });
+
+  /* ---------- Move buttons (animated) and Alt+arrows (instant) ---------- */
+  function move(li, dir, animate) {
+    const r = rows(todo), i = r.indexOf(li), j = i + dir;
+    if (i < 0 || j < 0 || j >= r.length) return false;
+    const before = animate ? snapshot() : null;
+    if (dir < 0) todo.insertBefore(li, r[j]); else todo.insertBefore(li, r[j].nextSibling);
+    refresh();
+    if (animate) play(before);
+    announce(`Moved to position ${j + 1} of ${r.length}.`);
+    api('reorder', rows(todo).map((n) => n.dataset.id));
+    return true;
+  }
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.ib'); if (!btn || btn.classList.contains('grip')) return;
+    const li = btn.closest('.task');
+    if (btn.classList.contains('del')) { remove(li); return; }
+    if (btn.classList.contains('move')) {
+      const dir = +btn.dataset.dir;
+      move(li, dir, true);
+      const same = li.querySelector(`[data-dir="${dir}"]`);
+      (same.disabled ? li.querySelector(`[data-dir="${-dir}"]`) : same).focus({ preventScroll: true });
+    }
+  });
+  todo.addEventListener('keydown', (e) => {
+    if (!e.altKey || (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) return;
+    const li = e.target.closest('.task'); if (!li) return;
+    e.preventDefault();
+    const focused = document.activeElement;
+    if (move(li, e.key === 'ArrowUp' ? -1 : 1, false)) (focused && li.contains(focused) ? focused : li).focus({ preventScroll: true });
+  });
+
+  /* ---------- Drag to reorder: follows the finger, neighbours make room, spring drop ---------- */
+  function spring({ from, to, velocity = 0, stiffness = 500, damping = 30, onUpdate, onDone }) {
+    let x = from, v = velocity, last = performance.now(), raf;
+    const step = (now) => {
+      const dt = Math.min(0.032, (now - last) / 1000); last = now;
+      v += (-stiffness * (x - to) - damping * v) * dt; x += v * dt;
+      onUpdate(x);
+      if (Math.abs(v) < 5 && Math.abs(x - to) < 0.5) { onUpdate(to); onDone(); return; }
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => { cancelAnimationFrame(raf); onUpdate(to); onDone(); };
+  }
+  function rubber(over, dim, c = 0.55) { return (over * dim * c) / (dim + c * Math.abs(over)); }
+
+  let drag = null, settling = null;
+  todo.addEventListener('pointerdown', (e) => {
+    const grip = e.target.closest('.grip'); if (!grip || e.button !== 0 || drag) return;
+    if (settling) settling();
+    const li = grip.closest('.task');
+    const items = rows(todo);
+    const rects = items.map((n) => n.getBoundingClientRect());
+    const gap = items.length > 1 ? rects[1].top - rects[0].bottom : 8;
+    drag = { li, grip, items, rects, gap, from: items.indexOf(li), to: items.indexOf(li), startY: e.clientY, dy: 0, started: false, samples: [] };
+    grip.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  todo.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    let dy = e.clientY - drag.startY;
+    if (!drag.started) {
+      if (Math.abs(dy) < 3) return;
+      drag.started = true;
+      drag.li.classList.add('lifted');
+      drag.items.forEach((n) => { n.getAnimations().forEach((a) => a.cancel()); if (n !== drag.li && !reduce) n.classList.add('shifting'); });
+    }
+    const { rects, from, li, items, gap } = drag;
+    const min = rects[0].top - rects[from].top, max = rects[rects.length - 1].bottom - rects[from].bottom;
+    if (dy < min) dy = min + rubber(dy - min, 200); else if (dy > max) dy = max + rubber(dy - max, 200);
+    drag.dy = dy;
+    const now = performance.now();
+    drag.samples.push({ t: now, y: dy }); if (drag.samples.length > 5) drag.samples.shift();
+    li.style.transform = `translate3d(0, ${dy}px, 0)`;
+    const h = rects[from].height, center = rects[from].top + dy + h / 2;
+    let to = 0;
+    items.forEach((n, i) => { if (i !== from && rects[i].top + rects[i].height / 2 < center) to++; });
+    drag.to = to;
+    items.forEach((n, i) => {
+      if (n === li) return;
+      let s = 0;
+      if (from < to && i > from && i <= to) s = -(h + gap);
+      else if (to < from && i >= to && i < from) s = h + gap;
+      n.style.transform = s ? `translate3d(0, ${s}px, 0)` : '';
+    });
+  });
+  function endDrag() {
+    if (!drag) return;
+    const d = drag; drag = null;
+    if (!d.started) return;
+    const { li, items, rects, from, to } = d;
+    const target = to > from ? rects[to].bottom - rects[from].bottom : to < from ? rects[to].top - rects[from].top : 0;
+    const s = d.samples, vel = s.length > 1 ? ((s[s.length - 1].y - s[0].y) / Math.max(1, s[s.length - 1].t - s[0].t)) * 1000 : 0;
+    const commit = () => {
+      settling = null;
+      items.forEach((n) => { n.classList.remove('shifting'); n.style.transform = ''; });
+      if (to !== from) {
+        const ref = to > from ? items[to].nextSibling : items[to];
+        todo.insertBefore(li, ref);
+        refresh();
+        announce(`Moved to position ${to + 1} of ${items.length}.`);
+        api('reorder', rows(todo).map((n) => n.dataset.id));
+      }
+      li.classList.remove('lifted');
+      d.grip.focus({ preventScroll: true });
+    };
+    if (reduce) { commit(); return; }
+    settling = spring({ from: d.dy, to: target, velocity: vel, onUpdate: (y) => { li.style.transform = `translate3d(0, ${y}px, 0)`; }, onDone: commit });
+  }
+  todo.addEventListener('pointerup', endDrag);
+  todo.addEventListener('pointercancel', endDrag);
+  todo.addEventListener('lostpointercapture', endDrag);
+})();
+</script>
+</body>
+</html>

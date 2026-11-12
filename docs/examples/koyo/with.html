@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kōyō: Ceremonial matcha from Uji, once a month</title>
+<meta name="description" content="Kōyō sells ceremonial-grade matcha from Uji, Kyoto, direct to you by monthly subscription." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Matcha_stone_mill_grinding_tencha_into_powder.jpg/1920px-Matcha_stone_mill_grinding_tencha_into_powder.jpg" />
+<style>
+:root {
+  --bg:          #050607;
+  --ink:         #f1efe9;
+  --ink-soft:    rgba(241, 239, 233, 0.66);
+  --ink-faint:   rgba(241, 239, 233, 0.45);
+  --pill-bg:     rgba(18, 19, 21, 0.55);
+  --pill-border: rgba(255, 255, 255, 0.10);
+  --star:        #e8893c;   /* ember: the single accent, the autumn leaf in Kōyō */
+  --cta-bg:      #f6f4ef;
+  --cta-ink:     #15171a;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans:    "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow-x: clip; }
+
+body {
+  font-family: var(--font-sans);
+  background: #000;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--star); color: #15171a; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 6px; }
+.skip { position: absolute; left: 16px; top: -60px; z-index: 10; background: var(--cta-bg); color: var(--cta-ink); padding: 10px 16px; border-radius: 999px; font-size: 14px; text-decoration: none; }
+.skip:focus-visible { top: 16px; }
+
+/* Hero shell: nav top, content middle, facts bottom */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--bg);
+}
+
+/* Full-bleed background (still in the video slot, slow push-in) */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%;
+  z-index: 0;
+  transform-origin: 50% 85%;
+  transform: scale(1.18);
+  animation: push 26s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+@keyframes push { from { transform: scale(1.18); } to { transform: scale(1.28); } }
+
+/* Dark wash + edge vignette */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 50% 36%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.45) 100%),
+    linear-gradient(180deg, rgba(5, 6, 7, 0.55) 0%, rgba(5, 6, 7, 0.15) 32%, rgba(5, 6, 7, 0.35) 100%);
+}
+/* Legibility scrim behind the centred copy: the mill photo is a bright daylight frame */
+.hero-scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(60% 46% at 50% 40%, rgba(5, 6, 7, 0.62) 0%, rgba(5, 6, 7, 0.38) 60%, rgba(5, 6, 7, 0) 100%);
+}
+
+/* Nav */
+.nav {
+  position: relative; z-index: 3;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 30px 52px;
+}
+.logo {
+  font-family: var(--font-sans); font-weight: 500; font-size: 18px;
+  letter-spacing: 0.34em; color: var(--ink); text-decoration: none;
+  display: inline-flex; align-items: center; min-height: 44px;
+}
+.nav-pill {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 18px; padding: 13px 28px;
+  background: var(--pill-bg); border: 1px solid var(--pill-border); border-radius: 999px;
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  list-style: none;
+}
+.nav-pill a {
+  color: var(--ink-soft); font-size: 14.5px; letter-spacing: 0.01em;
+  text-decoration: none; transition: color 0.2s ease;
+}
+.nav-pill a:hover { color: var(--ink); }
+.dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+.actions { display: flex; align-items: center; gap: 22px; color: var(--ink-soft); }
+.actions button {
+  background: none; border: 0; color: inherit; font: inherit; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; font-size: 14px;
+  min-height: 44px; min-width: 44px; justify-content: center;
+  transition: color 0.2s ease;
+}
+.actions button:hover { color: var(--ink); }
+.actions .chev { margin-top: 1px; }
+
+/* Hero content */
+.hero-content { position: relative; z-index: 2; text-align: center; padding: 14vh 24px 0; }
+.headline {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(40px, 6.6vw, 90px); line-height: 1.08; letter-spacing: -0.005em;
+  color: var(--ink); overflow-wrap: break-word; min-width: 0;
+}
+.headline-line2 { white-space: nowrap; }
+.headline em { font-style: italic; font-weight: 400; }
+.subtitle {
+  max-width: 480px; margin: 26px auto 0; font-size: 17px; line-height: 1.62; color: var(--ink-soft);
+}
+.cta {
+  display: inline-block; margin-top: 36px; padding: 16px 34px; border-radius: 999px;
+  background: var(--cta-bg); color: var(--cta-ink);
+  font-weight: 500; font-size: 15px; text-decoration: none;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cta:hover { transform: translateY(-2px); box-shadow: 0 16px 50px rgba(0,0,0,0.45); }
+.cta-note { margin-top: 16px; font-size: 13px; color: var(--ink-soft); }
+
+/* Facts row (the reviews slot, pinned bottom-centre) */
+.reviews {
+  position: relative; z-index: 2; margin-top: auto;
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  padding: 48px 24px 44px; list-style: none;
+}
+.reviews li { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; color: var(--ink); }
+.reviews li + li::before {
+  content: ""; width: 22px; height: 1px; background: var(--ink-faint); margin-right: 6px;
+}
+.leaf { width: 14px; height: 14px; fill: var(--star); flex: none; }
+
+@media (max-width: 860px) {
+  .nav { padding: 22px 24px; }
+  .nav-pill { display: none; }
+  .hero-content { padding-top: 18vh; }
+  .headline-line2 { white-space: normal; }
+}
+@media (max-width: 520px) {
+  .logo { font-size: 16px; letter-spacing: 0.28em; }
+  .subtitle { font-size: 16px; }
+  .hero-content { padding-top: 12vh; }
+  .reviews { flex-direction: column; gap: 10px; padding-bottom: 32px; }
+  .reviews li + li::before { display: none; }
+  .actions { gap: 4px; }
+  .leaf { display: none; }
+  .hero-scrim { background: radial-gradient(90% 50% at 50% 42%, rgba(5,6,7,0.66) 0%, rgba(5,6,7,0.4) 65%, rgba(5,6,7,0) 100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { animation: none; transform: scale(1.18); }
+  .cta, .nav-pill a, .actions button { transition: none; }
+  .cta:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<section class="hero" aria-label="Kōyō">
+  <img class="hero-video"
+       src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Matcha_stone_mill_grinding_tencha_into_powder.jpg/1920px-Matcha_stone_mill_grinding_tencha_into_powder.jpg"
+       srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Matcha_stone_mill_grinding_tencha_into_powder.jpg/1280px-Matcha_stone_mill_grinding_tencha_into_powder.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Matcha_stone_mill_grinding_tencha_into_powder.jpg/1920px-Matcha_stone_mill_grinding_tencha_into_powder.jpg 1920w"
+       sizes="100vw" width="1920" height="1280" fetchpriority="high"
+       alt="" />
+  <div class="hero-overlay"></div>
+  <div class="hero-scrim"></div>
+
+  <header class="nav">
+    <a class="logo" href="#" aria-label="Kōyō home">KŌYŌ</a>
+    <nav aria-label="Primary">
+      <ul class="nav-pill">
+        <li><a href="#matcha">The Matcha</a></li>
+        <li class="dot" aria-hidden="true"></li>
+        <li><a href="#uji">Uji</a></li>
+        <li class="dot" aria-hidden="true"></li>
+        <li><a href="#subscription">Subscription</a></li>
+        <li class="dot" aria-hidden="true"></li>
+        <li><a href="#preparing">Preparing</a></li>
+      </ul>
+    </nav>
+    <div class="actions">
+      <button type="button" aria-label="Language: English">EN
+        <svg class="chev" width="11" height="7" viewBox="0 0 11 7" fill="none" aria-hidden="true"><path d="M1 1.5L5.5 5.5L10 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M12.5 12.5L16 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="hero-content">
+    <h1 class="headline">Ceremonial Matcha from Uji<br /><span class="headline-line2">Whisked at Home, <em>Monthly</em></span></h1>
+    <p class="subtitle">Stone-milled tencha from the tea hills south of Kyoto, sent to your door once a month. Bought from the source, sold straight to you.</p>
+    <a class="cta" href="#subscribe">Start your subscription</a>
+    <p class="cta-note">[Price] a month for a [tin size] tin. [Cancellation terms].</p>
+  </main>
+
+  <ul class="reviews" aria-label="About the tea">
+    <li><svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/></svg>Ceremonial grade</li>
+    <li>Grown in Uji, Kyoto</li>
+    <li>One delivery a month</li>
+  </ul>
+</section>
+<!-- Photograph: "Matcha stone mill grinding tencha into powder" by Derjochenmeyer, CC BY-SA 4.0, Wikimedia Commons -->
+</body>
+</html>

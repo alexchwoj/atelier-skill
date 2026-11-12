@@ -48,17 +48,21 @@ Design at a reference resolution (1920×1080 for PC and console; the safe area o
 
 | Context | Body / UI text | Small labels (minimum) | Headers | Icons and targets |
 | --- | --- | --- | --- | --- |
-| TV, couch (2 to 3 m) | 28 to 32px at 1080p | 24px | 40px+ | icons 48px+, focus targets large and well spaced |
-| PC monitor (50 to 70 cm) | 18 to 22px at 1080p | 14 to 16px | 28px+ | icons 32px+, mouse targets 32px+ |
+| TV, couch (2 to 3 m) | 28 to 32px at 1080p (Xbox XAG 101: glyph height at least 26px, which is about `font-size: 28px`) | 24px | 40px+ | icons 48px+, focus targets large and well spaced |
+| PC monitor (50 to 70 cm) | 20 to 22px at 1080p (XAG: glyph height at least 18px, about `font-size: 20px`; dense PC screens in a game that uses smaller caps labels may set labels at 14 to 16px, never values) | 14 to 16px | 28px+ | icons 32px+, mouse targets 32px+ |
 | Handheld (Switch, Steam Deck) | 22 to 26px at 1080p equivalent | 18px | 32px+ | touch 48px+ |
 | Phone | 16px+ (pt/dp) | 12 to 13px | 22px+ | touch targets 44 to 48px, spaced 8px+ |
 | VR | text subtends ≥ 1.3° of view (≈ 2.3cm at 1m) | | | panels 1 to 3m away, within 30° of forward gaze |
 
-Offer a text-size setting that scales all UI text by at least 150% (`game/accessibility.md` § 3).
+Offer a text-size setting that scales all UI text up to 200%, including the letter inside button glyphs (XAG 101); the layout keeps every element at 200%, scrolling in one direction only.
+
+**Contrast (XAG 102):** 4.5:1 for text and important elements, 3:1 for large text (about 56px on console, 40px on PC) and inactive elements, 7:1 in a high-contrast mode, always measured against the **least contrasting part** of the frame behind it, not an average.
 
 ## 6. Safe areas
 
-- **TV:** keep all essential UI inside the **title-safe area**, 90% of the screen (5% margin each side); background art can bleed to the edges. Many TVs still overscan.
+- **TV:** keep all essential UI inside the **title-safe area**, 90% of the screen: 96px left and right and 54px top and bottom at 1080p (a 1728x972 box). Only full-bleed art, vignettes and damage effects go outside it. Many TVs still overscan.
+- **PC-only titles:** there is no TV overscan; follow the game's own margins (often 32 to 48px at 1080p) and align new elements with the HUD already in the capture.
+- **Ultrawide:** keep edge HUD in a centred 16:9 (or 21:9) region with a setting to widen it; crosshair, central prompts and subtitles stay centred on the real screen.
 - **Phones:** respect notches, rounded corners and home indicators (`env(safe-area-inset-*)` on the web, the platform safe-area APIs in engines); never put buttons in the bottom 20px gesture zone.
 - **Ultrawide:** keep the HUD in a 16:9 centre region by default, with a setting to spread it to the edges.
 - Offer a **HUD scale** and a **safe-area adjust** setting.

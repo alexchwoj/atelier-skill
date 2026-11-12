@@ -41,6 +41,18 @@ animate(el, { y: target }, { type: 'spring', bounce: 0.15, duration: 0.4, veloci
 
 Use 0.99 for a snappier feel. Always pass the release velocity into the spring so the motion continues at the finger's speed.
 
+**Thresholds that feel right:**
+
+| Surface | Dismiss when | Notes |
+| --- | --- | --- |
+| Toast | 45px, or a flick above 0.11 px/ms | a drag the wrong way is damped: `delta / (1.5 + |delta| / 20)` |
+| Bottom sheet, drawer | past 25% of its height, or a flick above 0.4 px/ms | drag only when its content is scrolled to the top; ignore drags for 100ms after a scroll reaches the top, so a fast scroll does not close it |
+| Card swipe | past 35 to 40% of its width, or a flick | it leaves along the release angle, never perfectly straight |
+
+A sheet that scales the page behind it does so with the drag: the page shrinks to `(innerWidth − 26px) / innerWidth`, moves down 26px and gains an 8px radius at full open, interpolated by drag progress; a nested sheet pushes its parent 16px further.
+
+**When to commit.** Light, reversible actions (revealing row actions, a peek) may commit mid-gesture once past the threshold; destructive ones commit only on release, so reversing the drag cancels. Feedback starts on the first pixel; only the commit waits for the threshold. Remove the element's transition while dragging (write the transform directly), and restore it on release.
+
 ## 4. Edges: rubber-band, never a wall
 
 Past a boundary, the content moves less and less, then springs back:

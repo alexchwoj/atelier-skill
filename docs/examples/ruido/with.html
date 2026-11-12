@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ruido identity</title>
+<meta name="description" content="Logo, icon, palette and type for Ruido, a three-day electronic music festival in an abandoned factory in Mexico City.">
+<meta name="theme-color" content="#120e0b">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23120e0b%22%2F%3E%3Cpath%20fill%3D%22%23e5481e%22%20d%3D%22M6%2050V14L23%2050ZM23%2050V14L40%2050ZM40%2050V14L58%2050Z%22%2F%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --soot:#120e0b; --soot-2:#1c1714; --soot-rule:#342f2c;
+  --concrete:#d4cec7; --concrete-2:#c7c0b8; --concrete-rule:#9c948c;
+  --red:#e5481e; --red-deep:#b12b00;
+  --ink-muted-dark:#a39d99; --ink-muted-light:#524b46;
+  --gutter:clamp(1rem,4vw,4rem);
+  --s-xs:8px; --s-sm:12px; --s-md:16px; --s-lg:24px; --s-xl:40px; --s-2xl:64px; --s-3xl:96px;
+  --display:"Archivo", "Arial Narrow", system-ui, sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--soot);color:var(--concrete);font:400 1.0625rem/1.6 var(--display);font-synthesis:none;-webkit-font-smoothing:antialiased}
+::selection{background:var(--red);color:var(--soot)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.light :focus-visible{outline-color:var(--red-deep)}
+/* the noise: a fixed grain plate, the festival's name made literal */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:400;opacity:.08;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{padding-inline:var(--gutter);max-width:1440px;margin-inline:auto}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+.lockup,.word,.mark{display:block;width:100%;height:auto}
+.lockup .name,.word path{fill:currentColor}
+.lockup .teeth{fill:var(--teeth,currentColor)}
+.mark path{fill:var(--teeth,currentColor)}
+
+/* hero */
+.hero{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;gap:var(--s-xl);padding-block:var(--s-lg) var(--s-xl)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:var(--s-lg);flex-wrap:wrap}
+.home{display:flex;align-items:center;gap:var(--s-sm);text-decoration:none;font-weight:700;font-stretch:112%;min-height:44px}
+.home .mark{width:28px;--teeth:var(--red)}
+.top nav ul{display:flex;gap:var(--s-lg);list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.top nav a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;text-decoration:none;color:var(--ink-muted-dark);font-size:1rem}
+.top nav a:hover{color:var(--concrete);text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+.stage{align-self:center;margin:0;font-size:1rem}
+.stage .lockup{--teeth:var(--red);color:var(--concrete)}
+.stage .stack{display:none}
+.hero-foot{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:var(--s-lg);align-items:end;border-top:1px solid var(--soot-rule);padding-top:var(--s-md)}
+.hero-foot p{margin:0;max-width:46ch;font-size:clamp(1.0625rem,1.4vw,1.25rem);text-wrap:pretty}
+.hero-foot .tba{justify-self:end;text-align:right;color:var(--ink-muted-dark)}
+.ph{border:1px dashed currentColor;padding:2px 6px}
+
+/* sections */
+section{padding-block:var(--s-3xl)}
+h2{font:900 clamp(2.5rem,6vw,4.5rem)/.95 var(--display);font-stretch:125%;letter-spacing:-.02em;margin:0 0 var(--s-lg);text-wrap:balance;max-width:16ch;overflow-wrap:break-word;min-width:0}
+.lede{max-width:60ch;margin:0 0 var(--s-2xl);color:var(--ink-muted-dark);text-wrap:pretty}
+figure{margin:0;min-width:0}
+figcaption{font-size:1rem;margin-top:var(--s-sm);color:var(--ink-muted-dark)}
+.light figcaption,.light .lede{color:var(--ink-muted-light)}
+
+/* grounds */
+.grounds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-lg)}
+.panel{aspect-ratio:16/10;display:grid;place-items:center;padding:12%}
+.p-concrete{background:var(--concrete);color:var(--soot);--teeth:var(--red-deep)}
+.p-soot{background:var(--soot-2);color:var(--concrete);--teeth:var(--red);outline:1px solid var(--soot-rule);outline-offset:-1px}
+.p-red{background:var(--red);color:var(--soot)}
+.grounds .wide{grid-column:1/-1}
+.grounds .wide .panel{aspect-ratio:auto;min-height:clamp(220px,32vw,420px);padding:6% 14%}
+.clear{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:var(--s-xl);align-items:center;margin-top:var(--s-2xl)}
+.clear .box .frame{background:var(--soot-2);padding:var(--s-xl);outline:1px solid var(--soot-rule);outline-offset:-1px}
+.clear .zone{padding:4.6%;background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(229,72,30,.35) 6px 7px);outline:1px dashed var(--red);color:var(--concrete);--teeth:var(--red)}
+.clear .zone .inner{background:var(--soot-2)}
+.clear p{margin:0 0 var(--s-lg);max-width:46ch}
+.clear dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s-sm) var(--s-lg);margin:0;border-top:1px solid var(--soot-rule);padding-top:var(--s-md)}
+.clear dt{color:var(--ink-muted-dark)}
+.clear dd{margin:0}
+
+/* icon */
+.light{background:var(--concrete);color:var(--soot)}
+.sizes{display:flex;align-items:flex-end;gap:clamp(1.5rem,5vw,4rem);flex-wrap:wrap;padding-bottom:var(--s-2xl);border-bottom:1px solid var(--concrete-rule);margin-bottom:var(--s-2xl)}
+.sizes figure{--teeth:var(--soot)}
+.sizes .tile{display:grid;place-items:center;background:var(--soot);--teeth:var(--red);padding:16%}
+.sizes .t180{width:180px;height:180px}
+.sizes .t64{width:64px;height:64px;padding:10px}
+.sizes .s32{width:32px}
+.sizes .s16{width:16px}
+.mocks{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:var(--s-2xl);align-items:start}
+.bands{display:grid;gap:var(--s-lg)}
+.band .strip{position:relative;display:flex;align-items:center;gap:var(--s-md);height:64px;padding-inline:var(--s-lg) 76px;border-radius:6px 0 0 6px;
+  background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 1px,transparent 1px 3px)}
+.band .daymark{width:40px;height:40px;flex-shrink:0}
+.band .word{width:120px;flex-shrink:0}
+.band .day{margin-left:auto;font:900 1.25rem/1 var(--display);font-stretch:125%;white-space:nowrap}
+.band .clasp{position:absolute;right:0;top:0;bottom:0;width:56px;background:var(--clasp);clip-path:polygon(0 0,100% 0,100% 100%,0 100%,22% 50%)}
+.b1 .strip{background-color:var(--soot);color:var(--concrete);--clasp:var(--red)}
+.b1 .on{fill:var(--red)} .b1 .off{fill:#4a433e}
+.b2 .strip{background-color:var(--concrete-2);color:var(--soot);--clasp:var(--soot);outline:1px solid var(--concrete-rule);outline-offset:-1px}
+.b2 .on{fill:var(--red-deep)} .b2 .off{fill:var(--concrete-rule)}
+.b3 .strip{background-color:var(--red);color:var(--soot);--clasp:var(--soot)}
+.b3 .on{fill:var(--soot)} .b3 .off{fill:#a33a1c}
+.social{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-lg)}
+.avatar{aspect-ratio:1;border-radius:50%;background:var(--soot);display:grid;place-items:center;--teeth:var(--red)}
+.avatar .mark{width:56%}
+.avatar.alt{background:var(--red);--teeth:var(--soot)}
+.post{grid-column:1/-1}
+.post .card{aspect-ratio:4/5;background:var(--soot);color:var(--concrete);padding:10%;display:grid;grid-template-rows:auto 1fr auto;--teeth:var(--red)}
+.post .mark{width:30%}
+.post strong{align-self:end;font:900 clamp(1.75rem,3.4vw,2.75rem)/.95 var(--display);font-stretch:125%;letter-spacing:-.02em}
+.post .word{width:46%;margin-top:var(--s-lg)}
+
+/* palette */
+.chips{display:flex;min-height:clamp(320px,40vw,480px);gap:2px;background:var(--soot-rule);outline:1px solid var(--soot-rule)}
+.chip{display:flex;flex-direction:column;justify-content:space-between;gap:var(--s-lg);padding:var(--s-lg);min-width:0}
+.chip h3{font:900 clamp(1.5rem,2.6vw,2.25rem)/1 var(--display);font-stretch:125%;margin:0 0 var(--s-xs);overflow-wrap:break-word}
+.chip p{margin:0;max-width:30ch}
+.chip dl{margin:0;display:grid;gap:2px;font-variant-numeric:tabular-nums}
+.chip dd{margin:0}
+.c-soot{flex:5;background:var(--soot);color:var(--concrete)}
+.c-concrete{flex:3;background:var(--concrete);color:var(--soot)}
+.c-red{flex:2;background:var(--red);color:var(--soot)}
+.c-deep{flex:2.2;background:var(--red-deep);color:#f3efec}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-xl);margin-top:var(--s-xl)}
+.rules p{margin:0;color:var(--ink-muted-dark)}
+.rules strong{display:block;color:var(--concrete);font-weight:700}
+
+/* type */
+.specs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s-2xl) var(--s-xl)}
+.spec{padding-top:var(--s-lg);border-top:1px solid var(--concrete-rule);min-width:0}
+.spec .meta{display:flex;justify-content:space-between;gap:var(--s-md);color:var(--ink-muted-light);font-size:1rem;margin-bottom:var(--s-lg);flex-wrap:wrap}
+.spec .meta b{color:var(--soot)}
+.glyphs{font-family:var(--display);font-weight:900;font-stretch:125%;font-size:clamp(2rem,4.4vw,3.75rem);line-height:1.05;overflow-wrap:break-word;letter-spacing:-.01em;margin:0}
+.big{font:900 clamp(2.5rem,7vw,6rem)/.92 var(--display);font-stretch:125%;letter-spacing:-.025em;margin:0;overflow-wrap:break-word;text-wrap:balance;max-width:18ch}
+.cond{font:800 clamp(2.25rem,4.6vw,3.75rem)/.95 var(--display);font-stretch:62%;margin:0}
+.body{font-size:1.125rem;max-width:52ch;margin:0}
+.wide-spec{grid-column:1/-1}
+.word-spec .word{max-width:560px;color:var(--soot)}
+.note{font-size:1rem;color:var(--ink-muted-light);margin:var(--s-md) 0 0;max-width:56ch}
+
+footer{padding-block:var(--s-2xl)}
+footer .wrap{display:flex;gap:var(--s-lg);align-items:center;color:var(--ink-muted-dark);font-size:1rem}
+footer .mark{width:28px;flex-shrink:0;--teeth:var(--red)}
+footer p{margin:0;max-width:70ch}
+
+@media (max-width:900px){
+  .mocks,.clear{grid-template-columns:minmax(0,1fr)}
+  .rules{grid-template-columns:minmax(0,1fr)}
+  .chips{flex-direction:column;min-height:0}
+  .chip{min-height:150px}
+}
+@media (max-width:640px){
+  .stage .wide-lock{display:none}
+  .stage .stack{display:grid;gap:var(--s-lg);color:var(--concrete);--teeth:var(--red)}
+  .stage .stack .mark{width:46%}
+  .hero-foot{grid-template-columns:minmax(0,1fr)}
+  .hero-foot .tba{justify-self:start;text-align:left}
+  .grounds,.specs{grid-template-columns:minmax(0,1fr)}
+  .panel{padding:10%}
+  .band .word{display:none}
+  .top nav ul{gap:var(--s-md)}
+}
+
+</style>
+</head>
+<body>
+<header class="hero wrap">
+  <div class="top">
+    <a class="home" href="#top"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 54V10L22 54ZM22 54V10L42 54ZM42 54V10L62 54Z"/></svg><span>Ruido identity</span></a>
+    <nav aria-label="Sections"><ul>
+      <li><a href="#grounds">Light and dark</a></li>
+      <li><a href="#icon">Icon</a></li>
+      <li><a href="#palette">Palette</a></li>
+      <li><a href="#type">Type</a></li>
+    </ul></nav>
+  </div>
+  <h1 class="stage" id="top">
+    <span class="vh">Ruido</span>
+    <span class="wide-lock"><svg class="lockup" viewBox="-235.3 -146 943.1 152" aria-hidden="true"><path class="teeth" d="M-229.3 0V-140L-162.6 0ZM-162.6 0V-140L-95.9 0ZM-95.9 0V-140L-29.2 0Z"/><path class="name" d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg></span>
+    <span class="stack"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 54V10L22 54ZM22 54V10L42 54ZM42 54V10L62 54Z"/></svg><svg class="word" viewBox="10 -144 696 150" aria-hidden="true"><path d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg></span>
+  </h1>
+  <div class="hero-foot">
+    <p>Three days of electronic music inside an abandoned factory in Mexico City. The mark is the factory's sawtooth roof and a synth's sawtooth wave: one tooth for every day.</p>
+    <p class="tba">Dates and address: <span class="ph">to be announced</span></p>
+  </div>
+</header>
+
+<main>
+<section id="grounds" aria-labelledby="h-grounds">
+  <div class="wrap">
+    <h2 id="h-grounds">Concrete by day, soot by night</h2>
+    <p class="lede">The name is always soot or concrete. The teeth carry the red: bright red lead on dark grounds, deep red lead on light ones, so the mark never drops under 3:1.</p>
+    <div class="grounds">
+      <figure><div class="panel p-concrete"><svg class="lockup" viewBox="-235.3 -146 943.1 152" role="img" aria-label="Ruido logo on concrete"><path class="teeth" d="M-229.3 0V-140L-162.6 0ZM-162.6 0V-140L-95.9 0ZM-95.9 0V-140L-29.2 0Z"/><path class="name" d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg></div><figcaption>On concrete: soot name, deep red lead teeth (4.2:1)</figcaption></figure>
+      <figure><div class="panel p-soot"><svg class="lockup" viewBox="-235.3 -146 943.1 152" role="img" aria-label="Ruido logo on soot"><path class="teeth" d="M-229.3 0V-140L-162.6 0ZM-162.6 0V-140L-95.9 0ZM-95.9 0V-140L-29.2 0Z"/><path class="name" d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg></div><figcaption>On soot: concrete name, red lead teeth (4.8:1)</figcaption></figure>
+      <figure class="wide"><div class="panel p-red"><svg class="lockup" viewBox="-235.3 -146 943.1 152" role="img" aria-label="Ruido logo in one colour on red lead"><path class="teeth" d="M-229.3 0V-140L-162.6 0ZM-162.6 0V-140L-95.9 0ZM-95.9 0V-140L-29.2 0Z"/><path class="name" d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg></div><figcaption>One colour on red lead: soot only, for wristbands, fences and stage banners</figcaption></figure>
+      <div class="clear">
+        <figure class="box"><div class="frame"><div class="zone"><div class="inner"><svg class="lockup" viewBox="-235.3 -146 943.1 152" role="img" aria-label="Ruido logo with its clear space marked"><path class="teeth" d="M-229.3 0V-140L-162.6 0ZM-162.6 0V-140L-95.9 0ZM-95.9 0V-140L-29.2 0Z"/><path class="name" d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg></div></div></div><figcaption>Hatched: the clear space, one I-stem wide on every side</figcaption></figure>
+        <div>
+          <p>The I in the name is cut like one more tooth, at the same angle as the mark, so name and mark read as one roofline.</p>
+          <dl>
+            <dt>Clear space</dt><dd>The width of the I, on all four sides</dd>
+            <dt>Smallest lockup</dt><dd>120 px wide on screen, 30 mm in print</dd>
+            <dt>Below that</dt><dd>The mark alone</dd>
+            <dt>Never</dt><dd>Gradients, outlines, a retyped name, red on red</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="icon" class="light" aria-labelledby="h-icon">
+  <div class="wrap">
+    <h2 id="h-icon">Three teeth, any size</h2>
+    <p class="lede">Solid triangles with wide gaps, so the mark holds at 16 px in a browser tab and at arm's length on a wrist. Each day lights its own tooth.</p>
+    <div class="sizes">
+      <figure><div class="tile t180"><svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Ruido mark at 180 pixels"><path d="M2 54V10L22 54ZM22 54V10L42 54ZM42 54V10L62 54Z"/></svg></div><figcaption>180 px app icon</figcaption></figure>
+      <figure><div class="tile t64"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 54V10L22 54ZM22 54V10L42 54ZM42 54V10L62 54Z"/></svg></div><figcaption>64 px</figcaption></figure>
+      <figure><div class="s32"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 54V10L22 54ZM22 54V10L42 54ZM42 54V10L62 54Z"/></svg></div><figcaption>32 px</figcaption></figure>
+      <figure><div class="s16"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 54V10L22 54ZM22 54V10L42 54ZM42 54V10L62 54Z"/></svg></div><figcaption>16 px</figcaption></figure>
+    </div>
+    <div class="mocks">
+      <div class="bands"><figure class="band b1"><div class="strip"><svg class="daymark" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 54V10L22 54Z" class="on"/><path d="M22 54V10L42 54Z" class="off"/><path d="M42 54V10L62 54Z" class="off"/></svg><svg class="word" viewBox="10 -144 696 150" aria-hidden="true"><path d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg><span class="day">Day 1</span><span class="clasp" aria-hidden="true"></span></div><figcaption>Day 1 wristband in soot: tooth 1 lit</figcaption></figure><figure class="band b2"><div class="strip"><svg class="daymark" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 54V10L22 54Z" class="off"/><path d="M22 54V10L42 54Z" class="on"/><path d="M42 54V10L62 54Z" class="off"/></svg><svg class="word" viewBox="10 -144 696 150" aria-hidden="true"><path d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg><span class="day">Day 2</span><span class="clasp" aria-hidden="true"></span></div><figcaption>Day 2 wristband in concrete: tooth 2 lit</figcaption></figure><figure class="band b3"><div class="strip"><svg class="daymark" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 54V10L22 54Z" class="off"/><path d="M22 54V10L42 54Z" class="off"/><path d="M42 54V10L62 54Z" class="on"/></svg><svg class="word" viewBox="10 -144 696 150" aria-hidden="true"><path d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg><span class="day">Day 3</span><span class="clasp" aria-hidden="true"></span></div><figcaption>Day 3 wristband in red lead: tooth 3 lit</figcaption></figure></div>
+      <div class="social">
+        <figure><div class="avatar"><svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Ruido profile picture on soot"><path d="M2 54V10L22 54ZM22 54V10L42 54ZM42 54V10L62 54Z"/></svg></div><figcaption>Profile picture</figcaption></figure>
+        <figure><div class="avatar alt"><svg class="mark" viewBox="0 0 64 64" role="img" aria-label="Ruido profile picture on red lead"><path d="M2 54V10L22 54ZM22 54V10L42 54ZM42 54V10L62 54Z"/></svg></div><figcaption>Announcement variant</figcaption></figure>
+        <figure class="post"><div class="card"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 54V10L22 54ZM22 54V10L42 54ZM42 54V10L62 54Z"/></svg><strong>Lineup<br>coming soon</strong><svg class="word" viewBox="10 -144 696 150" aria-hidden="true"><path d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg></div><figcaption>Post template, 4:5</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="palette" aria-labelledby="h-palette">
+  <div class="wrap">
+    <h2 id="h-palette">Soot, concrete, red lead</h2>
+    <p class="lede">Taken from the building: the blackened floor, the bare walls, and the red lead primer on every steel beam. The widths below are how much of a layout each one should own.</p>
+    <div class="chips">
+      <div class="chip c-soot"><div><h3>Soot</h3><p>The ground for everything after dark.</p></div><dl><dd>#120E0B</dd><dd>oklch(16.5% 0.009 60)</dd></dl></div>
+      <div class="chip c-concrete"><div><h3>Concrete</h3><p>Paper, posters, the daylight versions.</p></div><dl><dd>#D4CEC7</dd><dd>oklch(85% 0.009 60)</dd></dl></div>
+      <div class="chip c-red"><div><h3>Red lead</h3><p>Teeth, wristbands, the one action.</p></div><dl><dd>#E5481E</dd><dd>oklch(62% 0.2 35)</dd></dl></div>
+      <div class="chip c-deep"><div><h3>Deep red lead</h3><p>Red on light grounds.</p></div><dl><dd>#B12B00</dd><dd>oklch(50% 0.176 35)</dd></dl></div>
+    </div>
+    <div class="rules">
+      <p><strong>Concrete on soot, 12.3:1</strong>All text on dark grounds.</p>
+      <p><strong>Soot on red lead, 4.8:1</strong>The only way to set anything on red.</p>
+      <p><strong>Red lead on concrete, 2.6:1</strong>Fails. Use deep red lead there (4.2:1, logo and large type only).</p>
+    </div>
+  </div>
+</section>
+
+<section id="type" class="light" aria-labelledby="h-type">
+  <div class="wrap">
+    <h2 id="h-type">One family, pushed to its edges</h2>
+    <p class="lede">Archivo Black for the name, and Archivo's variable width axis for everything else: wide and black for shouting, narrow for the timetable, regular for reading.</p>
+    <div class="specs">
+      <div class="spec wide-spec word-spec">
+        <div class="meta"><span><b>Archivo Black</b>, the wordmark only</span><span>Outlined, never retyped</span></div>
+        <svg class="word" viewBox="10 -144 696 150" aria-hidden="true"><path d="M145.4 -95.4Q145.4 -82.8 138.6 -72.6Q131.8 -62.4 118.8 -57.6L118.8 -57.6L149.4 0L99.8 0L75.4 -50.2L59 -50.2L59 0L14.8 0L14.8 -137.6L99 -137.6Q113.8 -137.6 124.3 -131.9Q134.8 -126.2 140.1 -116.5Q145.4 -106.8 145.4 -95.4L145.4 -95.4ZM100.4 -93.6Q100.4 -99 96.8 -102.6Q93.2 -106.2 88 -106.2L88 -106.2L59 -106.2L59 -80.8L88 -80.8Q93.2 -80.8 96.8 -84.5Q100.4 -88.2 100.4 -93.6L100.4 -93.6ZM302 -55.4Q302 -27.2 284.2 -12.4Q266.4 2.4 233.6 2.4L233.6 2.4Q200.8 2.4 182.9 -12.4Q165 -27.2 165 -55.4L165 -55.4L165 -137.6L209.2 -137.6L209.2 -56Q209.2 -44.4 215.4 -37.5Q221.6 -30.6 233.4 -30.6L233.4 -30.6Q245.2 -30.6 251.5 -37.6Q257.8 -44.6 257.8 -56L257.8 -56L257.8 -137.6L302 -137.6L302 -55.4ZM331.6 0V-140L375.8 -47.2V0ZM465 -137.6Q537.2 -137.6 537.2 -68.8L537.2 -68.8Q537.2 0 465 0L465 0L405.4 0L405.4 -137.6L465 -137.6ZM449.6 -104.6L449.6 -33L464.2 -33Q492 -33 492 -62.8L492 -62.8L492 -74.8Q492 -104.6 464.2 -104.6L464.2 -104.6L449.6 -104.6ZM627.4 -140Q663 -140 682.4 -121.8Q701.8 -103.6 701.8 -68.8L701.8 -68.8Q701.8 -34 682.4 -15.8Q663 2.4 627.4 2.4L627.4 2.4Q591.8 2.4 572.5 -15.7Q553.2 -33.8 553.2 -68.8L553.2 -68.8Q553.2 -103.8 572.5 -121.9Q591.8 -140 627.4 -140L627.4 -140ZM627.4 -107Q613.2 -107 605.8 -98.4Q598.4 -89.8 598.4 -75.2L598.4 -75.2L598.4 -62.4Q598.4 -47.8 605.8 -39.2Q613.2 -30.6 627.4 -30.6L627.4 -30.6Q641.6 -30.6 649.1 -39.2Q656.6 -47.8 656.6 -62.4L656.6 -62.4L656.6 -75.2Q656.6 -89.8 649.1 -98.4Q641.6 -107 627.4 -107L627.4 -107Z"/></svg>
+        <p class="note">The I is redrawn as a tooth. Use the supplied artwork; typing RUIDO in Archivo Black loses the cut.</p>
+      </div>
+      <div class="spec wide-spec">
+        <div class="meta"><span><b>Archivo</b> width 125, weight 900</span><span>Headlines and announcements</span></div>
+        <p class="big">Bring earplugs. The concrete hits back.</p>
+      </div>
+      <div class="spec">
+        <div class="meta"><span><b>Archivo</b> width 62, weight 800</span><span>Timetables and signage</span></div>
+        <p class="cond">Main hall<br>Boiler room<br>Loading dock</p>
+        <p class="note">Stage names are placeholders until the floor plan is set.</p>
+      </div>
+      <div class="spec">
+        <div class="meta"><span><b>Archivo</b> width 100, weight 400</span><span>Reading text, 17 px and up</span></div>
+        <p class="body">Doors, set times, water points and the last metro home. Reading text stays plain and regular so the loud parts stay loud.</p>
+      </div>
+      <div class="spec wide-spec">
+        <div class="meta"><span>Character set</span><span>Archivo width 125, weight 900</span></div>
+        <p class="glyphs">ABCDEFGHIJKLM NOPQRSTUVWXYZ 0123456789</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 54V10L22 54ZM22 54V10L42 54ZM42 54V10L62 54Z"/></svg>
+    <p>Ruido identity. Wordmark drawn from Archivo Black (SIL Open Font License), outlined and modified. Dates, venue address and lineup are not set yet.</p>
+  </div>
+</footer>
+</body>
+
+</html>

@@ -38,8 +38,8 @@ The prompt library is a catalogue of builds that already looked good. Studio wor
    node scripts/find.mjs "<mood words>" --type prompt --mood editorial --limit 10
    node scripts/find.mjs "<industry>" --type design --limit 5
    ```
-2. **Open the five to ten closest prompts** and read them whole (more if the page is long), with their linked design system when the search shows one. Industry matters less than look: a fashion hero can carry a flower farm.
-3. **Pull parts** for every section the page will need, from any prompt:
+2. **Open the three to five closest prompts** and read them whole, with their linked design system when the search shows one. Pick the one whose first screen is strongest as the base. Industry matters less than look: a fashion hero can carry a flower farm.
+3. **Pull parts** only for the sections the base does not have (at most two donor prompts):
    ```bash
    node scripts/parts.mjs hero "<mood or effect>" --limit 8
    node scripts/parts.mjs nav --mood <mood> --print 2
@@ -50,11 +50,11 @@ The prompt library is a catalogue of builds that already looked good. Studio wor
    ```
    BASE        the prompt whose hero composition and system the page builds on, plus the other prompts that are the base for whole parts (or "none" with the reason)
    HERO        composition, scale and effect, and where it comes from
-   SECTIONS    a part lifted for every section, each with its source id
+   SECTIONS    the base's own sections, plus a donor part for each section it lacks, with its source id
    TYPE        the pairing and its source, or a choice made with studio/type.md
    PALETTE     the approach borrowed (dark video + glass, warm paper + one ink…)
    MOTION      the entrance and the one signature effect, with source
-   MOVES       five to ten specific decisions lifted as values (sizes, tracking, crops, surfaces, labels, timings), each with its source
+   MOVES       three to five specific decisions lifted as values (sizes, tracking, crops, surfaces, labels, timings), each with its source
    ```
 
 A strong base prompt is the default: rebuild it with this product's content, logo, palette and concept, and add the sections it lacks from other parts in the same system. Invent a composition only where the library has nothing that fits, and say so.
@@ -88,7 +88,7 @@ Build the system before the page. Each step has a reference and most have a scri
 | Type | the steal sheet's pairing first (`node scripts/fonts.mjs --pairings`); otherwise `studio/type.md` and `fonts.mjs` for two or three candidates; set the real headline in each and choose | font links, `--font-*` tokens |
 | Logo | `studio/logo.md`: concept, mark, wordmark (`node scripts/wordmark.mjs`), lockups, favicon | `brand/logo.svg`, `brand/mark.svg`, `brand/favicon.svg` |
 | Voice | `foundations/craft.md` § Copy: headline, subhead and three section heads written first, in the voice | copy deck in the handoff |
-| Imagery | `studio/imagery.md`: what the page shows and where it comes from; `node scripts/photos.mjs` for stand-ins | image plan, credits |
+| Imagery | `studio/imagery.md`: what the page shows and where it comes from; `node scripts/media.mjs` for real stand-ins | image plan, credits |
 | Motion | `studio/motion.md`: the one signature moment and the grammar for everything else | motion tokens and the moment |
 
 Then write the **design brief** (§ 5) and a `DESIGN.md` (`commands/document.md`) once the page is built, so later pages inherit the system.

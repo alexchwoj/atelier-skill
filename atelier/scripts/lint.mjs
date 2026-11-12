@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 // Static slop check for HTML, CSS, JSX/TSX, Vue, Svelte and Astro files.
-// node lint.mjs <file|folder>... [--json] [--quiet]
+// node lint.mjs <file|folder>... [--prompt <source prompt.md>]... [--json] [--quiet]
 // FAIL = Baseline (fix it). WARN = a tell (fix it, or keep it on purpose and say why).
+// --prompt: a tell that the source prompt itself asks for is the spec, not a tell. It is reported
+// as KEPT and does not count.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -12,9 +14,11 @@ const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'build', '.next', 'ou
 const args = process.argv.slice(2);
 const json = args.includes('--json');
 const quiet = args.includes('--quiet');
-const targets = args.filter((a) => !a.startsWith('--'));
+const promptFiles = args.flatMap((a, i) => (args[i - 1] === '--prompt' ? [a] : []));
+const kind = args.flatMap((a, i) => (args[i - 1] === '--kind' ? [a] : []))[0];
+const targets = args.filter((a, i) => !a.startsWith('--') && args[i - 1] !== '--prompt' && args[i - 1] !== '--kind');
 if (!targets.length) {
-  console.log('usage: node lint.mjs <file|folder>... [--json] [--quiet]');
+  console.log('usage: node lint.mjs <file|folder>... [--prompt <source prompt.md>]... [--kind game] [--json] [--quiet]');
   process.exit(0);
 }
 
@@ -28,6 +32,7 @@ function collect(p, out = []) {
 }
 
 const files = targets.flatMap((t) => collect(t));
+const promptText = promptFiles.map((p) => (fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : (console.error(`prompt not found: ${p}`), ''))).join('\n');
 const findings = [];
 const add = (level, rule, file, line, msg) => findings.push({ level, rule, file, line, msg });
 
@@ -78,9 +83,9 @@ const RULES = [
   ['transition-all', 'FAIL', /transition\s*:\s*all\b|transition-property\s*:\s*all\b|\btransition-all\b/g, 'transition on all properties: list them (transform, opacity, colours)', 'code'],
   ['animate-layout', 'FAIL', /transition(-property)?\s*:[^;{}]*\b(width|height|top|left|margin|padding)\b[^;{}]*;/g, 'transitioning a layout property: animate transform/opacity instead', 'code'],
   ['keyframes-layout', 'FAIL', /@keyframes\s+[\w-]+\s*\{(?:[^{}]*\{[^{}]*\})*?[^{}]*\{[^{}]*\b(width|height|top|left)\s*:[^{}]*\}/g, 'keyframes animating width/height/top/left: use transform (scaleX, translate)', 'code'],
-  ['focus-fade', 'FAIL', /:focus(-visible)?\s*\{[^}]*\btransition\s*:/g, 'focus ring that transitions in: focus must appear instantly', 'code'],
+  ['focus-fade', 'FAIL', /:focus(-visible)?\s*\{[^}]*\btransition\s*:(?!\s*none\b)/g, 'focus ring that transitions in: focus must appear instantly', 'code'],
   ['overflow-hidden-root', 'WARN', /(html|body)\s*(,\s*(html|body)\s*)?\{[^}]*overflow-x\s*:\s*hidden/g, 'overflow-x: hidden on html/body breaks sticky: use overflow-x: clip', 'code'],
-  ['100vw', 'WARN', /(?<!sizes=["'][^"']*)\b100vw\b|\bw-screen\b/g, '100vw/w-screen widths cause horizontal scroll: use 100% / w-full', 'code'],
+  ['100vw', 'WARN', /(?<!sizes=["'][^"']*)(?<!(min|max|clamp)\([^;{}]*)\b100vw\b|\bw-screen\b/g, '100vw/w-screen widths cause horizontal scroll: use 100% / w-full', 'code'],
   ['video-autoplay', 'FAIL', /<video\b(?=[^>]*\bautoplay)(?![^>]*\bmuted)[^>]*>/gi, 'autoplay video without muted', 'code'],
   ['video-inline', 'WARN', /<video\b(?=[^>]*\bautoplay)(?![^>]*\bplaysinline|[^>]*playsInline)[^>]*>/gi, 'autoplay video without playsinline (iOS goes fullscreen)', 'code'],
   ['img-alt', 'FAIL', /<img\b(?![^>]*\balt\s*=)[^>]*>/gi, 'image without alt (use alt="" when decorative)', 'code'],
@@ -103,12 +108,26 @@ const RULES = [
   ['tracked-caps', 'WARN', /\buppercase\b[^"'`]{0,80}\btracking-(wide|wider|widest|\[0?\.\d+em\])|\btracking-(wide|wider|widest|\[0?\.\d+em\])[^"'`]{0,80}\buppercase\b|text-transform\s*:\s*uppercase[^}]*letter-spacing\s*:\s*0?\.(0[4-9]|[1-9])|letter-spacing\s*:\s*0?\.(0[4-9]|[1-9])\d*em[^}]*text-transform\s*:\s*uppercase/g, 'tracked uppercase label (eyebrow / caps tag): body face, sentence case, untracked', 'code'],
 
   // Tells: layout
-  ['vh-hero', 'WARN', /\bh-screen\b|\bmin-h-screen\b|(?<![sd])\b100vh\b/g, 'vh/h-screen height: use svh/dvh (min-h-[100svh]) so mobile bars do not cut it', 'code'],
+  ['vh-hero', 'WARN', /\bh-screen\b(?![^"'`]*\b(h|min-h)-\[100[sd]vh\])|\bmin-h-screen\b(?![^"'`]*\bmin-h-\[100[sd]vh\])|(?<![sd])\b100vh\b(?![^};]*;[^}]*\b100[sd]vh\b)/g, 'vh/h-screen height: use svh/dvh (min-h-[100svh]) so mobile bars do not cut it', 'code'],
 
   // Tells: motion (references/motion/)
-  ['scale-zero', 'WARN', /scale\(\s*0(\.0+)?\s*\)|\bscale-0\b|scale:\s*0\s*[,}]/g, 'entrance from scale(0): start at scale(0.95-0.97) with opacity 0', 'code'],
+  ['scale-zero', 'WARN', /(?<![\w-])scale\(\s*0(\.0+)?\s*\)|\bscale-0\b|(?<![\w-])scale:\s*0\s*[,}]/g, 'entrance from scale(0): start at scale(0.95-0.97) with opacity 0', 'code'],
   ['heavy-blur', 'WARN', /(@keyframes[^{]*\{[^@]*?|transition[^;{}]*filter[^;{}]*;[^}]*?)blur\(\s*(2[1-9]|[3-9]\d|\d{3,})px\)/g, 'animated blur above 20px: costly (worst in Safari); 2-5px is enough to glue a crossfade', 'code'],
   ['will-change-wide', 'WARN', /(\*|html|body|:root)\s*\{[^}]*will-change\s*:/g, 'will-change on everything: put it only on the element that animates, only while it animates', 'code'],
+  ['hover-only', 'FAIL', /\bopacity-0\b(?=[^"'`]*\bgroup-hover:opacity-100\b)(?![^"'`]*\b(group-)?focus(-within|-visible)?:opacity-100\b)[^"'`]*/g, 'content shown only on hover: touch and keyboard never see it (add group-focus-within:opacity-100, or keep it visible)', 'code'],
+  ['flash-loop', 'FAIL', /animation\s*:[^;{}]*\b(glitch|flicker|flash|strobe)[\w-]*[^;{}]*\b(0?\.(0\d|[12]\d|3[0-2])s|([1-9]\d|[12]\d\d|3[0-2]\d)ms)\b[^;{}]*\binfinite\b|animation\s*:[^;{}]*\b(0?\.(0\d|[12]\d|3[0-2])s|([1-9]\d|[12]\d\d|3[0-2]\d)ms)\b[^;{}]*\b(glitch|flicker|flash|strobe)[\w-]*[^;{}]*\binfinite\b/g, 'flashing loop faster than 3 per second (WCAG 2.3.1)', 'code'],
+  ['overshoot-ease', 'WARN', /cubic-bezier\(\s*[\d.]+\s*,\s*-(0?\.[1-9]|[1-9])[\d.]*\s*,[^)]*\)|cubic-bezier\(\s*[\d.]+\s*,\s*-?[\d.]+\s*,\s*[\d.]+\s*,\s*(1\.[1-9]|[2-9])[\d.]*\s*\)|\bbounce\s*:\s*0?\.[3-9]|\bease\s*:\s*["'](back|elastic|bounce)[\w.]*["']|\banimate-bounce\b/g, 'overshooting or bouncing curve: keep overshoot to gestures, success and celebration (motion/principles.md § 5)', 'code'],
+  ['float-loop', 'WARN', /animation\s*:[^;{}]*\b(float|floating|bob|bobbing|levitate|drift|hover-?y)[\w-]*\b[^;{}]*\binfinite\b|animation\s*:[^;{}]*\binfinite\b[^;{}]*\b(float|floating|bob|bobbing|levitate|drift)[\w-]*|\banimate-(float|bob|drift)\b|animate=\{\{\s*y\s*:\s*\[\s*0\s*,\s*-?\d+\s*,\s*0\s*\]/g, 'floating or bobbing loop: still, depth from composition', 'code'],
+  ['animated-bg', 'WARN', /animation\s*:[^;{}]*\b(blob|aurora|gradient|bg-pan|background-pan|move-bg|mesh)[\w-]*\b[^;{}]*\binfinite\b|animation\s*:[^;{}]*\binfinite\b[^;{}]*\b(blob|aurora|gradient|bg-pan|background-pan|move-bg|mesh)[\w-]*|\banimate-(blob|aurora|gradient)\b/g, 'animated blob / aurora / gradient background: a still surface, or one slow loop that stops off-screen', 'code'],
+  ['shimmer-fx', 'WARN', /\b(ShinyText|AnimatedGradientText|ShimmerButton|BorderBeam|ShineBorder|Meteors|SparklesCore|BackgroundBeams|MovingBorder|AnimatedBeam|AuroraBackground|LampContainer|WavyBackground)\b|@property\s+--(angle|border-angle|rotation|gradient-angle)\b|(background-clip\s*:\s*text|\bbg-clip-text\b)[^}]{0,200}\banimation\b/g, 'shimmer, beam or rotating-border effect: a hairline and a lightness step', 'code'],
+  ['bounce-arrow', 'WARN', /\banimate-bounce\b[^>]*>\s*<(svg|i\b|Chevron|Arrow)|<(ChevronDown|ArrowDown)\b[^>]*\banimate-bounce\b/g, 'bouncing scroll arrow: delete it, let the next section show above the fold', 'code'],
+  ['typewriter', 'WARN', /\b(Typewriter|TypeAnimation|useTypewriter|ReactTyped)\b|new\s+Typed\(|@keyframes\s+(typing|typewriter|blink-caret)\b/g, 'typewriter text: the headline is complete at first paint', 'code'],
+  ['replay-on-scroll', 'WARN', /\bonce\s*:\s*false\b|data-aos-once\s*=\s*["']false|\bmirror\s*:\s*true\b/g, 'reveal that replays every time it is scrolled past: once, or not at all', 'code'],
+  ['tilt', 'WARN', /\b(react-parallax-tilt|vanilla-tilt|VanillaTilt|ParallaxTilt|useTilt)\b|rotate[XY]\(\s*\$\{[^}]*(mouse|client[XY]|pointer)/g, '3D tilt following the pointer: none unless 3D is the product', 'code'],
+  ['hover-img-zoom', 'WARN', /\bgroup-hover:scale-(10[5-9]|1[1-5]\d)\b|:hover\s+img[^{]*\{[^}]*scale\(/g, 'image zooming inside a card on hover: the caption or link changes instead', 'code'],
+  ['scroll-hijack', 'WARN', /\b(Lenis|LocomotiveScroll|locomotive-scroll|ScrollSmoother)\b|addEventListener\(\s*['"]wheel['"][\s\S]{0,300}?preventDefault\(\)/g, 'smooth-scroll library or wheel hijack: native scroll unless the concept needs it (motion/scroll.md § 6)', 'code'],
+  ['fake-latency', 'WARN', /setTimeout\(\s*\(\)\s*=>\s*set(Is)?Loading\(\s*false\s*\)\s*,\s*\d{3,4}\s*\)|new\s+Promise\(\s*\(?\s*(r|res|resolve)\s*\)?\s*=>\s*setTimeout\(\s*(r|res|resolve)\s*,\s*\d{3,4}\s*\)\s*\)/g, 'fake loading delay: render at once; a spinner only for real waits', 'code'],
+  ['text-parallax', 'WARN', /<motion\.(h[1-6]|p)\b[^>]*style=\{\{[^}]*\by\s*[:,}]/g, 'parallax on text: text stays put', 'code'],
 
   // Tells: copy
   ['buzzword', 'WARN', /\b(seamless(ly)?|robust|empower(s|ing)?|supercharge[ds]?|elevate[sd]?|effortless(ly)?|unlock(s|ing)?|unleash(es|ing)?|revolutioni[sz]e[sd]?|next[- ]gen(eration)?|world[- ]class|best[- ]in[- ]class|cutting[- ]edge|game[- ]changer|industry[- ]leading|future[- ]proof|harness the power|take .{1,20} to the next level)\b/gi, 'buzzword', 'text'],
@@ -118,10 +137,13 @@ const RULES = [
   ['arrow-glued', 'WARN', /\w\s?(→|->|›|»)\s*$/gm, 'arrow glued to link text: let the verb be the label', 'text'],
   ['middle-dots', 'WARN', /\S\s·\s\S[^·\n]*\s·\s\S/g, 'middle-dot meta string: use line breaks or columns', 'text'],
   ['invented-stats', 'WARN', /\b\d[\d,.]*\s?(k|m|\+)\+?\s+(users|customers|teams|companies|downloads|developers|businesses|creators)\b|\b99\.9+%|\btrusted by\b|\b[45]\.\d\s?\/\s?5\b|★★★★/gi, 'metric/rating/"trusted by": only if the user gave it, otherwise mark as placeholder', 'text'],
+  ['fake-metadata', 'WARN', /\d{1,3}(\.\d+)?\s?°\s?(\d{1,2}\s?[′']\s?)?[NS]\b|\bN[º°]\.?\s?\d+|№\s?\d+|§\s?\d+|\b0\d\s?\/\s?0?\d\b|\b(pass|step|deck|card|plate|lot|batch|serial|vol\.?|issue|chapter|frame|unit)\s+0?\d+\s*(of|\/)\s*\d+|\b(card|plate|lot|batch|serial|ref|unit)\.?\s*#?\d{3,}\b|\best\.?\s+(19|20)\d\d\b|\b[a-z]{2,3}-\d{4,}\b|\b(plate|pass|deck|card|lot|batch|frame|fig\.?|no\.?|index|entry|file|case|item|vol\.?)\s+0\d+\b/gi, 'decorative metadata (coordinates, Nº, §, 01 / 04, serials, "Est.") reads as generated: delete it, or keep a number only when the reader needs it', 'text'],
+  ['fake-metadata-js', 'WARN', /padStart\(\s*[23]\s*,\s*['"`]0['"`]\s*\)/g, 'zero-padded counter built in script (Plate 01, 02 / 09): decorative numbering reads as generated', 'code'],
   ['stock-cta', 'WARN', /^(learn more|get started|book a demo|click here|read more|discover more)$/gi, 'stock action label: use the verb of the real action', 'text'],
 ];
 
 let anyMotion = false, anyReduced = false, anyInteractive = false, anyFocusVisible = false;
+let anyMotionLib = false, anyMotionLibReduced = false, anyGsap = false, anyGsapReduced = false;
 
 for (const file of files) {
   const src = stripComments(fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n'));
@@ -134,6 +156,61 @@ for (const file of files) {
   }
   const stickies = [...src.matchAll(/position\s*:\s*sticky\s*;\s*top\s*:\s*0\b|\bsticky\b[^"'`]*\btop-0\b/g)];
   if (stickies.length > 1) add('WARN', 'double-sticky', rel, lineOf(src, stickies[1].index), 'two sticky elements at top 0: the second slides under the first');
+
+  // Motion tells that only show up as a count (references/motion/lint.md).
+  const counted = (id, re, min, msg) => {
+    const hits = [...src.matchAll(re)];
+    if (hits.length >= min) add('WARN', id, rel, lineOf(src, hits[0].index), `${msg} (${hits.length}×)`);
+  };
+  counted('reveal-everywhere', /\bwhileInView\s*=|\bdata-aos\s*=|<(FadeIn|FadeInUp|FadeUp|Reveal|ScrollReveal|AnimateOnScroll|AnimatedSection)\b|\bdata-reveal\b|class(Name)?=["'][^"']*\b(reveal|fade-up|fade-in-up|animate-on-scroll)\b/g, 6,
+    'scroll reveal on many elements: two to four reveals carry a story, headings and copy stay put');
+  counted('fade-up-preset', /initial\s*=\s*\{\{\s*opacity\s*:\s*0\s*,\s*y\s*:\s*\d+\s*\}\}|\bopacity-0\b[^"'`]*\btranslate-y-(2|3|4|5|6|8|10|12)\b|@keyframes\s+fade-?(in-?)?up\b/g, 3,
+    'the same fade-and-rise preset on many elements: vary distance by role, reveal fewer things');
+  counted('delay-chain', /delay\s*:\s*(i|index|idx|\w+Index)\s*\*\s*0?\.(0[89]|[1-9])\d*\b|animationDelay\s*:\s*`\$\{\s*\w+\s*\*\s*(0?\.[1-9]|[89]\d|[1-9]\d\d)|staggerChildren\s*:\s*0?\.(0[89]|[1-9])|transition-delay\s*:\s*calc\(\s*var\(--\w+\)\s*\*\s*([89]\d|[1-9]\d\d)ms\)|stagger\s*:\s*0?\.(0[89]|[1-9])\d*\b/g, 1,
+    'delay chain of 80ms or more per item: step min(40ms, 500ms ÷ n), groups under 500ms');
+  counted('delay-chain', /\b(animation-)?delay-(100|150|200|300|400|500|700|1000)\b/g, 3, 'delay classes stepping 100ms, 200ms, 300ms…: step min(40ms, 500ms ÷ n)');
+  counted('hover-scale', /\bhover:scale-(10[1-9]|11\d|\[1\.\d+\])\b|:hover[^{]*\{[^}]*scale\(\s*1\.(0[2-9]|[1-9])/g, 3, 'hover scale on many elements: one signal on the container; scale is for press');
+  counted('count-up', /\b(CountUp|useCountUp|NumberTicker|AnimatedNumber|AnimatedCounter|animateValue|countUp)\b|\bdata-count(-to|-target)?\s*=/g, 2, 'count-up on several figures: set the number; roll only a value that really changes');
+  counted('text-parallax', /\b(data-speed|data-rellax-speed|data-scroll-speed|data-lag)\s*=|useTransform\(\s*scrollYProgress/g, 3, 'parallax on many layers: at most one image layer, never text');
+  counted('split-text', /new\s+SplitText\(|SplitText\.create\(|\.split\(\s*['"`]{2}\s*\)\s*\.map\(/g, 2, 'several split-text animations: one headline per page at most');
+
+  // Loops: pulse, ping and glow on things that are not loaders; spins on things that are not spinners.
+  for (const m of src.matchAll(/class(Name)?=["'{][^"'}]*\banimate-(pulse|ping)\b[^"'}]*/g)) {
+    if (!/skeleton|\bbg-(gray|slate|zinc|neutral|stone|muted)-|aria-busy|loading/i.test(m[0])) add('WARN', 'infinite-loop', rel, lineOf(src, m.index), `endless ${m[2]} on something that is not a loader: static emphasis, or a live state that stops`);
+  }
+  for (const m of src.matchAll(/animation\s*:[^;{}]*\binfinite\b[^;{}]*;?/g)) {
+    if (/\b(pulse|glow|ping|breath\w*|shine|wiggle|heartbeat|beat|jiggle|wobble|throb)\b/i.test(m[0])) add('WARN', 'infinite-loop', rel, lineOf(src, m.index), `endless attention loop: "${m[0].slice(0, 60)}"`);
+  }
+  for (const m of src.matchAll(/<[^>]*\banimate-spin\b[^>]*>/g)) {
+    if (!/spin|load|progress|busy|Loader|refresh|sync/i.test(m[0].replace(/animate-spin/g, ''))) add('WARN', 'decorative-spin', rel, lineOf(src, m.index), 'spinning decoration: spin is for loading only');
+  }
+  if (/@keyframes\s+(marquee|ticker|scroll-x|infinite-scroll|loop-scroll)\b|\banimate-(marquee|infinite-scroll)\b/.test(src) && !/animation-play-state\s*:\s*paused|\[animation-play-state:paused\]|pauseOnHover|playState|\.pause\(\)/.test(src)) {
+    add('WARN', 'marquee-no-pause', rel, lineOf(src, src.search(/@keyframes\s+(marquee|ticker|scroll-x|infinite-scroll|loop-scroll)\b|\banimate-(marquee|infinite-scroll)\b/)), 'marquee that never pauses: pause on hover and focus, a pause control past 5s (WCAG 2.2.2)');
+  }
+
+  // Timing monoculture: one duration, or only the stock curves, on everything.
+  const durs = [];
+  for (const m of src.matchAll(/(?:transition|animation)(?:-duration)?\s*:\s*([^;{}]*)/g)) {
+    const t = /(\d*\.?\d+)(ms|s)\b/.exec(m[1]);
+    if (t) durs.push(Math.round(parseFloat(t[1]) * (t[2] === 's' ? 1000 : 1)));
+  }
+  for (const m of src.matchAll(/\bduration-(\d{2,4})\b/g)) durs.push(Number(m[1]));
+  for (const m of src.matchAll(/\bduration\s*:\s*(\d*\.?\d+)\s*[,}]/g)) { const v = parseFloat(m[1]); durs.push(Math.round(v < 10 ? v * 1000 : v)); }
+  if (durs.length >= 8) {
+    const hist = {};
+    for (const d of durs) hist[d] = (hist[d] || 0) + 1;
+    const [top, n] = Object.entries(hist).sort((a, b) => b[1] - a[1])[0];
+    if (n / durs.length >= 0.8) add('WARN', 'uniform-duration', rel, 0, `${n} of ${durs.length} durations are ${top}ms: time by role and distance (motion/principles.md § 4)`);
+  }
+  const decls = [...src.matchAll(/(?:transition|animation)(?:-timing-function)?\s*:\s*[^;{}]*/g)].map((m) => m[0]);
+  const custom = decls.filter((d) => /cubic-bezier\((?!\s*0?\.4\s*,\s*0\s*,\s*0?\.2\s*,\s*1\s*\))|linear\(|var\(--/.test(d)).length;
+  const stock = decls.filter((d) => /\bease(-in-out|-in|-out)?\b|cubic-bezier\(\s*0?\.4\s*,\s*0\s*,\s*0?\.2\s*,\s*1\s*\)/.test(d)).length;
+  if (stock >= 6 && !custom) add('WARN', 'default-curve', rel, 0, `${stock} transitions on stock curves (ease, 0.4/0/0.2/1) and none chosen: use the house curves or the brand's own`);
+
+  if (/from\s+['"](framer-motion|motion\/react|motion)['"]|require\(['"]framer-motion['"]\)/.test(src)) anyMotionLib = true;
+  if (/\bgsap\.(to|from|fromTo|timeline)\(/.test(src)) anyGsap = true;
+  if (/useReducedMotion|reducedMotion\s*=|MotionConfig|matchMedia\([^)]*prefers-reduced-motion/.test(src)) anyMotionLibReduced = true;
+  if (/gsap\.matchMedia|matchMedia\([^)]*prefers-reduced-motion/.test(src)) anyGsapReduced = true;
 
   for (const [id, level, re, msg, scope] of RULES) {
     const seen = new Set();
@@ -178,21 +255,95 @@ if (files.length) {
   const where = files.length === 1 ? (path.relative(process.cwd(), files[0]) || files[0]) : '(all files)';
   if (anyMotion && !anyReduced) add('FAIL', 'reduced-motion', where, 0, 'animation/transition/video found but no prefers-reduced-motion (or motion-reduce:) fallback anywhere');
   if (anyInteractive && !anyFocusVisible) add('FAIL', 'focus-visible', where, 0, 'interactive elements but no :focus-visible / focus-visible: styles anywhere');
+  if (anyMotionLib && !anyMotionLibReduced) add('FAIL', 'motion-lib-no-reduced', where, 0, 'Motion / Framer Motion used without MotionConfig reducedMotion="user" or useReducedMotion: CSS media queries do not reach it');
+  if (anyGsap && !anyGsapReduced) add('FAIL', 'motion-lib-no-reduced', where, 0, 'GSAP used without gsap.matchMedia() or a prefers-reduced-motion check: CSS media queries do not reach it');
+}
+
+// A WARN the source prompt asks for is kept: the rule matches the prompt too, or (fonts) the prompt names the face.
+if (promptText) {
+  const rules = new Map(RULES.map(([id, , re]) => [id, re]));
+  // Copy is always rewritten, and these Baseline warnings never change the look, so the prompt cannot keep them.
+  const PROSE_RULES = new Set(['buzzword', 'cliche', 'placeholder-name', 'em-dash', 'arrow-glued', 'middle-dots', 'invented-stats', 'stock-cta', 'fake-success',
+    'vh-hero', 'img-size', 'video-inline', '100vw', 'overflow-hidden-root', 'fake-metadata', 'fake-metadata-js']);
+  const lowerPrompt = promptText.toLowerCase();
+  // Prompts often describe a choice in words rather than code ("a 12px mono eyebrow, uppercase, 1.5px tracking").
+  const PROSE_HINTS = {
+    'eyebrow-class': /\b(eyebrow|kicker|overline|pre-?title|section label)\b/i,
+    'tracked-caps': /^(?=[\s\S]*\b(uppercase|all[- ]caps|small caps)\b)(?=[\s\S]*\b(track(ed|ing)?|letter-?spacing)\b)/i,
+    'gradient-text': /gradient (text|headline|word|fill)|text gradient|bg-clip-text|background-clip/i,
+    glow: /\bglow/i,
+    'blur-orb': /\b(orb|blob)s?\b|blurred (circle|shape)/i,
+    'pure-surface': /#fff(fff)?\b|#000(000)?\b|pure (white|black)/i,
+    'purple-blue-gradient': /(purple|violet|indigo|pink)[^.\n]{0,40}(blue|cyan)[^.\n]{0,20}gradient|gradient[^.\n]{0,40}(purple|violet|indigo)/i,
+    'stock-palette': /\b(indigo|violet)\b/i,
+    'scale-zero': /scale\(?\s*0\b/i,
+    'heavy-blur': /blur\(?\s*\d{2,}px/i,
+    // motion: a prompt that names the effect asks for it
+    'overshoot-ease': /\b(bounc\w*|spring\w*|elastic|overshoot\w*|back(Out|InOut)?)\b/i,
+    'infinite-loop': /\b(puls\w*|glow\w*|ping|breath\w*|heartbeat)\b/i,
+    'float-loop': /\b(float\w*|bob\w*|levitat\w*|drift\w*)\b/i,
+    'animated-bg': /\b(aurora|blob|animated (gradient|background)|gradient (animation|shift|pan|loop)|mesh)\b/i,
+    'shimmer-fx': /\b(shimmer\w*|shine|shiny|beam|sparkle\w*|meteor\w*|rotating border|conic)\b/i,
+    'bounce-arrow': /\bbounc\w*/i,
+    'typewriter': /\b(typewriter|typing|typed)\b/i,
+    'count-up': /\b(count(s|ing)?[- ]up|counter|ticker|odometer)\b/i,
+    'hover-scale': /hover[^.\n]{0,40}scal|scal[^.\n]{0,30}hover/i,
+    'hover-img-zoom': /\bzoom\w*/i,
+    'tilt': /\btilt\w*/i,
+    'scroll-hijack': /\b(lenis|locomotive|smooth[- ]scroll\w*|scrollsmoother)\b/i,
+    'text-parallax': /\bparallax\b/i,
+    'reveal-everywhere': /\b(reveal\w*|fade[- ]?in\w*|whileInView|on scroll|scroll[- ]trigger\w*|aos)\b/i,
+    'fade-up-preset': /\b(fade[- ]?(in[- ]?)?up|translate-?y|y:\s*\d+)/i,
+    'delay-chain': /\b(stagger\w*|delay\w*|cascade\w*)\b/i,
+    'decorative-spin': /\b(spin\w*|rotat\w*)\b/i,
+    'marquee-no-pause': /\b(marquee|ticker|infinite (scroll|loop)|logo (wall|strip|rail))\b/i,
+    'split-text': /\b(split ?text|per[- ](letter|word|char)|letter by letter|word by word)\b/i,
+    'replay-on-scroll': /\b(replay|every time|mirror|once:\s*false)\b/i,
+    'uniform-duration': /$^/,
+    'default-curve': /cubic-bezier\(\s*0?\.4\s*,\s*0\s*,\s*0?\.2\s*,\s*1\s*\)|\bease(-in-out)?\b/i,
+  };
+  for (const f of findings) {
+    if (f.level !== 'WARN' || PROSE_RULES.has(f.rule)) continue;
+    let asked = false;
+    if (f.rule === 'display-font') {
+      const face = (f.msg.match(/(Inter|Roboto|Poppins|Open[ +]Sans|Montserrat|Lato|Arial|Helvetica)/) || [])[1];
+      asked = !!face && lowerPrompt.includes(face.replace('+', ' ').toLowerCase());
+    } else if (f.rule === 'purple-blue-gradient') {
+      asked = purpleBlueGradients(promptText + ';').length > 0;
+    } else if (rules.has(f.rule)) {
+      const re = rules.get(f.rule);
+      re.lastIndex = 0;
+      asked = re.test(promptText) || (PROSE_HINTS[f.rule] || /$^/).test(promptText);
+      re.lastIndex = 0;
+    } else if (PROSE_HINTS[f.rule]) {
+      asked = PROSE_HINTS[f.rule].test(promptText);
+    }
+    if (asked) f.level = 'KEPT';
+  }
+}
+
+// --kind game: tracked caps, condensed or mono labels and a fixed 16:9 stage are the native language of HUDs.
+if (kind === 'game') {
+  // Pulses, pops and spins are game feedback (game/feedback.md), not decoration.
+  const GAME_NATIVE = new Set(['tracked-caps', 'eyebrow-class', 'display-font', '100vw', 'vh-hero', 'pure-surface',
+    'infinite-loop', 'overshoot-ease', 'float-loop', 'decorative-spin', 'count-up', 'hover-scale', 'bounce-arrow']);
+  for (let i = findings.length - 1; i >= 0; i--) if (findings[i].level === 'WARN' && GAME_NATIVE.has(findings[i].rule)) findings.splice(i, 1);
 }
 
 const fails = findings.filter((f) => f.level === 'FAIL');
+const kept = findings.filter((f) => f.level === 'KEPT');
 const warns = findings.filter((f) => f.level === 'WARN');
 
 if (json) {
-  console.log(JSON.stringify({ files: files.length, fail: fails.length, warn: warns.length, findings }, null, 1));
+  console.log(JSON.stringify({ files: files.length, fail: fails.length, warn: warns.length, kept: kept.length, findings }, null, 1));
 } else {
-  const order = { FAIL: 0, WARN: 1 };
+  const order = { FAIL: 0, WARN: 1, KEPT: 2 };
   findings.sort((a, b) => order[a.level] - order[b.level] || a.file.localeCompare(b.file) || a.line - b.line);
   for (const f of findings) {
-    if (quiet && f.level === 'WARN') continue;
+    if (quiet && f.level !== 'FAIL') continue;
     console.log(`${f.level.padEnd(4)} ${f.rule.padEnd(20)} ${f.file}${f.line ? ':' + f.line : ''}  ${f.msg}`);
   }
-  console.log(`\n${files.length} file(s) · ${fails.length} FAIL · ${warns.length} WARN`);
+  console.log(`\n${files.length} file(s) · ${fails.length} FAIL · ${warns.length} WARN${promptText ? ` · ${kept.length} KEPT (asked for by the prompt)` : ''}`);
   if (!files.length) console.log('No lintable files found.');
 }
 process.exit(fails.length ? 1 : 0);

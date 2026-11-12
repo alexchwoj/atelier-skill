@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northline logo reveal</title>
+<meta name="description" content="The Northline mark and its animated reveal: a route draws the N, reaches the summit dot, and the name rises from the baseline. Includes the Lottie file.">
+<meta name="theme-color" content="#0E1F2B">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-27%20-158%20172%20172%22%3E%3Crect%20x%3D%22-27%22%20y%3D%22-158%22%20width%3D%22172%22%20height%3D%22172%22%20rx%3D%2234%22%20fill%3D%22%230E1F2B%22%2F%3E%3Cpath%20d%3D%22M13%200%20L13%20-131%20L105%20-13%20L105%20-122%22%20fill%3D%22none%22%20stroke%3D%22%23E8592A%22%20stroke-width%3D%2226%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%22105%22%20cy%3D%22-125.4%22%20r%3D%2219%22%20fill%3D%22%23E8592A%22%2F%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0E1F2B;
+  --ink-2: #33444F;
+  --paper: #F2F4F1;
+  --paper-2: #E4E8E3;
+  --rule: #C9D0CB;
+  --muted: #5C6D79;
+  --blaze: #E8592A;
+  --on-ink-muted: #98A6B0;
+  --font: "Overpass", "Segoe UI", sans-serif;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --dur-press: 150ms;
+  --space: clamp(20px, 4vw, 48px);
+}
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--font); font-size: 17px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--blaze); color: var(--ink); }
+a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--blaze); outline-offset: 3px; }
+
+/* lockup parts: the plain styles are the finished frame (no JS, reduced motion) */
+.lockup, .mark { display: block; overflow: visible; }
+.lockup .route, .mark .route { fill: none; stroke: var(--route, var(--blaze)); stroke-width: 26; stroke-linejoin: round; stroke-linecap: butt; }
+.lockup .route { stroke-dasharray: 1 1; stroke-dashoffset: 0; }
+.lockup .dot, .mark .dot { fill: var(--route, var(--blaze)); transform-box: fill-box; transform-origin: center; }
+.lockup .ltr { fill: var(--word, var(--ink)); }
+
+/* ---------- stage ---------- */
+.stage {
+  background: var(--ink); color: var(--paper);
+  min-height: 88svh; display: grid; grid-template-rows: auto 1fr auto;
+  padding: 20px var(--space) clamp(28px, 5vw, 56px);
+  --word: var(--paper);
+}
+.bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.bar .mark { width: 36px; height: 36px; }
+.bar a { font-weight: 600; font-size: 16px; padding: 10px 0; }
+.stage h1 { margin: 0; align-self: center; justify-self: center; width: min(100%, 1040px); }
+.stage h1 .lockup { width: 100%; height: auto; }
+.stage-foot {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 40px; align-items: end;
+  border-top: 1px solid #25323B; padding-top: 24px;
+}
+.stage-foot p { margin: 0; max-width: 40ch; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.45; }
+.controls { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.btn {
+  font: 600 16px/1 var(--font); border: 0; border-radius: 999px; cursor: pointer;
+  min-height: 48px; padding: 15px 22px 13px; display: inline-flex; align-items: center; gap: 10px;
+  background: var(--blaze); color: var(--ink); text-decoration: none;
+  transition: transform var(--dur-press) var(--ease-out), background-color var(--dur-press) ease;
+}
+.btn:hover { background: #F06A3D; }
+.btn:active { transform: scale(0.97); }
+.btn svg { width: 18px; height: 18px; }
+.btn.ghost { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
+.btn.ghost:hover { background: rgba(255,255,255,0.06); }
+.scrub { display: grid; grid-template-columns: auto minmax(120px, 220px) 3.6em; gap: 12px; align-items: center; font-size: 16px; color: var(--on-ink-muted); }
+.scrub output { font-variant-numeric: tabular-nums; color: var(--paper); text-align: right; }
+input[type=range] { accent-color: var(--blaze); width: 100%; height: 44px; margin: 0; background: transparent; }
+
+/* ---------- sections ---------- */
+section { padding: clamp(64px, 9vw, 120px) var(--space); }
+.wrap { max-width: 1180px; margin: 0 auto; }
+h2 { font-weight: 800; font-size: clamp(34px, 4.6vw, 54px); line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 20px; overflow-wrap: break-word; }
+.lede { font-size: clamp(18px, 1.5vw, 20px); max-width: 52ch; margin: 0; color: var(--ink-2); }
+
+/* sizes */
+.build { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.sizes { display: flex; align-items: flex-end; gap: clamp(20px, 3vw, 44px); flex-wrap: wrap; }
+.sizes figure { margin: 0; display: grid; gap: 12px; justify-items: start; }
+.sizes figcaption { font-size: 16px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tile { background: var(--ink); border-radius: 22%; display: grid; place-items: center; }
+.s180 { width: 180px; height: 180px; } .s180 .mark { width: 128px; }
+.s64 { width: 64px; height: 64px; }   .s64 .mark { width: 46px; }
+.s32 { width: 32px; height: 32px; }   .s32 .mark { width: 24px; }
+.s16 { width: 16px; height: 16px; border-radius: 3px; } .s16 .mark { width: 13px; }
+.bare .mark { --route: var(--ink); }
+
+/* grounds */
+.grounds { padding-top: 0; }
+.ground-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.ground { border-radius: 6px; padding: clamp(28px, 6vw, 72px) clamp(20px, 4vw, 48px); display: grid; gap: 28px; }
+.ground .lockup { width: 100%; height: auto; }
+.ground p { margin: 0; font-size: 16px; }
+.g-blaze { grid-column: 1 / -1; background: var(--blaze); --route: var(--ink); --word: var(--ink); color: var(--ink); }
+.g-blaze .lockup { width: min(100%, 860px); justify-self: center; }
+.g-paper { background: #fff; box-shadow: inset 0 0 0 1px var(--rule); }
+.g-ink { background: var(--ink); color: var(--paper); --word: var(--paper); }
+
+/* timing */
+.timing { background: var(--paper-2); }
+.timing-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+table { width: 100%; border-collapse: collapse; font-size: 17px; }
+th, td { text-align: left; padding: 14px 16px 12px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; color: var(--muted); font-size: 16px; }
+td:first-child { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; width: 6.5em; }
+td:nth-child(2) { color: var(--muted); width: 7em; }
+
+/* lottie */
+.lottie-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.player { background: #fff; box-shadow: inset 0 0 0 1px var(--rule); border-radius: 6px; padding: clamp(12px, 3vw, 32px); }
+.player-canvas { aspect-ratio: 1200 / 360; width: 100%; }
+.player-canvas svg { display: block; }
+.spec { margin: 24px 0 28px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 20px; font-size: 16px; }
+.spec dt { color: var(--muted); }
+.spec dd { margin: 0; overflow-wrap: anywhere; }
+.spec code { font-family: var(--font); font-weight: 600; }
+.lottie-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.lottie-actions .btn.ghost { color: var(--ink); }
+.lottie-actions .btn.ghost:hover { background: rgba(14,31,43,0.06); }
+
+footer { padding: 36px var(--space) 48px; border-top: 1px solid var(--rule); font-size: 16px; color: var(--muted); }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .stage-foot, .build, .timing-grid, .lottie-grid { grid-template-columns: minmax(0, 1fr); }
+  .ground-grid { grid-template-columns: minmax(0, 1fr); }
+  .stage { min-height: 82svh; }
+}
+@media (max-width: 480px) {
+  .s180 { width: 132px; height: 132px; } .s180 .mark { width: 94px; }
+  .scrub { grid-template-columns: auto minmax(0, 1fr) 3.6em; width: 100%; }
+  td:nth-child(2) { display: none; } th:nth-child(2) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<header class="stage">
+  <div class="bar">
+    <svg class="mark" viewBox="-27 -158 172 172" aria-hidden="true" focusable="false"><path class="route" d="M13 0 L13 -131 L105 -13 L105 -122"/><circle class="dot" cx="105" cy="-125.4" r="19"/></svg>
+    <a href="northline.json" download>Download northline.json</a>
+  </div>
+  <h1 aria-label="Northline"><svg class="lockup" viewBox="-105.9 -252 1200 360" aria-hidden="true" focusable="false">
+  <defs><clipPath id="hero-clip"><rect x="-105.9" y="-175" width="1200" height="179"/></clipPath></defs>
+  <g class="wm" clip-path="url(#hero-clip)" transform="translate(158.7 0)">
+    <path class="ltr" d="M42.8 0L15.3 0L15.3 -102.2L42.8 -102.2L42.8 -92.6Q47.7 -98.6 54.65 -101.6Q61.6 -104.6 70.5 -104.6L70.5 -104.6Q87.2 -104.6 96.6 -94.25Q106 -83.9 106 -65.4L106 -65.4L106 0L78.5 0L78.5 -54.1Q78.5 -66.9 74.5 -72.55Q70.5 -78.2 61.4 -78.2L61.4 -78.2Q51.8 -78.2 47.3 -72.45Q42.8 -66.7 42.8 -54.5L42.8 -54.5L42.8 0Z"/>
+    <path class="ltr" d="M173.4 2.4L173.4 2.4Q151.6 2.4 139 -11.85Q126.4 -26.1 126.4 -51L126.4 -51Q126.4 -67.4 132.15 -79.45Q137.9 -91.5 148.45 -98.05Q159 -104.6 173.4 -104.6L173.4 -104.6Q187.7 -104.6 198.15 -98.05Q208.6 -91.5 214.3 -79.5Q220 -67.5 220 -51L220 -51Q220 -34.5 214.4 -22.5Q208.8 -10.5 198.3 -4.05Q187.8 2.4 173.4 2.4ZM173.4 -24L173.4 -24Q182.6 -24 187.65 -31.1Q192.7 -38.2 192.7 -51L192.7 -51Q192.7 -63.9 187.55 -71.05Q182.4 -78.2 173.4 -78.2L173.4 -78.2Q164.3 -78.2 159.1 -70.95Q153.9 -63.7 153.9 -51L153.9 -51Q153.9 -38.4 159.1 -31.2Q164.3 -24 173.4 -24Z"/>
+    <path class="ltr" d="M268.9 0L241.4 0L241.4 -102.2L268.9 -102.2L268.9 -92Q271.4 -97.3 277.35 -100.95Q283.3 -104.6 289.4 -104.6L289.4 -104.6Q300.8 -104.6 308.6 -96.4L308.6 -96.4L304.9 -71.3Q300.5 -75.1 296.5 -76.6Q292.5 -78.1 287.5 -78.1L287.5 -78.1Q281.6 -78.1 277.45 -75.45Q273.3 -72.8 271.1 -67.7Q268.9 -62.6 268.9 -55.4L268.9 -55.4L268.9 0Z"/>
+    <path class="ltr" d="M352.8 2.4L352.8 2.4Q340 2.4 333.75 -4.45Q327.5 -11.3 327.5 -25L327.5 -25L327.5 -78L313.1 -78L313.1 -102.2L327.5 -102.2L327.5 -131.4L354.8 -144.4L354.8 -102.2L377.3 -102.2L377.3 -78L354.8 -78L354.8 -29.1Q354.8 -25.2 356.55 -23.25Q358.3 -21.3 362 -21.3L362 -21.3Q369.5 -21.3 378.5 -25.6L378.5 -25.6L375.4 -2.2Q370.7 0 365.1 1.2Q359.5 2.4 352.8 2.4Z"/>
+    <path class="ltr" d="M425.5 0L398 0L398 -131.8L425.5 -144.4L425.5 -92.6Q430.4 -98.6 437.35 -101.6Q444.3 -104.6 453.2 -104.6L453.2 -104.6Q464.5 -104.6 472.4 -99.85Q480.3 -95.1 484.5 -86.3Q488.7 -77.5 488.7 -65.4L488.7 -65.4L488.7 0L461.2 0L461.2 -54.1Q461.2 -66.8 457.3 -72.5Q453.4 -78.2 444.1 -78.2L444.1 -78.2Q434.5 -78.2 430 -72.45Q425.5 -66.7 425.5 -54.5L425.5 -54.5L425.5 0Z"/>
+    <path class="ltr" d="M542.8 0L515.3 0L515.3 -132L542.8 -144.4L542.8 0Z"/>
+    <path class="ltr" d="M598.1 0L570.6 0L570.6 -102.2L598.1 -102.2L598.1 0ZM584.3 -113.1L584.3 -113.1Q577.8 -113.1 573.1 -117.8Q568.4 -122.5 568.4 -129L568.4 -129Q568.4 -135.5 573.05 -140.1Q577.7 -144.7 584.3 -144.7L584.3 -144.7Q591.2 -144.7 595.75 -140.2Q600.3 -135.7 600.3 -129L600.3 -129Q600.3 -122.4 595.65 -117.75Q591 -113.1 584.3 -113.1Z"/>
+    <path class="ltr" d="M652.4 0L624.9 0L624.9 -102.2L652.4 -102.2L652.4 -92.6Q657.3 -98.6 664.25 -101.6Q671.2 -104.6 680.1 -104.6L680.1 -104.6Q696.8 -104.6 706.2 -94.25Q715.6 -83.9 715.6 -65.4L715.6 -65.4L715.6 0L688.1 0L688.1 -54.1Q688.1 -66.9 684.1 -72.55Q680.1 -78.2 671 -78.2L671 -78.2Q661.4 -78.2 656.9 -72.45Q652.4 -66.7 652.4 -54.5L652.4 -54.5L652.4 0Z"/>
+    <path class="ltr" d="M784.1 2.4L784.1 2.4Q769.2 2.4 758.4 -4.1Q747.6 -10.6 741.8 -22.6Q736 -34.6 736 -51.2L736 -51.2Q736 -67.6 741.9 -79.6Q747.8 -91.6 758.6 -98.1Q769.4 -104.6 784.1 -104.6L784.1 -104.6Q796.8 -104.6 807.1 -99.35Q817.4 -94.1 823.45 -83.35Q829.5 -72.6 829.5 -56.2L829.5 -56.2Q829.5 -53.4 829.4 -49.45Q829.3 -45.5 828.8 -41.6L828.8 -41.6L762.9 -41.6Q763.1 -35.3 765.75 -30.7Q768.4 -26.1 773.1 -23.55Q777.8 -21 784.2 -21L784.2 -21Q791.8 -21 797.1 -23.45Q802.4 -25.9 807.3 -31.5L807.3 -31.5L823.1 -15.4Q816.2 -7.3 806.55 -2.45Q796.9 2.4 784.1 2.4ZM763.2 -62.6L763.2 -62.6L803.1 -62.6Q802.5 -68.5 800.1 -72.7Q797.7 -76.9 793.55 -79.05Q789.4 -81.2 783.5 -81.2L783.5 -81.2Q775.4 -81.2 769.85 -76.4Q764.3 -71.6 763.2 -62.6Z"/>
+  </g>
+  <path class="route" pathLength="1" d="M13 0 L13 -131 L105 -13 L105 -122"/>
+  <circle class="dot" cx="105" cy="-125.4" r="19"/>
+</svg></h1>
+  <div class="stage-foot">
+    <p>The route climbs, crosses the valley and walks up to the summit. The name comes up from the ground it stands on.</p>
+    <div class="controls">
+      <button class="btn" type="button" id="replay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        Replay
+      </button>
+      <label class="scrub" for="scrub">Scrub
+        <input id="scrub" type="range" min="0" max="4.2" step="0.01" value="4.2">
+        <output id="scrub-out" for="scrub">4.20s</output>
+      </label>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section aria-labelledby="build-h">
+    <div class="wrap build">
+      <div>
+        <h2 id="build-h">One line, walked once</h2>
+        <p class="lede">The mark is a single route. It starts on the baseline, climbs the first stem, crosses down to the valley and climbs again. It ends on the summit marker, the one point on the map you set before you leave. The stroke matches the weight of the letters, so the mark and the wordmark read as one hand.</p>
+      </div>
+      <div class="sizes">
+        <figure><div class="tile s180"><svg class="mark" viewBox="-27 -158 172 172" aria-hidden="true" focusable="false"><path class="route" d="M13 0 L13 -131 L105 -13 L105 -122"/><circle class="dot" cx="105" cy="-125.4" r="19"/></svg></div><figcaption>App icon, 180 px</figcaption></figure>
+        <figure><div class="tile s64"><svg class="mark" viewBox="-27 -158 172 172" aria-hidden="true" focusable="false"><path class="route" d="M13 0 L13 -131 L105 -13 L105 -122"/><circle class="dot" cx="105" cy="-125.4" r="19"/></svg></div><figcaption>64 px</figcaption></figure>
+        <figure><div class="tile s32"><svg class="mark" viewBox="-27 -158 172 172" aria-hidden="true" focusable="false"><path class="route" d="M13 0 L13 -131 L105 -13 L105 -122"/><circle class="dot" cx="105" cy="-125.4" r="19"/></svg></div><figcaption>32 px</figcaption></figure>
+        <figure><div class="tile s16"><svg class="mark" viewBox="-27 -158 172 172" aria-hidden="true" focusable="false"><path class="route" d="M13 0 L13 -131 L105 -13 L105 -122"/><circle class="dot" cx="105" cy="-125.4" r="19"/></svg></div><figcaption>16 px</figcaption></figure>
+        <figure class="bare"><div class="s64" style="display:grid;place-items:center"><svg class="mark" viewBox="-27 -158 172 172" aria-hidden="true" focusable="false"><path class="route" d="M13 0 L13 -131 L105 -13 L105 -122"/><circle class="dot" cx="105" cy="-125.4" r="19"/></svg></div><figcaption>One colour</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="grounds" aria-labelledby="grounds-h">
+    <div class="wrap">
+      <h2 id="grounds-h" style="max-width:16ch">Blaze, snowfield and night</h2>
+      <p class="lede" style="margin-bottom:40px">Trail blazes are painted on trees so you can find the way in any light. The brand colour is that paint; the ink is the sky before a dawn start.</p>
+      <div class="ground-grid">
+        <div class="ground g-blaze"><svg class="lockup" viewBox="-105.9 -252 1200 360" aria-hidden="true" focusable="false">
+  <defs><clipPath id="onblaze-clip"><rect x="-105.9" y="-175" width="1200" height="179"/></clipPath></defs>
+  <g class="wm" clip-path="url(#onblaze-clip)" transform="translate(158.7 0)">
+    <path class="ltr" d="M42.8 0L15.3 0L15.3 -102.2L42.8 -102.2L42.8 -92.6Q47.7 -98.6 54.65 -101.6Q61.6 -104.6 70.5 -104.6L70.5 -104.6Q87.2 -104.6 96.6 -94.25Q106 -83.9 106 -65.4L106 -65.4L106 0L78.5 0L78.5 -54.1Q78.5 -66.9 74.5 -72.55Q70.5 -78.2 61.4 -78.2L61.4 -78.2Q51.8 -78.2 47.3 -72.45Q42.8 -66.7 42.8 -54.5L42.8 -54.5L42.8 0Z"/>
+    <path class="ltr" d="M173.4 2.4L173.4 2.4Q151.6 2.4 139 -11.85Q126.4 -26.1 126.4 -51L126.4 -51Q126.4 -67.4 132.15 -79.45Q137.9 -91.5 148.45 -98.05Q159 -104.6 173.4 -104.6L173.4 -104.6Q187.7 -104.6 198.15 -98.05Q208.6 -91.5 214.3 -79.5Q220 -67.5 220 -51L220 -51Q220 -34.5 214.4 -22.5Q208.8 -10.5 198.3 -4.05Q187.8 2.4 173.4 2.4ZM173.4 -24L173.4 -24Q182.6 -24 187.65 -31.1Q192.7 -38.2 192.7 -51L192.7 -51Q192.7 -63.9 187.55 -71.05Q182.4 -78.2 173.4 -78.2L173.4 -78.2Q164.3 -78.2 159.1 -70.95Q153.9 -63.7 153.9 -51L153.9 -51Q153.9 -38.4 159.1 -31.2Q164.3 -24 173.4 -24Z"/>
+    <path class="ltr" d="M268.9 0L241.4 0L241.4 -102.2L268.9 -102.2L268.9 -92Q271.4 -97.3 277.35 -100.95Q283.3 -104.6 289.4 -104.6L289.4 -104.6Q300.8 -104.6 308.6 -96.4L308.6 -96.4L304.9 -71.3Q300.5 -75.1 296.5 -76.6Q292.5 -78.1 287.5 -78.1L287.5 -78.1Q281.6 -78.1 277.45 -75.45Q273.3 -72.8 271.1 -67.7Q268.9 -62.6 268.9 -55.4L268.9 -55.4L268.9 0Z"/>
+    <path class="ltr" d="M352.8 2.4L352.8 2.4Q340 2.4 333.75 -4.45Q327.5 -11.3 327.5 -25L327.5 -25L327.5 -78L313.1 -78L313.1 -102.2L327.5 -102.2L327.5 -131.4L354.8 -144.4L354.8 -102.2L377.3 -102.2L377.3 -78L354.8 -78L354.8 -29.1Q354.8 -25.2 356.55 -23.25Q358.3 -21.3 362 -21.3L362 -21.3Q369.5 -21.3 378.5 -25.6L378.5 -25.6L375.4 -2.2Q370.7 0 365.1 1.2Q359.5 2.4 352.8 2.4Z"/>
+    <path class="ltr" d="M425.5 0L398 0L398 -131.8L425.5 -144.4L425.5 -92.6Q430.4 -98.6 437.35 -101.6Q444.3 -104.6 453.2 -104.6L453.2 -104.6Q464.5 -104.6 472.4 -99.85Q480.3 -95.1 484.5 -86.3Q488.7 -77.5 488.7 -65.4L488.7 -65.4L488.7 0L461.2 0L461.2 -54.1Q461.2 -66.8 457.3 -72.5Q453.4 -78.2 444.1 -78.2L444.1 -78.2Q434.5 -78.2 430 -72.45Q425.5 -66.7 425.5 -54.5L425.5 -54.5L425.5 0Z"/>
+    <path class="ltr" d="M542.8 0L515.3 0L515.3 -132L542.8 -144.4L542.8 0Z"/>
+    <path class="ltr" d="M598.1 0L570.6 0L570.6 -102.2L598.1 -102.2L598.1 0ZM584.3 -113.1L584.3 -113.1Q577.8 -113.1 573.1 -117.8Q568.4 -122.5 568.4 -129L568.4 -129Q568.4 -135.5 573.05 -140.1Q577.7 -144.7 584.3 -144.7L584.3 -144.7Q591.2 -144.7 595.75 -140.2Q600.3 -135.7 600.3 -129L600.3 -129Q600.3 -122.4 595.65 -117.75Q591 -113.1 584.3 -113.1Z"/>
+    <path class="ltr" d="M652.4 0L624.9 0L624.9 -102.2L652.4 -102.2L652.4 -92.6Q657.3 -98.6 664.25 -101.6Q671.2 -104.6 680.1 -104.6L680.1 -104.6Q696.8 -104.6 706.2 -94.25Q715.6 -83.9 715.6 -65.4L715.6 -65.4L715.6 0L688.1 0L688.1 -54.1Q688.1 -66.9 684.1 -72.55Q680.1 -78.2 671 -78.2L671 -78.2Q661.4 -78.2 656.9 -72.45Q652.4 -66.7 652.4 -54.5L652.4 -54.5L652.4 0Z"/>
+    <path class="ltr" d="M784.1 2.4L784.1 2.4Q769.2 2.4 758.4 -4.1Q747.6 -10.6 741.8 -22.6Q736 -34.6 736 -51.2L736 -51.2Q736 -67.6 741.9 -79.6Q747.8 -91.6 758.6 -98.1Q769.4 -104.6 784.1 -104.6L784.1 -104.6Q796.8 -104.6 807.1 -99.35Q817.4 -94.1 823.45 -83.35Q829.5 -72.6 829.5 -56.2L829.5 -56.2Q829.5 -53.4 829.4 -49.45Q829.3 -45.5 828.8 -41.6L828.8 -41.6L762.9 -41.6Q763.1 -35.3 765.75 -30.7Q768.4 -26.1 773.1 -23.55Q777.8 -21 784.2 -21L784.2 -21Q791.8 -21 797.1 -23.45Q802.4 -25.9 807.3 -31.5L807.3 -31.5L823.1 -15.4Q816.2 -7.3 806.55 -2.45Q796.9 2.4 784.1 2.4ZM763.2 -62.6L763.2 -62.6L803.1 -62.6Q802.5 -68.5 800.1 -72.7Q797.7 -76.9 793.55 -79.05Q789.4 -81.2 783.5 -81.2L783.5 -81.2Q775.4 -81.2 769.85 -76.4Q764.3 -71.6 763.2 -62.6Z"/>
+  </g>
+  <path class="route" pathLength="1" d="M13 0 L13 -131 L105 -13 L105 -122"/>
+  <circle class="dot" cx="105" cy="-125.4" r="19"/>
+</svg><p>On blaze <strong>#E8592A</strong>, the whole lockup in ink.</p></div>
+        <div class="ground g-paper"><svg class="lockup" viewBox="-105.9 -252 1200 360" aria-hidden="true" focusable="false">
+  <defs><clipPath id="onpaper-clip"><rect x="-105.9" y="-175" width="1200" height="179"/></clipPath></defs>
+  <g class="wm" clip-path="url(#onpaper-clip)" transform="translate(158.7 0)">
+    <path class="ltr" d="M42.8 0L15.3 0L15.3 -102.2L42.8 -102.2L42.8 -92.6Q47.7 -98.6 54.65 -101.6Q61.6 -104.6 70.5 -104.6L70.5 -104.6Q87.2 -104.6 96.6 -94.25Q106 -83.9 106 -65.4L106 -65.4L106 0L78.5 0L78.5 -54.1Q78.5 -66.9 74.5 -72.55Q70.5 -78.2 61.4 -78.2L61.4 -78.2Q51.8 -78.2 47.3 -72.45Q42.8 -66.7 42.8 -54.5L42.8 -54.5L42.8 0Z"/>
+    <path class="ltr" d="M173.4 2.4L173.4 2.4Q151.6 2.4 139 -11.85Q126.4 -26.1 126.4 -51L126.4 -51Q126.4 -67.4 132.15 -79.45Q137.9 -91.5 148.45 -98.05Q159 -104.6 173.4 -104.6L173.4 -104.6Q187.7 -104.6 198.15 -98.05Q208.6 -91.5 214.3 -79.5Q220 -67.5 220 -51L220 -51Q220 -34.5 214.4 -22.5Q208.8 -10.5 198.3 -4.05Q187.8 2.4 173.4 2.4ZM173.4 -24L173.4 -24Q182.6 -24 187.65 -31.1Q192.7 -38.2 192.7 -51L192.7 -51Q192.7 -63.9 187.55 -71.05Q182.4 -78.2 173.4 -78.2L173.4 -78.2Q164.3 -78.2 159.1 -70.95Q153.9 -63.7 153.9 -51L153.9 -51Q153.9 -38.4 159.1 -31.2Q164.3 -24 173.4 -24Z"/>
+    <path class="ltr" d="M268.9 0L241.4 0L241.4 -102.2L268.9 -102.2L268.9 -92Q271.4 -97.3 277.35 -100.95Q283.3 -104.6 289.4 -104.6L289.4 -104.6Q300.8 -104.6 308.6 -96.4L308.6 -96.4L304.9 -71.3Q300.5 -75.1 296.5 -76.6Q292.5 -78.1 287.5 -78.1L287.5 -78.1Q281.6 -78.1 277.45 -75.45Q273.3 -72.8 271.1 -67.7Q268.9 -62.6 268.9 -55.4L268.9 -55.4L268.9 0Z"/>
+    <path class="ltr" d="M352.8 2.4L352.8 2.4Q340 2.4 333.75 -4.45Q327.5 -11.3 327.5 -25L327.5 -25L327.5 -78L313.1 -78L313.1 -102.2L327.5 -102.2L327.5 -131.4L354.8 -144.4L354.8 -102.2L377.3 -102.2L377.3 -78L354.8 -78L354.8 -29.1Q354.8 -25.2 356.55 -23.25Q358.3 -21.3 362 -21.3L362 -21.3Q369.5 -21.3 378.5 -25.6L378.5 -25.6L375.4 -2.2Q370.7 0 365.1 1.2Q359.5 2.4 352.8 2.4Z"/>
+    <path class="ltr" d="M425.5 0L398 0L398 -131.8L425.5 -144.4L425.5 -92.6Q430.4 -98.6 437.35 -101.6Q444.3 -104.6 453.2 -104.6L453.2 -104.6Q464.5 -104.6 472.4 -99.85Q480.3 -95.1 484.5 -86.3Q488.7 -77.5 488.7 -65.4L488.7 -65.4L488.7 0L461.2 0L461.2 -54.1Q461.2 -66.8 457.3 -72.5Q453.4 -78.2 444.1 -78.2L444.1 -78.2Q434.5 -78.2 430 -72.45Q425.5 -66.7 425.5 -54.5L425.5 -54.5L425.5 0Z"/>
+    <path class="ltr" d="M542.8 0L515.3 0L515.3 -132L542.8 -144.4L542.8 0Z"/>
+    <path class="ltr" d="M598.1 0L570.6 0L570.6 -102.2L598.1 -102.2L598.1 0ZM584.3 -113.1L584.3 -113.1Q577.8 -113.1 573.1 -117.8Q568.4 -122.5 568.4 -129L568.4 -129Q568.4 -135.5 573.05 -140.1Q577.7 -144.7 584.3 -144.7L584.3 -144.7Q591.2 -144.7 595.75 -140.2Q600.3 -135.7 600.3 -129L600.3 -129Q600.3 -122.4 595.65 -117.75Q591 -113.1 584.3 -113.1Z"/>
+    <path class="ltr" d="M652.4 0L624.9 0L624.9 -102.2L652.4 -102.2L652.4 -92.6Q657.3 -98.6 664.25 -101.6Q671.2 -104.6 680.1 -104.6L680.1 -104.6Q696.8 -104.6 706.2 -94.25Q715.6 -83.9 715.6 -65.4L715.6 -65.4L715.6 0L688.1 0L688.1 -54.1Q688.1 -66.9 684.1 -72.55Q680.1 -78.2 671 -78.2L671 -78.2Q661.4 -78.2 656.9 -72.45Q652.4 -66.7 652.4 -54.5L652.4 -54.5L652.4 0Z"/>
+    <path class="ltr" d="M784.1 2.4L784.1 2.4Q769.2 2.4 758.4 -4.1Q747.6 -10.6 741.8 -22.6Q736 -34.6 736 -51.2L736 -51.2Q736 -67.6 741.9 -79.6Q747.8 -91.6 758.6 -98.1Q769.4 -104.6 784.1 -104.6L784.1 -104.6Q796.8 -104.6 807.1 -99.35Q817.4 -94.1 823.45 -83.35Q829.5 -72.6 829.5 -56.2L829.5 -56.2Q829.5 -53.4 829.4 -49.45Q829.3 -45.5 828.8 -41.6L828.8 -41.6L762.9 -41.6Q763.1 -35.3 765.75 -30.7Q768.4 -26.1 773.1 -23.55Q777.8 -21 784.2 -21L784.2 -21Q791.8 -21 797.1 -23.45Q802.4 -25.9 807.3 -31.5L807.3 -31.5L823.1 -15.4Q816.2 -7.3 806.55 -2.45Q796.9 2.4 784.1 2.4ZM763.2 -62.6L763.2 -62.6L803.1 -62.6Q802.5 -68.5 800.1 -72.7Q797.7 -76.9 793.55 -79.05Q789.4 -81.2 783.5 -81.2L783.5 -81.2Q775.4 -81.2 769.85 -76.4Q764.3 -71.6 763.2 -62.6Z"/>
+  </g>
+  <path class="route" pathLength="1" d="M13 0 L13 -131 L105 -13 L105 -122"/>
+  <circle class="dot" cx="105" cy="-125.4" r="19"/>
+</svg><p>On snowfield <strong>#F2F4F1</strong> and white.</p></div>
+        <div class="ground g-ink"><svg class="lockup" viewBox="-105.9 -252 1200 360" aria-hidden="true" focusable="false">
+  <defs><clipPath id="onink-clip"><rect x="-105.9" y="-175" width="1200" height="179"/></clipPath></defs>
+  <g class="wm" clip-path="url(#onink-clip)" transform="translate(158.7 0)">
+    <path class="ltr" d="M42.8 0L15.3 0L15.3 -102.2L42.8 -102.2L42.8 -92.6Q47.7 -98.6 54.65 -101.6Q61.6 -104.6 70.5 -104.6L70.5 -104.6Q87.2 -104.6 96.6 -94.25Q106 -83.9 106 -65.4L106 -65.4L106 0L78.5 0L78.5 -54.1Q78.5 -66.9 74.5 -72.55Q70.5 -78.2 61.4 -78.2L61.4 -78.2Q51.8 -78.2 47.3 -72.45Q42.8 -66.7 42.8 -54.5L42.8 -54.5L42.8 0Z"/>
+    <path class="ltr" d="M173.4 2.4L173.4 2.4Q151.6 2.4 139 -11.85Q126.4 -26.1 126.4 -51L126.4 -51Q126.4 -67.4 132.15 -79.45Q137.9 -91.5 148.45 -98.05Q159 -104.6 173.4 -104.6L173.4 -104.6Q187.7 -104.6 198.15 -98.05Q208.6 -91.5 214.3 -79.5Q220 -67.5 220 -51L220 -51Q220 -34.5 214.4 -22.5Q208.8 -10.5 198.3 -4.05Q187.8 2.4 173.4 2.4ZM173.4 -24L173.4 -24Q182.6 -24 187.65 -31.1Q192.7 -38.2 192.7 -51L192.7 -51Q192.7 -63.9 187.55 -71.05Q182.4 -78.2 173.4 -78.2L173.4 -78.2Q164.3 -78.2 159.1 -70.95Q153.9 -63.7 153.9 -51L153.9 -51Q153.9 -38.4 159.1 -31.2Q164.3 -24 173.4 -24Z"/>
+    <path class="ltr" d="M268.9 0L241.4 0L241.4 -102.2L268.9 -102.2L268.9 -92Q271.4 -97.3 277.35 -100.95Q283.3 -104.6 289.4 -104.6L289.4 -104.6Q300.8 -104.6 308.6 -96.4L308.6 -96.4L304.9 -71.3Q300.5 -75.1 296.5 -76.6Q292.5 -78.1 287.5 -78.1L287.5 -78.1Q281.6 -78.1 277.45 -75.45Q273.3 -72.8 271.1 -67.7Q268.9 -62.6 268.9 -55.4L268.9 -55.4L268.9 0Z"/>
+    <path class="ltr" d="M352.8 2.4L352.8 2.4Q340 2.4 333.75 -4.45Q327.5 -11.3 327.5 -25L327.5 -25L327.5 -78L313.1 -78L313.1 -102.2L327.5 -102.2L327.5 -131.4L354.8 -144.4L354.8 -102.2L377.3 -102.2L377.3 -78L354.8 -78L354.8 -29.1Q354.8 -25.2 356.55 -23.25Q358.3 -21.3 362 -21.3L362 -21.3Q369.5 -21.3 378.5 -25.6L378.5 -25.6L375.4 -2.2Q370.7 0 365.1 1.2Q359.5 2.4 352.8 2.4Z"/>
+    <path class="ltr" d="M425.5 0L398 0L398 -131.8L425.5 -144.4L425.5 -92.6Q430.4 -98.6 437.35 -101.6Q444.3 -104.6 453.2 -104.6L453.2 -104.6Q464.5 -104.6 472.4 -99.85Q480.3 -95.1 484.5 -86.3Q488.7 -77.5 488.7 -65.4L488.7 -65.4L488.7 0L461.2 0L461.2 -54.1Q461.2 -66.8 457.3 -72.5Q453.4 -78.2 444.1 -78.2L444.1 -78.2Q434.5 -78.2 430 -72.45Q425.5 -66.7 425.5 -54.5L425.5 -54.5L425.5 0Z"/>
+    <path class="ltr" d="M542.8 0L515.3 0L515.3 -132L542.8 -144.4L542.8 0Z"/>
+    <path class="ltr" d="M598.1 0L570.6 0L570.6 -102.2L598.1 -102.2L598.1 0ZM584.3 -113.1L584.3 -113.1Q577.8 -113.1 573.1 -117.8Q568.4 -122.5 568.4 -129L568.4 -129Q568.4 -135.5 573.05 -140.1Q577.7 -144.7 584.3 -144.7L584.3 -144.7Q591.2 -144.7 595.75 -140.2Q600.3 -135.7 600.3 -129L600.3 -129Q600.3 -122.4 595.65 -117.75Q591 -113.1 584.3 -113.1Z"/>
+    <path class="ltr" d="M652.4 0L624.9 0L624.9 -102.2L652.4 -102.2L652.4 -92.6Q657.3 -98.6 664.25 -101.6Q671.2 -104.6 680.1 -104.6L680.1 -104.6Q696.8 -104.6 706.2 -94.25Q715.6 -83.9 715.6 -65.4L715.6 -65.4L715.6 0L688.1 0L688.1 -54.1Q688.1 -66.9 684.1 -72.55Q680.1 -78.2 671 -78.2L671 -78.2Q661.4 -78.2 656.9 -72.45Q652.4 -66.7 652.4 -54.5L652.4 -54.5L652.4 0Z"/>
+    <path class="ltr" d="M784.1 2.4L784.1 2.4Q769.2 2.4 758.4 -4.1Q747.6 -10.6 741.8 -22.6Q736 -34.6 736 -51.2L736 -51.2Q736 -67.6 741.9 -79.6Q747.8 -91.6 758.6 -98.1Q769.4 -104.6 784.1 -104.6L784.1 -104.6Q796.8 -104.6 807.1 -99.35Q817.4 -94.1 823.45 -83.35Q829.5 -72.6 829.5 -56.2L829.5 -56.2Q829.5 -53.4 829.4 -49.45Q829.3 -45.5 828.8 -41.6L828.8 -41.6L762.9 -41.6Q763.1 -35.3 765.75 -30.7Q768.4 -26.1 773.1 -23.55Q777.8 -21 784.2 -21L784.2 -21Q791.8 -21 797.1 -23.45Q802.4 -25.9 807.3 -31.5L807.3 -31.5L823.1 -15.4Q816.2 -7.3 806.55 -2.45Q796.9 2.4 784.1 2.4ZM763.2 -62.6L763.2 -62.6L803.1 -62.6Q802.5 -68.5 800.1 -72.7Q797.7 -76.9 793.55 -79.05Q789.4 -81.2 783.5 -81.2L783.5 -81.2Q775.4 -81.2 769.85 -76.4Q764.3 -71.6 763.2 -62.6Z"/>
+  </g>
+  <path class="route" pathLength="1" d="M13 0 L13 -131 L105 -13 L105 -122"/>
+  <circle class="dot" cx="105" cy="-125.4" r="19"/>
+</svg><p>On night <strong>#0E1F2B</strong>, the name in snowfield.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="timing" aria-labelledby="timing-h">
+    <div class="wrap timing-grid">
+      <div>
+        <h2 id="timing-h">4.2 seconds at walking pace</h2>
+        <p class="lede">Timed at 100 beats a minute, a steady uphill step. The summit appears first, because a route app starts from where you want to go. The last second is stillness, so the finished mark is the thing you remember.</p>
+      </div>
+      <table>
+        <thead><tr><th scope="col">Time</th><th scope="col">Act</th><th scope="col">What moves</th></tr></thead>
+        <tbody>
+          <tr><td>0.06 s</td><td>Set-up</td><td>The summit dot appears where the route will end.</td></tr>
+          <tr><td>0.60 s</td><td>Action</td><td>The route draws from the trailhead: up, across, up, in one stroke.</td></tr>
+          <tr><td>1.80 s</td><td>Arrival</td><td>The line reaches the summit and the dot answers with a small lift.</td></tr>
+          <tr><td>2.10 s</td><td>Reaction</td><td>The letters rise through the baseline, one every 75 ms.</td></tr>
+          <tr><td>3.15 s</td><td>Hold</td><td>Nothing moves until 4.20 s.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="lottie-h">
+    <div class="wrap lottie-grid">
+      <div class="player"><div class="player-canvas" id="lottie" role="img" aria-label="Northline logo reveal, played from northline.json"></div></div>
+      <div>
+        <h2 id="lottie-h">The same reveal as a Lottie</h2>
+        <p class="lede">For the iOS and Android splash and anywhere the web page cannot go. Built from the same geometry and timing as the page above, played here by lottie-web.</p>
+        <dl class="spec">
+          <dt>File</dt><dd><code>northline.json</code></dd>
+          <dt>Canvas</dt><dd>1200 by 360, transparent</dd>
+          <dt>Length</dt><dd>252 frames at 60 fps</dd>
+          <dt>Colour slots</dt><dd><code>route</code> and <code>wordmark</code>, for a dark-mode theme</dd>
+          <dt>Markers</dt><dd><code>reveal</code> and <code>hold</code></dd>
+        </dl>
+        <div class="lottie-actions">
+          <a class="btn" href="northline.json" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download northline.json
+          </a>
+          <button class="btn ghost" type="button" id="lottie-play">Play the Lottie</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Northline logo reveal</span>
+    <span>Wordmark set in Overpass, SIL Open Font License</span>
+  </div>
+</footer>
+
+<script type="application/json" id="lottie-data">{"v":"5.7.0","fr":60,"ip":0,"op":252,"w":1200,"h":360,"nm":"Northline logo reveal","ddd":0,"assets":[{"id":"wordmark","nm":"wordmark letters","layers":[{"ddd":0,"ty":4,"ind":1,"nm":"letter n","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":1,"k":[{"t":126,"s":[264.6,404],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":153,"s":[264.6,252]}]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"n","it":[{"ty":"sh","ks":{"a":0,"k":{"v":[[42.8,0],[15.3,0],[15.3,-102.2],[42.8,-102.2],[42.8,-92.6],[54.65,-101.6],[70.5,-104.6],[96.6,-94.25],[106,-65.4],[106,0],[78.5,0],[78.5,-54.1],[74.5,-72.55],[61.4,-78.2],[47.3,-72.45],[42.8,-54.5]],"i":[[0,0],[0,0],[0,0],[0,0],[0,0],[-4.63,2],[-5.93,0],[-6.27,-6.9],[0,-12.33],[0,0],[0,0],[0,0],[2.67,3.77],[6.07,0],[3,-3.83],[0,-8.13]],"o":[[0,0],[0,0],[0,0],[0,0],[3.27,-4],[4.63,-2],[11.13,0],[6.27,6.9],[0,0],[0,0],[0,0],[0,-8.53],[-2.67,-3.77],[-6.4,0],[-3,3.83],[0,0]],"c":true}}},{"ty":"fl","c":{"a":0,"k":[0.0549,0.1216,0.1686,1],"sid":"wordmark"},"o":{"a":0,"k":100},"r":2},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]},{"ddd":0,"ty":4,"ind":2,"nm":"letter o","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":1,"k":[{"t":130.5,"s":[264.6,404],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":157.5,"s":[264.6,252]}]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"o","it":[{"ty":"sh","ks":{"a":0,"k":{"v":[[173.4,2.4],[139,-11.85],[126.4,-51],[132.15,-79.45],[148.45,-98.05],[173.4,-104.6],[198.15,-98.05],[214.3,-79.5],[220,-51],[214.4,-22.5],[198.3,-4.05]],"i":[[9.6,0],[8.4,9.5],[0,16.6],[-3.83,8.03],[-7.03,4.37],[-9.6,0],[-6.97,-4.37],[-3.8,-8],[0,-11],[3.73,-8],[7,-4.3]],"o":[[-14.53,0],[-8.4,-9.5],[0,-10.93],[3.83,-8.03],[7.03,-4.37],[9.53,0],[6.97,4.37],[3.8,8],[0,11],[-3.73,8],[-7,4.3]],"c":true}}},{"ty":"sh","ks":{"a":0,"k":{"v":[[173.4,-24],[187.65,-31.1],[192.7,-51],[187.55,-71.05],[173.4,-78.2],[159.1,-70.95],[153.9,-51],[159.1,-31.2]],"i":[[-6.07,0],[-3.37,4.73],[0,8.53],[3.43,4.77],[6,0],[3.47,-4.83],[0,-8.47],[-3.47,-4.8]],"o":[[6.13,0],[3.37,-4.73],[0,-8.6],[-3.43,-4.77],[-6.07,0],[-3.47,4.83],[0,8.4],[3.47,4.8]],"c":true}}},{"ty":"fl","c":{"a":0,"k":[0.0549,0.1216,0.1686,1],"sid":"wordmark"},"o":{"a":0,"k":100},"r":2},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]},{"ddd":0,"ty":4,"ind":3,"nm":"letter r","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":1,"k":[{"t":135,"s":[264.6,404],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":162,"s":[264.6,252]}]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"r","it":[{"ty":"sh","ks":{"a":0,"k":{"v":[[268.9,0],[241.4,0],[241.4,-102.2],[268.9,-102.2],[268.9,-92],[277.35,-100.95],[289.4,-104.6],[308.6,-96.4],[304.9,-71.3],[296.5,-76.6],[287.5,-78.1],[277.45,-75.45],[271.1,-67.7],[268.9,-55.4]],"i":[[0,0],[0,0],[0,0],[0,0],[0,0],[-3.97,2.43],[-4.07,0],[-5.2,-5.47],[0,0],[2.67,1],[3.33,0],[2.77,-1.77],[1.47,-3.4],[0,-4.8]],"o":[[0,0],[0,0],[0,0],[0,0],[1.67,-3.53],[3.97,-2.43],[7.6,0],[0,0],[-2.93,-2.53],[-2.67,-1],[-3.93,0],[-2.77,1.77],[-1.47,3.4],[0,0]],"c":true}}},{"ty":"fl","c":{"a":0,"k":[0.0549,0.1216,0.1686,1],"sid":"wordmark"},"o":{"a":0,"k":100},"r":2},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]},{"ddd":0,"ty":4,"ind":4,"nm":"letter t","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":1,"k":[{"t":139.5,"s":[264.6,404],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":166.5,"s":[264.6,252]}]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"t","it":[{"ty":"sh","ks":{"a":0,"k":{"v":[[352.8,2.4],[333.75,-4.45],[327.5,-25],[327.5,-78],[313.1,-78],[313.1,-102.2],[327.5,-102.2],[327.5,-131.4],[354.8,-144.4],[354.8,-102.2],[377.3,-102.2],[377.3,-78],[354.8,-78],[354.8,-29.1],[356.55,-23.25],[362,-21.3],[378.5,-25.6],[375.4,-2.2],[365.1,1.2]],"i":[[4.47,0],[4.17,4.57],[0,9.13],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[-1.17,-1.3],[-2.47,0],[-6,2.87],[0,0],[3.73,-0.8]],"o":[[-8.53,0],[-4.17,-4.57],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,2.6],[1.17,1.3],[5,0],[0,0],[-3.13,1.47],[-3.73,0.8]],"c":true}}},{"ty":"fl","c":{"a":0,"k":[0.0549,0.1216,0.1686,1],"sid":"wordmark"},"o":{"a":0,"k":100},"r":2},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]},{"ddd":0,"ty":4,"ind":5,"nm":"letter h","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":1,"k":[{"t":144,"s":[264.6,404],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":171,"s":[264.6,252]}]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"h","it":[{"ty":"sh","ks":{"a":0,"k":{"v":[[425.5,0],[398,0],[398,-131.8],[425.5,-144.4],[425.5,-92.6],[437.35,-101.6],[453.2,-104.6],[472.4,-99.85],[484.5,-86.3],[488.7,-65.4],[488.7,0],[461.2,0],[461.2,-54.1],[457.3,-72.5],[444.1,-78.2],[430,-72.45],[425.5,-54.5]],"i":[[0,0],[0,0],[0,0],[0,0],[0,0],[-4.63,2],[-5.93,0],[-5.27,-3.17],[-2.8,-5.87],[0,-8.07],[0,0],[0,0],[0,0],[2.6,3.8],[6.2,0],[3,-3.83],[0,-8.13]],"o":[[0,0],[0,0],[0,0],[0,0],[3.27,-4],[4.63,-2],[7.53,0],[5.27,3.17],[2.8,5.87],[0,0],[0,0],[0,0],[0,-8.47],[-2.6,-3.8],[-6.4,0],[-3,3.83],[0,0]],"c":true}}},{"ty":"fl","c":{"a":0,"k":[0.0549,0.1216,0.1686,1],"sid":"wordmark"},"o":{"a":0,"k":100},"r":2},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]},{"ddd":0,"ty":4,"ind":6,"nm":"letter l","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":1,"k":[{"t":148.5,"s":[264.6,404],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":175.5,"s":[264.6,252]}]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"l","it":[{"ty":"sh","ks":{"a":0,"k":{"v":[[542.8,0],[515.3,0],[515.3,-132],[542.8,-144.4]],"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"c":true}}},{"ty":"fl","c":{"a":0,"k":[0.0549,0.1216,0.1686,1],"sid":"wordmark"},"o":{"a":0,"k":100},"r":2},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]},{"ddd":0,"ty":4,"ind":7,"nm":"letter i","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":1,"k":[{"t":153,"s":[264.6,404],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":180,"s":[264.6,252]}]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"i","it":[{"ty":"sh","ks":{"a":0,"k":{"v":[[598.1,0],[570.6,0],[570.6,-102.2],[598.1,-102.2]],"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]],"c":true}}},{"ty":"sh","ks":{"a":0,"k":{"v":[[584.3,-113.1],[573.1,-117.8],[568.4,-129],[573.05,-140.1],[584.3,-144.7],[595.75,-140.2],[600.3,-129],[595.65,-117.75]],"i":[[4.47,0],[3.13,3.13],[0,4.33],[-3.1,3.07],[-4.4,0],[-3.03,-3],[0,-4.47],[3.1,-3.1]],"o":[[-4.33,0],[-3.13,-3.13],[0,-4.33],[3.1,-3.07],[4.6,0],[3.03,3],[0,4.4],[-3.1,3.1]],"c":true}}},{"ty":"fl","c":{"a":0,"k":[0.0549,0.1216,0.1686,1],"sid":"wordmark"},"o":{"a":0,"k":100},"r":2},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]},{"ddd":0,"ty":4,"ind":8,"nm":"letter n","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":1,"k":[{"t":157.5,"s":[264.6,404],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":184.5,"s":[264.6,252]}]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"n","it":[{"ty":"sh","ks":{"a":0,"k":{"v":[[652.4,0],[624.9,0],[624.9,-102.2],[652.4,-102.2],[652.4,-92.6],[664.25,-101.6],[680.1,-104.6],[706.2,-94.25],[715.6,-65.4],[715.6,0],[688.1,0],[688.1,-54.1],[684.1,-72.55],[671,-78.2],[656.9,-72.45],[652.4,-54.5]],"i":[[0,0],[0,0],[0,0],[0,0],[0,0],[-4.63,2],[-5.93,0],[-6.27,-6.9],[0,-12.33],[0,0],[0,0],[0,0],[2.67,3.77],[6.07,0],[3,-3.83],[0,-8.13]],"o":[[0,0],[0,0],[0,0],[0,0],[3.27,-4],[4.63,-2],[11.13,0],[6.27,6.9],[0,0],[0,0],[0,0],[0,-8.53],[-2.67,-3.77],[-6.4,0],[-3,3.83],[0,0]],"c":true}}},{"ty":"fl","c":{"a":0,"k":[0.0549,0.1216,0.1686,1],"sid":"wordmark"},"o":{"a":0,"k":100},"r":2},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]},{"ddd":0,"ty":4,"ind":9,"nm":"letter e","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":1,"k":[{"t":162,"s":[264.6,404],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":189,"s":[264.6,252]}]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"e","it":[{"ty":"sh","ks":{"a":0,"k":{"v":[[784.1,2.4],[758.4,-4.1],[741.8,-22.6],[736,-51.2],[741.9,-79.6],[758.6,-98.1],[784.1,-104.6],[807.1,-99.35],[823.45,-83.35],[829.5,-56.2],[829.4,-49.45],[828.8,-41.6],[762.9,-41.6],[765.75,-30.7],[773.1,-23.55],[784.2,-21],[797.1,-23.45],[807.3,-31.5],[823.1,-15.4],[806.55,-2.45]],"i":[[8.53,0],[7.2,4.33],[3.87,8],[0,11.07],[-3.93,8],[-7.2,4.33],[-9.8,0],[-6.87,-3.5],[-4.03,-7.17],[0,-10.93],[0.07,-2.63],[0.33,-2.6],[0,0],[-1.77,-3.07],[-3.13,-1.7],[-4.27,0],[-3.53,1.63],[-3.27,3.73],[0,0],[6.43,-3.23]],"o":[[-9.93,0],[-7.2,-4.33],[-3.87,-8],[0,-10.93],[3.93,-8],[7.2,-4.33],[8.47,0],[6.87,3.5],[4.03,7.17],[0,1.87],[-0.07,2.63],[0,0],[0.13,4.2],[1.77,3.07],[3.13,1.7],[5.07,0],[3.53,-1.63],[0,0],[-4.6,5.4],[-6.43,3.23]],"c":true}}},{"ty":"sh","ks":{"a":0,"k":{"v":[[763.2,-62.6],[803.1,-62.6],[800.1,-72.7],[793.55,-79.05],[783.5,-81.2],[769.85,-76.4]],"i":[[0.73,-6],[0,0],[1.6,2.8],[2.77,1.43],[3.93,0],[3.7,-3.2]],"o":[[0,0],[-0.4,-3.93],[-1.6,-2.8],[-2.77,-1.43],[-5.4,0],[-3.7,3.2]],"c":true}}},{"ty":"fl","c":{"a":0,"k":[0.0549,0.1216,0.1686,1],"sid":"wordmark"},"o":{"a":0,"k":100},"r":2},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]}]}],"layers":[{"ddd":0,"ty":4,"ind":1,"nm":"summit dot","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[210.9,126.6]},"s":{"a":1,"k":[{"t":3.6,"s":[60,60],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":25.2,"s":[100,100],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":108,"s":[100,100],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":120.6,"s":[108,108],"o":{"x":[0.33],"y":[0]},"i":{"x":[0.2],"y":[1]}},{"t":133.2,"s":[100,100]}]},"r":{"a":0,"k":0},"o":{"a":1,"k":[{"t":3.6,"s":[0],"o":{"x":[0.23],"y":[1]},"i":{"x":[0.32],"y":[1]}},{"t":16.56,"s":[100]}]}},"shapes":[{"ty":"gr","nm":"dot","it":[{"ty":"el","d":1,"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[38,38]}},{"ty":"fl","c":{"a":0,"k":[0.9098,0.349,0.1647,1],"sid":"route"},"o":{"a":0,"k":100},"r":1},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]},{"ddd":0,"ty":4,"ind":2,"nm":"route","ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[105.9,252]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"route","it":[{"ty":"sh","ks":{"a":0,"k":{"c":false,"v":[[13,0],[13,-131],[105,-13],[105,-122]],"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]]}}},{"ty":"tm","s":{"a":0,"k":0},"e":{"a":1,"k":[{"t":36,"s":[0],"o":{"x":[0.65],"y":[0]},"i":{"x":[0.35],"y":[1]}},{"t":108,"s":[100]}]},"o":{"a":0,"k":0},"m":1},{"ty":"st","c":{"a":0,"k":[0.9098,0.349,0.1647,1],"sid":"route"},"o":{"a":0,"k":100},"w":{"a":0,"k":26},"lc":1,"lj":2},{"ty":"tr","a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}]}]},{"ddd":0,"ty":0,"ind":3,"nm":"wordmark","refId":"wordmark","w":1200,"h":360,"ip":0,"op":252,"st":0,"sr":1,"ao":0,"bm":0,"hasMask":true,"masksProperties":[{"nm":"baseline","mode":"a","inv":false,"pt":{"a":0,"k":{"c":true,"v":[[0,77],[1200,77],[1200,256],[0,256]],"i":[[0,0],[0,0],[0,0],[0,0]],"o":[[0,0],[0,0],[0,0],[0,0]]}},"o":{"a":0,"k":100},"x":{"a":0,"k":0}}],"ks":{"a":{"a":0,"k":[0,0]},"p":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100}}}],"markers":[{"cm":"reveal","tm":0,"dr":189},{"cm":"hold","tm":189,"dr":63}]}</script>
+<script>
+(() => {
+  const T = {"total":4.2,"dot":{"start":0.06,"in":0.36,"bumpAt":1.8,"bumpPeak":2.01,"bumpEnd":2.22},"route":{"start":0.6,"dur":1.2},"letters":{"start":2.1,"step":0.075,"dur":0.45},"rise":152,"ease":{"out":[0.23,1,0.32,1],"inout":[0.65,0,0.35,1]}};
+  const bez = (e) => `cubic-bezier(${e.join(',')})`;
+  const rm = matchMedia('(prefers-reduced-motion: reduce)');
+  const svg = document.querySelector('.stage h1 .lockup');
+  const route = svg.querySelector('.route');
+  const dot = svg.querySelector('.dot');
+  const letters = [...svg.querySelectorAll('.ltr')];
+  const scrub = document.getElementById('scrub');
+  const out = document.getElementById('scrub-out');
+  let anims = [];
+
+  function build() {
+    anims.forEach((a) => a.cancel());
+    const d = T.dot, dDur = d.bumpEnd - d.start;
+    const at = (t) => (t - d.start) / dDur;
+    anims = [
+      dot.animate([
+        { offset: 0, opacity: 0, transform: 'scale(0.6)', easing: bez(T.ease.out) },
+        { offset: at(d.start + d.in * 0.6), opacity: 1 },
+        { offset: at(d.start + d.in), transform: 'scale(1)' },
+        { offset: at(d.bumpAt), transform: 'scale(1)', easing: 'cubic-bezier(0.33,0,0.2,1)' },
+        { offset: at(d.bumpPeak), transform: 'scale(1.08)', easing: bez(T.ease.out) },
+        { offset: 1, opacity: 1, transform: 'scale(1)' },
+      ], { duration: dDur * 1000, delay: d.start * 1000, fill: 'both' }),
+      route.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }],
+        { duration: T.route.dur * 1000, delay: T.route.start * 1000, easing: bez(T.ease.inout), fill: 'both' }),
+      ...letters.map((el, i) => el.animate(
+        [{ transform: `translate(0px, ${T.rise}px)` }, { transform: 'translate(0px, 0px)' }],
+        { duration: T.letters.dur * 1000, delay: (T.letters.start + i * T.letters.step) * 1000, easing: bez(T.ease.out), fill: 'both' })),
+    ];
+    anims.forEach((a) => a.pause());
+  }
+  const seek = (t) => { if (!anims.length) build(); anims.forEach((a) => { a.pause(); a.currentTime = t * 1000; }); };
+  const play = () => {
+    if (rm.matches) { clear(); return; }
+    build(); anims.forEach((a) => { a.currentTime = 0; a.play(); });
+    const t0 = performance.now(), run = anims;
+    const tick = (now) => {
+      if (anims !== run || run[run.length - 1].playState === 'paused') return;   // scrubbed or replayed
+      const t = Math.min(T.total, (now - t0) / 1000);
+      scrub.value = t; out.textContent = t.toFixed(2) + 's';
+      if (t < T.total) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  function clear() { anims.forEach((a) => a.cancel()); anims = []; scrub.value = T.total; out.textContent = T.total.toFixed(2) + 's'; }
+  window.__timeline = { duration: T.total, seek, play };
+
+  document.getElementById('replay').addEventListener('click', play);
+  scrub.addEventListener('input', () => {
+    const t = +scrub.value; out.textContent = t.toFixed(2) + 's';
+    if (rm.matches) return;   // reduced motion: the finished mark stays
+    seek(t);
+  });
+  rm.addEventListener('change', () => { if (rm.matches) clear(); });
+  if (!rm.matches) play();
+
+  // ---------- the Lottie, from the same data as northline.json ----------
+  const box = document.getElementById('lottie');
+  const btn = document.getElementById('lottie-play');
+  const s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie_light.min.js';
+  s.onload = () => {
+    const data = JSON.parse(document.getElementById('lottie-data').textContent);
+    const anim = window.lottie.loadAnimation({ container: box, renderer: 'svg', loop: false, autoplay: false, animationData: data,
+      rendererSettings: { preserveAspectRatio: 'xMidYMid meet' } });
+    anim.addEventListener('DOMLoaded', () => {
+      anim.goToAndStop(anim.totalFrames - 1, true);
+      if (rm.matches) return;
+      const io = new IntersectionObserver((es) => {
+        if (es[0].isIntersecting) { anim.goToAndPlay(0, true); io.disconnect(); }
+      }, { threshold: 0.6 });
+      io.observe(box);
+    });
+    btn.addEventListener('click', () => { if (rm.matches) anim.goToAndStop(anim.totalFrames - 1, true); else anim.goToAndPlay(0, true); });
+  };
+  s.onerror = () => { box.textContent = 'The Lottie player could not load. The file itself is next to this page.'; };
+  document.body.appendChild(s);
+})();
+</script>
+</body>
+</html>

@@ -21,8 +21,8 @@
   },
   "themes": {
    "dark": 54,
-   "mixed": 79,
-   "light": 57
+   "light": 60,
+   "mixed": 76
   },
   "examples": [
    "library/prompts/3d/facet-glass.md",
@@ -52,9 +52,9 @@
    "cinematic": 1
   },
   "themes": {
-   "dark": 10,
-   "light": 23,
-   "mixed": 12
+   "dark": 11,
+   "light": 21,
+   "mixed": 13
   },
   "examples": [
    "library/prompts/background/delizoso-elegant-italian-3d-restaurant-copy.md",
@@ -84,8 +84,8 @@
    "corporate": 1
   },
   "themes": {
-   "light": 19,
-   "mixed": 7,
+   "light": 20,
+   "mixed": 6,
    "dark": 3
   },
   "examples": [
@@ -117,9 +117,9 @@
    "brutalist": 2
   },
   "themes": {
-   "light": 3,
+   "light": 5,
    "dark": 14,
-   "mixed": 11
+   "mixed": 9
   },
   "examples": [
    "library/prompts/chat/ai-chat-workspace-ui-emerald-agent-builder-with-live-preview.md",
@@ -149,9 +149,9 @@
    "bold": 2
   },
   "themes": {
-   "mixed": 12,
-   "light": 3,
-   "dark": 8
+   "mixed": 10,
+   "dark": 9,
+   "light": 4
   },
   "examples": [
    "library/prompts/agency/velorah.md",
@@ -178,9 +178,9 @@
    "corporate": 1
   },
   "themes": {
-   "mixed": 5,
-   "light": 13,
-   "dark": 2
+   "dark": 1,
+   "light": 14,
+   "mixed": 5
   },
   "examples": [
    "library/prompts/3d/design-world.md",
@@ -209,9 +209,9 @@
    "minimal": 2
   },
   "themes": {
-   "mixed": 9,
+   "mixed": 8,
    "dark": 7,
-   "light": 3
+   "light": 4
   },
   "examples": [
    "library/prompts/button/hardstop-buttons-with-a-spine-a-brutalist-button-system.md",
@@ -242,8 +242,8 @@
   },
   "themes": {
    "dark": 4,
-   "mixed": 7,
-   "light": 7
+   "mixed": 8,
+   "light": 6
   },
   "examples": [
    "library/prompts/chat/ragindex-ai-chat-interface-neutral-professional-b73b0d.md",
@@ -273,9 +273,9 @@
    "futuristic": 1
   },
   "themes": {
-   "dark": 7,
-   "mixed": 7,
-   "light": 3
+   "dark": 9,
+   "light": 5,
+   "mixed": 3
   },
   "examples": [
    "library/prompts/analytics/data-signal.md",
@@ -396,8 +396,8 @@
    "organic": 1
   },
   "themes": {
-   "mixed": 4,
-   "light": 8,
+   "mixed": 3,
+   "light": 9,
    "dark": 1
   },
   "examples": [
@@ -429,8 +429,8 @@
   },
   "themes": {
    "dark": 7,
-   "mixed": 3,
-   "light": 1
+   "light": 2,
+   "mixed": 2
   },
   "examples": [
    "library/prompts/dashboard/animated-landing-page-dark-console-with-a-self-drawing-network-diagram.md",
@@ -460,7 +460,8 @@
   },
   "themes": {
    "light": 6,
-   "mixed": 5
+   "dark": 2,
+   "mixed": 3
   },
   "examples": [
    "library/prompts/dashboard/fintech-dashboard-with-line-chart.md",
@@ -484,8 +485,8 @@
    "corporate": 1
   },
   "themes": {
-   "dark": 2,
-   "light": 8
+   "mixed": 1,
+   "light": 9
   },
   "examples": [
    "library/prompts/dashboard/bento-dashboard-dark-graphite-analytics-overview-fuchsia-accent.md",
@@ -511,8 +512,8 @@
    "minimal": 1
   },
   "themes": {
-   "mixed": 3,
-   "light": 4,
+   "mixed": 4,
+   "light": 3,
    "dark": 2
   },
   "examples": [
@@ -571,9 +572,9 @@
    "futuristic": 1
   },
   "themes": {
-   "mixed": 5,
-   "dark": 2,
-   "light": 1
+   "dark": 4,
+   "mixed": 1,
+   "light": 3
   },
   "examples": [
    "library/prompts/3d/cast-and-render.md",
@@ -715,9 +716,8 @@
    "corporate": 1
   },
   "themes": {
-   "light": 2,
-   "dark": 1,
-   "mixed": 2
+   "light": 4,
+   "dark": 1
   },
   "examples": [
    "library/prompts/3d-website/3d-collectible-hero.md",
@@ -767,8 +767,7 @@
   },
   "themes": {
    "light": 2,
-   "mixed": 2,
-   "dark": 1
+   "mixed": 3
   },
   "examples": [
    "library/prompts/faq/questions-answered-loudly-a-brutalist-faq.md",
@@ -795,8 +794,9 @@
    "bold": 1
   },
   "themes": {
-   "mixed": 2,
-   "dark": 3
+   "dark": 3,
+   "light": 1,
+   "mixed": 1
   },
   "examples": [
    "library/prompts/hero-section/blueai.md",
@@ -819,9 +819,9 @@
    "bold": 1
   },
   "themes": {
-   "dark": 3,
-   "mixed": 1,
-   "light": 1
+   "light": 1,
+   "mixed": 3,
+   "dark": 1
   },
   "examples": [
    "library/prompts/hero-section/coral-gradient-product-launch-email.md",
@@ -865,8 +865,7 @@
    "bold": 1
   },
   "themes": {
-   "mixed": 1,
-   "dark": 2,
+   "dark": 3,
    "light": 1
   },
   "examples": [
@@ -919,8 +918,8 @@
    "techy": 1
   },
   "themes": {
-   "dark": 1,
-   "mixed": 3
+   "dark": 3,
+   "mixed": 1
   },
   "examples": [
    "library/prompts/dashboard/dinar-gold-admin-customer-data-entry.md",
@@ -942,8 +941,8 @@
    "organic": 1
   },
   "themes": {
-   "light": 3,
-   "mixed": 1
+   "mixed": 3,
+   "light": 1
   },
   "examples": [
    "library/prompts/footer/acid-yellow-neo-brutalist-mega-footer.md",
@@ -1062,8 +1061,7 @@
    "luxury": 1
   },
   "themes": {
-   "mixed": 1,
-   "dark": 2
+   "dark": 3
   },
   "examples": [
    "library/prompts/agency/neural-pathway.md",
@@ -1110,8 +1108,8 @@
    "cinematic": 1
   },
   "themes": {
-   "mixed": 1,
-   "dark": 2
+   "dark": 2,
+   "light": 1
   },
   "examples": [
    "library/prompts/ai/orbit-flora.md",
@@ -1135,7 +1133,8 @@
   },
   "themes": {
    "dark": 1,
-   "mixed": 2
+   "mixed": 1,
+   "light": 1
   },
   "examples": [
    "library/prompts/animation/nexa-ai-premium-animated-experience.md",
@@ -1156,7 +1155,8 @@
    "luxury": 1
   },
   "themes": {
-   "mixed": 3
+   "dark": 2,
+   "mixed": 1
   },
   "examples": [
    "library/prompts/background/parallax-stars-background.md",
@@ -1221,7 +1221,8 @@
    "editorial": 1
   },
   "themes": {
-   "mixed": 3
+   "light": 1,
+   "mixed": 2
   },
   "examples": [
    "library/prompts/dashboard/leadflow-dashboard-with-navigation.md",
@@ -1244,7 +1245,7 @@
    "futuristic": 1
   },
   "themes": {
-   "mixed": 1,
+   "light": 1,
    "dark": 2
   },
   "examples": [
@@ -1288,8 +1289,7 @@
    "corporate": 1
   },
   "themes": {
-   "mixed": 1,
-   "light": 1,
+   "light": 2,
    "dark": 1
   },
   "examples": [
@@ -1316,8 +1316,7 @@
    "brutalist": 1
   },
   "themes": {
-   "mixed": 2,
-   "dark": 1
+   "dark": 3
   },
   "examples": [
    "library/prompts/hero-section/apos.md",
@@ -1337,8 +1336,8 @@
    "minimal": 1
   },
   "themes": {
-   "mixed": 1,
-   "dark": 2
+   "dark": 2,
+   "mixed": 1
   },
   "examples": [
    "library/prompts/misc/command-center.md",
@@ -1359,7 +1358,8 @@
    "editorial": 1
   },
   "themes": {
-   "light": 3
+   "dark": 1,
+   "light": 2
   },
   "examples": [
    "library/prompts/misc/elitehire-premium-executive-recruitment.md",
@@ -1400,8 +1400,7 @@
   "uses": 2,
   "moods": {},
   "themes": {
-   "light": 1,
-   "mixed": 1
+   "mixed": 2
   },
   "examples": [
    "library/prompts/3d/3d-character-studio.md",
@@ -1439,8 +1438,7 @@
    "minimal": 1
   },
   "themes": {
-   "light": 1,
-   "mixed": 1
+   "mixed": 2
   },
   "examples": [
    "library/prompts/ai/scanner-comparison.md",
@@ -1484,7 +1482,7 @@
    "retro": 1
   },
   "themes": {
-   "mixed": 1,
+   "light": 1,
    "dark": 1
   },
   "examples": [
@@ -1523,7 +1521,8 @@
    "editorial": 1
   },
   "themes": {
-   "dark": 2
+   "light": 1,
+   "dark": 1
   },
   "examples": [
    "library/prompts/dashboard/dashboard-003.md",
@@ -1548,7 +1547,7 @@
   },
   "themes": {
    "light": 1,
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/dashboard/fun-facts-live-retro-punk-dashboard.md",
@@ -1589,7 +1588,8 @@
    "techy": 1
   },
   "themes": {
-   "light": 2
+   "light": 1,
+   "dark": 1
   },
   "examples": [
    "library/prompts/environmental/trueearth.md",
@@ -1629,7 +1629,7 @@
    "luxury": 1
   },
   "themes": {
-   "mixed": 2
+   "light": 2
   },
   "examples": [
    "library/prompts/hero-section/digital-epoch.md",
@@ -1668,8 +1668,7 @@
    "bold": 1
   },
   "themes": {
-   "mixed": 1,
-   "dark": 1
+   "dark": 2
   },
   "examples": [
    "library/prompts/hero-section/nikki.md",
@@ -1708,7 +1707,7 @@
    "editorial": 1
   },
   "themes": {
-   "dark": 1,
+   "light": 1,
    "mixed": 1
   },
   "examples": [
@@ -1784,7 +1783,8 @@
    "editorial": 1
   },
   "themes": {
-   "mixed": 2
+   "mixed": 1,
+   "dark": 1
   },
   "examples": [
    "library/prompts/landing-page/hover-reveal-effect.md",
@@ -1866,8 +1866,8 @@
    "minimal": 1
   },
   "themes": {
-   "mixed": 1,
-   "dark": 1
+   "dark": 1,
+   "mixed": 1
   },
   "examples": [
    "library/prompts/misc/argos-architectural-sonic-archive-mountain-landscape-edition.md",
@@ -1921,7 +1921,8 @@
   "uses": 2,
   "moods": {},
   "themes": {
-   "light": 2
+   "light": 1,
+   "dark": 1
   },
   "examples": [
    "library/prompts/misc/dentavoice-dental-charting-live-exam-state-update.md",
@@ -1943,7 +1944,8 @@
    "futuristic": 1
   },
   "themes": {
-   "dark": 2
+   "dark": 1,
+   "light": 1
   },
   "examples": [
    "library/prompts/misc/hollywood-screenplay-focus-group-session.md",
@@ -1964,7 +1966,8 @@
    "bold": 1
   },
   "themes": {
-   "light": 2
+   "light": 1,
+   "mixed": 1
   },
   "examples": [
    "library/prompts/misc/immoprojet-mediterranean-editorial-variation.md",
@@ -2044,7 +2047,7 @@
    "organic": 1
   },
   "themes": {
-   "mixed": 1,
+   "dark": 1,
    "light": 1
   },
   "examples": [
@@ -2142,8 +2145,7 @@
    "retro": 1
   },
   "themes": {
-   "light": 1,
-   "dark": 1
+   "dark": 2
   },
   "examples": [
    "library/prompts/style/red-noir-style.md",
@@ -2191,7 +2193,7 @@
    "retro": 1
   },
   "themes": {
-   "light": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/3d/feathers-atlas.md"
@@ -2208,7 +2210,7 @@
    "bold": 1
   },
   "themes": {
-   "dark": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/3d/mind-ai.md"
@@ -2241,7 +2243,7 @@
    "bold": 1
   },
   "themes": {
-   "light": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/3d/space-planet.md"
@@ -2305,7 +2307,7 @@
    "corporate": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/ai/ai-runtime.md"
@@ -2409,7 +2411,7 @@
    "bold": 1
   },
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/animation/horizontal-scroll-editorial-themes.md"
@@ -2455,7 +2457,7 @@
   "uses": 1,
   "moods": {},
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/authentication/keylight.md"
@@ -2552,7 +2554,7 @@
    "bold": 1
   },
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/creative-agency/playful-idea.md"
@@ -2619,7 +2621,7 @@
    "organic": 1
   },
   "themes": {
-   "dark": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/dashboard/developer-dashboard-e-ink-paper-cicd-deployments-console.md"
@@ -2638,7 +2640,7 @@
    "techy": 1
   },
   "themes": {
-   "light": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/dashboard/fedmindy-or-empire-command-dashboard.md"
@@ -2707,7 +2709,7 @@
    "corporate": 1
   },
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/dashboard/neon-edge-or-cinematic-dashboard.md"
@@ -2840,7 +2842,7 @@
    "luxury": 1
   },
   "themes": {
-   "light": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/ecommerce/animated-didone-landing-page-blush-and-dusty-pink-editorial-with-multiply-blende.md"
@@ -2858,7 +2860,7 @@
    "bold": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/ecommerce/vertex.md"
@@ -2910,7 +2912,7 @@
    "bold": 1
   },
   "themes": {
-   "dark": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/finance/trustflow.md"
@@ -2926,7 +2928,7 @@
    "brutalist": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/fintech/aurex-finance.md"
@@ -3022,7 +3024,7 @@
    "corporate": 1
   },
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/form/updated-contact-information-for-hiliox-energy.md"
@@ -3054,7 +3056,7 @@
    "luxury": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/hero-section/aistudio.md"
@@ -3109,7 +3111,7 @@
    "luxury": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/hero-section/chipmuk.md"
@@ -3128,7 +3130,7 @@
    "luxury": 1
   },
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/hero-section/cloudb.md"
@@ -3283,7 +3285,7 @@
    "organic": 1
   },
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/hero-section/picway.md"
@@ -3443,7 +3445,7 @@
    "organic": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/hero/organic-odyssey.md"
@@ -3457,7 +3459,7 @@
   "uses": 1,
   "moods": {},
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/hero/subscription-agency.md"
@@ -3541,7 +3543,7 @@
    "luxury": 1
   },
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/landing-page/adamdev.md"
@@ -3657,7 +3659,7 @@
    "cinematic": 1
   },
   "themes": {
-   "light": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/landing-page/circular-gallery.md"
@@ -3748,7 +3750,7 @@
    "corporate": 1
   },
   "themes": {
-   "dark": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/landing-page/hybera.md"
@@ -3857,7 +3859,7 @@
    "cinematic": 1
   },
   "themes": {
-   "light": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/landing-page/marx.md"
@@ -3922,7 +3924,7 @@
    "futuristic": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/landing-page/orbis-nft.md"
@@ -3941,7 +3943,7 @@
    "luxury": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/landing-page/porgas.md"
@@ -3977,7 +3979,7 @@
    "cinematic": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/landing-page/prisma-creative-studio.md"
@@ -4080,7 +4082,7 @@
    "minimal": 1
   },
   "themes": {
-   "light": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/layout/collection-page-visual-discovery-wall.md"
@@ -4263,7 +4265,7 @@
    "organic": 1
   },
   "themes": {
-   "dark": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/login-page/formcast-forms-that-dont-mumble.md"
@@ -4577,7 +4579,7 @@
   "uses": 1,
   "moods": {},
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/misc/modern-illustrator-linkedin-profile-header.md"
@@ -4631,7 +4633,7 @@
    "bold": 1
   },
   "themes": {
-   "dark": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/misc/northline-health-digital-growth-for-healthcare-providers.md"
@@ -4914,7 +4916,7 @@
    "editorial": 1
   },
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/mobile-app/mobile-app-ui-airline-boarding-pass-and-trip-screen.md"
@@ -4948,7 +4950,7 @@
    "organic": 1
   },
   "themes": {
-   "light": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/mobile-app/pastel-bloom-onboarding-29fcbf.md"
@@ -5064,7 +5066,7 @@
    "retro": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/portfolio/digital-director.md"
@@ -5097,7 +5099,7 @@
    "bold": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/portfolio/parallex.md"
@@ -5163,7 +5165,7 @@
   "uses": 1,
   "moods": {},
   "themes": {
-   "light": 1
+   "mixed": 1
   },
   "examples": [
    "library/prompts/presentation/ledger-deck-two-colours-that-swap-roles-against-a-full-height-shelf-column.md"
@@ -5395,7 +5397,7 @@
    "bold": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/print/vintage-serif-masthead-editorial-newspaper-poster.md"
@@ -5425,7 +5427,7 @@
   "uses": 1,
   "moods": {},
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/saas/agent-grove.md"
@@ -5486,7 +5488,7 @@
   "uses": 1,
   "moods": {},
   "themes": {
-   "dark": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/saas/scaling-platform.md"
@@ -5530,7 +5532,7 @@
    "retro": 1
   },
   "themes": {
-   "dark": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/science/planetary-pulse.md"
@@ -5571,7 +5573,7 @@
    "corporate": 1
   },
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/skill/landing-page-saas.md"
@@ -5866,7 +5868,7 @@
    "bold": 1
   },
   "themes": {
-   "dark": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/style/monochrome.md"
@@ -5922,7 +5924,7 @@
    "bold": 1
   },
   "themes": {
-   "mixed": 1
+   "light": 1
   },
   "examples": [
    "library/prompts/style/news-print.md"
@@ -6012,7 +6014,7 @@
    "techy": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/style/terminal.md"
@@ -6063,7 +6065,7 @@
    "retro": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/supply/logistics-freight.md"
@@ -6096,7 +6098,7 @@
    "organic": 1
   },
   "themes": {
-   "mixed": 1
+   "dark": 1
   },
   "examples": [
    "library/prompts/tech/riverine.md"

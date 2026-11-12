@@ -16,18 +16,23 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
+import { findChrome } from './chrome.mjs';
 
 const args = process.argv.slice(2);
-const opts = { out: '.atelier/shots', sizes: 'desktop,fold,mobile,wide' };
+const opts = { sizes: 'desktop,fold,mobile,wide' };
+const USAGE = 'usage: node shot.mjs <file.html | url> [--out dir] [--sizes desktop,fold,mobile,wide] [--full] [--at 25%,50%,2400] [--kind brand|game] [--json]\n' +
+  'Screenshots go to --out, or to .atelier/shots next to the file (a URL: under the current folder).';
 let target;
 for (let i = 0; i < args.length; i++) {
   const a = args[i];
+  if (a === '--help' || a === '-h') { console.log(USAGE); process.exit(0); }
   if (a === '--full' || a === '--json') opts[a.slice(2)] = true;
-  else if (a.startsWith('--')) opts[a.slice(2)] = args[++i];
+  else if (a === '--out' || a === '--sizes' || a === '--at' || a === '--kind') opts[a.slice(2)] = args[++i];
+  else if (a.startsWith('-')) { console.log(`unknown option ${a}\n${USAGE}`); process.exit(2); }
   else target = a;
 }
 if (!target) {
-  console.log('usage: node shot.mjs <file.html | url> [--out dir] [--sizes desktop,fold,mobile,wide] [--full] [--json]');
+  console.log(USAGE);
   process.exit(0);
 }
 if (typeof WebSocket === 'undefined') {
@@ -42,29 +47,18 @@ const SIZES = {
   wide: { w: 1920, h: 1080, mobile: false },
 };
 
-function findChrome() {
-  if (process.env.CHROME_PATH && fs.existsSync(process.env.CHROME_PATH)) return process.env.CHROME_PATH;
-  const c = {
-    win32: [
-      'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-      `${process.env.LOCALAPPDATA}/Google/Chrome/Application/chrome.exe`, 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
-      'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
-    ],
-    darwin: ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Chromium.app/Contents/MacOS/Chromium',
-      '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge'],
-    linux: ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/snap/bin/chromium', '/usr/bin/microsoft-edge'],
-  }[process.platform] || [];
-  return c.find((p) => p && fs.existsSync(p));
-}
-
 const chromePath = findChrome();
 if (!chromePath) {
   console.log('No Chrome, Chromium or Edge found. Set CHROME_PATH, or do the visual check by hand and say so in the handoff.');
   process.exit(2);
 }
 
-const url = /^https?:|^file:/.test(target) ? target : pathToFileURL(path.resolve(target)).href;
-const outDir = path.resolve(opts.out);
+// A local file may carry a query or hash (index.html?state=check&bare): keep it on the file URL.
+const [filePart, ...rest] = target.split(/(?=[?#])/);
+if (!/^https?:|^file:/.test(target) && !fs.existsSync(filePart)) { console.log('file not found: ' + filePart); process.exit(2); }
+const url = /^https?:|^file:/.test(target) ? target : pathToFileURL(path.resolve(filePart)).href + rest.join('');
+const isUrl = /^https?:|^file:/.test(target);
+const outDir = path.resolve(opts.out || (isUrl ? '.atelier/shots' : path.join(path.dirname(path.resolve(target)), '.atelier', 'shots')));
 fs.mkdirSync(outDir, { recursive: true });
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'atelier-chrome-'));
 const port = 9300 + Math.floor(Math.random() * 500);
@@ -133,7 +127,7 @@ const MEASURE = `(() => {
     const r = p.getBoundingClientRect();
     if (r.top < vh && r.bottom > 0) words += n.textContent.trim().split(/\\s+/).length;
   }
-  const broken = [...document.images].filter((i) => i.complete && i.naturalWidth === 0).map((i) => i.currentSrc || i.src).slice(0, 5);
+  const broken = [...document.images].filter((i) => i.getAttribute('src') && i.complete && i.naturalWidth === 0).map((i) => i.currentSrc || i.src).slice(0, 5);
   const tiny = [...document.querySelectorAll('body *')].filter((el) => el.childNodes.length && [...el.childNodes].some((c) => c.nodeType === 3 && c.textContent.trim()) && vis(el) && parseFloat(getComputedStyle(el).fontSize) < 12).map(sel).slice(0, 5);
   // Inline links inside running text are exempt; controls and chrome links are not.
   const smallTaps = vw < 600 ? [...document.querySelectorAll('a, button, input, select, textarea')].filter((el) => {
@@ -141,9 +135,15 @@ const MEASURE = `(() => {
     const r = el.getBoundingClientRect();
     if (r.width <= 2 || r.height <= 2) return false; // visually hidden input behind a label
     if (el.tagName === 'A') return (el.closest('nav, header') || !el.closest('p, li, footer')) && (r.height < 32 || r.width < 32);
-    return r.height < 40 || r.width < 40;
+    // A checkbox or radio is tapped through its label: measure the label instead.
+    const label = el.tagName === 'INPUT' && (el.closest('label') || (el.id && document.querySelector('label[for="' + el.id + '"]')));
+    const t = label ? label.getBoundingClientRect() : r;
+    return t.height < 40 || t.width < 40;
   }).map(sel).slice(0, 5) : [];
-  const hidden = [...document.querySelectorAll('h1, h2, h3, p, li, img, a, button')].filter((el) => { const s = getComputedStyle(el); return s.display !== 'none' && (parseFloat(s.opacity) < 0.05 || s.visibility === 'hidden'); }).map(sel).slice(0, 5);
+  // Rendered (no display:none up the tree) but invisible through opacity or visibility, the ancestors' included.
+  const shown = (el) => (el.checkVisibility ? el.checkVisibility() : getComputedStyle(el).display !== 'none');
+  const seen = (el) => (el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : parseFloat(getComputedStyle(el).opacity) >= 0.05 && getComputedStyle(el).visibility !== 'hidden');
+  const hidden = [...document.querySelectorAll('h1, h2, h3, p, li, img, a, button')].filter((el) => shown(el) && !seen(el)).map(sel).slice(0, 12);
   return { vw, vh, docW, docH: document.documentElement.scrollHeight, overflow: docW > vw + 1, wide,
     h1: h1 ? { text: h1.textContent.trim().slice(0, 80), bottom: Math.round(h1r.bottom), inView: h1r.bottom <= vh && h1r.top >= 0 } : null,
     actionInView: actions.length > 0, filledActionInView: filled.length > 0, words, broken, tiny, smallTaps, hidden,
@@ -221,6 +221,14 @@ try {
     await evaluate(SETTLE);
     const m = await evaluate(MEASURE);
     const files = [await capture(path.join(outDir, `${name}.png`), false)];
+    // --at: also shoot the screen scrolled to each position (pixels, or % of the scrollable height),
+    // for pinned and scroll-driven sections that a full-page capture shows empty.
+    for (const at of (opts.at || '').split(',').map((s) => s.trim()).filter(Boolean)) {
+      const y = at.endsWith('%') ? `(document.documentElement.scrollHeight - innerHeight) * ${parseFloat(at) / 100}` : String(parseFloat(at));
+      await evaluate(`(async () => { scrollTo({ top: ${y}, behavior: 'instant' }); await new Promise(r => setTimeout(r, 700)); return true; })()`);
+      files.push(await capture(path.join(outDir, `${name}-at-${at.replace('%', 'pct')}.png`), false));
+    }
+    if (opts.at) await evaluate(`(async () => { scrollTo({ top: 0, behavior: 'instant' }); await new Promise(r => setTimeout(r, 300)); return true; })()`);
     if (opts.full && (name === 'desktop' || name === 'mobile')) {
       // Scroll through so lazy images and scroll reveals fire, finish what they started,
       // then shoot the whole page in its final state.
@@ -261,18 +269,22 @@ for (const [name, r] of Object.entries(results)) {
   if (name === 'fold' || name === 'desktop') {
     if (!r.h1) add('WARN', `${name}: no <h1> on the page`);
     else if (!r.h1.inView) add('FAIL', `${name}: the headline ends at ${r.h1.bottom}px, below the ${r.vh}px fold`);
-    if (!r.actionInView) add('WARN', `${name}: no link or button visible in the first screen`);
+    if (opts.kind === 'brand' || opts.kind === 'game') { /* a brand sheet or a HUD has no call to action */ }
+    else if (!r.actionInView) add('WARN', `${name}: no link or button visible in the first screen`);
     else if (!r.filledActionInView) add('WARN', `${name}: no filled primary action in the first screen`);
-    if (r.words > 90) add('WARN', `${name}: about ${r.words} words on the first screen (aim for 80 or fewer)`);
+    if (r.words > 90 && opts.kind !== 'game') add('WARN', `${name}: about ${r.words} words on the first screen (aim for 80 or fewer)`);
   }
   if (r.broken.length) add('FAIL', `${name}: broken images: ${r.broken.join(', ')}`);
-  if (r.tiny.length) add('WARN', `${name}: text under 12px: ${r.tiny.join(', ')}`);
-  if (r.smallTaps.length) add('WARN', `${name}: tap targets under 40px: ${r.smallTaps.join(', ')}`);
+  if (r.tiny.length && opts.kind !== 'game') add('WARN', `${name}: text under 12px: ${r.tiny.join(', ')}`);
+  if (r.smallTaps.length && opts.kind !== 'game') add('WARN', `${name}: tap targets under 40px: ${r.smallTaps.join(', ')}`);
 }
 const first = Object.values(results).find((r) => r.title !== undefined);
 if (first && !first.title) add('WARN', 'document has no <title>');
 if (first && !first.lang) add('WARN', '<html> has no lang');
-if (results.reducedMotion?.hidden.length) add('FAIL', `content invisible with reduced motion: ${results.reducedMotion.hidden.join(', ')}`);
+// Only what the normal pass shows and reduced motion hides: content hidden on purpose (a closed menu, an inactive HUD state) is hidden in both.
+const normalHidden = new Set(Object.entries(results).filter(([k]) => k !== 'reducedMotion').flatMap(([, r]) => r.hidden || []));
+const lostToMotion = (results.reducedMotion?.hidden || []).filter((h) => !normalHidden.has(h)).slice(0, 5);
+if (lostToMotion.length) add('FAIL', `content invisible with reduced motion: ${lostToMotion.join(', ')}`);
 const errs = [...new Set(consoleErrors)].slice(0, 5);
 if (errs.length) add('WARN', `console errors: ${errs.join(' | ')}`);
 

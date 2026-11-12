@@ -48,6 +48,7 @@ Once the page is built, wire the few decisions still worth debating to a live pa
    ```
 3. Expose **four to seven** controls, chosen for this page: the decisions where you were torn, and the ones a client would argue about. Every option in a select is a good answer (the runner-up faces from the type search, not random fonts), and every font option is loaded by the page.
 4. Ranges are bounded to the good zone: a hue slider for an accent whose lightness and chroma are fixed in OKLCH; a display size from "confident" to "poster", never down to body size.
+   When motion is open to debate, two controls cover it: `"--motion-scale": { "label": "Motion pace", "type": "range", "min": 0.7, "max": 1.4, "step": 0.05 }` (the page's durations are `calc(<token> * var(--motion-scale, 1))`, `motion/principles.md` § 3) and `"data-motion": { "label": "Reduced motion", "type": "toggle", "on": "reduce", "off": "full" }` (the page's `:root[data-motion="reduce"]` rules, `motion/accessibility.md` § 5b), so the client sees the calm version too.
 5. The panel's **Copy** button gives the chosen values as CSS. When the user sends them, bake them into the tokens and remove the panel and its script.
 
 Never ship the panel: the handoff says where it is and that it is review-only; on the final pass, delete the `atelier:tweaks` block.
@@ -83,5 +84,5 @@ Reach for these when the push asks for more. Each is in the library many times; 
 - **Crop and bleed:** images off the edge, type running behind or across a photo, a section that breaks the container once.
 - **Material:** paper grain, ink spread, glass, metal, screen phosphor, made in CSS and SVG filters, matched to the world, applied to the whole page, not one card.
 - **Rhythm breaks:** one dense section among airy ones, one full-bleed colour band, one pinned sequence, one change of reading direction.
-- **Marginalia and system details:** running heads, index numbers, captions, coordinates, timestamps, units: the furniture of the world the page borrows from.
+- **Captions that carry a fact:** what the photo shows and who made it, the unit beside a real number, the name of the thing on screen. Never decorative metadata (coordinates, index numbers, serials, timestamps, counters): it is the most recognisable generated tell (`anti-slop.md` § Copy and chrome).
 - **Motion with meaning:** the signature tells the product's story (the tape drawing up the wall, the ticket printing), everything else is quiet.

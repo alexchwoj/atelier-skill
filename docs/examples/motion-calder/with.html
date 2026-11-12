@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ines Calder, documentary photographer</title>
+<meta name="description" content="Documentary stories by Ines Calder: fishing crews, flooded farms, hand harvests, market halls, heat trades and the last trains home.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+:root {
+  --paper: oklch(96.6% 0.006 80);
+  --paper-2: oklch(93.6% 0.008 78);
+  --rule: oklch(85.5% 0.009 75);
+  --muted: oklch(47% 0.012 60);
+  --ink-2: oklch(36% 0.012 60);
+  --ink: oklch(21% 0.012 60);
+  --mark: oklch(55% 0.19 29);          /* china-marker red: selection, focus, the one filled button */
+  --mark-ink: oklch(99% 0.004 80);
+  --ok: oklch(48% 0.12 150);
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --pad: clamp(16px, 3.4vw, 48px);
+  --gap: clamp(16px, 2vw, 28px);
+  --s-2xs: 4px; --s-xs: 8px; --s-sm: 12px; --s-md: 16px; --s-lg: 24px; --s-xl: 40px; --s-2xl: 64px; --s-3xl: 96px; --s-4xl: 144px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 150ms;
+  --dur-mark: 260ms;
+  --dur-morph: 400ms;
+  --dur-back: 320ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { background: var(--paper); scrollbar-color: var(--ink-2) var(--paper-2); scrollbar-gutter: stable; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 17px/1.6 var(--sans); font-synthesis: none;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+::selection { background: var(--mark); color: var(--mark-ink); }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, p, figure, ul, ol { margin: 0; }
+:focus-visible { outline: 3px solid var(--mark); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---------- Header (persists across both views) ---------- */
+.site-head {
+  position: sticky; top: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-md);
+  min-height: 64px; padding: 0 var(--pad);
+  background: color-mix(in oklch, var(--paper) 94%, transparent);
+  border-bottom: 1px solid var(--rule);
+  view-transition-name: site-head;
+}
+.brand { font: 400 22px/1 var(--serif); text-decoration: none; letter-spacing: -0.01em; padding: 10px 0; }
+.head-nav { display: flex; gap: clamp(16px, 2.4vw, 32px); align-items: center; }
+.head-nav a, .back {
+  font-size: 16px; text-decoration: none; padding: 10px 0; min-height: 44px; display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(currentColor, currentColor) 0 calc(100% - 9px) / 0 1px no-repeat;
+  transition: background-size 180ms var(--ease-out);
+}
+@media (hover: hover) { .head-nav a:hover, .back:hover { background-size: 100% 1px; } }
+.head-nav .back { display: none; }
+.back svg { width: 18px; height: 18px; flex-shrink: 0; }
+.js body[data-view="story"] .head-nav .back { display: inline-flex; }
+.js body[data-view="story"] .head-nav .to-about { display: none; }
+
+/* ---------- Index ---------- */
+.index { padding: clamp(40px, 7vw, 96px) var(--pad) var(--s-3xl); }
+.sheet {
+  list-style: none; padding: 0;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gap); row-gap: clamp(56px, 8vw, 120px);
+  align-items: start;
+}
+.intro { grid-column: 1 / 5; grid-row: 1; padding-top: var(--s-xs); }
+.intro h1 {
+  font: 400 clamp(36px, 3.9vw, 58px)/1.04 var(--serif); letter-spacing: -0.022em;
+  max-width: 11ch; text-wrap: balance; overflow-wrap: break-word;
+}
+.intro p { margin-top: var(--s-lg); color: var(--ink-2); max-width: 34ch; text-wrap: pretty; }
+.intro .hint { margin-top: var(--s-md); font-size: 15px; color: var(--muted); }
+
+.tile { min-width: 0; }
+.tile-link { display: block; text-decoration: none; outline-offset: 16px; }
+.tile-frame { position: relative; display: block; background: var(--paper-2); }
+.tile-frame img { width: 100%; height: 100%; object-fit: cover; }
+.c-wide { aspect-ratio: 16 / 10; }
+.c-std { aspect-ratio: 3 / 2; }
+.c-tall { aspect-ratio: 4 / 5; }
+.c-port { aspect-ratio: 3 / 4; }
+.tile-text { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s-md); padding-top: var(--s-md); }
+.tile-title { font: 400 clamp(24px, 2.1vw, 32px)/1.1 var(--serif); letter-spacing: -0.015em; grid-column: 1; }
+.tile-count { grid-column: 2; grid-row: 1; font-size: 15px; color: var(--muted); padding-top: 6px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tile-dek { grid-column: 1 / -1; margin-top: 6px; color: var(--ink-2); font-size: 16px; max-width: 46ch; text-wrap: pretty; }
+
+/* catalogue placement: one big frame bleeding off the edge, then an uneven sheet */
+.t1 { grid-column: 5 / 13; grid-row: 1; margin-right: calc(var(--pad) * -1); }
+.t1 .tile-text { padding-right: var(--pad); }
+.t2 { grid-column: 1 / 6; }
+.t3 { grid-column: 7 / 13; margin-top: clamp(40px, 12vw, 200px); }
+.t4 { grid-column: 2 / 8; }
+.t5 { grid-column: 9 / 13; margin-top: clamp(40px, 8vw, 140px); }
+.t6 { grid-column: 1 / 6; }
+.about { grid-column: 7 / 12; align-self: end; padding-bottom: var(--s-xl); }
+.about h2 { font: 400 clamp(28px, 2.6vw, 38px)/1.1 var(--serif); letter-spacing: -0.018em; }
+.about p { margin-top: var(--s-md); color: var(--ink-2); max-width: 44ch; text-wrap: pretty; }
+.about a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+/* the editor's china-marker box */
+.mark {
+  position: absolute; inset: -9px; width: calc(100% + 18px); height: calc(100% + 18px);
+  overflow: visible; pointer-events: none;
+}
+.mark path {
+  fill: none; stroke: var(--mark); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: var(--len, 4000px); stroke-dashoffset: var(--len, 4000px);
+}
+.marks-ready .mark path { transition: stroke-dashoffset 160ms var(--ease-out); }
+@media (hover: hover) { .tile-link:hover .mark path, .next-link:hover .mark path { stroke-dashoffset: 0; transition-duration: var(--dur-mark); } }
+.tile-link:focus-visible .mark path, .tile.is-seen .mark path { stroke-dashoffset: 0; transition-duration: var(--dur-mark); }
+.tile-link:focus-visible .tile-title { text-decoration: underline 2px var(--mark); text-underline-offset: 5px; }
+.tile.is-seen .tile-count::after { content: ", viewed"; }
+
+/* ---------- Story ---------- */
+.stories { padding: 0 var(--pad); }
+.js .story { display: none; }
+.js .story.is-current { display: block; }
+.js body[data-view="story"] .index { display: none; }
+.story { padding: clamp(24px, 3vw, 40px) 0 var(--s-3xl); }
+.no-js-sep .story + .story { border-top: 1px solid var(--rule); }
+
+.lead { margin: 0 auto; max-width: min(100%, calc((100svh - 140px) * var(--r))); }
+.lead-img { width: 100%; height: auto; background: var(--paper-2); }
+figcaption { margin-top: var(--s-sm); font-size: 15px; line-height: 1.5; color: var(--ink-2); max-width: 70ch; text-wrap: pretty; }
+.credit { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
+.credit a { text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+.story-head {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
+  margin-top: clamp(40px, 6vw, 88px);
+}
+.story-title {
+  grid-column: 1 / -1;
+  font: 400 clamp(48px, 8.4vw, 132px)/0.95 var(--serif); letter-spacing: -0.035em;
+  overflow-wrap: break-word; min-width: 0; text-wrap: balance;
+}
+.story-title:focus-visible { outline: 3px solid var(--mark); }
+.story-dek { grid-column: 1 / 8; margin-top: var(--s-lg); font: italic 400 clamp(21px, 1.8vw, 26px)/1.35 var(--serif); color: var(--ink-2); max-width: 40ch; }
+.story-text { margin: var(--s-2xl) 0 0 auto; width: min(100%, 38rem); margin-right: clamp(0px, 8vw, 140px); }
+.story-text p + p { margin-top: var(--s-md); }
+.story-text b { font-weight: 600; }
+
+.seq {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
+  row-gap: clamp(48px, 7vw, 112px); margin-top: clamp(64px, 9vw, 144px); align-items: end;
+}
+.frame { min-width: 0; }
+.frame img { width: 100%; background: var(--paper-2); }
+.f-wide { grid-column: 1 / 8; }
+.f-side { grid-column: 9 / 13; }
+.f-full { grid-column: 1 / -1; margin: 0 calc(var(--pad) * -1); }
+.f-full figcaption { padding: 0 var(--pad); }
+.f-full img { max-height: 92svh; object-fit: cover; }
+.f-mid { grid-column: 3 / 11; }
+
+.next { margin-top: clamp(80px, 10vw, 160px); border-top: 1px solid var(--rule); padding-top: var(--s-xl); }
+.next-link { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: var(--s-lg); align-items: end; text-decoration: none; max-width: 760px; }
+.next-frame { position: relative; display: block; aspect-ratio: 3 / 2; background: var(--paper-2); }
+.next-frame img { width: 100%; height: 100%; object-fit: cover; }
+.next-label { display: block; color: var(--muted); font-size: 15px; }
+.next-title { display: block; font: 400 clamp(32px, 4vw, 56px)/1 var(--serif); letter-spacing: -0.025em; margin-top: 6px; }
+@media (hover: hover) { .next-link:hover .next-title { text-decoration: underline 2px var(--mark); text-underline-offset: 6px; } }
+
+/* ---------- Enquiry ---------- */
+.ask { padding: var(--s-3xl) var(--pad); background: var(--paper-2); border-top: 1px solid var(--rule); }
+.js body[data-view="index"] .ask { display: none; }
+.ask-inner { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: var(--s-xl); }
+.ask h2 { grid-column: 1 / -1; font: 400 clamp(44px, 6.6vw, 104px)/0.98 var(--serif); letter-spacing: -0.032em; max-width: 14ch; text-wrap: balance; overflow-wrap: break-word; min-width: 0; }
+.ask-note { grid-column: 1 / 5; color: var(--ink-2); max-width: 32ch; }
+.ask form { grid-column: 6 / 13; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-lg) var(--gap); }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field.full { grid-column: 1 / -1; }
+.field label { font-size: 15px; font-weight: 600; }
+.field input, .field select, .field textarea {
+  font: 400 17px/1.4 var(--sans); color: var(--ink); background: var(--paper);
+  border: 1px solid oklch(62% 0.012 60); border-radius: 2px; padding: 12px 14px; min-height: 48px; width: 100%;
+  caret-color: var(--mark); accent-color: var(--mark);
+}
+.field textarea { min-height: 128px; resize: vertical; }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 3px solid var(--mark); outline-offset: 0; border-color: var(--ink); }
+.field .err { font-size: 14px; color: var(--mark); min-height: 1.4em; }
+.ask-actions { grid-column: 1 / -1; display: flex; align-items: center; gap: var(--s-lg); flex-wrap: wrap; }
+.btn {
+  display: inline-grid; overflow: clip; min-height: 52px; padding: 0 28px; border: 0; border-radius: 2px; cursor: pointer;
+  background: var(--ink); color: var(--paper); font: 600 17px/1 var(--sans);
+  transition: transform var(--dur-press) var(--ease-out), background-color 150ms ease;
+}
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) { .btn:hover { background: var(--mark); } }
+.btn:disabled { cursor: progress; }
+.btn > span { grid-area: 1 / 1; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  transition: opacity 200ms var(--ease-out), transform 260ms var(--ease-out), filter 200ms var(--ease-out); }
+.btn > span:not([data-s="idle"]) { opacity: 0; transform: translateY(-60%); filter: blur(2px); }
+.btn:is([data-state="loading"], [data-state="done"]) > [data-s="idle"],
+.btn[data-state="done"] > [data-s="loading"] { opacity: 0; transform: translateY(60%); filter: blur(2px); transition-duration: 120ms; }
+.btn[data-state="loading"] > [data-s="loading"], .btn[data-state="done"] > [data-s="done"] { opacity: 1; transform: none; filter: none; transition-delay: 70ms; }
+.btn[data-state="done"] { background: var(--ok); }
+.spin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: spin 800ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.status { font-size: 16px; color: var(--ink-2); min-height: 1.6em; }
+
+/* ---------- Footer ---------- */
+.site-foot { border-top: 1px solid var(--rule); padding: var(--s-lg) var(--pad); display: flex; flex-wrap: wrap; gap: var(--s-xs) var(--s-xl); justify-content: space-between; font-size: 15px; color: var(--ink-2); }
+.site-foot a { text-underline-offset: 3px; }
+
+/* ---------- View transitions ---------- */
+::view-transition-group(site-head) { animation: none; }
+::view-transition-old(site-head) { display: none; }
+::view-transition-new(site-head) { animation: none; }
+::view-transition-group(lead) { animation-duration: var(--dur-morph); animation-timing-function: var(--ease-in-out); }
+::view-transition-old(lead), ::view-transition-new(lead) { height: 100%; object-fit: cover; overflow: clip; }
+::view-transition-old(lead) { animation: 140ms var(--ease-out) both vt-fade-out; }
+::view-transition-new(lead) { animation: none; }
+::view-transition-old(root) { animation: 160ms var(--ease-out) both vt-fade-out; }
+::view-transition-new(root) { animation: 300ms var(--ease-out) 90ms both vt-rise; }
+html.is-back::view-transition-group(lead) { animation-duration: var(--dur-back); }
+html.is-back::view-transition-new(root) { animation: 220ms var(--ease-out) 40ms both vt-fade-in; }
+html.is-back::view-transition-old(root) { animation: 120ms var(--ease-out) both vt-fade-out; }
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-fade-in { from { opacity: 0; } }
+@keyframes vt-rise { from { opacity: 0; transform: translateY(10px); } }
+/* browsers without View Transitions: a short crossfade of the incoming view */
+.swap-in { animation: vt-fade-in 200ms var(--ease-out) both; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+  .intro { grid-column: 1 / -1; position: static; }
+  .intro h1 { max-width: 14ch; }
+  .t1 { grid-column: 1 / -1; grid-row: auto; margin-right: calc(var(--pad) * -1); }
+  .t2 { grid-column: 1 / 7; }
+  .t3 { grid-column: 7 / 13; }
+  .t4 { grid-column: 1 / 8; }
+  .t5 { grid-column: 8 / 13; }
+  .t6 { grid-column: 1 / 7; }
+  .about { grid-column: 7 / 13; }
+  .ask-note, .ask form { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .sheet { row-gap: 56px; }
+  .sheet > * { grid-column: 1 / -1 !important; margin-top: 0 !important; }
+  .t1 { margin-left: calc(var(--pad) * -1); }
+  .t1 .tile-text { padding-left: var(--pad); }
+  .about { padding-bottom: 0; }
+  .story-dek { grid-column: 1 / -1; }
+  .story-text { margin-right: 0; }
+  .seq > .frame { grid-column: 1 / -1; }
+  .f-full { margin: 0 calc(var(--pad) * -1); }
+  .next-link { grid-template-columns: minmax(0, 120px) minmax(0, 1fr); gap: var(--s-md); }
+  .ask form { grid-template-columns: minmax(0, 1fr); }
+  .head-nav a.to-contact { display: none; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .spin { animation-duration: 800ms !important; animation-iteration-count: infinite !important; }
+  ::view-transition-group(*) { animation: none !important; }
+  ::view-transition-old(*) { animation: 150ms ease both vt-fade-out !important; }
+  ::view-transition-new(*) { animation: 150ms ease both vt-fade-in !important; }
+  .btn:active { transform: none; }
+}
+</style>
+</head>
+<body data-view="index">
+<a class="sr-only" href="#main">Skip to content</a>
+<header class="site-head">
+  <a class="brand" href="#work" data-home aria-label="Ines Calder, all stories">Ines Calder</a>
+  <nav class="head-nav" aria-label="Site">
+    <a class="back" href="#work" data-home>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+      All stories
+    </a>
+    <a class="to-about" href="#about">About</a>
+    <a class="to-contact" href="mailto:studio@example.com">studio@example.com</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="index" id="work" aria-label="Stories">
+    <ul class="sheet">
+      <li class="intro">
+        <h1>Long stories about people at work.</h1>
+        <p>Documentary photographs of fishing crews, flooded farms, hand harvests, market halls and night shifts, edited as stories you read frame by frame.</p>
+        <p class="hint">Open a story to see the whole sequence.</p>
+      </li>
+      <li class="tile t1">
+        <a class="tile-link" href="#the-net-comes-up" data-story="the-net-comes-up">
+          <span class="tile-frame c-wide">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/FishinginSar%C4%B1yer3.JPG/960px-FishinginSar%C4%B1yer3.JPG" width="960" height="644" alt="Two men work a net from a rowing boat in a rising chop." fetchpriority="high" decoding="async">
+            <svg class="mark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M6 4.5C30 2.4 68 3.1 95.6 4.4C97.4 32 97.2 68 95.2 95.3C68 97.6 31 97.1 4.6 95.8C2.6 69 2.9 33 4.1 6.5L11 3.6"/></svg>
+          </span>
+          <span class="tile-text">
+            <h2 class="tile-title">The Net Comes Up</h2>
+            <span class="tile-dek">Small boats, hand-hauled nets and the long quiet between casting and counting.</span>
+            <span class="tile-count">5 frames</span>
+          </span>
+        </a>
+      </li>
+      <li class="tile t2">
+        <a class="tile-link" href="#when-the-river-stayed" data-story="when-the-river-stayed">
+          <span class="tile-frame c-tall">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg/960px-Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg" width="960" height="600" alt="Bare walnut trees stand in floodwater that has nowhere to drain." loading="lazy" decoding="async">
+            <svg class="mark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M6 4.5C30 2.4 68 3.1 95.6 4.4C97.4 32 97.2 68 95.2 95.3C68 97.6 31 97.1 4.6 95.8C2.6 69 2.9 33 4.1 6.5L11 3.6"/></svg>
+          </span>
+          <span class="tile-text">
+            <h2 class="tile-title">When the River Stayed</h2>
+            <span class="tile-dek">Orchards, paddies and fields that kept the water for weeks after the flood.</span>
+            <span class="tile-count">4 frames</span>
+          </span>
+        </a>
+      </li>
+      <li class="tile t3">
+        <a class="tile-link" href="#by-hand" data-story="by-hand">
+          <span class="tile-frame c-std">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Saffronfarm-860808.jpg/960px-Saffronfarm-860808.jpg" width="960" height="640" alt="Pickers in straw hats fill baskets with saffron crocus at first light." loading="lazy" decoding="async">
+            <svg class="mark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M6 4.5C30 2.4 68 3.1 95.6 4.4C97.4 32 97.2 68 95.2 95.3C68 97.6 31 97.1 4.6 95.8C2.6 69 2.9 33 4.1 6.5L11 3.6"/></svg>
+          </span>
+          <span class="tile-text">
+            <h2 class="tile-title">By Hand</h2>
+            <span class="tile-dek">Harvests that still run on fingers, baskets and backs.</span>
+            <span class="tile-count">5 frames</span>
+          </span>
+        </a>
+      </li>
+      <li class="tile t4">
+        <a class="tile-link" href="#stall-light" data-story="stall-light">
+          <span class="tile-frame c-std">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Shopping_in_the_spotlight_%28Cairo%29.jpg/960px-Shopping_in_the_spotlight_%28Cairo%29.jpg" width="960" height="675" alt="A shaft of sunlight lands on a fabric stall in a dark market hall." loading="lazy" decoding="async">
+            <svg class="mark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M6 4.5C30 2.4 68 3.1 95.6 4.4C97.4 32 97.2 68 95.2 95.3C68 97.6 31 97.1 4.6 95.8C2.6 69 2.9 33 4.1 6.5L11 3.6"/></svg>
+          </span>
+          <span class="tile-text">
+            <h2 class="tile-title">Stall Light</h2>
+            <span class="tile-dek">Market halls where one shaft of sun decides who gets seen.</span>
+            <span class="tile-count">4 frames</span>
+          </span>
+        </a>
+      </li>
+      <li class="tile t5">
+        <a class="tile-link" href="#heat-trades" data-story="heat-trades">
+          <span class="tile-frame c-std">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Blacksmith_At_Work_02.jpg/960px-Blacksmith_At_Work_02.jpg" width="960" height="640" alt="A blacksmith sits by a charcoal fire in an earthen forge." loading="lazy" decoding="async">
+            <svg class="mark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M6 4.5C30 2.4 68 3.1 95.6 4.4C97.4 32 97.2 68 95.2 95.3C68 97.6 31 97.1 4.6 95.8C2.6 69 2.9 33 4.1 6.5L11 3.6"/></svg>
+          </span>
+          <span class="tile-text">
+            <h2 class="tile-title">Heat Trades</h2>
+            <span class="tile-dek">Forges, tanneries, glass and steel: work done close to fire and noise.</span>
+            <span class="tile-count">5 frames</span>
+          </span>
+        </a>
+      </li>
+      <li class="tile t6">
+        <a class="tile-link" href="#last-train-home" data-story="last-train-home">
+          <span class="tile-frame c-port">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Man_at_Dundas_subway_station%2C_Toronto%2C_2008-05-06.jpg/960px-Man_at_Dundas_subway_station%2C_Toronto%2C_2008-05-06.jpg" width="960" height="1274" alt="A man in a long coat walks the platform as the train blurs past." loading="lazy" decoding="async">
+            <svg class="mark" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M6 4.5C30 2.4 68 3.1 95.6 4.4C97.4 32 97.2 68 95.2 95.3C68 97.6 31 97.1 4.6 95.8C2.6 69 2.9 33 4.1 6.5L11 3.6"/></svg>
+          </span>
+          <span class="tile-text">
+            <h2 class="tile-title">Last Train Home</h2>
+            <span class="tile-dek">Platforms, rain and the people who travel after the city closes.</span>
+            <span class="tile-count">5 frames</span>
+          </span>
+        </a>
+      </li>
+      <li class="about" id="about">
+        <h2>About Ines</h2>
+        <p>Ines Calder photographs work: the people who do it and the places it happens. She takes on editorial assignments and long-term projects with NGOs and publishers.</p>
+        <p>Write to <a href="mailto:studio@example.com">studio@example.com</a>, or use the enquiry form at the end of any story.</p>
+      </li>
+    </ul>
+  </section>
+
+  <div class="stories no-js-sep">
+    <article class="story" id="the-net-comes-up" aria-labelledby="the-net-comes-up-title">
+      <figure class="lead" style="--r:1.490">
+        <img class="lead-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/FishinginSar%C4%B1yer3.JPG/960px-FishinginSar%C4%B1yer3.JPG" data-srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/FishinginSar%C4%B1yer3.JPG/960px-FishinginSar%C4%B1yer3.JPG 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/FishinginSar%C4%B1yer3.JPG/1280px-FishinginSar%C4%B1yer3.JPG 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/FishinginSar%C4%B1yer3.JPG/1920px-FishinginSar%C4%B1yer3.JPG 1920w" width="960" height="644" alt="Two men work a net from a rowing boat in a rising chop." decoding="async">
+        <figcaption>Two men work a net from a rowing boat in a rising chop. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:FishinginSar%C4%B1yer3.JPG" rel="noopener">Ankara, CC BY-SA 3.0</a></span></figcaption>
+      </figure>
+      <header class="story-head">
+        <h2 id="the-net-comes-up-title" class="story-title" tabindex="-1">The Net Comes Up</h2>
+        <p class="story-dek">Small boats, hand-hauled nets and the long quiet between casting and counting.</p>
+      </header>
+      <div class="story-text">
+        <p><b>Nobody on these boats talks while the net is coming up.</b> The work is a rhythm of pull, gather and brace, and the photographs stay inside it, close enough to hear the rope.</p>
+        <p>The story follows the net from the first haul to the knots mended on the sand. The catch is never the subject; the people holding the line are.</p>
+      </div>
+      <div class="seq">
+        <figure class="frame f-wide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg/1280px-Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg/960px-Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg/1280px-Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg/1920px-Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg/3840px-Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg 3840w" sizes="(min-width: 760px) 66vw, 100vw" width="1280" height="853" alt="A fisherman stands to pull green net into a small wooden boat on a flat sea." loading="lazy" decoding="async">
+          <figcaption>A fisherman stands to pull green net into a small wooden boat on a flat sea. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Un_pecheur_pr%C3%A9pare_son_filet_%C3%A0_kerkennah_-_tunisie.jpg" rel="noopener">Skander zarrad, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-side">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Fishermen_at_Kavarathi%2C_Lakshadweep%2C_India_%28edit%29.jpg/1280px-Fishermen_at_Kavarathi%2C_Lakshadweep%2C_India_%28edit%29.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Fishermen_at_Kavarathi%2C_Lakshadweep%2C_India_%28edit%29.jpg/960px-Fishermen_at_Kavarathi%2C_Lakshadweep%2C_India_%28edit%29.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Fishermen_at_Kavarathi%2C_Lakshadweep%2C_India_%28edit%29.jpg/1280px-Fishermen_at_Kavarathi%2C_Lakshadweep%2C_India_%28edit%29.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Fishermen_at_Kavarathi%2C_Lakshadweep%2C_India_%28edit%29.jpg/1920px-Fishermen_at_Kavarathi%2C_Lakshadweep%2C_India_%28edit%29.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Fishermen_at_Kavarathi%2C_Lakshadweep%2C_India_%28edit%29.jpg/3840px-Fishermen_at_Kavarathi%2C_Lakshadweep%2C_India_%28edit%29.jpg 3840w" sizes="(min-width: 760px) 34vw, 100vw" width="1280" height="841" alt="Two men drag a fine net up white sand beside a lagoon." loading="lazy" decoding="async">
+          <figcaption>Two men drag a fine net up white sand beside a lagoon. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Fishermen_at_Kavarathi,_Lakshadweep,_India_(edit).jpg" rel="noopener">Shafeeq Thamarassery, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-full">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Fishing_net_2_Heraklion.jpg/1280px-Fishing_net_2_Heraklion.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Fishing_net_2_Heraklion.jpg/960px-Fishing_net_2_Heraklion.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Fishing_net_2_Heraklion.jpg/1280px-Fishing_net_2_Heraklion.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Fishing_net_2_Heraklion.jpg/1920px-Fishing_net_2_Heraklion.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Fishing_net_2_Heraklion.jpg/3840px-Fishing_net_2_Heraklion.jpg 3840w" sizes="100vw" width="1280" height="917" alt="Yellow net, teal rope and red floats, piled for mending." loading="lazy" decoding="async">
+          <figcaption>Yellow net, teal rope and red floats, piled for mending. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Fishing_net_2_Heraklion.jpg" rel="noopener">Jebulon, CC0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-mid">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg/1280px-Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg/960px-Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg/1280px-Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg/1920px-Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg/3840px-Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg 3840w" sizes="(min-width: 760px) 66vw, 100vw" width="1280" height="800" alt="A narrow boat heaped with nets waits on dark, still water." loading="lazy" decoding="async">
+          <figcaption>A narrow boat heaped with nets waits on dark, still water. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Fishing_Boat_Nets_Sholayar_Valparai_Feb26_A7CR_10156.jpg" rel="noopener">Timothy A. Gonsalves, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+      </div>
+      <nav class="next" aria-label="Next story">
+        <a class="next-link" href="#when-the-river-stayed" data-story="when-the-river-stayed">
+          <span class="next-frame"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg/960px-Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg" width="960" height="600" alt="" loading="lazy" decoding="async"></span>
+          <span class="next-text"><span class="next-label">Next story</span><span class="next-title">When the River Stayed</span></span>
+        </a>
+      </nav>
+    </article>
+    <article class="story" id="when-the-river-stayed" aria-labelledby="when-the-river-stayed-title">
+      <figure class="lead" style="--r:1.600">
+        <img class="lead-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg/960px-Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg" data-srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg/960px-Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg/1280px-Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg/1920px-Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg/3840px-Flooded_walnut_orchard_in_Butte_County%2C_California-L1001234.jpg 3840w" width="960" height="600" alt="Bare walnut trees stand in floodwater that has nowhere to drain." decoding="async">
+        <figcaption>Bare walnut trees stand in floodwater that has nowhere to drain. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Flooded_walnut_orchard_in_Butte_County,_California-L1001234.jpg" rel="noopener">Frank Schulenburg, CC BY-SA 4.0</a></span></figcaption>
+      </figure>
+      <header class="story-head">
+        <h2 id="when-the-river-stayed-title" class="story-title" tabindex="-1">When the River Stayed</h2>
+        <p class="story-dek">Orchards, paddies and fields that kept the water for weeks after the flood.</p>
+      </header>
+      <div class="story-text">
+        <p><b>The flood lasted days. The water stayed for weeks.</b> This story is about the second part, when the news has moved on and the fields are still lakes.</p>
+        <p>Farmers feed animals knee-deep, race bulls through the mud and wait for a dry edge to start again.</p>
+      </div>
+      <div class="seq">
+        <figure class="frame f-wide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg/1280px-Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg/960px-Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg/1280px-Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg/1920px-Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg/3840px-Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg 3840w" sizes="(min-width: 760px) 66vw, 100vw" width="1280" height="853" alt="A boy hands hay to a cow in a flooded paddy; both are doubled in the water." loading="lazy" decoding="async">
+          <figcaption>A boy hands hay to a cow in a flooded paddy; both are doubled in the water. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Water_reflection_of_a_boy_feeding_hay_to_a_cow_in_a_paddy_field_at_golden_hour_in_Laos.jpg" rel="noopener">Basile Morin, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-side">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra%2C_Indonesia.jpg/1280px-Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra%2C_Indonesia.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra%2C_Indonesia.jpg/960px-Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra%2C_Indonesia.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra%2C_Indonesia.jpg/1280px-Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra%2C_Indonesia.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra%2C_Indonesia.jpg/1920px-Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra%2C_Indonesia.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra%2C_Indonesia.jpg/3840px-Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra%2C_Indonesia.jpg 3840w" sizes="(min-width: 760px) 34vw, 100vw" width="1280" height="854" alt="A man runs between two bulls through a drowned field, mud flying." loading="lazy" decoding="async">
+          <figcaption>A man runs between two bulls through a drowned field, mud flying. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Mud_Cow_Racing_-_Pacu_Jawi_-_West_Sumatra,_Indonesia.jpg" rel="noopener">Rodney Ee, CC BY 2.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-full">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Sunset_at_Acheloos_river_delta_01.jpg/1280px-Sunset_at_Acheloos_river_delta_01.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Sunset_at_Acheloos_river_delta_01.jpg/960px-Sunset_at_Acheloos_river_delta_01.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Sunset_at_Acheloos_river_delta_01.jpg/1280px-Sunset_at_Acheloos_river_delta_01.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Sunset_at_Acheloos_river_delta_01.jpg/1920px-Sunset_at_Acheloos_river_delta_01.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Sunset_at_Acheloos_river_delta_01.jpg/3840px-Sunset_at_Acheloos_river_delta_01.jpg 3840w" sizes="100vw" width="1280" height="853" alt="An old jetty reaches into still delta water at sunset." loading="lazy" decoding="async">
+          <figcaption>An old jetty reaches into still delta water at sunset. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Sunset_at_Acheloos_river_delta_01.jpg" rel="noopener">Dimitrios Tzortzis, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+      </div>
+      <nav class="next" aria-label="Next story">
+        <a class="next-link" href="#by-hand" data-story="by-hand">
+          <span class="next-frame"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Saffronfarm-860808.jpg/960px-Saffronfarm-860808.jpg" width="960" height="640" alt="" loading="lazy" decoding="async"></span>
+          <span class="next-text"><span class="next-label">Next story</span><span class="next-title">By Hand</span></span>
+        </a>
+      </nav>
+    </article>
+    <article class="story" id="by-hand" aria-labelledby="by-hand-title">
+      <figure class="lead" style="--r:1.500">
+        <img class="lead-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Saffronfarm-860808.jpg/960px-Saffronfarm-860808.jpg" data-srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Saffronfarm-860808.jpg/960px-Saffronfarm-860808.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Saffronfarm-860808.jpg/1280px-Saffronfarm-860808.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Saffronfarm-860808.jpg/1920px-Saffronfarm-860808.jpg 1920w" width="960" height="640" alt="Pickers in straw hats fill baskets with saffron crocus at first light." decoding="async">
+        <figcaption>Pickers in straw hats fill baskets with saffron crocus at first light. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Saffronfarm-860808.jpg" rel="noopener">Safa.daneshvar, CC BY-SA 3.0</a></span></figcaption>
+      </figure>
+      <header class="story-head">
+        <h2 id="by-hand-title" class="story-title" tabindex="-1">By Hand</h2>
+        <p class="story-dek">Harvests that still run on fingers, baskets and backs.</p>
+      </header>
+      <div class="story-text">
+        <p><b>Some crops refuse machines.</b> Saffron is picked flower by flower, olives are sorted from leaves by hand, wheat is still carried in sheaves where the fields are small.</p>
+        <p>The pictures stay at hand height, where the work is decided.</p>
+      </div>
+      <div class="seq">
+        <figure class="frame f-wide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Woman_harvesting_wheat%2C_Raisen_district%2C_Madhya_Pradesh%2C_India_ggia_version.jpg/1280px-Woman_harvesting_wheat%2C_Raisen_district%2C_Madhya_Pradesh%2C_India_ggia_version.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Woman_harvesting_wheat%2C_Raisen_district%2C_Madhya_Pradesh%2C_India_ggia_version.jpg/960px-Woman_harvesting_wheat%2C_Raisen_district%2C_Madhya_Pradesh%2C_India_ggia_version.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Woman_harvesting_wheat%2C_Raisen_district%2C_Madhya_Pradesh%2C_India_ggia_version.jpg/1280px-Woman_harvesting_wheat%2C_Raisen_district%2C_Madhya_Pradesh%2C_India_ggia_version.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Woman_harvesting_wheat%2C_Raisen_district%2C_Madhya_Pradesh%2C_India_ggia_version.jpg/1920px-Woman_harvesting_wheat%2C_Raisen_district%2C_Madhya_Pradesh%2C_India_ggia_version.jpg 1920w" sizes="(min-width: 760px) 66vw, 100vw" width="1280" height="896" alt="A woman carries cut wheat across a harvested field." loading="lazy" decoding="async">
+          <figcaption>A woman carries cut wheat across a harvested field. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Woman_harvesting_wheat,_Raisen_district,_Madhya_Pradesh,_India_ggia_version.jpg" rel="noopener">Yann Forget, CC BY-SA 3.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-side">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg/1280px-Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg/960px-Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg/1280px-Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg/1920px-Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg/3840px-Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg 3840w" sizes="(min-width: 760px) 34vw, 100vw" width="1280" height="960" alt="Hands sort black olives from leaves on a harvest net." loading="lazy" decoding="async">
+          <figcaption>Hands sort black olives from leaves on a harvest net. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Tradizioni_familiari_Raccolta_olive_wlk_olive_in_cassetta.jpg" rel="noopener">Anna.Massini, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-full">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Grape_worker.jpg/1280px-Grape_worker.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Grape_worker.jpg/960px-Grape_worker.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Grape_worker.jpg/1280px-Grape_worker.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Grape_worker.jpg/1920px-Grape_worker.jpg 1920w" sizes="100vw" width="1280" height="960" alt="A grape picker between vineyard rows at the end of the day." loading="lazy" decoding="async">
+          <figcaption>A grape picker between vineyard rows at the end of the day. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Grape_worker.jpg" rel="noopener">Tomas Castelazo, CC BY 3.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-mid">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg/1280px-Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg/960px-Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg/1280px-Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg/1920px-Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg/3840px-Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg 3840w" sizes="(min-width: 760px) 66vw, 100vw" width="1280" height="960" alt="Where the fields are big enough, the combine takes over in a cloud of dust." loading="lazy" decoding="async">
+          <figcaption>Where the fields are big enough, the combine takes over in a cloud of dust. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Fr%C3%A4nkische_Schweiz_Getreideernte-20210821-RM-154445.jpg" rel="noopener">Ermell, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+      </div>
+      <nav class="next" aria-label="Next story">
+        <a class="next-link" href="#stall-light" data-story="stall-light">
+          <span class="next-frame"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Shopping_in_the_spotlight_%28Cairo%29.jpg/960px-Shopping_in_the_spotlight_%28Cairo%29.jpg" width="960" height="675" alt="" loading="lazy" decoding="async"></span>
+          <span class="next-text"><span class="next-label">Next story</span><span class="next-title">Stall Light</span></span>
+        </a>
+      </nav>
+    </article>
+    <article class="story" id="stall-light" aria-labelledby="stall-light-title">
+      <figure class="lead" style="--r:1.422">
+        <img class="lead-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Shopping_in_the_spotlight_%28Cairo%29.jpg/960px-Shopping_in_the_spotlight_%28Cairo%29.jpg" data-srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Shopping_in_the_spotlight_%28Cairo%29.jpg/960px-Shopping_in_the_spotlight_%28Cairo%29.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Shopping_in_the_spotlight_%28Cairo%29.jpg/1280px-Shopping_in_the_spotlight_%28Cairo%29.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Shopping_in_the_spotlight_%28Cairo%29.jpg/1920px-Shopping_in_the_spotlight_%28Cairo%29.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Shopping_in_the_spotlight_%28Cairo%29.jpg/3840px-Shopping_in_the_spotlight_%28Cairo%29.jpg 3840w" width="960" height="675" alt="A shaft of sunlight lands on a fabric stall in a dark market hall." decoding="async">
+        <figcaption>A shaft of sunlight lands on a fabric stall in a dark market hall. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Shopping_in_the_spotlight_(Cairo).jpg" rel="noopener">Frank Schulenburg, CC BY-SA 3.0</a></span></figcaption>
+      </figure>
+      <header class="story-head">
+        <h2 id="stall-light-title" class="story-title" tabindex="-1">Stall Light</h2>
+        <p class="story-dek">Market halls where one shaft of sun decides who gets seen.</p>
+      </header>
+      <div class="story-text">
+        <p><b>A market is a room built out of light.</b> Sellers arrange their goods where the sun or the bulb will find them, and lean into it themselves.</p>
+        <p>These frames were made by waiting for the light to reach a face.</p>
+      </div>
+      <div class="seq">
+        <figure class="frame f-wide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/20160807_spice_merchant_Nyaung_Shwe_Myanmar_8916_DxO.jpg/1280px-20160807_spice_merchant_Nyaung_Shwe_Myanmar_8916_DxO.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/20160807_spice_merchant_Nyaung_Shwe_Myanmar_8916_DxO.jpg/960px-20160807_spice_merchant_Nyaung_Shwe_Myanmar_8916_DxO.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/20160807_spice_merchant_Nyaung_Shwe_Myanmar_8916_DxO.jpg/1280px-20160807_spice_merchant_Nyaung_Shwe_Myanmar_8916_DxO.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/20160807_spice_merchant_Nyaung_Shwe_Myanmar_8916_DxO.jpg/1920px-20160807_spice_merchant_Nyaung_Shwe_Myanmar_8916_DxO.jpg 1920w" sizes="(min-width: 760px) 66vw, 100vw" width="1280" height="1932" alt="A spice seller sits among her sacks, waiting for the morning trade." loading="lazy" decoding="async">
+          <figcaption>A spice seller sits among her sacks, waiting for the morning trade. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:20160807_spice_merchant_Nyaung_Shwe_Myanmar_8916_DxO.jpg" rel="noopener">Jakub Hałun, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-side">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Puesto_de_frutos_en_el_Zoco_--_2014_--_Marrakech%2C_Marruecos.jpg/1280px-Puesto_de_frutos_en_el_Zoco_--_2014_--_Marrakech%2C_Marruecos.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Puesto_de_frutos_en_el_Zoco_--_2014_--_Marrakech%2C_Marruecos.jpg/960px-Puesto_de_frutos_en_el_Zoco_--_2014_--_Marrakech%2C_Marruecos.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Puesto_de_frutos_en_el_Zoco_--_2014_--_Marrakech%2C_Marruecos.jpg/1280px-Puesto_de_frutos_en_el_Zoco_--_2014_--_Marrakech%2C_Marruecos.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Puesto_de_frutos_en_el_Zoco_--_2014_--_Marrakech%2C_Marruecos.jpg/1920px-Puesto_de_frutos_en_el_Zoco_--_2014_--_Marrakech%2C_Marruecos.jpg 1920w" sizes="(min-width: 760px) 34vw, 100vw" width="1280" height="848" alt="Bare bulbs over dried fruit and spices; the seller leans in to weigh." loading="lazy" decoding="async">
+          <figcaption>Bare bulbs over dried fruit and spices; the seller leans in to weigh. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Puesto_de_frutos_en_el_Zoco_--_2014_--_Marrakech,_Marruecos.jpg" rel="noopener">J. Ligero Loarte, CC BY-SA 3.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-full">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ensenada_fish_market_2.jpg/1280px-Ensenada_fish_market_2.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ensenada_fish_market_2.jpg/960px-Ensenada_fish_market_2.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ensenada_fish_market_2.jpg/1280px-Ensenada_fish_market_2.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ensenada_fish_market_2.jpg/1920px-Ensenada_fish_market_2.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ensenada_fish_market_2.jpg/3840px-Ensenada_fish_market_2.jpg 3840w" sizes="100vw" width="1280" height="878" alt="Whole fish hang in a dense row at the edge of the fish market." loading="lazy" decoding="async">
+          <figcaption>Whole fish hang in a dense row at the edge of the fish market. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Ensenada_fish_market_2.jpg" rel="noopener">Tomascastelazo, CC BY-SA 3.0</a></span></figcaption>
+        </figure>
+      </div>
+      <nav class="next" aria-label="Next story">
+        <a class="next-link" href="#heat-trades" data-story="heat-trades">
+          <span class="next-frame"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Blacksmith_At_Work_02.jpg/960px-Blacksmith_At_Work_02.jpg" width="960" height="640" alt="" loading="lazy" decoding="async"></span>
+          <span class="next-text"><span class="next-label">Next story</span><span class="next-title">Heat Trades</span></span>
+        </a>
+      </nav>
+    </article>
+    <article class="story" id="heat-trades" aria-labelledby="heat-trades-title">
+      <figure class="lead" style="--r:1.500">
+        <img class="lead-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Blacksmith_At_Work_02.jpg/960px-Blacksmith_At_Work_02.jpg" data-srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Blacksmith_At_Work_02.jpg/960px-Blacksmith_At_Work_02.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Blacksmith_At_Work_02.jpg/1280px-Blacksmith_At_Work_02.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Blacksmith_At_Work_02.jpg/1920px-Blacksmith_At_Work_02.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Blacksmith_At_Work_02.jpg/3840px-Blacksmith_At_Work_02.jpg 3840w" width="960" height="640" alt="A blacksmith sits by a charcoal fire in an earthen forge." decoding="async">
+        <figcaption>A blacksmith sits by a charcoal fire in an earthen forge. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Blacksmith_At_Work_02.jpg" rel="noopener">OJjnr, CC BY-SA 4.0</a></span></figcaption>
+      </figure>
+      <header class="story-head">
+        <h2 id="heat-trades-title" class="story-title" tabindex="-1">Heat Trades</h2>
+        <p class="story-dek">Forges, tanneries, glass and steel: work done close to fire and noise.</p>
+      </header>
+      <div class="story-text">
+        <p><b>These are jobs you can hear before you see them.</b> Hammering, the roar of a furnace, the hiss of a pressure washer on a hull.</p>
+        <p>The story moves from the oldest trade in it to the newest, and keeps the same distance from each worker.</p>
+      </div>
+      <div class="seq">
+        <figure class="frame f-wide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Leather_tanneries_%2810%29.jpg/1280px-Leather_tanneries_%2810%29.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Leather_tanneries_%2810%29.jpg/960px-Leather_tanneries_%2810%29.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Leather_tanneries_%2810%29.jpg/1280px-Leather_tanneries_%2810%29.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Leather_tanneries_%2810%29.jpg/1920px-Leather_tanneries_%2810%29.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Leather_tanneries_%2810%29.jpg/3840px-Leather_tanneries_%2810%29.jpg 3840w" sizes="(min-width: 760px) 66vw, 100vw" width="1280" height="856" alt="A tannery worker lifts a wet hide among piles of skins." loading="lazy" decoding="async">
+          <figcaption>A tannery worker lifts a wet hide among piles of skins. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Leather_tanneries_(10).jpg" rel="noopener">Myousry6666, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-side">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/0_Le_ma%C3%AEtre_verrier_Werner_Garcia_%281%29.JPG/1280px-0_Le_ma%C3%AEtre_verrier_Werner_Garcia_%281%29.JPG" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/0_Le_ma%C3%AEtre_verrier_Werner_Garcia_%281%29.JPG/960px-0_Le_ma%C3%AEtre_verrier_Werner_Garcia_%281%29.JPG 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/0_Le_ma%C3%AEtre_verrier_Werner_Garcia_%281%29.JPG/1280px-0_Le_ma%C3%AEtre_verrier_Werner_Garcia_%281%29.JPG 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/0_Le_ma%C3%AEtre_verrier_Werner_Garcia_%281%29.JPG/1920px-0_Le_ma%C3%AEtre_verrier_Werner_Garcia_%281%29.JPG 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/0_Le_ma%C3%AEtre_verrier_Werner_Garcia_%281%29.JPG/3840px-0_Le_ma%C3%AEtre_verrier_Werner_Garcia_%281%29.JPG 3840w" sizes="(min-width: 760px) 34vw, 100vw" width="1280" height="881" alt="A glassblower rolls his pipe along the arms of the bench." loading="lazy" decoding="async">
+          <figcaption>A glassblower rolls his pipe along the arms of the bench. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:0_Le_ma%C3%AEtre_verrier_Werner_Garcia_(1).JPG" rel="noopener">Jean-Pol GRANDMONT, CC BY 3.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-full">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg/1280px-Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg/960px-Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg/1280px-Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg/1920px-Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg/3840px-Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg 3840w" sizes="100vw" width="1280" height="853" alt="Ear defenders on, a worker blasts old paint from a ship hull." loading="lazy" decoding="async">
+          <figcaption>Ear defenders on, a worker blasts old paint from a ship hull. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Une_b%C3%A9n%C3%A9vole_nettoie_la_coque_du_Kraken_au_karcher_%C3%A0_Savone.jpg" rel="noopener">Victor Janjić, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-mid">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Construction_workers_in_Mexico.jpg/1280px-Construction_workers_in_Mexico.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Construction_workers_in_Mexico.jpg/960px-Construction_workers_in_Mexico.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Construction_workers_in_Mexico.jpg/1280px-Construction_workers_in_Mexico.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Construction_workers_in_Mexico.jpg/1920px-Construction_workers_in_Mexico.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Construction_workers_in_Mexico.jpg/3840px-Construction_workers_in_Mexico.jpg 3840w" sizes="(min-width: 760px) 66vw, 100vw" width="1280" height="696" alt="Four men climb a rebar grid against a white sky." loading="lazy" decoding="async">
+          <figcaption>Four men climb a rebar grid against a white sky. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Construction_workers_in_Mexico.jpg" rel="noopener">Tomascastelazo, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+      </div>
+      <nav class="next" aria-label="Next story">
+        <a class="next-link" href="#last-train-home" data-story="last-train-home">
+          <span class="next-frame"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Man_at_Dundas_subway_station%2C_Toronto%2C_2008-05-06.jpg/960px-Man_at_Dundas_subway_station%2C_Toronto%2C_2008-05-06.jpg" width="960" height="1274" alt="" loading="lazy" decoding="async"></span>
+          <span class="next-text"><span class="next-label">Next story</span><span class="next-title">Last Train Home</span></span>
+        </a>
+      </nav>
+    </article>
+    <article class="story" id="last-train-home" aria-labelledby="last-train-home-title">
+      <figure class="lead" style="--r:0.754">
+        <img class="lead-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Man_at_Dundas_subway_station%2C_Toronto%2C_2008-05-06.jpg/960px-Man_at_Dundas_subway_station%2C_Toronto%2C_2008-05-06.jpg" data-srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Man_at_Dundas_subway_station%2C_Toronto%2C_2008-05-06.jpg/960px-Man_at_Dundas_subway_station%2C_Toronto%2C_2008-05-06.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Man_at_Dundas_subway_station%2C_Toronto%2C_2008-05-06.jpg/1280px-Man_at_Dundas_subway_station%2C_Toronto%2C_2008-05-06.jpg 1280w" width="960" height="1274" alt="A man in a long coat walks the platform as the train blurs past." decoding="async">
+        <figcaption>A man in a long coat walks the platform as the train blurs past. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Man_at_Dundas_subway_station,_Toronto,_2008-05-06.jpg" rel="noopener">Radomianin, CC BY-SA 4.0</a></span></figcaption>
+      </figure>
+      <header class="story-head">
+        <h2 id="last-train-home-title" class="story-title" tabindex="-1">Last Train Home</h2>
+        <p class="story-dek">Platforms, rain and the people who travel after the city closes.</p>
+      </header>
+      <div class="story-text">
+        <p><b>After midnight the city belongs to the people who keep it running.</b> Cleaners, rail crews and night-shift workers share the last services and the wet streets between them.</p>
+        <p>The story is shot the way the night looks: mostly grey, with one colour when a train arrives.</p>
+      </div>
+      <div class="seq">
+        <figure class="frame f-wide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/English_queue_-_Flickr_-_gagilas.jpg/1280px-English_queue_-_Flickr_-_gagilas.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/English_queue_-_Flickr_-_gagilas.jpg/960px-English_queue_-_Flickr_-_gagilas.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/English_queue_-_Flickr_-_gagilas.jpg/1280px-English_queue_-_Flickr_-_gagilas.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/English_queue_-_Flickr_-_gagilas.jpg/1920px-English_queue_-_Flickr_-_gagilas.jpg 1920w" sizes="(min-width: 760px) 66vw, 100vw" width="1280" height="835" alt="A queue under umbrellas on a wet street." loading="lazy" decoding="async">
+          <figcaption>A queue under umbrellas on a wet street. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:English_queue_-_Flickr_-_gagilas.jpg" rel="noopener">Petras Gagilas, CC BY-SA 2.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-side">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Re_460_058-1_%2B_IC_2000_St._Gallen%2C_2014_%281%29.JPG/1280px-Re_460_058-1_%2B_IC_2000_St._Gallen%2C_2014_%281%29.JPG" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Re_460_058-1_%2B_IC_2000_St._Gallen%2C_2014_%281%29.JPG/960px-Re_460_058-1_%2B_IC_2000_St._Gallen%2C_2014_%281%29.JPG 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Re_460_058-1_%2B_IC_2000_St._Gallen%2C_2014_%281%29.JPG/1280px-Re_460_058-1_%2B_IC_2000_St._Gallen%2C_2014_%281%29.JPG 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Re_460_058-1_%2B_IC_2000_St._Gallen%2C_2014_%281%29.JPG/1920px-Re_460_058-1_%2B_IC_2000_St._Gallen%2C_2014_%281%29.JPG 1920w" sizes="(min-width: 760px) 34vw, 100vw" width="1280" height="854" alt="A red train waits at a rainy platform in the blue hour." loading="lazy" decoding="async">
+          <figcaption>A red train waits at a rainy platform in the blue hour. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Re_460_058-1_%2B_IC_2000_St._Gallen,_2014_(1).JPG" rel="noopener">Bahnfrend, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-full">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/RailroadSwitch_20200801_014921.jpg/1280px-RailroadSwitch_20200801_014921.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/RailroadSwitch_20200801_014921.jpg/960px-RailroadSwitch_20200801_014921.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/RailroadSwitch_20200801_014921.jpg/1280px-RailroadSwitch_20200801_014921.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/RailroadSwitch_20200801_014921.jpg/1920px-RailroadSwitch_20200801_014921.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/RailroadSwitch_20200801_014921.jpg/3840px-RailroadSwitch_20200801_014921.jpg 3840w" sizes="100vw" width="1280" height="720" alt="A rail crew repairs a switch by lamplight, seen from the footbridge." loading="lazy" decoding="async">
+          <figcaption>A rail crew repairs a switch by lamplight, seen from the footbridge. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:RailroadSwitch_20200801_014921.jpg" rel="noopener">Ka23 13, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+        <figure class="frame f-mid">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Steam_stacks_at_Broadway_and_Dey_%2891441%29.jpg/1280px-Steam_stacks_at_Broadway_and_Dey_%2891441%29.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Steam_stacks_at_Broadway_and_Dey_%2891441%29.jpg/960px-Steam_stacks_at_Broadway_and_Dey_%2891441%29.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Steam_stacks_at_Broadway_and_Dey_%2891441%29.jpg/1280px-Steam_stacks_at_Broadway_and_Dey_%2891441%29.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Steam_stacks_at_Broadway_and_Dey_%2891441%29.jpg/1920px-Steam_stacks_at_Broadway_and_Dey_%2891441%29.jpg 1920w, https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Steam_stacks_at_Broadway_and_Dey_%2891441%29.jpg/3840px-Steam_stacks_at_Broadway_and_Dey_%2891441%29.jpg 3840w" sizes="(min-width: 760px) 66vw, 100vw" width="1280" height="977" alt="Steam from a street vent drifts across the first commuters." loading="lazy" decoding="async">
+          <figcaption>Steam from a street vent drifts across the first commuters. <span class="credit">Stand-in photograph: <a href="https://commons.wikimedia.org/wiki/File:Steam_stacks_at_Broadway_and_Dey_(91441).jpg" rel="noopener">Rhododendrites, CC BY-SA 4.0</a></span></figcaption>
+        </figure>
+      </div>
+      <nav class="next" aria-label="Next story">
+        <a class="next-link" href="#the-net-comes-up" data-story="the-net-comes-up">
+          <span class="next-frame"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/FishinginSar%C4%B1yer3.JPG/960px-FishinginSar%C4%B1yer3.JPG" width="960" height="644" alt="" loading="lazy" decoding="async"></span>
+          <span class="next-text"><span class="next-label">Next story</span><span class="next-title">The Net Comes Up</span></span>
+        </a>
+      </nav>
+    </article>
+  </div>
+
+  <section class="ask" id="ask" aria-labelledby="ask-title">
+    <div class="ask-inner">
+      <h2 id="ask-title">Ask about this story</h2>
+      <p class="ask-note">For publication, exhibition, prints or licensing. Say where it would run and when; Ines answers every enquiry herself.</p>
+      <form id="ask-form" novalidate>
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+          <span class="err" id="e-name" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+          <span class="err" id="e-email" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="f-story">Story</label>
+          <select id="f-story" name="story"><option value="the-net-comes-up">The Net Comes Up</option><option value="when-the-river-stayed">When the River Stayed</option><option value="by-hand">By Hand</option><option value="stall-light">Stall Light</option><option value="heat-trades">Heat Trades</option><option value="last-train-home">Last Train Home</option></select>
+        </div>
+        <div class="field">
+          <label for="f-use">What it is for</label>
+          <select id="f-use" name="use">
+            <option>Publication</option>
+            <option>Exhibition</option>
+            <option>Print sale</option>
+            <option>Licensing</option>
+            <option>Assignment</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="f-msg">Message</label>
+          <textarea id="f-msg" name="message" required></textarea>
+          <span class="err" id="e-msg" aria-live="polite"></span>
+        </div>
+        <div class="ask-actions">
+          <button class="btn" type="submit" data-state="idle">
+            <span data-s="idle">Send enquiry</span>
+            <span data-s="loading" aria-hidden="true"><i class="spin"></i>Sending…</span>
+            <span data-s="done" aria-hidden="true">Sent</span>
+          </button>
+          <p class="status" id="ask-status" role="status"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <span>Ines Calder, documentary photographer</span>
+  <span>Photographs are licensed stand-ins from Wikimedia Commons, credited under each frame.</span>
+  <a href="mailto:studio@example.com">studio@example.com</a>
+</footer>
+
+<script>
+(() => {
+  const body = document.body;
+  const root = document.documentElement;
+  const stories = [...document.querySelectorAll('.story')];
+  const bySlug = Object.fromEntries(stories.map((s) => [s.id, s]));
+  const siteTitle = document.title;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelector('.stories').classList.remove('no-js-sep');
+  // the marker's dash length follows each frame's real perimeter (non-scaling stroke works in screen pixels)
+  const sizeMarks = () => document.querySelectorAll('.tile-frame').forEach((f) => {
+    const r = f.getBoundingClientRect(); if (r.width) f.style.setProperty('--len', Math.ceil(2 * (r.width + r.height) + 120) + 'px');
+  });
+  sizeMarks(); requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('marks-ready'))); new ResizeObserver(sizeMarks).observe(document.querySelector('.sheet'));
+
+  let current = null;           // slug of the open story, or null for the index
+  let indexScroll = 0;
+  let running = null;
+
+  const tileFor = (slug) => document.querySelector(`.tile-link[data-story="${slug}"]`);
+  const clearNames = () => document.querySelectorAll('[data-vt]').forEach((el) => { el.style.viewTransitionName = ''; el.removeAttribute('data-vt'); });
+  const name = (el) => { if (el) { el.style.viewTransitionName = 'lead'; el.setAttribute('data-vt', ''); } };
+
+  // Upgrade the lead plate to full resolution once it is on screen; swap only after decode, no layout change.
+  const upgrade = (article) => {
+    const img = article.querySelector('.lead-img');
+    if (!img || img.dataset.upgraded) return;
+    const hi = new Image();
+    hi.sizes = '(min-width: 1200px) 1200px, 100vw';
+    hi.srcset = img.dataset.srcset;
+    hi.decode().then(() => { img.sizes = hi.sizes; img.srcset = hi.srcset; img.dataset.upgraded = '1'; }).catch(() => {});
+  };
+
+  // Warm a story's lead when its link is hovered or focused.
+  const warm = (slug) => { const a = bySlug[slug]; if (a) { const i = a.querySelector('.lead-img'); i.decode && i.decode().catch(() => {}); } };
+
+  function render(slug, fromEl) {
+    if (slug) {
+      const art = bySlug[slug];
+      stories.forEach((s) => s.classList.toggle('is-current', s === art));
+      body.dataset.view = 'story';
+      document.title = `${art.querySelector('.story-title').textContent}, Ines Calder`;
+      const sel = document.getElementById('f-story'); if (sel) sel.value = slug;
+      window.scrollTo(0, 0);
+    } else {
+      stories.forEach((s) => s.classList.remove('is-current'));
+      body.dataset.view = 'index';
+      document.title = siteTitle;
+      window.scrollTo(0, indexScroll);
+    }
+  }
+
+  function go(slug, { back = false, push = true } = {}) {
+    if (slug === current) return;
+    if (running) running.skipTransition();
+    const prev = current;
+    if (!prev) indexScroll = window.scrollY;
+
+    // the element the eye is on now, and the one it will land on
+    const fromImg = prev ? bySlug[prev].querySelector('.lead-img') : tileFor(slug)?.querySelector('img');
+    const fromNext = prev && slug ? bySlug[prev].querySelector(`.next-link[data-story="${slug}"] img`) : null;
+    const toImg = () => slug ? bySlug[slug].querySelector('.lead-img') : tileFor(prev)?.querySelector('img');
+
+    if (slug) {
+      // open with the pixels already decoded in the tile or the next-link thumbnail
+      const lead = bySlug[slug].querySelector('.lead-img');
+      const shown = (fromNext || tileFor(slug)?.querySelector('img'));
+      if (shown && shown.currentSrc && !lead.dataset.upgraded) lead.src = shown.currentSrc;
+    }
+
+    if (push) history.pushState({ story: slug }, '', slug ? `#${slug}` : '#work');
+    root.classList.toggle('is-back', back);
+
+    const update = () => {
+      clearNames();
+      render(slug);
+      name(toImg());
+      if (!slug && prev) {
+        const t = tileFor(prev)?.closest('.tile');
+        document.querySelectorAll('.tile.is-seen').forEach((x) => x.classList.remove('is-seen'));
+        t && t.classList.add('is-seen');
+      }
+    };
+    const settle = () => {
+      clearNames();
+      root.classList.remove('is-back');
+      running = null;
+      current = slug;
+      if (slug) {
+        upgrade(bySlug[slug]);
+        bySlug[slug].querySelector('.story-title').focus({ preventScroll: true });
+      } else if (prev) {
+        tileFor(prev)?.focus({ preventScroll: true });
+      }
+    };
+
+    current = slug;
+    if (!document.startViewTransition) {
+      update();
+      const incoming = slug ? bySlug[slug] : document.getElementById('work');
+      if (!reduce.matches) { incoming.classList.remove('swap-in'); void incoming.offsetWidth; incoming.classList.add('swap-in'); }
+      settle();
+      return;
+    }
+    clearNames();
+    name(fromNext || fromImg);
+    running = document.startViewTransition(update);
+    running.finished.finally(settle);
+  }
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-story], a[data-home]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    if (a.hasAttribute('data-home')) {
+      if (current) go(null, { back: true });
+      else window.scrollTo({ top: 0 });
+    } else {
+      go(a.dataset.story, { back: false });
+    }
+  });
+  document.addEventListener('pointerover', (e) => { const a = e.target.closest('a[data-story]'); if (a) warm(a.dataset.story); });
+  document.addEventListener('focusin', (e) => { const a = e.target.closest('a[data-story]'); if (a) warm(a.dataset.story); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && current && !e.target.closest('form')) go(null, { back: true }); });
+
+  window.addEventListener('popstate', (e) => {
+    const slug = (e.state && e.state.story) || (bySlug[location.hash.slice(1)] ? location.hash.slice(1) : null);
+    go(slug, { back: !slug, push: false });
+  });
+
+  // first load: open the story in the hash without a transition
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const first = location.hash.slice(1);
+  if (bySlug[first]) { render(first); current = first; upgrade(bySlug[first]); history.replaceState({ story: first }, ''); }
+  else { history.replaceState({ story: null }, ''); }
+
+  // ---------- Enquiry form (no server here: the request is simulated with a real wait) ----------
+  const form = document.getElementById('ask-form');
+  const btn = form.querySelector('.btn');
+  const status = document.getElementById('ask-status');
+  const fakePost = (data) => new Promise((resolve) => setTimeout(() => resolve({ ok: true, data }), 1100));
+  const checks = [
+    ['f-name', 'e-name', (v) => v.trim() ? '' : 'Add your name so Ines knows who is writing.'],
+    ['f-email', 'e-email', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'Enter an email address like name@example.com.'],
+    ['f-msg', 'e-msg', (v) => v.trim().length >= 10 ? '' : 'Say a little more: where it would run and when.'],
+  ];
+  const validate = () => {
+    let firstBad = null;
+    for (const [id, eid, fn] of checks) {
+      const el = document.getElementById(id);
+      const msg = fn(el.value);
+      document.getElementById(eid).textContent = msg;
+      el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (msg) el.setAttribute('aria-describedby', eid); else el.removeAttribute('aria-describedby');
+      if (msg && !firstBad) firstBad = el;
+    }
+    return firstBad;
+  };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const bad = validate();
+    if (bad) { bad.focus(); return; }
+    const storyTitle = form.story.selectedOptions[0].textContent;
+    btn.disabled = true;
+    status.textContent = '';
+    const showLoading = setTimeout(() => { btn.dataset.state = 'loading'; }, 200);
+    const t0 = performance.now();
+    const res = await fakePost(Object.fromEntries(new FormData(form)));
+    clearTimeout(showLoading);
+    if (btn.dataset.state === 'loading') { const held = performance.now() - t0 - 200; if (held < 300) await new Promise((r) => setTimeout(r, 300 - held)); }
+    if (res.ok) {
+      btn.dataset.state = 'done';
+      status.textContent = `Sent. Your note about ${storyTitle} is with Ines.`;
+      form.reset();
+      if (current) form.story.value = current;
+      setTimeout(() => { btn.dataset.state = 'idle'; btn.disabled = false; }, 2400);
+    }
+  });
+})();
+</script>
+</body>
+</html>

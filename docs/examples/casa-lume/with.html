@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Lume, houses that face the Atlantic</title>
+<meta name="description" content="Casa Lume is a Lisbon architecture studio designing concrete-and-timber houses on the Atlantic coast. Book a studio visit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script>
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('anim');
+</script>
+<style>
+  :root{
+    --black:#111111;
+    --white:#ffffff;
+    --grey:#f4f4f4;
+    --mute:rgba(255,255,255,.72);
+    --hair:rgba(255,255,255,.35); /* 35% hairline, per base */
+    --hair-strong:rgba(255,255,255,.7);
+    --track:0.18em;
+    --e-mask:cubic-bezier(.16,1,.3,1);
+    --e-line:cubic-bezier(.65,0,.35,1);
+    --e-soft:cubic-bezier(.22,.61,.36,1);
+    --pad:clamp(20px, 4vw, 56px);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;overflow-x:clip;background:var(--black);color:var(--white)}
+  body{
+    font-family:'Libre Franklin','Franklin Gothic Medium','Franklin Gothic',Arial,sans-serif;
+    font-size:16px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--white);color:var(--black)}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--white);outline-offset:4px}
+
+  .label{
+    font-size:12px;font-weight:400;letter-spacing:var(--track);text-transform:uppercase;line-height:1.3;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;isolation:isolate;overflow:hidden}
+  .hero__media{position:absolute;inset:0;z-index:-2}
+  .hero__media img{
+    width:100%;height:100%;object-fit:cover;object-position:38% 50%;display:block;
+    filter:grayscale(1) contrast(1.08) brightness(.86);
+    transform:scale(1.04);
+  }
+  .anim .hero__media img{animation:drift 2.4s var(--e-soft) both}
+  /* scrim: keeps the white type at 4.5:1 over the brightest surf */
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 22%),
+      linear-gradient(90deg, rgba(0,0,0,.05) 30%, rgba(0,0,0,.62) 78%),
+      linear-gradient(0deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 30%);
+  }
+
+  /* nav */
+  .nav__inner{display:contents}
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    padding:28px var(--pad) 0;
+  }
+  .brand{display:inline-flex;align-items:center;min-height:44px;font-weight:700;font-size:15px;letter-spacing:.28em;text-transform:uppercase;white-space:nowrap}
+  .nav__links{display:flex;align-items:center;gap:clamp(20px,3vw,44px);list-style:none;margin:0;padding:0}
+  .nav__links a{position:relative;padding:8px 0;opacity:.86;transition:opacity .25s ease}
+  .nav__links a:hover{opacity:1}
+  .nav__links a:not(.nav__cta)::after{
+    content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:currentColor;
+    transform:scaleX(0);transform-origin:left;transition:transform .35s var(--e-line);
+  }
+  .nav__links a:hover::after{transform:scaleX(1)}
+  .nav__links .nav__cta{
+    display:inline-flex;align-items:center;min-height:44px;padding:0 18px;
+    border:1px solid var(--hair-strong);transition:background-color .25s ease,color .25s ease;
+  }
+  .nav__links .nav__cta:hover{opacity:1;background:var(--white);color:var(--black)}
+
+  /* the frame box on the right third */
+  .stage{flex:1;display:flex;align-items:flex-end;justify-content:flex-end;padding:40px var(--pad) clamp(28px,6vh,72px)}
+  .frame{
+    position:relative;width:min(100%, 600px);
+    padding:clamp(28px,3.4vw,44px) clamp(24px,3vw,40px) 0;
+  }
+  /* 1px hairline, drawn as four lines so it can draw in */
+  .frame__line{position:absolute;background:var(--hair)}
+  .frame__line--t{top:0;left:0;right:0;height:1px;transform-origin:left}
+  .frame__line--b{bottom:0;left:0;right:0;height:1px;transform-origin:right}
+  .frame__line--l{top:0;bottom:0;left:0;width:1px;transform-origin:top}
+  .frame__line--r{top:0;bottom:0;right:0;width:1px;transform-origin:bottom}
+  .anim .frame__line--t{animation:drawX .7s var(--e-line) .1s both}
+  .anim .frame__line--l{animation:drawY .7s var(--e-line) .1s both}
+  .anim .frame__line--b{animation:drawX .7s var(--e-line) .3s both}
+  .anim .frame__line--r{animation:drawY .7s var(--e-line) .3s both}
+
+  .overline{color:var(--mute);margin:0 0 22px}
+  h1{margin:0;font-size:clamp(44px, 5.9vw, 75px);line-height:.98;letter-spacing:-.01em;overflow-wrap:break-word;min-width:0}
+  .h1row{display:block;overflow:hidden;padding-bottom:.06em}
+  .h1rise{display:block}
+  .h1row--name .h1rise{font-weight:700;text-transform:uppercase;letter-spacing:.02em}
+  .h1row--desc .h1rise{font-weight:400;font-size:.62em;line-height:1.1;letter-spacing:-.005em;padding-top:.12em}
+  .anim .h1row--name .h1rise{animation:maskUp .9s var(--e-mask) .42s both}
+  .anim .h1row--desc .h1rise{animation:maskUp .9s var(--e-mask) .52s both}
+
+  .lede{margin:22px 0 0;max-width:34ch;color:var(--mute);font-size:16px;line-height:1.6;font-weight:300}
+  .anim .lede{animation:settle .72s var(--e-soft) .7s both}
+
+  .frame__foot{
+    display:flex;align-items:center;justify-content:space-between;gap:0;
+    margin-top:clamp(28px,3.4vw,40px);border-top:1px solid var(--hair);
+    margin-left:calc(-1 * clamp(24px,3vw,40px));margin-right:calc(-1 * clamp(24px,3vw,40px));
+  }
+  .book{
+    flex:1;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    min-height:64px;padding:0 clamp(24px,3vw,40px);
+    font-weight:700;background:var(--white);color:var(--black);transition:background-color .3s ease,color .3s ease;
+  }
+  .book svg{transition:transform .35s var(--e-soft)}
+  .book:hover{background:var(--grey)}
+  .book:hover svg{transform:translateX(4px)}
+  .book:focus-visible{outline:2px solid var(--black);outline-offset:-6px}
+  .scroll{
+    display:grid;place-items:center;width:64px;min-height:64px;border-left:1px solid var(--hair);
+    transition:background-color .3s ease;
+  }
+  .scroll:hover{background:rgba(255,255,255,.08)}
+  .scroll svg{animation:none}
+  .anim .frame__foot{animation:settle .62s var(--e-soft) .86s both}
+
+  /* caption, bottom-left: the photo is a stand-in and says so */
+  .caption{
+    position:absolute;left:var(--pad);bottom:clamp(28px,6vh,72px);
+    color:rgba(255,255,255,.7);max-width:32ch;font-size:12px;
+  }
+  .anim .caption{animation:fadeIn .6s linear 1s both}
+
+  @keyframes drawX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes drawY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+  @keyframes maskUp{from{transform:translateY(112%)}to{transform:translateY(0)}}
+  @keyframes settle{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes drift{from{transform:scale(1.1)}to{transform:scale(1.04)}}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none !important;transition-duration:0s !important}
+  }
+
+  @media (max-width: 860px){
+    .nav__links li:not(:last-child){display:none}
+    .caption{display:none}
+    .stage{justify-content:center}
+    .hero__media img{object-position:30% 50%}
+    .hero::before{
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 22%),
+        linear-gradient(0deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.3) 55%, rgba(0,0,0,0) 80%);
+    }
+  }
+  @media (max-width: 420px){
+    .brand{font-size:13px;letter-spacing:.22em}
+    .nav__links .nav__cta{padding:0 14px}
+    .nav__cta .long{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero__media">
+    <!-- Stand-in photograph: replace with Casa Lume's own house photography -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Piscina_das_Mar%C3%A9s_%2854192196590%29.jpg/1920px-Piscina_das_Mar%C3%A9s_%2854192196590%29.jpg"
+         alt="A board-marked concrete wall meeting Atlantic surf breaking over dark rocks."
+         width="1920" height="855" fetchpriority="high">
+  </div>
+
+  <header class="nav"><nav aria-label="Primary" class="nav__inner">
+    <a class="brand" href="#" aria-label="Casa Lume, home">Casa Lume</a>
+    <ul class="nav__links label">
+      <li><a href="#houses">Houses</a></li>
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="nav__cta" href="#visit">Book<span class="long">&nbsp;a visit</span></a></li>
+    </ul>
+  </nav></header>
+
+  <main class="stage" id="main">
+    <section class="frame" aria-labelledby="hero-title">
+      <span class="frame__line frame__line--t" aria-hidden="true"></span>
+      <span class="frame__line frame__line--r" aria-hidden="true"></span>
+      <span class="frame__line frame__line--b" aria-hidden="true"></span>
+      <span class="frame__line frame__line--l" aria-hidden="true"></span>
+
+      <p class="overline label">Concrete, timber, Atlantic light</p>
+      <h1 id="hero-title">
+        <span class="h1row h1row--name"><span class="h1rise">Casa Lume</span></span>
+        <span class="h1row h1row--desc"><span class="h1rise">Houses that face<br>the Atlantic</span></span>
+      </h1>
+      <p class="lede">A Lisbon studio drawing concrete-and-timber houses for the wind, the salt and the western sun.</p>
+
+      <div class="frame__foot">
+        <a class="book label" href="#visit">
+          Book a studio visit
+          <svg width="22" height="12" viewBox="0 0 22 12" fill="none" aria-hidden="true"><path d="M0 6h20M15 1l5 5-5 5" stroke="currentColor" stroke-width="1.2"/></svg>
+        </a>
+        <a class="scroll" href="#houses" aria-label="Scroll to the houses">
+          <svg width="12" height="20" viewBox="0 0 12 20" fill="none" aria-hidden="true"><path d="M6 0v18M1 13l5 5 5-5" stroke="currentColor" stroke-width="1.2"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <p class="caption label">Stand-in photograph: Piscina das Marés, Leça da Palmeira. Photo Šarūnas Burdulis, CC BY-SA 2.0</p>
+</div>
+</body>
+</html>

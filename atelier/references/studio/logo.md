@@ -27,12 +27,13 @@ Default to a **wordmark plus a monogram** (the first letter, or a simple mark) f
 
    ```bash
    node scripts/wordmark.mjs --text "Kiln & Co" --font "Gloock" --tracking -10 --out brand/wordmark.svg
+   node scripts/wordmark.mjs --text "molino" --font "Young Serif" --glyphs --out brand/wordmark-letters.svg   # one path per letter
    node scripts/wordmark.mjs --text "NORTE" --font "Anton" --tracking 40 --out brand/wordmark.svg
    node scripts/wordmark.mjs --text "orbit" --font "Satoshi" --file ./Satoshi-Bold.otf --out brand/wordmark.svg   # a local face
    ```
 
    Needs `opentype.js` (`npm i --no-save opentype.js`) and network for Google Fonts. Without them, set the wordmark as live text in the display face and say the outlined export is pending.
-4. Add **one** considered detail, by editing the SVG path or adding a shape: a ligature between two letters, a cut or notch from the world (a chalk line through the crossbar), a custom dot on an i, a letter replaced by the mark. One. Two details read as a costume.
+4. Add **one** considered detail, by editing the SVG path or adding a shape: a ligature between two letters, a cut or notch from the world (a chalk line through the crossbar), a custom dot on an i, a letter replaced by the mark. One, or none: if every detail you try costs legibility (an "l" that now reads as "i"), ship the clean set name. Two details read as a costume. To work on one letter, export with `--glyphs`: each letter becomes its own `<path data-char>` and its box is printed, so you can delete the o and draw the mark in its box, or colour one letter.
 5. Tracking: display faces at logo size usually want slightly tighter tracking (-10 to -30) in lowercase and looser (+40 to +100) in caps. Check pairs by eye; fix any collision or gap.
 
 ## 4. The mark
@@ -59,7 +60,7 @@ Draw it by hand in SVG on a grid. Construction rules:
 Render a test sheet (`scripts/shot.mjs` on a small HTML page) and look at:
 
 - The mark at **16, 32, 64 and 180px**: still recognisable at 16? If not, simplify; small sizes may need their own simplified drawing.
-- **One colour** (ink on paper) and **reversed** (paper on ink), on the brand colour, and over a photograph.
+- **Brand colour** (the primary view for most consumer brands), **one colour** (ink on paper), **reversed** (paper on ink), and over a photograph.
 - The lockup (mark beside the wordmark) with the mark's height near the wordmark's cap height or x-height, and clear space of at least the mark's counter on every side.
 - The squint test and the "describe it in one sentence" test.
 
@@ -77,6 +78,14 @@ brand/
 
 In the page: the nav wordmark is an inline `<svg>` or `<img src="brand/logo.svg">` inside a link to home with `aria-label`; `<link rel="icon" href="brand/favicon.svg" type="image/svg+xml">`; a `<meta name="theme-color">` from the palette.
 
+**Animated logo** (when asked, or as a Studio run's signature): the move comes from the mark's own construction (drawn, built, cut, transformed, type-led), timed in acts with a hold at the end, and the finished static mark is its last frame. Keep each part of the mark a separate path so it can move. Deliver `logo-animated.svg` (CSS inside, reduced motion respected) and, if the brand ships to apps, `logo.lottie`. Method: `motion/brand.md`; Lottie: `motion/lottie.md`.
+
 ## 7. Colour
 
-The master logo is one colour. A brand colour version uses the palette's accent or ink, never a gradient by default. Check the mark's contrast against every background it sits on (3:1 at least).
+The master logo works in one colour (that is the test it must pass), but the **brand is shown in colour**. A logo sheet in ink on cream with one timid accent reads as a safe default, not an identity. Choose the brand's colour as boldly as its world allows:
+
+- **Consumer, food, leisure, kids, sport, music, festivals:** two or three confident colours with roles (Ensemble or Flood dosage in `studio/color.md`), the mark itself in colour (a two-colour mark is fine when each colour means something: the sun and the sea, the flame and the coal), and at least one full-bleed colour ground on the sheet.
+- **Professional services, finance, health, software:** one owned brand colour that is not navy, grey or the category's cliché, plus ink; the mark in the brand colour on the primary lockup, ink as the alternate.
+- **Luxury and craft:** restraint is right here; give the single colour a material (a tile glaze, a dye, an ink) and use it with conviction rather than as a 5% accent.
+
+Show the logo on paper, on ink and on the brand colour ground; the colour ground is often the strongest view and belongs early on the sheet. Never a gradient by default. Check the mark's contrast against every background it sits on (3:1 at least).

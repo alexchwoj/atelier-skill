@@ -2,6 +2,10 @@
 
 The tells that make a page read as generated, and the fix for each. **Baseline** items are never acceptable (they are also in `SKILL.md`). Everything else is a **tell**: a reflex worth questioning, not a ban. Use one when it is the best choice for this page (the brief or a library prompt asks for it, or it simply looks better here) and do it well; avoid it when it is there by habit. Never replace a tell with something that looks worse: the goal is a better page, not a page that avoids a list. `scripts/lint.mjs` catches the ones marked *(lint)*.
 
+**Game interfaces are out of scope for the type tells:** tracked uppercase labels, mono figures and dense caps are the native language of most HUDs and game menus. Follow the game's own language there (`routes/game.md`).
+
+**Scope: the tells judge only what you decide yourself.** Anything the user, the project or a chosen library prompt specifies is the spec, never a tell: an eyebrow, an italic or gradient word, a centred hero, glass, a status pill, mono labels, Inter, pure black on white. Build it as written and run `lint.mjs --prompt <prompt.md>` so those warnings show as KEPT. The one exception is **fake technical metadata** (§ Copy and chrome): it goes on every route, even when a prompt draws it; keep the element only if real words can fill it. Cutting a prompt's other signature moves to satisfy this list makes the page worse; it is the most common way a good prompt turns into a flat build.
+
 ## Colour and surface
 
 | Tell | Fix |
@@ -68,6 +72,7 @@ The tells that make a page read as generated, and the fix for each. **Baseline**
 | Stock second action beside the primary (*Learn more*, *Get started*, *Book a demo*) | one primary; a second action that goes somewhere specific |
 | Invented stats, testimonials, star ratings, logo walls (`10k+ users`, `99.9% uptime`, `Trusted by 500+ teams`) *(lint)* | the user's facts, a marked placeholder, or nothing (Baseline) |
 | Decoration text: scroll cues, rotated vertical labels, `v2.0`/`BETA` pills, mono strips under the hero, `01 / 04` counters on tiles | delete; a real fact becomes a caption |
+| **Fake technical metadata** *(lint, every route)*: coordinates (`41°23′ N 2°10′ E`), `Nº 03`, `§ 01`, `Card 0412`, `Deck 01 / 03`, `Pass 3 of 4`, `Plate 01`, serial, lot and batch numbers, `Est. 2011`, timestamps and readouts that measure nothing | delete. It is the single most recognisable generated tell: numbering and coordinates make a page look like a model imitating a technical document. Keep a number only when the reader needs it (a price, a date, a real step in a real `<ol>`). A true value used as an ornament counts too (`A4 · 440 Hz` in a corner, the city's real coordinates, a launch year as a tag): the test is whether the reader needs that number in that spot, not whether it is accurate. If you catch yourself justifying one as "real", delete it |
 | A form that prints "Thanks, you're on the list!" with no backend | no success state until wired; say nothing was sent (Baseline) |
 
 ## Imagery
@@ -94,6 +99,11 @@ The tells that make a page read as generated, and the fix for each. **Baseline**
 | Custom cursor, cursor follower, mouse parallax, starfield | remove unless the brief is about exactly that |
 | Marquee or carousel that never pauses *(lint: no reduced-motion)* | pause on hover/focus, a pause control, reduced-motion fallback |
 | Focus ring that fades in or is missing *(lint)* | instant `:focus-visible` (Baseline) |
+| One duration and curve on everything; `{ opacity: 0, y: 20 }` and `delay: i * 0.1` on every block *(lint)* | tokens by role and distance, capped stagger, a motion character (`motion/principles.md` § 3) |
+| Pulsing, glowing, floating or spinning decoration; shimmer text; a bouncing scroll arrow *(lint)* | still; a loop only for a loader, a live state or the declared concept |
+| Typewriter headline, every stat counting up, fake loading spinners *(lint)* | the real text and numbers at first paint; spinners only for real waits |
+
+The full catalogue and the self-check every moving build passes: `motion/lint.md`.
 
 ## Before handing back
 
@@ -107,5 +117,5 @@ Answer each with a look, not a guess:
 6. At 375 wide: horizontal scroll, overlaps, text under 16px, tap targets under 44px?
 7. Tab through it: is focus always visible?
 8. With reduced motion on and JS off, is all content visible?
-9. Count the eyebrows, gradients, glows, emoji and buzzwords: is the answer zero, or each one deliberate?
+9. Count the eyebrows, gradients, glows, emoji and buzzwords you added yourself: is the answer zero, or each one deliberate? (Ones the prompt asks for stay.)
 10. Would a designer believe a person made this?

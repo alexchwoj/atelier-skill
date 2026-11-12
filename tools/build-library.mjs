@@ -125,13 +125,45 @@ function promptKind(cat, text) {
   return 'page';
 }
 
+// Light or dark from the page's own background when the prompt declares one; otherwise from the
+// colour words and hex values, skipping lines that only set text colour (a navy ink is not a dark page).
 function promptTheme(text) {
   const t = text.toLowerCase();
-  const dark = (t.match(/\bdark\b|bg-black|bg-\[#0|bg-neutral-9|bg-zinc-9|#0{3,6}\b|#0[0-9a-f]{5}\b|#1[0-9a-f]{5}\b|black background|near-black|pure black/g) || []).length;
-  const light = (t.match(/\blight (theme|mode|background)|bg-white|#fff(fff)?\b|white background|cream|off-white|#f[0-9a-f]{5}\b|#e[0-9a-f]{5}\b/g) || []).length;
+  const page = [
+    ...t.matchAll(/(?:^|[\s{,])(?:body|html|:root|main)\s*\{[^}]*?background(?:-color)?\s*:\s*(#[0-9a-f]{6}|#[0-9a-f]{3})\b/g),
+    ...t.matchAll(/^[\s>*-]*\**\s*(?:page |site |base |main |overall |hero )?(?:background|canvas|bg)(?: colou?r)?\**\s*[:=-][^\n#]{0,60}(#[0-9a-f]{6}|#[0-9a-f]{3})\b/gm),
+    ...t.matchAll(/--(?:bg|background|paper|canvas|page)(?:-[\w-]*)?\s*:\s*(#[0-9a-f]{6}|#[0-9a-f]{3})\b/g),
+  ].map((m) => luminance(m[1])).filter((l) => l !== null);
+  if (page.length) {
+    const darkVotes = page.filter((l) => l < 0.35).length;
+    if (darkVotes === page.length) return 'dark';
+    if (darkVotes === 0) return 'light';
+    return page[0] < 0.35 ? (darkVotes * 2 >= page.length ? 'dark' : 'mixed') : (darkVotes * 2 <= page.length ? 'light' : 'mixed');
+  }
+  const surface = t.split('\n')
+    .filter((l) => !/\b(text|font|heading|headline|ink|foreground)\b|(^|[^-])colou?r\s*[:=`]/.test(l) || /background|\bbg-|surface|canvas/.test(l)).join('\n');
+  const dark = (surface.match(/\bdark\b|bg-black|bg-\[#0|bg-neutral-9|bg-zinc-9|#0{3,6}\b|#0[0-9a-f]{5}\b|#1[0-9a-f]{5}\b|black background|near-black|pure black/g) || []).length;
+  const light = (surface.match(/\blight (theme|mode|background)|bg-white|#fff(fff)?\b|white background|cream|off-white|#f[0-9a-f]{5}\b|#e[0-9a-f]{5}\b/g) || []).length;
   if (dark > light * 1.5 + 1) return 'dark';
   if (light > dark * 1.5 + 1) return 'light';
   return 'mixed';
+}
+
+// How concrete a prompt is: distinct exact values (colours, sizes, timings, easings, media URLs)
+// on a 0 to 1 scale. Vague prompts ("a modern, clean hero") score low and rank lower in find.mjs.
+const MEDIA_URL = /https?:\/\/[^\s"'`)<>]+?\.(?:mp4|webm|mov|m3u8|png|jpe?g|webp|avif|glb|gltf)\b/gi;
+// How much a prompt leans on decorative numbering (section indices, counters, coordinates, serials),
+// per KB. Prompts high on it produce the "model imitating a technical document" look; find.mjs ranks them lower.
+const DECO = /\b(index|indices|numeric spine|numbered|counter|coordinates|serial|plate \d|no\. ?\d|nº|§|0\d ?\/ ?0?\d)\b/gi;
+function decoration(text) {
+  return Math.round(((text.match(DECO) || []).length / (text.length / 1000)) * 100) / 100;
+}
+
+function specificity(text) {
+  const distinct = (re) => new Set([...text.matchAll(re)].map((m) => m[0].toLowerCase())).size;
+  const n = distinct(/#[0-9a-f]{6}\b|#[0-9a-f]{3}\b/gi) + distinct(/\b\d+(?:\.\d+)?(?:px|rem|em|vw|vh|svh)\b/g) +
+    distinct(/\b\d+(?:\.\d+)?m?s\b/g) * 2 + distinct(/cubic-bezier\([^)]+\)/g) * 3 + distinct(MEDIA_URL) * 3;
+  return Math.min(1, Math.round((n / 45) * 100) / 100);
 }
 
 function fontsIn(text) {
@@ -319,6 +351,9 @@ function buildPrompts() {
       fonts,
       fontRoles: fontRoles(text, fonts),
       parts: partsOf(text),
+      spec: specificity(text),
+      deco: decoration(text),
+      ...(text.search(MEDIA_URL) >= 0 ? { media: true } : {}),
       kb: Math.round(text.length / 1024),
       summary: info.description ? (info.description.length > 280 ? info.description.slice(0, 277) + '…' : info.description) : summaryOf(text),
       path: `library/prompts/${rel}`,

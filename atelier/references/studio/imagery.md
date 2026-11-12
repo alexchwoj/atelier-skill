@@ -7,7 +7,7 @@ What a page shows, and where it comes from. A page looks made when it shows the 
 1. **The user's own images and recordings.** They win every slot. Ask for them once.
 2. **Screenshots of the real product,** whenever it can be reached (a URL, a dev server, a project that runs with one command). Put it in a state that tells the story, capture it (`scripts/shot.mjs` on the route, or the harness's browser), check nothing private is visible (names, emails, tokens, file paths).
 3. **The product built** at full fidelity inside the page, only when there is nothing to capture yet. Sample data reads as sample (`example.com`, round amounts, "Example Kitchen").
-4. **Library photographs** as stand-ins: `node scripts/photos.mjs "<what the picture shows>"`. 755 photos from Wikimedia Commons, each CC0, public domain, CC BY or CC BY-SA, with a ready `<img>` and credit.
+4. **Real photographs and footage** as stand-ins: `node scripts/media.mjs "<what the frame shows>" --sheet <file.png>`. It searches the 755 curated library photos, Openverse and Wikimedia Commons with no setup, and Pexels, Pixabay and Unsplash (photos and video) when their free keys are set; every result carries its licence and credit.
 5. **Generated images,** only when the harness has an image tool and the user is fine with it. Write the prompt from the concept's world (subject, light, lens, palette), never "a beautiful hero image".
 6. **Type at full scale,** when the page is about words.
 
@@ -19,18 +19,24 @@ What a page shows, and where it comes from. A page looks made when it shows the 
 
 A photograph never stands in for a fact: numbers, names and claims stay in type, and a stock face never stands in for a customer, a teammate or a testimonial.
 
-## 3. Library photos
+## 3. Finding real media
 
 ```bash
-node scripts/photos.mjs "hands kneading dough" --people hands --n 3
-node scripts/photos.mjs "harbour at dawn" --orient landscape --tone light --temp cool
+node scripts/media.mjs "hands kneading dough on a floured bench" --orient landscape --sheet .atelier/media/hero.png
+node scripts/media.mjs "slow drift over a misty harbour at dawn" --type video --sheet .atelier/media/hero-video.png
+node scripts/media.mjs "harbour at dawn" --source library --tone light --temp cool
 ```
 
-- Search for the subject's **physical object**, not the category ("climbing chalk bag on a mat", not "fitness"). Re-ask in other words (the place, the material, the action) before settling for a near miss. One decisive photo beats five mediocre ones.
-- **Credit every photo used:** one "Photographs:" line in the footer with each printed credit. CC BY and CC BY-SA require it.
+- **Describe the frame, not the category:** the subject's physical object, the shot (aerial, macro, wide, close on hands), the light and the motion ("climbing chalk bag on a mat, hard side light", not "fitness"). Re-ask in other words (the place, the material, the action) before settling for a near miss.
+- **Choose on the contact sheet.** `--sheet` lays every candidate out numbered; open it and pick by looking. Titles lie, and one decisive picture beats five mediocre ones.
+- **Sources and keys:** `library` (offline, curated), `openverse` and `commons` (no key) are always on. `PEXELS_API_KEY`, `PIXABAY_API_KEY` and `UNSPLASH_ACCESS_KEY` (free from each site's developer page) add the stock libraries with the best photographs and almost all of the free video. Without them, video comes from Commons only (often 480p): prefer a still with a slow CSS zoom over a soft video.
+- **Recognisable stand-ins:** a famous building, a known person or another brand's product must never read as the client's own work. Prefer anonymous subjects; when a recognisable one is the best fit, caption it visibly as a stand-in with its credit.
+- **Openverse** images are often 1024px wide: fine for cards and halves, too small for a full-bleed hero.
+- **Credit every asset used:** one "Photographs:" (and "Footage:") line in the footer with each printed credit. CC BY and CC BY-SA require it; Pexels, Pixabay and Unsplash ask for it.
 - **Size and crop in CSS:** keep the `srcset`, set `sizes` to the layout, crop with `aspect-ratio` and `object-fit: cover`, steer with `object-position`.
-- **Hero photo:** remove `loading="lazy"`, add `fetchpriority="high"`; use the 1920 or 2560 width for full-bleed.
-- Never write an image URL from memory, and never hotlink paid stock. Verify any other URL resolves before shipping.
+- **Hero photo:** remove `loading="lazy"`, add `fetchpriority="high"`; use the 1920 width for full-bleed.
+- **Video:** use the printed file and poster; hotlinked stock video is fine for a draft, but for production download it, compress to under 2 MB for the hero, and serve it yourself.
+- Never write a media URL from memory, and never hotlink paid stock.
 
 ## 4. Slots
 

@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upload notifications</title>
+<meta name="description" content="A stacking toast system for a file-upload app: uploads report progress, completion and failures with retry, in one deck in the corner.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-paper: oklch(97.5% 0.008 245);
+  --color-paper-2: oklch(95.3% 0.009 245);
+  --color-paper-3: oklch(92.5% 0.010 245);
+  --color-card: oklch(99.4% 0.003 245);
+  --color-rule: oklch(88.5% 0.010 245);
+  --color-edge: oklch(70% 0.012 245);
+  --color-muted: oklch(50% 0.011 245);
+  --color-ink-2: oklch(40% 0.011 245);
+  --color-ink: oklch(20.5% 0.012 245);
+  --color-accent: oklch(55% 0.146 245);
+  --color-focus: oklch(55% 0.146 245);
+  --color-success: oklch(52% 0.14 150);
+  --color-error: oklch(52% 0.17 27);
+  --color-error-wash: oklch(96% 0.025 27);
+
+  --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-figure: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px;
+  --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px;
+
+  --radius-sm: 8px; --radius-card: 12px; --radius-pill: 999px;
+  --shadow-1: 0 1px 2px oklch(20% 0.01 245 / 0.06), 0 10px 28px -12px oklch(20% 0.02 245 / 0.22);
+
+  /* motion: precise character (file tool), tokens x 0.85 */
+  --motion-scale: 0.85;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --dur-press: calc(150ms * var(--motion-scale));
+  --dur-toast: calc(400ms * var(--motion-scale));
+  --dur-toast-exit: calc(200ms * var(--motion-scale));
+  --dur-swap-out: 110ms;
+  --dur-swap-in: 220ms;
+  --dur-colour: 200ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100svh;
+  background: var(--color-paper); color: var(--color-ink);
+  font: 400 1rem/1.6 var(--font-body);
+  font-synthesis: none; -webkit-font-smoothing: antialiased;
+  accent-color: var(--color-accent); caret-color: var(--color-accent);
+  scrollbar-color: var(--color-edge) var(--color-paper);
+}
+::selection { background: oklch(86% 0.07 245); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+h1, h2 { margin: 0; text-wrap: balance; overflow-wrap: break-word; min-width: 0; }
+p { margin: 0; text-wrap: pretty; max-width: 62ch; }
+.num { font-family: var(--font-figure); font-variant-numeric: tabular-nums; font-size: 0.9375em; letter-spacing: -0.01em; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- page ---------- */
+.page {
+  width: 100%; max-width: 1240px; margin-inline: auto;
+  padding: clamp(40px, 8vw, 104px) clamp(16px, 5vw, 64px) var(--space-3xl);
+  display: grid; gap: var(--space-2xl);
+}
+.intro { display: grid; gap: var(--space-md); max-width: 640px; }
+h1 { font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.5rem); line-height: 1.04; letter-spacing: -0.035em; font-weight: 700; max-width: 16ch; }
+.lead { font-size: 1.125rem; color: var(--color-ink-2); max-width: 52ch; }
+
+.work { display: grid; gap: var(--space-2xl); max-width: 640px; }
+
+/* drop zone */
+.drop {
+  position: relative; display: grid; justify-items: start; gap: var(--space-md);
+  padding: var(--space-xl) var(--space-lg);
+  border: 1.5px dashed var(--color-edge); border-radius: 16px;
+  background: var(--color-paper-2);
+  transition: background-color var(--dur-colour) ease, border-color var(--dur-colour) ease;
+}
+.drop[data-over] { background: oklch(94% 0.03 245); border-color: var(--color-accent); }
+.drop h2 { font-size: 1.5rem; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
+.drop p { color: var(--color-muted); }
+.drop-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-md); }
+.drop-icon { width: 28px; height: 28px; color: var(--color-ink-2); flex-shrink: 0; }
+
+/* buttons */
+.btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs);
+  min-height: 44px; padding: 0 var(--space-lg);
+  border: 1px solid var(--color-ink); border-radius: var(--radius-pill);
+  background: var(--color-ink); color: var(--color-paper);
+  font: 700 1rem/1 var(--font-body); white-space: nowrap; cursor: pointer; text-decoration: none;
+  transition: background-color var(--dur-colour) ease, border-color var(--dur-colour) ease, transform var(--dur-press) var(--ease-out);
+}
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn--quiet { background: var(--color-card); color: var(--color-ink); border-color: var(--color-edge); }
+.btn--text { background: transparent; color: var(--color-ink-2); border-color: transparent; padding-inline: var(--space-sm); font-weight: 400; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--color-edge); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover:not(:disabled) { background: var(--color-ink-2); border-color: var(--color-ink-2); }
+  .btn--quiet:hover:not(:disabled) { background: var(--color-paper-2); border-color: var(--color-ink-2); }
+  .btn--text:hover:not(:disabled) { background: transparent; border-color: transparent; color: var(--color-ink); text-decoration-color: currentColor; }
+}
+.file-input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.file-input:focus-visible + label { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* demo triggers */
+.demo { display: grid; gap: var(--space-md); }
+.demo h2 { font-size: 1.5rem; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
+.demo > p { color: var(--color-muted); }
+.triggers { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--color-rule); }
+.triggers li {
+  display: grid; grid-template-columns: minmax(0, 15.5rem) minmax(0, 1fr); gap: var(--space-xs) var(--space-lg);
+  align-items: center; padding: var(--space-md) 0; border-bottom: 1px solid var(--color-rule);
+}
+.triggers .btn { justify-content: flex-start; width: 100%; }
+.triggers p { color: var(--color-ink-2); }
+.foot-actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }
+.hint { color: var(--color-muted); font-size: 1rem; }
+kbd { font-family: var(--font-figure); font-size: 0.875em; padding: 1px 6px; border: 1px solid var(--color-rule); border-bottom-width: 2px; border-radius: 6px; background: var(--color-card); color: var(--color-ink); }
+
+@media (max-width: 640px) {
+  .triggers li { grid-template-columns: minmax(0, 1fr); }
+  .drop { padding: var(--space-lg) var(--space-md); }
+}
+
+/* ---------- toaster ---------- */
+.toaster {
+  position: fixed; z-index: 500; right: 24px; bottom: 24px;
+  width: min(380px, calc(100vw - 32px)); height: 0;
+  --gap: 14px;
+}
+.toaster ol { list-style: none; margin: 0; padding: 0; }
+@media (max-width: 480px) { .toaster { right: 16px; bottom: 16px; } }
+
+.toast {
+  position: absolute; right: 0; bottom: 0; width: 100%;
+  --y: 0px; --s: 1; --clip: 0px;
+  transform: translateY(var(--y)) scale(var(--s));
+  transform-origin: bottom center;
+  clip-path: inset(var(--clip) 0 0 0 round var(--radius-card));
+  background: var(--color-card); color: var(--color-ink);
+  border: 1px solid var(--color-rule); border-radius: var(--radius-card);
+  box-shadow: var(--shadow-1);
+  transition:
+    transform var(--dur-toast) var(--ease-out),
+    opacity var(--dur-toast) var(--ease-out),
+    clip-path var(--dur-toast) var(--ease-out),
+    background-color var(--dur-colour) ease,
+    border-color var(--dur-colour) ease;
+  touch-action: pan-y;
+}
+.toast[data-enter] { transform: translateY(calc(var(--y) + 110%)) scale(var(--s)); opacity: 0; transition-duration: 0s; }
+.toast[data-leaving] {
+  transform: translateY(calc(var(--y) + 24px)) scale(var(--s)); opacity: 0; pointer-events: none;
+  transition-duration: var(--dur-toast-exit);
+}
+.toast[data-hidden] { opacity: 0; pointer-events: none; }
+.toast[data-state="failed"] { background: var(--color-error-wash); border-color: oklch(85% 0.06 27); }
+/* bridge the gaps between fanned-out cards so the hover never drops */
+.toaster[data-expanded] .toast::after { content: ""; position: absolute; inset-inline: 0; bottom: 100%; height: calc(var(--gap) + 1px); }
+
+.t-body {
+  display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: var(--space-sm);
+  align-items: start; padding: 14px 10px 14px 14px;
+  transition: opacity 200ms var(--ease-out);
+}
+.toaster:not([data-expanded]) .toast:not([data-i="0"]) .t-body { opacity: 0; }
+
+.t-text { display: grid; gap: 2px; min-width: 0; padding-top: 1px;
+  transition: opacity var(--dur-swap-in) var(--ease-out), filter var(--dur-swap-in) var(--ease-out), transform var(--dur-swap-in) var(--ease-out); }
+.t-text[data-changing] { opacity: 0; filter: blur(2px); transform: scale(0.97); transition-duration: var(--dur-swap-out); }
+.t-title { font-weight: 700; font-size: 1rem; line-height: 1.35; overflow-wrap: anywhere; }
+.t-detail { color: var(--color-ink-2); font-size: 0.9375rem; line-height: 1.45; }
+.toast[data-state="failed"] .t-detail { color: oklch(36% 0.06 27); }
+
+.t-actions { display: flex; align-items: center; gap: 2px; margin-top: -4px; }
+.t-more:has(> [hidden]) { display: none; }
+.t-more { padding-top: 8px; }
+.t-retry {
+  min-height: 34px; padding: 0 12px; border-radius: var(--radius-pill);
+  border: 1px solid var(--color-error); background: var(--color-card); color: oklch(42% 0.15 27);
+  font: 700 0.9375rem/1 var(--font-body); cursor: pointer; position: relative;
+  transition: background-color var(--dur-colour) ease, transform var(--dur-press) var(--ease-out);
+}
+.t-close {
+  width: 32px; height: 32px; display: grid; place-items: center; border: 0; border-radius: var(--radius-sm);
+  background: transparent; color: var(--color-muted); cursor: pointer; position: relative;
+  transition: background-color var(--dur-colour) ease, color var(--dur-colour) ease, transform var(--dur-press) var(--ease-out);
+}
+.t-retry::before, .t-close::before { content: ""; position: absolute; inset: -6px; }
+.t-close svg { width: 16px; height: 16px; }
+.t-retry:active, .t-close:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .t-retry:hover { background: oklch(93% 0.04 27); }
+  .t-close:hover { background: var(--color-paper-3); color: var(--color-ink); }
+}
+
+/* the ring: progress while sending, closes into a check, stops where a failure happened */
+.t-icon { width: 24px; height: 24px; position: relative; color: var(--color-accent); transition: color var(--dur-colour) ease; }
+.toast[data-state="done"] .t-icon { color: var(--color-success); }
+.toast[data-state="failed"] .t-icon { color: var(--color-error); }
+.t-icon svg { width: 24px; height: 24px; display: block; fill: none; stroke: currentColor; stroke-linecap: round; }
+.ring-track { stroke: var(--color-rule); stroke-width: 2.25; }
+.toast[data-state="failed"] .ring-track { stroke: oklch(86% 0.05 27); }
+.ring-fill { stroke-width: 2.25; stroke-dasharray: 1 1; stroke-dashoffset: calc(1 - var(--p, 0));
+  transform: rotate(-90deg); transform-origin: 12px 12px; transition: stroke-dashoffset 160ms linear; }
+.mark { stroke-width: 2.25; transform-origin: 12px 12px; }
+.mark-check { stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.toast[data-state="done"] .mark-check { stroke-dashoffset: 0; transition: stroke-dashoffset 220ms var(--ease-out) 170ms; }
+.mark-bang { opacity: 0; transform: scale(0.25); filter: blur(2px);
+  transition: opacity 240ms var(--ease-out), transform 240ms var(--ease-out), filter 240ms var(--ease-out); }
+.toast[data-state="failed"] .mark-bang { opacity: 1; transform: none; filter: none; }
+
+@media (max-width: 480px) {
+  .t-detail { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important; animation-timeline: auto !important; scroll-behavior: auto !important;
+  }
+  /* soften: toasts and text swaps become short fades, positions change in place */
+  .toast { transition: opacity 150ms ease !important; }
+  .toast[data-enter] { transform: translateY(var(--y)) scale(var(--s)); }
+  .toast[data-leaving] { transform: translateY(var(--y)) scale(var(--s)); }
+  .t-text, .t-text[data-changing] { transform: none; filter: none; transition: opacity 150ms ease !important; }
+  .mark-bang { transform: none; filter: none; }
+  /* keep: progress reports state */
+  .ring-fill { transition: stroke-dashoffset 160ms linear !important; }
+}
+@media (forced-colors: active) { .toast { border: 1px solid CanvasText; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="intro">
+    <h1>Every upload reports back</h1>
+    <p class="lead">Start a few uploads. Each one gets a notice in the corner that fills as it sends, says when it’s done, and holds on to a failure until you retry it.</p>
+  </header>
+
+  <div class="work">
+    <section class="drop" id="drop" aria-labelledby="drop-title">
+      <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></svg>
+      <h2 id="drop-title">Drop files here</h2>
+      <p>Or pick them from your computer. In this demo nothing leaves your machine: the upload is simulated with your file’s real name and size.</p>
+      <div class="drop-row">
+        <input class="file-input" id="files" type="file" multiple>
+        <label class="btn" for="files">Choose files</label>
+      </div>
+    </section>
+
+    <section class="demo" aria-labelledby="demo-title">
+      <h2 id="demo-title">Try each notice</h2>
+      <p>Every button runs a real sequence, so you see the notice change state rather than arrive finished.</p>
+      <ul class="triggers">
+        <li>
+          <button class="btn btn--quiet" type="button" data-demo="small">Upload a small file</button>
+          <p>Sends in about two seconds, turns into “uploaded”, then leaves on its own.</p>
+        </li>
+        <li>
+          <button class="btn btn--quiet" type="button" data-demo="large">Upload a large file</button>
+          <p>Stays in progress for about twenty seconds; the ring and the count fill as it goes.</p>
+        </li>
+        <li>
+          <button class="btn btn--quiet" type="button" data-demo="fail">Upload on a bad connection</button>
+          <p>Drops partway, moves to the front and waits. Retry carries on from where it stopped.</p>
+        </li>
+        <li>
+          <button class="btn btn--quiet" type="button" data-demo="batch">Upload four at once</button>
+          <p>Watch them stack. Hover, tap or tab into the stack to fan it out.</p>
+        </li>
+      </ul>
+      <div class="foot-actions">
+        <button class="btn btn--text" type="button" id="clear">Clear all notices</button>
+        <p class="hint"><kbd>Esc</kbd> folds the stack back up.</p>
+      </div>
+      <noscript><p>The notices need JavaScript to run.</p></noscript>
+    </section>
+  </div>
+</main>
+
+<section class="toaster" id="toaster" aria-label="Upload notices">
+  <ol id="toast-list"></ol>
+</section>
+<div class="sr-only" id="announce-polite" role="status" aria-live="polite"></div>
+<div class="sr-only" id="announce-alert" role="alert"></div>
+
+<template id="toast-tpl">
+  <li class="toast" data-state="uploading">
+    <div class="t-body">
+      <span class="t-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <circle class="ring-track" cx="12" cy="12" r="9.5"/>
+          <circle class="ring-fill" cx="12" cy="12" r="9.5" pathLength="1"/>
+          <path class="mark mark-check" pathLength="1" d="M8.2 12.4l2.6 2.6 5-5.4"/>
+          <g class="mark mark-bang"><path d="M12 7.6v5.2"/><path d="M12 16.2v.1"/></g>
+        </svg>
+      </span>
+      <div class="t-text">
+        <p class="t-title"></p>
+        <p class="t-detail"></p>
+        <p class="t-more"><button class="t-retry" type="button" hidden>Retry upload</button></p>
+      </div>
+      <div class="t-actions">
+        <button class="t-close" type="button" aria-label="Dismiss">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+    </div>
+  </li>
+</template>
+
+<script>
+(() => {
+  const toaster = document.getElementById('toaster');
+  const list = document.getElementById('toast-list');
+  const tpl = document.getElementById('toast-tpl');
+  const politeEl = document.getElementById('announce-polite');
+  const alertEl = document.getElementById('announce-alert');
+
+  const GAP = 14;            // px between fanned cards, and the deck step when folded
+  const DECK = 3;            // cards visible while folded
+  const DONE_LINGER = 5000;  // ms a finished notice stays, paused while you read
+  const EXIT_MS = 170;
+
+  const rm = matchMedia('(prefers-reduced-motion: reduce)');
+  let reduce = rm.matches;
+  rm.addEventListener('change', e => { reduce = e.matches; });
+
+  /** newest first; index 0 is the front of the deck */
+  let toasts = [];
+  let seq = 0;
+
+  // ---------- helpers ----------
+  const fmt = (bytes) => {
+    if (bytes < 1e6) return Math.max(1, Math.round(bytes / 1e3)) + ' KB';
+    if (bytes < 1e8) return (bytes / 1e6).toFixed(1) + ' MB';
+    if (bytes < 1e9) return Math.round(bytes / 1e6) + ' MB';
+    return (bytes / 1e9).toFixed(2) + ' GB';
+  };
+  const pct = (t) => Math.floor((t.sent / t.size) * 100);
+  const wait = (ms, signal) => new Promise((res, rej) => {
+    const h = setTimeout(res, ms);
+    signal?.addEventListener('abort', () => { clearTimeout(h); rej(new DOMException('aborted', 'AbortError')); }, { once: true });
+  });
+  const say = (el, text) => { el.textContent = ''; requestAnimationFrame(() => { el.textContent = text; }); };
+
+  // ---------- deck state ----------
+  let hovering = false, focusInside = false, tapOpen = false, escHeld = false;
+  const isExpanded = () => !escHeld && (hovering || focusInside || tapOpen);
+
+  let layoutQueued = false;
+  const queueLayout = () => { if (!layoutQueued) { layoutQueued = true; requestAnimationFrame(() => { layoutQueued = false; layout(); }); } };
+
+  function layout() {
+    const expanded = isExpanded() && toasts.length > 1;
+    toaster.toggleAttribute('data-expanded', expanded);
+    const maxH = window.innerHeight - 48;
+    const h0 = toasts[0] ? toasts[0].el.offsetHeight : 0;
+    let acc = 0;
+    toasts.forEach((t, i) => {
+      const h = t.el.offsetHeight;
+      let y, s, clip, hidden;
+      if (expanded) {
+        y = -acc; s = 1; clip = 0;
+        hidden = acc + h > maxH;
+        acc += h + GAP;
+      } else {
+        y = -i * GAP; s = 1 - i * 0.05; clip = Math.max(0, h - h0);
+        hidden = i >= DECK;
+      }
+      t.el.dataset.i = i;
+      t.el.style.setProperty('--y', y + 'px');
+      t.el.style.setProperty('--s', s);
+      t.el.style.setProperty('--clip', clip + 'px');
+      t.el.style.zIndex = String(100 - i);
+      t.el.toggleAttribute('data-hidden', hidden);
+      t.el.inert = hidden;
+    });
+    syncTimers();
+  }
+
+  // ---------- timers (finished notices leave; paused while the deck is open or the tab hidden) ----------
+  function syncTimers() {
+    const paused = isExpanded() || document.hidden;
+    toasts.forEach(t => {
+      if (t.state !== 'done') return;
+      if (paused && t.handle) { clearTimeout(t.handle); t.handle = null; t.remaining -= performance.now() - t.started; }
+      if (!paused && !t.handle) { t.started = performance.now(); t.handle = setTimeout(() => dismiss(t, false), Math.max(400, t.remaining)); }
+    });
+  }
+  document.addEventListener('visibilitychange', syncTimers);
+
+  // ---------- one notice ----------
+  function create(file) {
+    const el = tpl.content.firstElementChild.cloneNode(true);
+    const t = {
+      id: ++seq, el, name: file.name, size: file.size, sent: 0,
+      rate: file.rate, failAt: file.failAt ?? null, state: 'uploading',
+      remaining: DONE_LINGER, handle: null, started: 0, ctrl: null,
+      title: el.querySelector('.t-title'), detail: el.querySelector('.t-detail'),
+      text: el.querySelector('.t-text'), retry: el.querySelector('.t-retry'), close: el.querySelector('.t-close'),
+    };
+    t.title.textContent = 'Uploading ' + t.name;
+    renderProgress(t);
+    t.close.setAttribute('aria-label', 'Cancel upload of ' + t.name);
+    t.close.addEventListener('click', () => dismiss(t, true));
+    t.retry.setAttribute('aria-label', 'Retry ' + t.name);
+    t.retry.addEventListener('click', () => retry(t));
+
+    el.setAttribute('data-enter', '');
+    toasts.unshift(t);
+    list.prepend(el);
+    layout();
+    // two frames so the start position is painted before it travels in
+    requestAnimationFrame(() => requestAnimationFrame(() => el.removeAttribute('data-enter')));
+    new ResizeObserver(queueLayout).observe(el);
+    say(politeEl, 'Uploading ' + t.name);
+    run(t);
+    return t;
+  }
+
+  function renderProgress(t) {
+    const p = Math.min(1, t.sent / t.size);
+    t.el.style.setProperty('--p', p.toFixed(4));
+    t.detail.innerHTML = '<span class="num">' + pct(t) + '%</span>&ensp;' + fmt(t.sent) + ' of ' + fmt(t.size);
+  }
+
+  /** title and detail swap on one clock: old out fast with a little blur, new in after it */
+  function swapText(t, title, detailHTML, after) {
+    if (reduce) { t.title.textContent = title; t.detail.innerHTML = detailHTML; after?.(); return; }
+    t.text.setAttribute('data-changing', '');
+    setTimeout(() => {
+      t.title.textContent = title; t.detail.innerHTML = detailHTML; after?.();
+      requestAnimationFrame(() => t.text.removeAttribute('data-changing'));
+    }, 110);
+  }
+
+  // the simulated request: real time passes, bytes arrive in uneven chunks
+  async function run(t) {
+    t.ctrl = new AbortController();
+    const { signal } = t.ctrl;
+    try {
+      while (t.sent < t.size) {
+        await wait(120, signal);
+        const jitter = 0.6 + Math.random() * 0.8;
+        t.sent = Math.min(t.size, t.sent + t.rate * 0.12 * jitter);
+        if (t.failAt !== null && t.sent / t.size >= t.failAt) {
+          t.sent = Math.floor(t.size * t.failAt);
+          renderProgress(t);
+          throw new Error('connection');
+        }
+        renderProgress(t);
+      }
+      await wait(140, signal); // server confirms
+      finish(t);
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      fail(t);
+    }
+  }
+
+  function finish(t) {
+    t.state = 'done';
+    t.el.dataset.state = 'done';
+    t.el.style.setProperty('--p', '1');
+    t.close.setAttribute('aria-label', 'Dismiss');
+    swapText(t, t.name + ' uploaded', fmt(t.size) + ' saved to your files.');
+    say(politeEl, t.name + ' uploaded');
+    layout();
+  }
+
+  function fail(t) {
+    t.state = 'failed';
+    t.el.dataset.state = 'failed';
+    t.close.setAttribute('aria-label', 'Dismiss failed upload of ' + t.name);
+    const at = pct(t);
+    swapText(t, 'Couldn’t upload ' + t.name,
+      'The connection dropped at <span class="num">' + at + '%</span>. Retry carries on from ' + fmt(t.sent) + '.',
+      () => { if (t.state === 'failed') t.retry.hidden = false; });
+    // a failure moves to the front of the deck
+    toasts = [t, ...toasts.filter(x => x !== t)];
+    layout();
+    say(alertEl, 'Couldn’t upload ' + t.name + '. Connection dropped at ' + at + ' percent. Retry is in the notices.');
+  }
+
+  function retry(t) {
+    const hadFocus = t.el.contains(document.activeElement);
+    t.failAt = null;
+    t.state = 'uploading';
+    t.el.dataset.state = 'uploading';
+    t.retry.hidden = true;
+    t.close.setAttribute('aria-label', 'Cancel upload of ' + t.name);
+    if (hadFocus) t.close.focus();
+    swapText(t, 'Uploading ' + t.name, '<span class="num">' + pct(t) + '%</span>&ensp;picking up from ' + fmt(t.sent));
+    say(politeEl, 'Retrying ' + t.name);
+    setTimeout(() => run(t), 260);
+  }
+
+  function dismiss(t, byUser) {
+    if (!toasts.includes(t)) return;
+    t.ctrl?.abort();
+    clearTimeout(t.handle);
+    const idx = toasts.indexOf(t);
+    const hadFocus = t.el.contains(document.activeElement);
+    toasts = toasts.filter(x => x !== t);
+    t.el.setAttribute('data-leaving', '');
+    t.el.inert = true;
+    layout();
+    setTimeout(() => t.el.remove(), reduce ? 160 : EXIT_MS + 30);
+    if (hadFocus) {
+      const next = toasts[Math.min(idx, toasts.length - 1)];
+      if (next) next.close.focus();
+      else document.querySelector('[data-demo]').focus();
+    }
+    if (byUser && t.state === 'uploading') say(politeEl, 'Upload of ' + t.name + ' cancelled');
+  }
+
+  // ---------- deck interaction ----------
+  toaster.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { hovering = true; layout(); } });
+  toaster.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') { hovering = false; escHeld = false; layout(); } });
+  toaster.addEventListener('focusin', () => { focusInside = true; layout(); });
+  toaster.addEventListener('focusout', e => {
+    if (!toaster.contains(e.relatedTarget)) { focusInside = false; escHeld = false; queueLayout(); }
+  });
+  // touch has no hover: a tap on a card opens the deck, a tap elsewhere folds it
+  toaster.addEventListener('click', e => {
+    if (e.target.closest('button')) return;
+    if (!hovering) { tapOpen = !tapOpen; layout(); }
+  });
+  document.addEventListener('pointerdown', e => {
+    if (tapOpen && !toaster.contains(e.target)) { tapOpen = false; layout(); }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && isExpanded()) { escHeld = true; tapOpen = false; layout(); }
+  });
+  window.addEventListener('resize', queueLayout);
+
+  // ---------- demo triggers ----------
+  const MB = 1e6;
+  const demos = {
+    small: () => create({ name: 'signed-lease.pdf', size: 1.8 * MB, rate: 1.1 * MB }),
+    large: () => create({ name: 'interview-raw.mov', size: 212 * MB, rate: 10.5 * MB }),
+    fail:  () => create({ name: 'site-photos-march.zip', size: 48 * MB, rate: 22 * MB, failAt: 0.38 + Math.random() * 0.2 }),
+    batch: () => {
+      const batch = [
+        { name: 'floor-plan-v4.dwg', size: 6.4 * MB, rate: 2.6 * MB },
+        { name: 'kitchen-render.png', size: 3.1 * MB, rate: 1.4 * MB },
+        { name: 'quote-from-supplier.xlsx', size: 0.42 * MB, rate: 0.12 * MB, failAt: 0.55 },
+        { name: 'walkthrough.mp4', size: 96 * MB, rate: 9 * MB },
+      ];
+      batch.forEach((f, i) => setTimeout(() => create(f), i * 180));
+    },
+  };
+  document.querySelectorAll('[data-demo]').forEach(btn => btn.addEventListener('click', () => demos[btn.dataset.demo]()));
+  document.getElementById('clear').addEventListener('click', () => [...toasts].forEach(t => dismiss(t, false)));
+
+  // ---------- real files, simulated sending ----------
+  const fromFiles = (files) => [...files].forEach((f, i) => {
+    const size = Math.max(f.size, 2000);
+    const seconds = Math.min(14, 1.4 + size / (12 * MB));
+    setTimeout(() => create({ name: f.name, size, rate: size / seconds }), i * 180);
+  });
+  const input = document.getElementById('files');
+  input.addEventListener('change', () => { fromFiles(input.files); input.value = ''; });
+  const drop = document.getElementById('drop');
+  ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.setAttribute('data-over', ''); }));
+  ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); if (ev === 'drop' || !drop.contains(e.relatedTarget)) drop.removeAttribute('data-over'); }));
+  drop.addEventListener('drop', e => { if (e.dataTransfer?.files?.length) fromFiles(e.dataTransfer.files); });
+  window.addEventListener('dragover', e => e.preventDefault());
+  window.addEventListener('drop', e => e.preventDefault());
+})();
+</script>
+</body>
+</html>

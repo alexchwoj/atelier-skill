@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rallycross HUD Mock</title>
+<meta name="description" content="A DiRT Rally 2.0 rallycross HUD mock over a gameplay capture: position, standings with joker state, lap timing, track map with the joker branch, and the rev dial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,500;1,700&family=Roboto+Condensed:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* DiRT Rally 2.0 language: red on charcoal, white figures, condensed bold italic */
+  --you: #ff003c;            /* one meaning: the player */
+  --charcoal: #2d2d34;
+  --plate: rgb(22 21 27 / .64);
+  --plate-strong: rgb(22 21 27 / .78);
+  --ink: #f5f5f7;
+  --ink-dim: rgb(245 245 247 / .66);
+  --ink-faint: rgb(245 245 247 / .34);
+  --gain: #3ee07f;           /* delta: faster, always with "−" */
+  --loss: #ff6a4d;           /* delta: slower, always with "+" */
+  --joker: #ffc61a;          /* joker: filled = taken, outline = to take */
+  --damage: #ff8a1f;
+
+  --f-fig: "Barlow Condensed", "Roboto Condensed", system-ui, sans-serif;
+  --f-ui: "Roboto Condensed", system-ui, sans-serif;
+
+  /* sizes in stage height units: 1cqh = 10.8px at 1080p */
+  --t-label: 1.7cqh;   /* 18px */
+  --t-row: 2.15cqh;    /* 23px */
+  --t-row-near: 2.6cqh;/* 28px */
+  --t-value: 2.8cqh;   /* 30px */
+  --t-time: 4.6cqh;    /* 50px */
+  --t-primary: 8.4cqh; /* 91px */
+
+  --shadow: 0 1px 2px rgb(0 0 0 / .7), 0 0 12px rgb(0 0 0 / .4);
+  --slant: -12deg;
+  --ease-in: cubic-bezier(0, 0, .2, 1);
+  --ease-out: cubic-bezier(.4, 0, 1, 1);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #050506; overflow: clip; }
+body { display: grid; place-items: center; font-family: var(--f-ui); color: var(--ink); font-synthesis: none; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.stage { position: relative; width: min(100vw, 177.78svh); aspect-ratio: 16 / 9; container-type: size; overflow: hidden; }
+.frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hud { position: absolute; inset: 5cqh 5cqw; }
+.fig { font-family: var(--f-fig); font-style: italic; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+.lbl { font-family: var(--f-fig); font-style: italic; font-weight: 500; font-size: var(--t-label); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-dim); line-height: 1; }
+
+/* ---------- top left: position, lap, joker, standings ---------- */
+.race { position: absolute; left: 0; top: 0; display: grid; gap: 1.1cqh; width: 30cqh; }
+.posbar { display: flex; align-items: stretch; height: 10.4cqh; }
+.pos { background: var(--you); transform: skewX(var(--slant)); display: grid; place-items: center; padding: 0 2.2cqh 0 2.4cqh; margin-left: 1.1cqh; }
+.pos > span { transform: skewX(calc(var(--slant) * -1)); display: flex; align-items: baseline; gap: .3cqh; }
+.pos .n { font-size: var(--t-primary); }
+.pos .of { font-size: 3cqh; opacity: .82; }
+.lapbox { flex: 1; background: var(--plate); transform: skewX(var(--slant)); margin-left: .5cqh; display: grid; align-content: center; gap: 1cqh; padding: 0 1.4cqh 0 2cqh; }
+.lapbox > * { transform: skewX(calc(var(--slant) * -1)); }
+.lap { display: flex; align-items: baseline; gap: .8cqh; }
+.lap .v { font-size: 3.6cqh; }
+.lap .v small { font-size: 2.4cqh; color: var(--ink-dim); }
+.jk { display: flex; align-items: center; gap: .8cqh; }
+.jk .state { font-family: var(--f-fig); font-style: italic; font-weight: 700; font-size: 2cqh; text-transform: uppercase; letter-spacing: .03em; }
+.jtag { width: 2.3cqh; height: 2.3cqh; display: inline-grid; place-items: center; border: .28cqh solid var(--joker); color: var(--joker); font-family: var(--f-fig); font-style: italic; font-weight: 700; font-size: 1.6cqh; line-height: 1; flex-shrink: 0; }
+.jtag.done { background: var(--joker); color: #1a1600; }
+
+.tower { background: var(--plate); padding: .8cqh 0; margin-left: 0; clip-path: polygon(0 0, 100% 0, calc(100% - 1.6cqh) 100%, 0 100%); }
+.row { display: grid; grid-template-columns: 3.4cqh 3.2cqh 1fr auto; align-items: center; height: 3.1cqh; padding: 0 2.6cqh 0 1.2cqh; font-size: var(--t-row); position: relative; }
+.row .p { font-family: var(--f-fig); font-style: italic; font-weight: 700; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+.row .nm { font-weight: 700; letter-spacing: .04em; }
+.row .gap { font-family: var(--f-fig); font-style: italic; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; color: var(--ink-dim); }
+.row .jtag { width: 2cqh; height: 2cqh; font-size: 1.35cqh; border-width: .24cqh; }
+.row.near { height: 3.7cqh; font-size: var(--t-row-near); }
+.row.near .gap { color: var(--ink); }
+.row.me { background: linear-gradient(90deg, rgb(255 0 60 / .34), rgb(255 0 60 / .08)); }
+.row.me::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: .7cqh; background: var(--you); }
+.row.me .p, .row.me .nm { color: var(--ink); }
+.row.me .gap { color: var(--ink-faint); }
+
+/* ---------- top right: lap timing ---------- */
+.timing { position: absolute; right: 0; top: 0; background: var(--plate); padding: 1.3cqh 2.2cqh 1.4cqh 3.4cqh; clip-path: polygon(1.8cqh 0, 100% 0, 100% 100%, 0 100%); display: grid; gap: .9cqh; justify-items: end; min-width: 27cqh; }
+.timing .cur { font-size: var(--t-time); }
+.trow { display: flex; align-items: baseline; gap: 1.2cqh; }
+.trow .v { font-size: var(--t-value); }
+.delta { font-size: var(--t-value); padding: .2cqh 1cqh; background: rgb(0 0 0 / .35); }
+.delta.gain { color: var(--gain); }
+.delta.loss { color: var(--loss); }
+
+/* ---------- top centre: momentary calls ---------- */
+.call { position: absolute; left: 50%; top: 2cqh; translate: -50% 0; display: flex; align-items: center; gap: 1.6cqh; opacity: 0; transform: translateY(-1.2cqh); transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out); pointer-events: none; }
+.call.on { opacity: 1; transform: none; transition: opacity 200ms var(--ease-in), transform 200ms var(--ease-in); }
+.note { position: relative; width: 10cqh; height: 10cqh; border-radius: 1.8cqh; background: rgb(74 6 24 / .62); border: .55cqh solid var(--joker); display: grid; place-items: center; }
+.note svg { width: 7cqh; height: 7cqh; overflow: visible; }
+.note .badge { position: absolute; left: -1.2cqh; bottom: -1.2cqh; background: var(--joker); color: #1a1600; font-family: var(--f-fig); font-style: italic; font-weight: 700; font-size: 2.6cqh; line-height: 1; padding: .3cqh .8cqh; transform: skewX(var(--slant)); }
+.calltext { display: grid; gap: .6cqh; text-shadow: var(--shadow); }
+.calltext .h { font-family: var(--f-fig); font-style: italic; font-weight: 700; font-size: 4.2cqh; text-transform: uppercase; line-height: 1; }
+.calltext .s { font-family: var(--f-fig); font-style: italic; font-weight: 700; font-size: 2.4cqh; text-transform: uppercase; color: var(--joker); letter-spacing: .04em; line-height: 1; }
+.calltext .s span { color: var(--ink); font-variant-numeric: tabular-nums; }
+.flagbar { position: absolute; left: 50%; top: 3cqh; translate: -50% 0; display: flex; align-items: stretch; opacity: 0; transform: translateY(-1.2cqh); transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out); }
+.flagbar.on { opacity: 1; transform: none; transition: opacity 200ms var(--ease-in), transform 200ms var(--ease-in); }
+.flagbar .t { background: var(--plate-strong); transform: skewX(var(--slant)); padding: 1cqh 3cqh; }
+.flagbar .t span { display: block; transform: skewX(calc(var(--slant) * -1)); font-family: var(--f-fig); font-style: italic; font-weight: 700; font-size: 4.4cqh; text-transform: uppercase; line-height: 1; }
+.flagbar .j { background: var(--joker); color: #1a1600; transform: skewX(var(--slant)); padding: 0 1.8cqh; display: grid; place-items: center; margin-left: .5cqh; }
+.flagbar .j span { transform: skewX(calc(var(--slant) * -1)); font-family: var(--f-fig); font-style: italic; font-weight: 700; font-size: 2.2cqh; text-transform: uppercase; }
+
+/* ---------- bottom left: track map ---------- */
+.map { position: absolute; left: 0; bottom: 0; width: 26cqh; }
+.map svg { width: 100%; height: auto; display: block; overflow: visible; }
+.map .under { fill: none; stroke: rgb(0 0 0 / .55); stroke-width: 9; stroke-linejoin: round; }
+.map .line { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linejoin: round; }
+.map .jline { fill: none; stroke: var(--joker); stroke-width: 3.5; stroke-dasharray: 6 5; stroke-linecap: round; }
+.map .junder { fill: none; stroke: rgb(0 0 0 / .55); stroke-width: 8; }
+.map .car { fill: var(--ink); stroke: #111; stroke-width: 2; }
+.map .car.jok { fill: var(--joker); }
+.map .me { fill: var(--you); stroke: var(--ink); stroke-width: 2.5; }
+
+/* ---------- bottom right: dial ---------- */
+.dash { position: absolute; right: 0; bottom: 0; display: flex; align-items: flex-end; gap: 1.6cqh; }
+.dial { width: 26cqh; height: 26cqh; position: relative; }
+.dial svg { width: 100%; height: 100%; display: block; }
+.dial .face { fill: rgb(18 17 22 / .66); }
+.dial .track { fill: none; stroke: rgb(255 255 255 / .16); stroke-width: 8; }
+.dial .rev { fill: none; stroke: var(--ink); stroke-width: 8; }
+.dial .red { fill: none; stroke: var(--you); stroke-width: 8; }
+.dial .boost-t { fill: none; stroke: rgb(255 255 255 / .14); stroke-width: 4; }
+.dial .boost { fill: none; stroke: var(--ink-dim); stroke-width: 4; }
+.dial .tick { stroke: var(--ink-dim); stroke-width: 2; }
+.dial .num { fill: var(--ink-dim); font-family: var(--f-fig); font-style: italic; font-weight: 700; font-size: 17px; text-anchor: middle; dominant-baseline: central; }
+.dial .num.rl { fill: var(--you); }
+.dial .needle { stroke: var(--you); stroke-width: 5; stroke-linecap: square; }
+.dial .centre { position: absolute; inset: 0; display: grid; place-items: center; }
+.gearrow { display: flex; align-items: center; gap: .8cqh; margin-top: -.6cqh; }
+.gear { background: var(--charcoal); transform: skewX(var(--slant)); padding: .5cqh 1.1cqh; box-shadow: inset 0 0 0 .25cqh rgb(255 255 255 / .18); }
+.gear span { display: block; transform: skewX(calc(var(--slant) * -1)); font-size: 6.2cqh; }
+.spd { display: grid; justify-items: start; gap: .3cqh; }
+.spd .v { font-size: 3.5cqh; }
+.spd .v .lead { color: var(--ink-faint); }
+.spd .u { font-size: 1.6cqh; }
+.dial .under { position: absolute; left: 50%; bottom: 3.6cqh; translate: -50% 0; }
+
+.dmg { display: grid; justify-items: center; gap: .6cqh; margin-bottom: 1.2cqh; opacity: 0; transform: translateX(1cqh); transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out); }
+.dmg.on { opacity: 1; transform: none; transition: opacity 200ms var(--ease-in), transform 200ms var(--ease-in); }
+.dmg svg { width: 5.4cqh; height: auto; filter: drop-shadow(0 1px 2px rgb(0 0 0 / .7)); }
+.dmg .body { fill: rgb(18 17 22 / .66); stroke: var(--ink); stroke-width: 2; }
+.dmg .z { fill: none; }
+.dmg .z.hit { fill: url(#hatch); stroke: var(--damage); stroke-width: 2; }
+.dmg .lbl { color: var(--damage); text-shadow: var(--shadow); text-align: center; line-height: 1.15; }
+
+/* meta: contact edge */
+.edge { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(ellipse at center, transparent 58%, rgb(255 40 30 / .45) 100%); }
+.edge.flash { animation: edge 650ms var(--ease-out) 1; }
+@keyframes edge { 0% { opacity: 1; } 100% { opacity: 0; } }
+
+/* ---------- mock controls (hidden with &bare) ---------- */
+.mock { position: fixed; left: 50%; bottom: 12px; translate: -50% 0; z-index: 10; display: flex; gap: 4px; padding: 4px; background: rgb(12 12 15 / .86); border: 1px solid rgb(255 255 255 / .14); font-family: var(--f-ui); }
+.mock button { font: 500 14px/1 var(--f-ui); color: var(--ink-dim); background: transparent; border: 0; padding: 10px 14px; min-height: 36px; cursor: pointer; transition: background-color 100ms, color 100ms; }
+.mock button:hover { color: var(--ink); background: rgb(255 255 255 / .08); }
+.mock button[aria-pressed="true"] { color: var(--ink); background: var(--you); }
+.mock button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.mock kbd { font: inherit; opacity: .6; margin-right: 6px; }
+.bare .mock { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .call, .call.on, .flagbar, .flagbar.on, .dmg, .dmg.on { transform: none; transition: opacity 120ms linear; }
+  .edge.flash { animation: none; }
+}
+</style>
+</head>
+<body>
+<main class="stage" id="stage">
+  <img class="frame" src="capture.jpg" alt="" width="1920" height="1080">
+  <h1 class="sr">DiRT Rally 2.0 rallycross HUD mock</h1>
+  <div class="edge" id="edge" aria-hidden="true"></div>
+
+  <div class="hud">
+    <section class="race" aria-label="Race position and standings">
+      <div class="posbar">
+        <div class="pos"><span><b class="fig n" id="pos">4</b><span class="fig of" id="of">/6</span></span></div>
+        <div class="lapbox">
+          <div class="lap"><span class="lbl">Lap</span><span class="fig v" id="lap">3<small>/4</small></span></div>
+          <div class="jk"><span class="jtag" id="myj">J</span><span class="state" id="myjs">To take</span></div>
+        </div>
+      </div>
+      <div class="tower" id="tower" role="list" aria-label="Standings, gap to you"></div>
+    </section>
+
+    <section class="timing" aria-label="Lap timing">
+      <span class="fig cur" id="cur">0:18.420</span>
+      <div class="trow"><span class="lbl">Best</span><span class="fig v" id="best">0:43.906</span></div>
+      <div class="trow"><span class="lbl">Delta</span><span class="fig delta gain" id="delta">−0.214</span></div>
+    </section>
+
+    <div class="call" id="call" role="status">
+      <div class="note" aria-hidden="true">
+        <svg viewBox="0 0 70 70">
+          <path d="M44 62 C44 40 42 28 26 22" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="10" stroke-linecap="round"/>
+          <path d="M44 62 C44 40 42 28 26 22" fill="none" stroke="#f5f5f7" stroke-width="6" stroke-linecap="round"/>
+          <path d="M30 10 L14 21 L30 33 Z" fill="#f5f5f7" stroke="#000" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M54 62 C54 46 54 38 50 30" fill="none" stroke="#f5f5f7" stroke-opacity=".45" stroke-width="4" stroke-linecap="round" stroke-dasharray="5 5"/>
+        </svg>
+        <span class="badge">J</span>
+      </div>
+      <div class="calltext">
+        <span class="h">Joker split</span>
+        <span class="s">Keep left <span id="calld">120 m</span></span>
+      </div>
+    </div>
+
+    <div class="flagbar" id="flagbar" role="status">
+      <div class="t"><span>Final lap</span></div>
+      <div class="j"><span>Joker taken</span></div>
+    </div>
+
+    <figure class="map" aria-label="Track map, joker lap dashed" style="margin:0">
+      <svg viewBox="0 0 220 170" id="mapsvg">
+        <path class="junder" d="M60 128 C70 156 150 160 172 124"/>
+        <path class="under" id="trackU" d="M60 128 L160 128 C200 128 206 96 186 78 L146 44 C126 28 98 30 82 46 L50 80 C36 94 28 110 36 120 C42 127 50 128 60 128 Z"/>
+        <path class="jline" d="M60 128 C70 156 150 160 172 124"/>
+        <path class="line" id="track" d="M60 128 L160 128 C200 128 206 96 186 78 L146 44 C126 28 98 30 82 46 L50 80 C36 94 28 110 36 120 C42 127 50 128 60 128 Z"/>
+        <g id="finish"><rect x="107" y="121" width="4" height="4" fill="#f5f5f7"/><rect x="111" y="121" width="4" height="4" fill="#111"/><rect x="107" y="125" width="4" height="4" fill="#111"/><rect x="111" y="125" width="4" height="4" fill="#f5f5f7"/><rect x="107" y="129" width="4" height="4" fill="#f5f5f7"/><rect x="111" y="129" width="4" height="4" fill="#111"/></g>
+        <g id="cars"></g>
+      </svg>
+    </figure>
+
+    <section class="dash" aria-label="Car">
+      <div class="dmg" id="dmg">
+        <svg viewBox="0 0 44 78" aria-hidden="true">
+          <defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#ff8a1f" fill-opacity=".35"/><rect width="2.2" height="5" fill="#ff8a1f"/></pattern></defs>
+          <rect x="1" y="12" width="5" height="13" rx="1.5" fill="#f5f5f7"/><rect x="38" y="12" width="5" height="13" rx="1.5" fill="#f5f5f7"/><rect x="1" y="54" width="5" height="13" rx="1.5" fill="#f5f5f7"/><rect x="38" y="54" width="5" height="13" rx="1.5" fill="#f5f5f7"/><rect class="body" x="5" y="3" width="34" height="72" rx="9"/>
+          <path class="z hit" d="M6 22 L6 12 Q6 5 13 5 L22 5 L22 22 Z"/>
+          <path class="z" d="M22 5 L31 5 Q38 5 38 12 L38 22 L22 22 Z"/>
+          <rect x="10" y="26" width="24" height="18" rx="2" fill="none" stroke="#f5f5f7" stroke-opacity=".5" stroke-width="1.5"/>
+        </svg>
+        <span class="lbl">Front left</span>
+      </div>
+      <div class="dial">
+        <svg viewBox="0 0 240 240" id="dialsvg" aria-hidden="true">
+          <circle class="face" cx="120" cy="120" r="118"/>
+          <path class="track" id="revTrack"/>
+          <path class="red" id="revRed"/>
+          <path class="rev" id="revFill"/>
+          <path class="boost-t" id="boostTrack"/>
+          <path class="boost" id="boostFill"/>
+          <g id="ticks"></g>
+          <line class="needle" id="needle"/>
+        </svg>
+        <div class="centre">
+          <div class="gearrow">
+            <div class="gear"><span class="fig" id="gear">3</span></div>
+            <div class="spd"><span class="fig v" id="spd"><span class="lead">0</span>87</span><span class="lbl u">km/h</span></div>
+          </div>
+        </div>
+        <span class="lbl under" style="font-size:1.5cqh">x1000 rpm</span>
+      </div>
+    </section>
+  </div>
+</main>
+
+<nav class="mock" aria-label="Mock states">
+  <button type="button" data-state="split"><kbd>1</kbd>Joker split ahead</button>
+  <button type="button" data-state="contact"><kbd>2</kbd>After contact</button>
+  <button type="button" data-state="final"><kbd>3</kbd>Final lap</button>
+</nav>
+
+<script>
+(() => {
+  const STATES = {
+    split: {
+      pos: 4, lap: 3, joker: false, lapStart: 18.42, best: '0:43.906', delta: -0.214,
+      gear: 3, kmh: 87, rpm: 6300, boost: .72, call: true, flag: false, dmg: false,
+      me: .955,
+      field: [
+        { p: 1, n: 'MOR', gap: '−4.1', j: true,  at: .30 },
+        { p: 2, n: 'EKL', gap: '−2.7', j: false, at: .17 },
+        { p: 3, n: 'BRA', gap: '−0.6', j: false, at: .02 },
+        { p: 4, n: 'YOU', gap: '',     j: false, me: true },
+        { p: 5, n: 'KAS', gap: '+0.9', j: true,  at: .90 },
+        { p: 6, n: 'DUV', gap: '+3.8', j: true,  at: .80 },
+      ],
+    },
+    contact: {
+      pos: 5, lap: 3, joker: false, lapStart: 24.86, best: '0:43.906', delta: 0.618,
+      gear: 2, kmh: 54, rpm: 4700, boost: .35, call: false, flag: false, dmg: true,
+      me: .26,
+      field: [
+        { p: 1, n: 'MOR', gap: '−5.0', j: true,  at: .52 },
+        { p: 2, n: 'EKL', gap: '−3.3', j: true,  at: .44 },
+        { p: 3, n: 'BRA', gap: '−1.2', j: false, at: .36 },
+        { p: 4, n: 'KAS', gap: '−0.4', j: true,  at: .30 },
+        { p: 5, n: 'YOU', gap: '',     j: false, me: true },
+        { p: 6, n: 'DUV', gap: '+1.9', j: true,  at: .12 },
+      ],
+    },
+    final: {
+      pos: 3, lap: 4, joker: true, lapStart: 2.11, best: '0:43.791', delta: -0.105,
+      gear: 4, kmh: 112, rpm: 7400, boost: .95, call: false, flag: true, dmg: false,
+      me: .05,
+      field: [
+        { p: 1, n: 'MOR', gap: '−3.6', j: true, at: .22 },
+        { p: 2, n: 'KAS', gap: '−0.8', j: true, at: .09 },
+        { p: 3, n: 'YOU', gap: '',     j: true, me: true },
+        { p: 4, n: 'BRA', gap: '+0.5', j: true, at: .99 },
+        { p: 5, n: 'EKL', gap: '+2.2', j: true, at: .93 },
+        { p: 6, n: 'DUV', gap: '+4.4', j: true, at: .84 },
+      ],
+    },
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const NS = 'http://www.w3.org/2000/svg';
+
+  /* dial geometry: 0 to 8 (x1000) over 270 degrees, from bottom-left clockwise */
+  const C = 120, R = 90, RB = 76, A0 = 135, SWEEP = 270, MAX = 8000, REDLINE = 7200;
+  const pt = (r, deg) => { const a = deg * Math.PI / 180; return [C + r * Math.cos(a), C + r * Math.sin(a)]; };
+  const arc = (r, d0, d1) => {
+    const [x0, y0] = pt(r, d0), [x1, y1] = pt(r, d1);
+    return `M${x0.toFixed(2)} ${y0.toFixed(2)} A${r} ${r} 0 ${d1 - d0 > 180 ? 1 : 0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
+  };
+  const ang = (rpm) => A0 + SWEEP * Math.min(rpm, MAX) / MAX;
+  $('revTrack').setAttribute('d', arc(R, A0, A0 + SWEEP));
+  $('revRed').setAttribute('d', arc(R, ang(REDLINE), A0 + SWEEP));
+  $('boostTrack').setAttribute('d', arc(RB, 150, 240));
+  const ticks = $('ticks');
+  for (let k = 0; k <= 8; k++) {
+    const d = ang(k * 1000);
+    const [x0, y0] = pt(R - 7, d), [x1, y1] = pt(R + 6, d), [tx, ty] = pt(R + 19, d);
+    const l = document.createElementNS(NS, 'line');
+    Object.entries({ x1: x0, y1: y0, x2: x1, y2: y1, class: 'tick' }).forEach(([a, v]) => l.setAttribute(a, v));
+    const t = document.createElementNS(NS, 'text');
+    Object.entries({ x: tx, y: ty, class: k * 1000 >= REDLINE ? 'num rl' : 'num' }).forEach(([a, v]) => t.setAttribute(a, v));
+    t.textContent = k;
+    ticks.append(l, t);
+  }
+
+  const track = $('track');
+  const L = track.getTotalLength();
+  const at = (f) => track.getPointAtLength(((f % 1) + 1) % 1 * L);
+
+  let lapStart = 0, t0 = performance.now(), raf;
+  const fmt = (s) => { const m = Math.floor(s / 60); const r = (s - m * 60).toFixed(3).padStart(6, '0'); return `${m}:${r}`; };
+  const tick = () => { $('cur').textContent = fmt(lapStart + (performance.now() - t0) / 1000); raf = requestAnimationFrame(tick); };
+
+  function apply(name) {
+    const s = STATES[name] || STATES.split;
+    $('pos').textContent = s.pos;
+    $('lap').innerHTML = `${s.lap}<small>/4</small>`;
+    $('myj').classList.toggle('done', s.joker);
+    $('myjs').textContent = s.joker ? 'Taken' : 'To take';
+    $('best').textContent = s.best;
+    const d = $('delta');
+    d.textContent = (s.delta < 0 ? '−' : '+') + Math.abs(s.delta).toFixed(3);
+    d.className = 'fig delta ' + (s.delta < 0 ? 'gain' : 'loss');
+
+    const me = s.field.findIndex((r) => r.me);
+    $('tower').innerHTML = s.field.map((r, i) => {
+      const near = Math.abs(i - me) === 1;
+      return `<div class="row${r.me ? ' me' : ''}${near ? ' near' : ''}" role="listitem">
+        <span class="p">${r.p}</span>
+        <span class="jtag${r.j ? ' done' : ''}" aria-label="${r.j ? 'Joker taken' : 'Joker to take'}">J</span>
+        <span class="nm">${r.n}</span>
+        <span class="gap">${r.gap}</span></div>`;
+    }).join('');
+
+    const cars = $('cars');
+    cars.innerHTML = '';
+    s.field.filter((r) => !r.me).forEach((r) => {
+      const p = at(r.at);
+      const c = document.createElementNS(NS, 'circle');
+      Object.entries({ cx: p.x, cy: p.y, r: 5, class: 'car' }).forEach(([a, v]) => c.setAttribute(a, v));
+      cars.append(c);
+    });
+    const p = at(s.me);
+    const dm = document.createElementNS(NS, 'path');
+    dm.setAttribute('d', `M${p.x} ${p.y - 9} L${p.x + 8} ${p.y} L${p.x} ${p.y + 9} L${p.x - 8} ${p.y} Z`);
+    dm.setAttribute('class', 'me');
+    cars.append(dm);
+
+    $('gear').textContent = s.gear;
+    const sp = String(s.kmh).padStart(3, '0');
+    const lead = sp.match(/^0*/)[0].slice(0, 2);
+    $('spd').innerHTML = `<span class="lead">${lead}</span>${sp.slice(lead.length)}`;
+    $('revFill').setAttribute('d', arc(R, A0, ang(s.rpm)));
+    $('boostFill').setAttribute('d', arc(RB, 150, 150 + 90 * s.boost));
+    const [nx0, ny0] = pt(R - 12, ang(s.rpm)), [nx1, ny1] = pt(R + 8, ang(s.rpm));
+    Object.entries({ x1: nx0, y1: ny0, x2: nx1, y2: ny1 }).forEach(([a, v]) => $('needle').setAttribute(a, v));
+
+    $('call').classList.toggle('on', s.call);
+    $('flagbar').classList.toggle('on', s.flag);
+    $('dmg').classList.toggle('on', s.dmg);
+    const edge = $('edge');
+    edge.classList.remove('flash');
+    if (s.dmg) { void edge.offsetWidth; edge.classList.add('flash'); }
+
+    lapStart = s.lapStart; t0 = performance.now();
+    cancelAnimationFrame(raf); tick();
+
+    document.querySelectorAll('.mock button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.state === name)));
+  }
+
+  const q = new URLSearchParams(location.search);
+  if (q.has('bare')) document.body.classList.add('bare');
+  let current = STATES[q.get('state')] ? q.get('state') : 'split';
+  apply(current);
+
+  document.querySelectorAll('.mock button').forEach((b) => b.addEventListener('click', () => apply(current = b.dataset.state)));
+  addEventListener('keydown', (e) => {
+    const k = { '1': 'split', '2': 'contact', '3': 'final' }[e.key];
+    if (k) apply(current = k);
+  });
+})();
+</script>
+</body>
+</html>

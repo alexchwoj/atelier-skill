@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raid Inventory Mock</title>
+<meta name="description" content="A 16:9 HTML/CSS mock of an extraction shooter's in-raid inventory: equipment, rig, pockets, backpack and pouch grids, and the quick use bar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #000;
+  --plate: rgba(8, 9, 9, .62);
+  --plate-2: rgba(14, 15, 15, .78);
+  --cell: rgba(10, 11, 11, .72);
+  --line: rgba(160, 160, 150, .16);
+  --line-2: rgba(160, 160, 150, .28);
+  --tab: #121414;
+  --tab-hi: #c5c5bb;
+  --text: #e6e4dc;
+  --text-2: #a3a196;
+  --text-3: #6f6d65;
+  --tan: #8d7a55;
+  --tan-hi: #c9b27e;
+  --armor: #e8862a;
+  --res: #e0463c;
+  --hp: #8bc34a;
+  --water: #4fa3e0;
+  --energy: #e6c33c;
+  --t-violet: rgba(74, 48, 96, .62);
+  --t-red: rgba(96, 26, 24, .62);
+  --t-olive: rgba(62, 66, 34, .62);
+  --t-key: rgba(92, 82, 30, .55);
+  --t-ammo: rgba(88, 56, 26, .58);
+  --t-grey: rgba(46, 48, 48, .62);
+
+  --ease-in: cubic-bezier(0, 0, .2, 1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); overflow: clip; }
+body { display: grid; place-items: center; color: var(--text); font-family: "Saira Semi Condensed", "Arial Narrow", sans-serif; }
+::selection { background: var(--tan); color: #000; }
+.sr { position: absolute; width: calc(var(--u)*1); height: calc(var(--u)*1); overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; cursor: pointer; text-align: inherit; }
+:focus-visible { outline: calc(var(--u)*2) solid var(--tan-hi); outline-offset: calc(var(--u)*1); }
+
+.stage { position: relative; width: min(100vw, 177.78svh); aspect-ratio: 16 / 9; container-type: size; overflow: hidden; background: #050505; --u: calc(100cqw / 1920); --c: calc(var(--u)*56); }
+.frame { position: absolute; inset: calc(var(--u)*-40); width: calc(100% + calc(var(--u)*80)); height: calc(100% + calc(var(--u)*80)); object-fit: cover; filter: blur(calc(var(--u)*20)) brightness(.55) saturate(.75); }
+.shade { position: absolute; inset: 0; background:
+  radial-gradient(ellipse 70% 80% at 30% 50%, rgba(0,0,0,.25), rgba(0,0,0,.6)),
+  linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.15) 30%, rgba(0,0,0,.45)); }
+.ui { position: absolute; inset: 0; font-size: calc(var(--u)*13); line-height: 1.2; }
+.abs { position: absolute; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* top bar */
+.topbar { position: absolute; left: 0; right: 0; top: 0; height: calc(var(--u)*46); background: linear-gradient(rgba(0,0,0,.82), rgba(0,0,0,.6)); border-bottom: calc(var(--u)*1) solid var(--line); display: flex; align-items: flex-end; padding: 0 calc(var(--u)*48); gap: calc(var(--u)*4); }
+.tabs { display: flex; gap: calc(var(--u)*4); height: calc(var(--u)*36); }
+.tab { display: flex; align-items: center; gap: calc(var(--u)*8); height: calc(var(--u)*36); padding: 0 calc(var(--u)*26) 0 calc(var(--u)*14); background: rgba(24,26,26,.9); color: var(--text-2); font-weight: 600; font-size: calc(var(--u)*14); letter-spacing: .08em; text-transform: uppercase; clip-path: polygon(0 0, calc(100% - calc(var(--u)*14)) 0, 100% 100%, 0 100%); transition: background-color .1s, color .1s; }
+.tab svg { width: calc(var(--u)*18); height: calc(var(--u)*18); flex: none; }
+.tab:hover { background: rgba(50,52,50,.95); color: var(--text); }
+.tab[aria-current="page"] { background: var(--tab-hi); color: #111; }
+.back { position: absolute; right: calc(var(--u)*48); top: calc(var(--u)*8); height: calc(var(--u)*40); display: flex; align-items: center; gap: calc(var(--u)*10); padding: 0 calc(var(--u)*30) 0 calc(var(--u)*18); background: rgba(20,22,22,.92); border: calc(var(--u)*1) solid var(--line-2); clip-path: polygon(0 0, 100% 0, 100% 100%, calc(var(--u)*16) 100%, 0 calc(100% - calc(var(--u)*16))); font-size: calc(var(--u)*22); font-weight: 700; letter-spacing: .1em; }
+.back kbd { font: inherit; font-size: calc(var(--u)*11); font-weight: 600; color: var(--text-3); border: calc(var(--u)*1) solid var(--line-2); padding: calc(var(--u)*1) calc(var(--u)*5); letter-spacing: .04em; }
+.back:hover { background: rgba(60,62,58,.95); }
+
+/* silhouette */
+.body { position: absolute; left: calc(var(--u)*20); top: calc(var(--u)*52); width: calc(var(--u)*560); height: calc(var(--u)*880); opacity: .92; pointer-events: none; }
+
+/* section heads: dark tab, slanted right end */
+.head { display: inline-flex; align-items: center; height: calc(var(--u)*22); padding: 0 calc(var(--u)*22) 0 calc(var(--u)*8); background: var(--tab); color: var(--text); font-size: calc(var(--u)*13); font-weight: 600; letter-spacing: .07em; text-transform: uppercase; clip-path: polygon(0 0, calc(100% - calc(var(--u)*12)) 0, 100% 100%, 0 100%); white-space: nowrap; }
+.blk { position: absolute; display: flex; flex-direction: column; gap: calc(var(--u)*4); }
+
+/* slots */
+.slot { position: relative; width: calc(var(--u)*128); height: calc(var(--u)*128); background: var(--cell); border: calc(var(--u)*1) solid var(--line-2); }
+.slot.wide { width: calc(var(--u)*412); }
+.slot.half { width: calc(var(--u)*199); }
+.slot.empty { background:
+  repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 calc(var(--u)*2), transparent calc(var(--u)*2) calc(var(--u)*9)), rgba(8,9,9,.6); }
+.slot.full { border-color: var(--tan); }
+.ghost { position: absolute; inset: 18%; width: 64%; height: 64%; color: rgba(220,220,210,.13); }
+.art { position: absolute; inset: 9%; width: 82%; height: 82%; filter: drop-shadow(0 calc(var(--u)*3) calc(var(--u)*3) rgba(0,0,0,.7)); }
+.slot.wide .art { inset: 8% 4% 12% 4%; width: 92%; height: 80%; }
+.nm { position: absolute; right: calc(var(--u)*4); top: calc(var(--u)*2); font-size: calc(var(--u)*12); font-weight: 600; letter-spacing: .02em; color: var(--text); text-shadow: 0 calc(var(--u)*1) calc(var(--u)*2) #000; text-align: right; line-height: 1.1; }
+.nm small { display: block; color: var(--text-2); font-weight: 500; font-size: calc(var(--u)*11); }
+.dur { position: absolute; right: calc(var(--u)*4); bottom: calc(var(--u)*2); font-size: calc(var(--u)*12); font-weight: 600; color: var(--text); text-shadow: 0 calc(var(--u)*1) calc(var(--u)*2) #000; }
+.shield { position: absolute; left: calc(var(--u)*4); top: calc(var(--u)*4); width: calc(var(--u)*16); height: calc(var(--u)*18); color: var(--armor); }
+.key { position: absolute; left: calc(var(--u)*3); top: calc(var(--u)*3); min-width: calc(var(--u)*15); height: calc(var(--u)*15); padding: 0 calc(var(--u)*3); background: #ecebe4; color: #0b0b0b; font-size: calc(var(--u)*11); font-weight: 700; line-height: calc(var(--u)*15); text-align: center; z-index: 2; }
+.ammo { position: absolute; right: calc(var(--u)*6); bottom: calc(var(--u)*2); font-weight: 700; text-shadow: 0 calc(var(--u)*1) calc(var(--u)*2) #000; }
+.ammo b { font-size: calc(var(--u)*22); } .ammo span { font-size: calc(var(--u)*13); color: var(--text-2); }
+.mode { position: absolute; left: calc(var(--u)*5); bottom: calc(var(--u)*5); height: calc(var(--u)*15); padding: 0 calc(var(--u)*5); border: calc(var(--u)*1) solid var(--line-2); font-size: calc(var(--u)*10); font-weight: 600; letter-spacing: .08em; color: var(--text-2); line-height: calc(var(--u)*13); background: rgba(0,0,0,.5); }
+
+/* container rows (render square + grids) */
+.crow { display: flex; gap: calc(var(--u)*12); align-items: flex-start; }
+.cbox { position: relative; width: calc(var(--u)*112); height: calc(var(--u)*112); background: var(--cell); border: calc(var(--u)*1) solid var(--tan); flex: none; }
+.cbox .art { inset: 8%; width: 84%; height: 84%; }
+.subs { display: flex; gap: calc(var(--u)*6); align-items: flex-start; }
+.grid { position: relative; display: grid; grid-template-columns: repeat(var(--w), var(--c)); grid-template-rows: repeat(var(--h), var(--c)); background-color: var(--cell);
+  background-image: linear-gradient(to right, var(--line) calc(var(--u)*1), transparent calc(var(--u)*1)), linear-gradient(to bottom, var(--line) calc(var(--u)*1), transparent calc(var(--u)*1));
+  background-size: var(--c) var(--c); border: calc(var(--u)*1) solid var(--line-2); width: calc(var(--c) * var(--w) + calc(var(--u)*2)); height: calc(var(--c) * var(--h) + calc(var(--u)*2)); }
+.stack { display: flex; flex-direction: column; gap: calc(var(--u)*6); }
+
+/* items */
+.it { position: relative; margin: 0; border: calc(var(--u)*1) solid rgba(150,150,140,.32); background: var(--t-grey); overflow: hidden; transition: border-color .1s, background-color .1s; }
+.it:hover, .it:focus-visible, .it.hot { border-color: #d8d6cc; background-color: rgba(120,120,110,.28); }
+.it .art { inset: 10%; width: 80%; height: 80%; filter: drop-shadow(0 calc(var(--u)*2) calc(var(--u)*2) rgba(0,0,0,.75)); }
+.it .nm { font-size: calc(var(--u)*11); right: calc(var(--u)*3); top: calc(var(--u)*1); font-weight: 500; max-width: calc(100% - calc(var(--u)*6)); overflow: hidden; white-space: nowrap; text-overflow: clip; }
+.it .key ~ .nm { max-width: calc(100% - calc(var(--u)*22)); }
+.it .dur { font-size: calc(var(--u)*11); right: calc(var(--u)*3); bottom: calc(var(--u)*1); }
+.it .key { left: calc(var(--u)*2); top: calc(var(--u)*2); min-width: calc(var(--u)*13); height: calc(var(--u)*13); line-height: calc(var(--u)*13); font-size: calc(var(--u)*10); }
+.v { background-color: var(--t-violet); } .r { background-color: var(--t-red); } .o { background-color: var(--t-olive); }
+.k { background-color: var(--t-key); } .a { background-color: var(--t-ammo); }
+.res { color: var(--res) !important; }
+.chk { color: var(--text-2) !important; }
+
+/* stats */
+.stats { position: absolute; left: calc(var(--u)*88); top: calc(var(--u)*896); width: calc(var(--u)*440); display: flex; justify-content: space-between; align-items: baseline; }
+.stat { display: flex; align-items: center; gap: calc(var(--u)*6); font-weight: 600; }
+.stat svg { width: calc(var(--u)*18); height: calc(var(--u)*18); align-self: center; }
+.stat b { font-size: calc(var(--u)*26); font-weight: 700; letter-spacing: -.01em; }
+.stat span { font-size: calc(var(--u)*13); color: var(--text-2); }
+.hpc { color: var(--hp); } .wtc { color: var(--water); } .enc { color: var(--energy); }
+.over b { color: #e8b04a; }
+
+/* quick use */
+.qu { position: absolute; left: calc(var(--u)*88); top: calc(var(--u)*950); display: flex; align-items: flex-start; gap: calc(var(--u)*6); }
+.qu .head { margin-right: calc(var(--u)*6); margin-top: calc(var(--u)*18); }
+.q { width: calc(var(--u)*72); display: flex; flex-direction: column; gap: calc(var(--u)*3); }
+.q .cell { position: relative; height: calc(var(--u)*54); background: var(--cell); border: calc(var(--u)*1) solid var(--line-2); }
+.q .cell.empty { background: repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 calc(var(--u)*2), transparent calc(var(--u)*2) calc(var(--u)*8)), rgba(8,9,9,.6); }
+.q .art { inset: 8% 6%; width: 88%; height: 84%; }
+.q .key { left: calc(var(--u)*2); top: calc(var(--u)*2); }
+.q .lbl { font-size: calc(var(--u)*11); font-weight: 500; color: var(--text-2); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: none; }
+.q.wpn .cell { border-color: var(--tan); }
+.q:hover .cell { border-color: #d8d6cc; }
+
+/* bottom bar */
+.bottombar { position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--u)*34); background: rgba(0,0,0,.78); border-top: calc(var(--u)*1) solid var(--line); display: flex; align-items: center; gap: calc(var(--u)*4); padding: 0 calc(var(--u)*48); }
+.bb { display: flex; align-items: center; gap: calc(var(--u)*8); height: calc(var(--u)*26); padding: 0 calc(var(--u)*14); color: var(--text-2); font-size: calc(var(--u)*13); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.bb svg { width: calc(var(--u)*16); height: calc(var(--u)*16); }
+.bb:hover { color: var(--text); background: rgba(60,62,58,.6); }
+
+/* floating container window */
+.win { position: absolute; left: calc(var(--u)*1004); top: calc(var(--u)*486); width: calc(var(--u)*288); background: var(--plate-2); border: calc(var(--u)*1) solid var(--line-2); box-shadow: 0 calc(var(--u)*12) calc(var(--u)*32) rgba(0,0,0,.6); animation: pop .2s var(--ease-in) both; }
+.win[hidden] { display: none; }
+.win-top { display: flex; align-items: center; gap: calc(var(--u)*6); height: calc(var(--u)*30); padding: 0 0 0 calc(var(--u)*8); background: #161818; border-bottom: calc(var(--u)*1) solid var(--line-2); }
+.win-top svg { width: calc(var(--u)*18); height: calc(var(--u)*18); flex: none; }
+.win-top h2 { margin: 0; flex: 1; font-size: calc(var(--u)*13); font-weight: 600; letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; }
+.x { width: calc(var(--u)*30); height: calc(var(--u)*30); display: grid; place-items: center; background: #8e1d17; color: #fff; }
+.x:hover { background: #b9271f; }
+.x svg { width: calc(var(--u)*14); height: calc(var(--u)*14); }
+.search { display: flex; align-items: center; gap: calc(var(--u)*6); margin: calc(var(--u)*8) calc(var(--u)*8) 0; height: calc(var(--u)*26); padding: 0 calc(var(--u)*8); background: rgba(0,0,0,.55); border: calc(var(--u)*1) solid var(--line-2); }
+.search svg { width: calc(var(--u)*14); height: calc(var(--u)*14); color: var(--text-3); flex: none; }
+.search input { all: unset; flex: 1; min-width: 0; font-size: calc(var(--u)*12); color: var(--text); }
+.search input::placeholder { color: var(--text-3); }
+.search:focus-within { border-color: var(--tan-hi); }
+.win .grid { margin: calc(var(--u)*8) auto calc(var(--u)*10); }
+@keyframes pop { from { opacity: 0; transform: scale(.96); } }
+
+/* tooltip */
+.tip { position: absolute; z-index: 20; pointer-events: none; padding: calc(var(--u)*3) calc(var(--u)*8); background: rgba(12,13,13,.94); border: calc(var(--u)*1) solid var(--line-2); font-size: calc(var(--u)*13); font-weight: 500; white-space: nowrap; color: var(--text); }
+.tip[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .win { animation: none; }
+  .tab, .it { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- shared paint for every item render -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="gPoly" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55595b"/><stop offset=".45" stop-color="#2c2f30"/><stop offset="1" stop-color="#141516"/></linearGradient>
+  <linearGradient id="gMetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d8285"/><stop offset=".35" stop-color="#454a4d"/><stop offset="1" stop-color="#1e2022"/></linearGradient>
+  <linearGradient id="gSteel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3e7ea"/><stop offset=".5" stop-color="#9aa1a6"/><stop offset="1" stop-color="#4c5256"/></linearGradient>
+  <linearGradient id="gSteelH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4c5256"/><stop offset=".5" stop-color="#d9dde0"/><stop offset="1" stop-color="#5d6367"/></linearGradient>
+  <linearGradient id="gOlive" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a7b4e"/><stop offset=".55" stop-color="#4b4c2c"/><stop offset="1" stop-color="#26271a"/></linearGradient>
+  <linearGradient id="gGreen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6f7e52"/><stop offset=".5" stop-color="#3f4a2c"/><stop offset="1" stop-color="#1d2314"/></linearGradient>
+  <linearGradient id="gTan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c4ad80"/><stop offset=".55" stop-color="#8a7550"/><stop offset="1" stop-color="#4d3f28"/></linearGradient>
+  <linearGradient id="gBrown" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a35"/><stop offset=".55" stop-color="#5a3820"/><stop offset="1" stop-color="#2e1c10"/></linearGradient>
+  <linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4473c"/><stop offset=".55" stop-color="#9a2520"/><stop offset="1" stop-color="#55100d"/></linearGradient>
+  <linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5f8fd0"/><stop offset=".55" stop-color="#2f5694"/><stop offset="1" stop-color="#172c52"/></linearGradient>
+  <linearGradient id="gBrass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a5a1c"/><stop offset=".4" stop-color="#f0d27e"/><stop offset=".7" stop-color="#c39a3e"/><stop offset="1" stop-color="#6a4c16"/></linearGradient>
+  <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbe7a0"/><stop offset=".45" stop-color="#d7a83c"/><stop offset="1" stop-color="#7c5512"/></linearGradient>
+  <linearGradient id="gCopper" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6a3a1a"/><stop offset=".45" stop-color="#e09a62"/><stop offset="1" stop-color="#6a3a1a"/></linearGradient>
+  <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9cc7d8"/><stop offset=".5" stop-color="#3a6474"/><stop offset="1" stop-color="#14262e"/></linearGradient>
+  <linearGradient id="gAmber" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3c66e"/><stop offset="1" stop-color="#7a4e10"/></linearGradient>
+  <linearGradient id="gPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9e3d2"/><stop offset="1" stop-color="#a49c86"/></linearGradient>
+  <linearGradient id="gYellow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0cf4a"/><stop offset=".55" stop-color="#c49a18"/><stop offset="1" stop-color="#6e540a"/></linearGradient>
+  <linearGradient id="gWater" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a90b0" stop-opacity=".85"/><stop offset=".35" stop-color="#d6eef8" stop-opacity=".9"/><stop offset=".7" stop-color="#7fb2cc" stop-opacity=".85"/><stop offset="1" stop-color="#2d5a72" stop-opacity=".9"/></linearGradient>
+  <linearGradient id="gHi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <radialGradient id="gDome" cx=".38" cy=".3" r=".75"><stop offset="0" stop-color="#8f9d6c"/><stop offset=".5" stop-color="#4a5634"/><stop offset="1" stop-color="#1c2214"/></radialGradient>
+  <radialGradient id="gCoin" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff2b8"/><stop offset=".45" stop-color="#e0ae3e"/><stop offset="1" stop-color="#7a520e"/></radialGradient>
+  <radialGradient id="gCup" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#5a5d58"/><stop offset=".6" stop-color="#262826"/><stop offset="1" stop-color="#0e0f0e"/></radialGradient>
+  <radialGradient id="gFan" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3a3d40"/><stop offset=".8" stop-color="#121314"/><stop offset="1" stop-color="#050505"/></radialGradient>
+  <radialGradient id="gScreen" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#9fd8ff"/><stop offset=".6" stop-color="#3a6fb0"/><stop offset="1" stop-color="#1a2c55"/></radialGradient>
+  <linearGradient id="gBody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0d0e0e"/><stop offset=".45" stop-color="#2a2d2b"/><stop offset=".6" stop-color="#232624"/><stop offset="1" stop-color="#0a0b0b"/></linearGradient>
+
+  <!-- ===== item renders (original drawings) ===== -->
+  <symbol id="i-headset" viewBox="0 0 100 100">
+    <path d="M22 52 C20 18 80 18 78 52" fill="none" stroke="#0a0a0a" stroke-width="11" stroke-linecap="round"/>
+    <path d="M22 52 C20 18 80 18 78 52" fill="none" stroke="url(#gOlive)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M27 40 C30 22 70 22 73 40" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
+    <rect x="8" y="44" width="26" height="38" rx="9" fill="url(#gCup)" stroke="#070707" stroke-width="2.5"/>
+    <rect x="66" y="44" width="26" height="38" rx="9" fill="url(#gCup)" stroke="#070707" stroke-width="2.5"/>
+    <rect x="12" y="49" width="10" height="20" rx="4" fill="url(#gHi)" opacity=".5"/>
+    <rect x="70" y="49" width="10" height="20" rx="4" fill="url(#gHi)" opacity=".5"/>
+    <circle cx="79" cy="58" r="4" fill="#3d403b" stroke="#000"/>
+    <path d="M14 76 C14 90 34 94 50 90" fill="none" stroke="#070707" stroke-width="5" stroke-linecap="round"/>
+    <path d="M14 76 C14 90 34 94 50 90" fill="none" stroke="#3a3c38" stroke-width="2.5" stroke-linecap="round"/>
+    <rect x="48" y="85" width="11" height="9" rx="3" fill="url(#gPoly)" stroke="#000" stroke-width="1.5"/>
+  </symbol>
+
+  <symbol id="i-helmet" viewBox="0 0 100 100">
+    <path d="M10 66 C8 30 30 12 52 12 C76 12 93 30 91 62 L88 72 L66 70 L60 60 L24 62 L14 74 Z" fill="url(#gDome)" stroke="#060706" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M22 34 C30 20 46 16 60 18" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="3" stroke-linecap="round"/>
+    <path d="M12 62 L24 58 L60 56 L88 60 L90 66 L64 66 L58 60 L24 63 L14 72 Z" fill="url(#gMetal)" stroke="#060706" stroke-width="1.5"/>
+    <rect x="40" y="14" width="20" height="9" rx="2" fill="url(#gPoly)" stroke="#000" stroke-width="1.5"/>
+    <path d="M70 40 L88 42 L88 58 L70 56 Z" fill="url(#gPoly)" stroke="#000" stroke-width="1.5"/>
+    <path d="M71 44 L87 46" stroke="#fff" stroke-opacity=".15"/>
+    <path d="M30 44 C38 40 50 40 58 44" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="2"/>
+  </symbol>
+
+  <symbol id="i-glasses" viewBox="0 0 100 100">
+    <path d="M6 40 C20 30 80 30 94 40 L92 56 C86 66 62 66 56 56 L50 52 L44 56 C38 66 14 66 8 56 Z" fill="url(#gGlass)" stroke="#060606" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M12 42 C24 36 40 36 46 40 L44 46 C34 42 20 42 12 46 Z" fill="#fff" opacity=".35"/>
+    <path d="M6 40 C20 30 80 30 94 40 L93 44 C78 36 22 36 7 44 Z" fill="url(#gPoly)" stroke="#000" stroke-width="1.5"/>
+    <path d="M6 42 L2 48 M94 42 L98 48" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+    <path d="M58 48 C66 46 80 46 88 50" stroke="#fff" stroke-opacity=".25" stroke-width="2" fill="none"/>
+  </symbol>
+
+  <symbol id="i-armband" viewBox="0 0 100 100">
+    <path d="M18 30 C30 22 70 22 82 30 L82 72 C70 80 30 80 18 72 Z" fill="url(#gBlue)" stroke="#05070c" stroke-width="2.5"/>
+    <path d="M18 30 C30 38 70 38 82 30" fill="none" stroke="#0b1424" stroke-width="2"/>
+    <path d="M22 36 C34 42 66 42 78 36 L78 40 C66 46 34 46 22 40 Z" fill="#fff" opacity=".18"/>
+    <rect x="36" y="48" width="28" height="18" rx="2" fill="#1d3561" stroke="#0a1630" stroke-width="1.5"/>
+    <path d="M38 52 H62 M38 56 H62 M38 60 H62" stroke="#3f62a0" stroke-width="1"/>
+    <path d="M18 72 C30 64 70 64 82 72" fill="none" stroke="#000" stroke-opacity=".4" stroke-width="2"/>
+  </symbol>
+
+  <symbol id="i-armor" viewBox="0 0 100 100">
+    <path d="M26 10 L38 10 L42 22 L58 22 L62 10 L74 10 L78 30 L86 36 L86 86 C70 94 30 94 14 86 L14 36 L22 30 Z" fill="url(#gGreen)" stroke="#060706" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M24 38 L76 38 L76 80 C62 86 38 86 24 80 Z" fill="url(#gOlive)" stroke="#0a0b07" stroke-width="2"/>
+    <path d="M30 44 H70 M30 52 H70 M30 60 H70 M30 68 H70" stroke="#1c1d12" stroke-width="2"/>
+    <path d="M30 44 H70 M30 52 H70 M30 60 H70 M30 68 H70" stroke="#9fa073" stroke-opacity=".25" stroke-width="1" transform="translate(0 1.5)"/>
+    <path d="M28 14 L36 14 L39 24" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2"/>
+    <rect x="40" y="26" width="20" height="8" rx="1" fill="url(#gPoly)" stroke="#000"/>
+    <path d="M14 86 C30 92 70 92 86 86" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="3"/>
+  </symbol>
+
+  <symbol id="i-rig" viewBox="0 0 100 100">
+    <path d="M22 8 L32 8 L36 26 L64 26 L68 8 L78 8 L80 32 L90 40 L90 84 L10 84 L10 40 L20 32 Z" fill="url(#gOlive)" stroke="#060606" stroke-width="2.5" stroke-linejoin="round"/>
+    <g stroke="#0b0b06" stroke-width="1.8">
+      <rect x="15" y="44" width="16" height="34" rx="2" fill="url(#gTan)"/>
+      <rect x="33" y="44" width="16" height="34" rx="2" fill="url(#gTan)"/>
+      <rect x="51" y="44" width="16" height="34" rx="2" fill="url(#gTan)"/>
+      <rect x="69" y="44" width="16" height="34" rx="2" fill="url(#gTan)"/>
+    </g>
+    <g fill="#000" opacity=".35"><rect x="15" y="44" width="16" height="7"/><rect x="33" y="44" width="16" height="7"/><rect x="51" y="44" width="16" height="7"/><rect x="69" y="44" width="16" height="7"/></g>
+    <path d="M17 54 V74 M35 54 V74 M53 54 V74 M71 54 V74" stroke="#fff" stroke-opacity=".2" stroke-width="1.5"/>
+    <path d="M24 12 L30 12 L33 26" stroke="#fff" stroke-opacity=".2" stroke-width="2" fill="none"/>
+  </symbol>
+
+  <symbol id="i-backpack" viewBox="0 0 100 100">
+    <path d="M24 18 C24 8 76 8 76 18 L80 88 C80 94 20 94 20 88 Z" fill="url(#gBrown)" stroke="#070402" stroke-width="2.5"/>
+    <path d="M22 20 C30 12 70 12 78 20 L78 38 C66 44 34 44 22 38 Z" fill="url(#gTan)" stroke="#070402" stroke-width="2"/>
+    <path d="M28 20 C38 15 62 15 72 20" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+    <rect x="30" y="52" width="40" height="30" rx="4" fill="url(#gOlive)" stroke="#070402" stroke-width="2"/>
+    <path d="M30 60 H70" stroke="#000" stroke-opacity=".4" stroke-width="2"/>
+    <path d="M36 38 L36 50 M64 38 L64 50" stroke="#1a1208" stroke-width="4"/>
+    <rect x="33" y="44" width="6" height="6" fill="url(#gMetal)" stroke="#000"/>
+    <rect x="61" y="44" width="6" height="6" fill="url(#gMetal)" stroke="#000"/>
+    <path d="M24 30 L22 86" stroke="#000" stroke-opacity=".3" stroke-width="3"/>
+  </symbol>
+
+  <symbol id="i-case" viewBox="0 0 100 100">
+    <rect x="10" y="22" width="80" height="62" rx="6" fill="url(#gPoly)" stroke="#050505" stroke-width="2.5"/>
+    <rect x="10" y="22" width="80" height="16" rx="6" fill="url(#gMetal)" stroke="#050505" stroke-width="2"/>
+    <path d="M16 26 H84" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+    <rect x="36" y="12" width="28" height="12" rx="4" fill="none" stroke="#0c0c0c" stroke-width="5"/>
+    <rect x="36" y="12" width="28" height="12" rx="4" fill="none" stroke="#4c5053" stroke-width="2"/>
+    <rect x="20" y="34" width="12" height="10" rx="1.5" fill="url(#gSteel)" stroke="#000" stroke-width="1.5"/>
+    <rect x="68" y="34" width="12" height="10" rx="1.5" fill="url(#gSteel)" stroke="#000" stroke-width="1.5"/>
+    <path d="M14 52 H86 M14 66 H86" stroke="#000" stroke-opacity=".45" stroke-width="2"/>
+    <path d="M14 53.5 H86 M14 67.5 H86" stroke="#fff" stroke-opacity=".08" stroke-width="1"/>
+  </symbol>
+
+  <symbol id="i-m4" viewBox="0 0 320 100">
+    <path d="M6 38 L56 33 L66 36 L66 58 L56 60 L28 70 L8 70 Z" fill="url(#gPoly)" stroke="#050505" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M10 41 L54 37" stroke="#fff" stroke-opacity=".2" stroke-width="2"/>
+    <rect x="62" y="40" width="30" height="11" fill="url(#gMetal)" stroke="#050505" stroke-width="1.5"/>
+    <path d="M88 42 L172 42 L174 58 L152 60 L142 64 L100 64 L88 57 Z" fill="url(#gMetal)" stroke="#050505" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M104 60 L122 60 L115 90 L97 87 Z" fill="url(#gPoly)" stroke="#050505" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M118 64 C118 76 134 76 138 64" fill="none" stroke="#111" stroke-width="2.5"/>
+    <path d="M140 60 L160 60 L166 92 L146 96 Z" fill="url(#gPoly)" stroke="#050505" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M144 66 L161 66 M145 72 L162 72 M146 78 L163 78" stroke="#000" stroke-opacity=".4"/>
+    <rect x="86" y="29" width="92" height="14" fill="url(#gMetal)" stroke="#050505" stroke-width="2"/>
+    <rect x="120" y="33" width="26" height="6" fill="#121314" stroke="#000"/>
+    <rect x="86" y="24" width="166" height="6" fill="#26292b" stroke="#050505" stroke-width="1.5"/>
+    <path d="M88 25.5 H250" stroke="#7c8184" stroke-width="1.5" stroke-dasharray="3 2.5"/>
+    <rect x="178" y="30" width="72" height="20" fill="url(#gPoly)" stroke="#050505" stroke-width="2"/>
+    <path d="M186 36 H198 M204 36 H216 M222 36 H234 M186 44 H198 M204 44 H216 M222 44 H234" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M180 32 H248" stroke="#fff" stroke-opacity=".18" stroke-width="1.5"/>
+    <rect x="250" y="36" width="46" height="6" fill="url(#gSteel)" stroke="#050505" stroke-width="1.2"/>
+    <rect x="236" y="14" width="5" height="12" fill="url(#gMetal)" stroke="#000"/>
+    <path d="M294 33 L314 33 L314 45 L294 45 Z" fill="url(#gPoly)" stroke="#050505" stroke-width="1.5"/>
+    <path d="M298 35 V43 M303 35 V43 M308 35 V43" stroke="#000" stroke-width="1.5"/>
+    <path d="M104 22 L104 12 C104 8 108 6 112 6 L134 6 C138 6 140 8 140 12 L140 22 Z" fill="url(#gPoly)" stroke="#050505" stroke-width="2"/>
+    <path d="M110 8 L110 20 L134 20 L134 8" fill="url(#gGlass)" stroke="#000"/>
+    <circle cx="122" cy="14" r="1.6" fill="#ff4a3a"/>
+    <path d="M108 10 H136" stroke="#fff" stroke-opacity=".25"/>
+    <rect x="102" y="20" width="40" height="4" fill="#1b1d1e" stroke="#000"/>
+    <path d="M92 31 H176" stroke="#fff" stroke-opacity=".25" stroke-width="1.5"/>
+  </symbol>
+
+  <symbol id="i-glock" viewBox="0 0 160 100">
+    <path d="M14 28 L142 28 L144 46 L14 46 Z" fill="url(#gPoly)" stroke="#050505" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M16 31 H140" stroke="#fff" stroke-opacity=".28" stroke-width="2"/>
+    <path d="M24 34 V42 M29 34 V42 M34 34 V42 M39 34 V42" stroke="#000" stroke-width="1.5"/>
+    <rect x="70" y="32" width="26" height="8" fill="#111" stroke="#000"/>
+    <rect x="136" y="24" width="5" height="5" fill="#222" stroke="#000"/>
+    <rect x="20" y="24" width="6" height="5" fill="#222" stroke="#000"/>
+    <path d="M22 46 L134 46 L134 54 L72 56 L60 56 L56 50 L22 52 Z" fill="url(#gMetal)" stroke="#050505" stroke-width="2"/>
+    <path d="M22 50 L54 50 L48 92 L18 90 Z" fill="url(#gPoly)" stroke="#050505" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M26 58 L46 58 M25 66 L45 66 M24 74 L44 74 M23 82 L43 82" stroke="#000" stroke-opacity=".45" stroke-width="1.5"/>
+    <path d="M56 54 C56 70 78 70 80 56" fill="none" stroke="#141516" stroke-width="3"/>
+    <path d="M64 56 L66 64" stroke="#2e3133" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="i-knife" viewBox="0 0 200 100">
+    <path d="M78 42 L176 40 C186 40 194 46 196 50 C188 56 176 58 160 58 L78 58 Z" fill="url(#gSteel)" stroke="#060606" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M84 44 L176 43" stroke="#fff" stroke-opacity=".6" stroke-width="1.5"/>
+    <path d="M100 50 L170 49" stroke="#3a4044" stroke-width="1.5"/>
+    <path d="M110 40 L150 40" stroke="#41474b" stroke-width="2" stroke-dasharray="3 3"/>
+    <rect x="70" y="34" width="10" height="32" rx="1" fill="url(#gMetal)" stroke="#050505" stroke-width="1.5"/>
+    <path d="M8 42 C8 38 12 38 16 38 L70 40 L70 60 L16 62 C12 62 8 62 8 58 Z" fill="url(#gBrown)" stroke="#050302" stroke-width="2"/>
+    <path d="M14 42 L66 43" stroke="#fff" stroke-opacity=".2" stroke-width="2"/>
+    <path d="M22 40 V60 M36 40 V61 M50 40 V61" stroke="#000" stroke-opacity=".35" stroke-width="2"/>
+    <circle cx="14" cy="50" r="3" fill="url(#gSteel)" stroke="#000"/>
+  </symbol>
+
+  <symbol id="i-pmag" viewBox="0 0 100 200">
+    <path d="M30 10 L70 10 L72 40 C74 90 80 140 88 186 L46 192 C38 140 32 90 30 40 Z" fill="url(#gPoly)" stroke="#050505" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M34 14 L40 14 C40 70 46 130 54 186" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="2.5"/>
+    <path d="M36 60 L70 58 M38 80 L72 78 M40 100 L74 98 M42 120 L76 118" stroke="#000" stroke-opacity=".5" stroke-width="2"/>
+    <path d="M42 176 L88 170 L90 188 L46 194 Z" fill="url(#gMetal)" stroke="#050505" stroke-width="2"/>
+    <rect x="34" y="4" width="30" height="8" fill="url(#gBrass)" stroke="#3a2a08"/>
+  </symbol>
+
+  <symbol id="i-glmag" viewBox="0 0 100 100">
+    <path d="M36 10 L64 10 L66 84 L34 84 Z" fill="url(#gPoly)" stroke="#050505" stroke-width="2.5" stroke-linejoin="round" transform="rotate(-12 50 50)"/>
+    <rect x="31" y="80" width="38" height="10" fill="url(#gMetal)" stroke="#050505" stroke-width="2" transform="rotate(-12 50 50)"/>
+    <path d="M40 14 V78" stroke="#fff" stroke-opacity=".2" stroke-width="2.5" transform="rotate(-12 50 50)"/>
+    <rect x="38" y="4" width="22" height="7" fill="url(#gBrass)" stroke="#3a2a08" transform="rotate(-12 50 50)"/>
+  </symbol>
+
+  <symbol id="i-f1" viewBox="0 0 100 100">
+    <ellipse cx="46" cy="58" rx="28" ry="34" fill="url(#gGreen)" stroke="#060706" stroke-width="2.5"/>
+    <g stroke="#141a0c" stroke-width="2.5" fill="none"><path d="M20 46 H72 M18 58 H74 M20 70 H72 M24 82 H68"/><path d="M34 26 V90 M46 24 V92 M58 26 V90"/></g>
+    <ellipse cx="36" cy="44" rx="9" ry="12" fill="#fff" opacity=".18"/>
+    <rect x="38" y="14" width="16" height="12" rx="2" fill="url(#gMetal)" stroke="#000" stroke-width="2"/>
+    <path d="M54 16 C70 16 76 30 74 56" fill="none" stroke="#050505" stroke-width="7" stroke-linecap="round"/>
+    <path d="M54 16 C70 16 76 30 74 56" fill="none" stroke="url(#gSteel)" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="34" cy="16" r="7" fill="none" stroke="#111" stroke-width="4"/><circle cx="34" cy="16" r="7" fill="none" stroke="url(#gSteel)" stroke-width="2"/>
+  </symbol>
+
+  <symbol id="i-rgd5" viewBox="0 0 100 100">
+    <path d="M24 50 C24 30 36 22 48 22 C62 22 74 30 74 50 C74 74 62 92 48 92 C34 92 24 74 24 50 Z" fill="url(#gGreen)" stroke="#060706" stroke-width="2.5"/>
+    <path d="M26 54 C40 58 58 58 72 54" fill="none" stroke="#141a0c" stroke-width="2.5"/>
+    <ellipse cx="38" cy="42" rx="7" ry="12" fill="#fff" opacity=".2"/>
+    <rect x="40" y="10" width="16" height="14" rx="2" fill="url(#gMetal)" stroke="#000" stroke-width="2"/>
+    <path d="M56 14 C70 16 74 34 72 52" fill="none" stroke="#050505" stroke-width="7" stroke-linecap="round"/>
+    <path d="M56 14 C70 16 74 34 72 52" fill="none" stroke="url(#gSteel)" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="34" cy="12" r="7" fill="none" stroke="#111" stroke-width="4"/><circle cx="34" cy="12" r="7" fill="none" stroke="url(#gSteel)" stroke-width="2"/>
+  </symbol>
+
+  <symbol id="i-afak" viewBox="0 0 100 100">
+    <rect x="12" y="20" width="76" height="64" rx="8" fill="url(#gOlive)" stroke="#060606" stroke-width="2.5"/>
+    <rect x="12" y="20" width="76" height="20" rx="8" fill="url(#gGreen)" stroke="#060606" stroke-width="2"/>
+    <path d="M18 25 H82" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+    <path d="M44 48 H56 V56 H64 V68 H56 V76 H44 V68 H36 V56 H44 Z" fill="url(#gRed)" stroke="#2a0705" stroke-width="1.5"/>
+    <path d="M20 44 V78 M80 44 V78" stroke="#000" stroke-opacity=".35" stroke-width="2" stroke-dasharray="3 3"/>
+    <rect x="44" y="14" width="12" height="10" rx="2" fill="url(#gMetal)" stroke="#000"/>
+  </symbol>
+
+  <symbol id="i-calok" viewBox="0 0 100 100">
+    <path d="M16 22 L84 18 L86 80 L18 84 Z" fill="url(#gPaper)" stroke="#060606" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M16 22 L84 18 L84 32 L16 36 Z" fill="url(#gRed)" stroke="#060606" stroke-width="1.5"/>
+    <path d="M26 46 L74 43 M26 54 L66 51 M26 62 L70 59" stroke="#5c574a" stroke-width="3"/>
+    <path d="M20 40 L82 36" stroke="#fff" stroke-opacity=".5" stroke-width="1.5"/>
+    <path d="M18 84 L86 80" stroke="#000" stroke-opacity=".35" stroke-width="3"/>
+  </symbol>
+
+  <symbol id="i-esmarch" viewBox="0 0 100 100">
+    <ellipse cx="50" cy="54" rx="34" ry="30" fill="url(#gGreen)" stroke="#060706" stroke-width="2.5"/>
+    <ellipse cx="50" cy="54" rx="22" ry="19" fill="none" stroke="#0e130a" stroke-width="2"/>
+    <ellipse cx="50" cy="54" rx="11" ry="9" fill="#10140b" stroke="#000" stroke-width="2"/>
+    <path d="M26 38 C34 30 50 28 62 32" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="3" stroke-linecap="round"/>
+    <path d="M80 60 L94 86 L84 90 L72 66" fill="url(#gRed)" stroke="#2a0705" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="38" y="16" width="24" height="10" rx="2" fill="url(#gMetal)" stroke="#000" stroke-width="1.5"/>
+  </symbol>
+
+  <symbol id="i-morphine" viewBox="0 0 100 100">
+    <g transform="rotate(-38 50 50)">
+      <rect x="40" y="10" width="20" height="62" rx="4" fill="url(#gWater)" stroke="#060606" stroke-width="2.5"/>
+      <rect x="42" y="38" width="16" height="32" fill="#d9b44a" opacity=".85"/>
+      <path d="M44 14 V66" stroke="#fff" stroke-opacity=".6" stroke-width="2"/>
+      <path d="M42 24 H50 M42 32 H50 M42 40 H50 M42 48 H50" stroke="#20323a" stroke-width="1.2"/>
+      <rect x="36" y="70" width="28" height="6" rx="1" fill="url(#gPoly)" stroke="#000" stroke-width="1.5"/>
+      <rect x="47" y="2" width="6" height="10" fill="url(#gPoly)" stroke="#000"/>
+      <path d="M50 76 V96" stroke="#111" stroke-width="3"/><path d="M50 76 V96" stroke="url(#gSteelH)" stroke-width="1.5"/>
+    </g>
+  </symbol>
+
+  <symbol id="i-water" viewBox="0 0 100 200">
+    <rect x="40" y="6" width="20" height="16" rx="2" fill="url(#gBlue)" stroke="#05070c" stroke-width="2"/>
+    <path d="M42 22 L58 22 L60 34 C76 44 78 60 76 76 L76 180 C76 190 24 190 24 180 L24 76 C22 60 24 44 40 34 Z" fill="url(#gWater)" stroke="#0a1418" stroke-width="2.5" stroke-linejoin="round"/>
+    <rect x="25" y="92" width="50" height="46" fill="url(#gBlue)" stroke="#05070c" stroke-width="1.5"/>
+    <path d="M34 106 H66 M34 116 H58" stroke="#d8e8f8" stroke-width="3" stroke-opacity=".8"/>
+    <path d="M32 50 C30 80 30 150 32 176" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3"/>
+    <path d="M26 152 H74 M26 164 H74" stroke="#2d5a72" stroke-opacity=".6" stroke-width="1.5"/>
+  </symbol>
+
+  <symbol id="i-salewa" viewBox="0 0 100 200">
+    <rect x="14" y="24" width="72" height="160" rx="12" fill="url(#gRed)" stroke="#1c0403" stroke-width="2.5"/>
+    <path d="M22 30 C40 24 60 24 78 30" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="3"/>
+    <rect x="40" y="14" width="20" height="14" rx="3" fill="url(#gPoly)" stroke="#000" stroke-width="1.5"/>
+    <path d="M44 84 H56 V96 H68 V108 H56 V120 H44 V108 H32 V96 H44 Z" fill="#f1ede4" stroke="#3a0b08" stroke-width="1.5"/>
+    <path d="M20 54 H80" stroke="#2a0705" stroke-width="2.5"/>
+    <path d="M20 56 H80" stroke="#fff" stroke-opacity=".12"/>
+    <path d="M18 160 C40 168 60 168 82 160" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="3"/>
+  </symbol>
+
+  <symbol id="i-docs" viewBox="0 0 200 100">
+    <rect x="12" y="16" width="176" height="72" rx="8" fill="url(#gBrown)" stroke="#070402" stroke-width="2.5"/>
+    <path d="M18 24 H182" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+    <path d="M20 28 H180 V80 H20 Z" fill="none" stroke="#c9a678" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <path d="M12 52 H188" stroke="#1c1006" stroke-width="3"/>
+    <path d="M12 52 H188" stroke="url(#gSteel)" stroke-width="1.5" stroke-dasharray="2 1.5"/>
+    <rect x="150" y="46" width="14" height="12" rx="2" fill="url(#gSteel)" stroke="#000" stroke-width="1.5"/>
+    <rect x="80" y="62" width="40" height="12" rx="2" fill="#2b1a0c" stroke="#120a04"/>
+  </symbol>
+
+  <symbol id="i-tushonka" viewBox="0 0 100 100">
+    <ellipse cx="50" cy="26" rx="30" ry="10" fill="url(#gSteel)" stroke="#060606" stroke-width="2"/>
+    <path d="M20 26 L20 78 C20 92 80 92 80 78 L80 26 C80 36 20 36 20 26 Z" fill="url(#gSteelH)" stroke="#060606" stroke-width="2.5"/>
+    <path d="M20 40 C20 50 80 50 80 40 L80 70 C80 80 20 80 20 70 Z" fill="url(#gRed)" stroke="#2a0705" stroke-width="1"/>
+    <path d="M32 54 H68 M36 62 H64" stroke="#f3e2b0" stroke-width="3"/>
+    <ellipse cx="50" cy="26" rx="22" ry="6" fill="none" stroke="#5f666a" stroke-width="1.5"/>
+  </symbol>
+
+  <symbol id="i-gpu" viewBox="0 0 200 100">
+    <rect x="10" y="20" width="176" height="56" rx="3" fill="url(#gPoly)" stroke="#050505" stroke-width="2.5"/>
+    <rect x="10" y="76" width="150" height="8" fill="#1f5a2c" stroke="#06140a" stroke-width="1.5"/>
+    <path d="M30 78 V84 M38 78 V84 M46 78 V84 M54 78 V84 M62 78 V84 M70 78 V84 M78 78 V84 M86 78 V84 M94 78 V84 M102 78 V84" stroke="url(#gBrass)" stroke-width="3"/>
+    <circle cx="62" cy="48" r="22" fill="url(#gFan)" stroke="#000" stroke-width="2"/>
+    <circle cx="134" cy="48" r="22" fill="url(#gFan)" stroke="#000" stroke-width="2"/>
+    <g stroke="#55595c" stroke-width="2.2" fill="none"><path d="M62 48 C70 34 76 40 74 44 M62 48 C48 40 52 34 56 34 M62 48 C60 64 52 62 52 58 M62 48 C76 56 74 62 70 62"/><path d="M134 48 C142 34 148 40 146 44 M134 48 C120 40 124 34 128 34 M134 48 C132 64 124 62 124 58 M134 48 C148 56 146 62 142 62"/></g>
+    <circle cx="62" cy="48" r="5" fill="url(#gMetal)"/><circle cx="134" cy="48" r="5" fill="url(#gMetal)"/>
+    <path d="M14 24 H182" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+    <rect x="186" y="18" width="6" height="66" fill="url(#gSteel)" stroke="#000"/>
+  </symbol>
+
+  <symbol id="i-ledx" viewBox="0 0 100 100">
+    <rect x="18" y="10" width="64" height="84" rx="8" fill="url(#gMetal)" stroke="#050505" stroke-width="2.5"/>
+    <rect x="26" y="20" width="48" height="40" rx="3" fill="url(#gScreen)" stroke="#000" stroke-width="2"/>
+    <path d="M30 24 L52 24 L32 46 Z" fill="#fff" opacity=".22"/>
+    <circle cx="38" cy="74" r="6" fill="url(#gPoly)" stroke="#000" stroke-width="1.5"/>
+    <circle cx="62" cy="74" r="6" fill="url(#gPoly)" stroke="#000" stroke-width="1.5"/>
+    <path d="M24 14 H76" stroke="#fff" stroke-opacity=".35" stroke-width="2"/>
+  </symbol>
+
+  <symbol id="i-btc" viewBox="0 0 100 100">
+    <circle cx="50" cy="52" r="36" fill="#6a4710" stroke="#1d1304" stroke-width="2"/>
+    <circle cx="50" cy="49" r="36" fill="url(#gCoin)" stroke="#2b1c05" stroke-width="2.5"/>
+    <circle cx="50" cy="49" r="28" fill="none" stroke="#8a5f14" stroke-width="2"/>
+    <path d="M42 33 V65 M42 33 H54 C64 33 64 48 54 48 H42 M42 48 H56 C67 48 67 65 56 65 H42 M47 29 V69 M52 29 V69" fill="none" stroke="#6e4a0c" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M26 36 C32 24 44 18 56 19" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="i-roler" viewBox="0 0 100 100">
+    <rect x="36" y="4" width="28" height="92" rx="4" fill="url(#gGold)" stroke="#2b1c05" stroke-width="2"/>
+    <path d="M36 16 H64 M36 26 H64 M36 74 H64 M36 84 H64" stroke="#7a520e" stroke-width="1.5"/>
+    <circle cx="50" cy="50" r="24" fill="url(#gCoin)" stroke="#2b1c05" stroke-width="2.5"/>
+    <circle cx="50" cy="50" r="17" fill="#1b2a44" stroke="#5a3d0a" stroke-width="2"/>
+    <path d="M50 50 L50 37 M50 50 L59 54" stroke="#e9e2cc" stroke-width="2" stroke-linecap="round"/>
+    <path d="M38 40 C42 34 48 33 52 34" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2"/>
+    <rect x="73" y="47" width="5" height="6" fill="url(#gGold)" stroke="#2b1c05"/>
+  </symbol>
+
+  <symbol id="i-ammo" viewBox="0 0 100 100">
+    <g stroke="#2a1d06" stroke-width="2">
+      <rect x="16" y="40" width="16" height="50" rx="2" fill="url(#gBrass)"/>
+      <path d="M16 40 L20 22 C22 14 26 14 28 22 L32 40 Z" fill="url(#gCopper)"/>
+      <rect x="42" y="36" width="16" height="54" rx="2" fill="url(#gBrass)"/>
+      <path d="M42 36 L46 18 C48 10 52 10 54 18 L58 36 Z" fill="url(#gCopper)"/>
+      <rect x="68" y="40" width="16" height="50" rx="2" fill="url(#gBrass)"/>
+      <path d="M68 40 L72 22 C74 14 78 14 80 22 L84 40 Z" fill="url(#gCopper)"/>
+    </g>
+    <path d="M24 18 L24 22 M50 14 L50 18 M76 18 L76 22" stroke="#5a7a3a" stroke-width="5"/>
+    <path d="M14 82 H86" stroke="#000" stroke-opacity=".3" stroke-width="2"/>
+  </symbol>
+
+  <symbol id="i-bolts" viewBox="0 0 100 100">
+    <g transform="rotate(-30 50 50)">
+      <rect x="44" y="26" width="12" height="62" fill="url(#gSteelH)" stroke="#060606" stroke-width="2"/>
+      <path d="M44 40 L56 37 M44 48 L56 45 M44 56 L56 53 M44 64 L56 61 M44 72 L56 69 M44 80 L56 77" stroke="#3a4044" stroke-width="2"/>
+      <path d="M34 14 L66 14 L70 22 L66 30 L34 30 L30 22 Z" fill="url(#gSteel)" stroke="#060606" stroke-width="2.5" stroke-linejoin="round"/>
+    </g>
+    <g transform="translate(18 26) rotate(20 50 50) scale(.6)">
+      <rect x="44" y="26" width="12" height="62" fill="url(#gSteelH)" stroke="#060606" stroke-width="3"/>
+      <path d="M34 14 L66 14 L70 22 L66 30 L34 30 L30 22 Z" fill="url(#gSteel)" stroke="#060606" stroke-width="3"/>
+    </g>
+  </symbol>
+
+  <symbol id="i-hose" viewBox="0 0 100 100">
+    <ellipse cx="50" cy="54" rx="34" ry="28" fill="none" stroke="#050505" stroke-width="14"/>
+    <ellipse cx="50" cy="54" rx="34" ry="28" fill="none" stroke="#2b2d2e" stroke-width="10"/>
+    <ellipse cx="50" cy="52" rx="34" ry="28" fill="none" stroke="#6c7072" stroke-width="2.5" stroke-dasharray="40 30"/>
+    <ellipse cx="50" cy="54" rx="20" ry="16" fill="none" stroke="#050505" stroke-width="12"/>
+    <ellipse cx="50" cy="54" rx="20" ry="16" fill="none" stroke="#323536" stroke-width="8"/>
+    <rect x="78" y="40" width="14" height="12" rx="2" fill="url(#gBrass)" stroke="#2a1d06" stroke-width="1.5"/>
+  </symbol>
+
+  <symbol id="i-wires" viewBox="0 0 100 100">
+    <path d="M10 70 C30 20 50 90 90 30" fill="none" stroke="#050505" stroke-width="9"/>
+    <path d="M10 70 C30 20 50 90 90 30" fill="none" stroke="#c0392b" stroke-width="5"/>
+    <path d="M12 78 C34 34 54 96 92 42" fill="none" stroke="#050505" stroke-width="9"/>
+    <path d="M12 78 C34 34 54 96 92 42" fill="none" stroke="#2f6fb0" stroke-width="5"/>
+    <path d="M8 62 C28 12 50 80 88 20" fill="none" stroke="#050505" stroke-width="9"/>
+    <path d="M8 62 C28 12 50 80 88 20" fill="none" stroke="#d6d1c2" stroke-width="5"/>
+    <path d="M88 20 L96 14 M90 30 L98 25 M92 42 L99 38" stroke="url(#gCopper)" stroke-width="3"/>
+    <path d="M14 56 C26 30 34 34 40 46" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.5"/>
+  </symbol>
+
+  <symbol id="i-gasan" viewBox="0 0 100 200">
+    <rect x="18" y="20" width="64" height="168" rx="10" fill="url(#gYellow)" stroke="#2a1f02" stroke-width="2.5"/>
+    <rect x="28" y="36" width="44" height="34" rx="3" fill="#1d2a1a" stroke="#000" stroke-width="2"/>
+    <path d="M34 50 H56 M34 58 H48" stroke="#8ee07a" stroke-width="3"/>
+    <rect x="30" y="86" width="40" height="70" rx="4" fill="url(#gPoly)" stroke="#000" stroke-width="2"/>
+    <g fill="#55595c" stroke="#000"><circle cx="40" cy="100" r="4"/><circle cx="60" cy="100" r="4"/><circle cx="40" cy="118" r="4"/><circle cx="60" cy="118" r="4"/><circle cx="50" cy="140" r="6"/></g>
+    <rect x="40" y="8" width="20" height="14" fill="url(#gPoly)" stroke="#000" stroke-width="1.5"/>
+    <path d="M24 30 V176" stroke="#fff" stroke-opacity=".35" stroke-width="3"/>
+  </symbol>
+
+  <symbol id="i-tape" viewBox="0 0 100 100">
+    <ellipse cx="50" cy="56" rx="38" ry="30" fill="#4a4d50" stroke="#050505" stroke-width="2.5"/>
+    <ellipse cx="50" cy="50" rx="38" ry="30" fill="url(#gSteel)" stroke="#050505" stroke-width="2.5"/>
+    <ellipse cx="50" cy="50" rx="18" ry="14" fill="#7a5a36" stroke="#2a1a0a" stroke-width="2"/>
+    <ellipse cx="50" cy="50" rx="13" ry="10" fill="#141414"/>
+    <path d="M20 40 C26 28 40 22 52 22" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.5"/>
+    <path d="M86 52 L94 78 L80 80 L78 60" fill="#8e9599" stroke="#050505" stroke-width="2"/>
+  </symbol>
+
+  <symbol id="i-keytool" viewBox="0 0 100 100">
+    <rect x="14" y="16" width="72" height="68" rx="6" fill="url(#gTan)" stroke="#120c04" stroke-width="2.5"/>
+    <path d="M14 34 H86" stroke="#3c2e18" stroke-width="2.5"/>
+    <path d="M20 22 H80" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+    <circle cx="50" cy="58" r="12" fill="none" stroke="#3c2e18" stroke-width="3"/>
+    <path d="M50 46 V30" stroke="#3c2e18" stroke-width="3"/>
+    <rect x="44" y="26" width="12" height="8" rx="1" fill="url(#gSteel)" stroke="#000"/>
+  </symbol>
+
+  <symbol id="i-injcase" viewBox="0 0 100 100">
+    <rect x="12" y="22" width="76" height="60" rx="6" fill="url(#gRed)" stroke="#1c0403" stroke-width="2.5"/>
+    <path d="M18 28 H82" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+    <rect x="22" y="44" width="56" height="24" rx="4" fill="#2a0705" stroke="#000" stroke-width="1.5"/>
+    <path d="M28 56 H66" stroke="#111" stroke-width="7" stroke-linecap="round"/><path d="M28 56 H66" stroke="url(#gSteel)" stroke-width="4" stroke-linecap="round"/>
+    <rect x="44" y="16" width="12" height="8" rx="2" fill="url(#gPoly)" stroke="#000"/>
+  </symbol>
+
+  <symbol id="i-propital" viewBox="0 0 100 100">
+    <g transform="rotate(-40 50 50)">
+      <rect x="40" y="8" width="20" height="70" rx="6" fill="url(#gSteelH)" stroke="#060606" stroke-width="2.5"/>
+      <rect x="40" y="30" width="20" height="26" fill="#2f8f5a" stroke="#0a2a1a" stroke-width="1.5"/>
+      <path d="M44 34 H56 M44 40 H52" stroke="#e0f2e6" stroke-width="2"/>
+      <rect x="40" y="70" width="20" height="10" rx="2" fill="#e6a020" stroke="#2a1a02" stroke-width="1.5"/>
+      <path d="M44 12 V72" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+    </g>
+  </symbol>
+
+  <symbol id="i-key" viewBox="0 0 100 100">
+    <g transform="rotate(-35 50 50)">
+      <circle cx="50" cy="22" r="15" fill="url(#gBrass)" stroke="#2a1d06" stroke-width="2.5"/>
+      <circle cx="50" cy="22" r="5" fill="#1a1a1a" stroke="#000"/>
+      <path d="M45 36 L55 36 L55 88 L45 88 Z" fill="url(#gBrass)" stroke="#2a1d06" stroke-width="2"/>
+      <path d="M55 64 H64 V70 H58 V76 H66 V82 H55" fill="url(#gBrass)" stroke="#2a1d06" stroke-width="2"/>
+      <path d="M48 40 V84" stroke="#fff" stroke-opacity=".45" stroke-width="1.5"/>
+    </g>
+  </symbol>
+  <symbol id="i-key2" viewBox="0 0 100 100">
+    <g transform="rotate(-35 50 50)">
+      <rect x="36" y="8" width="28" height="26" rx="6" fill="url(#gPoly)" stroke="#050505" stroke-width="2.5"/>
+      <circle cx="50" cy="18" r="4" fill="#0a0a0a"/>
+      <path d="M45 34 L55 34 L55 90 L45 90 Z" fill="url(#gSteelH)" stroke="#060606" stroke-width="2"/>
+      <path d="M55 60 H63 V66 H58 V74 H64 V80 H55" fill="url(#gSteelH)" stroke="#060606" stroke-width="2"/>
+    </g>
+  </symbol>
+
+  <symbol id="i-intel" viewBox="0 0 100 200">
+    <path d="M16 20 L76 14 L86 180 L22 186 Z" fill="url(#gPaper)" stroke="#060606" stroke-width="2" stroke-linejoin="round" opacity=".9"/>
+    <path d="M12 26 L80 22 L86 188 L18 192 Z" fill="url(#gTan)" stroke="#120c04" stroke-width="2.5" stroke-linejoin="round"/>
+    <rect x="30" y="56" width="40" height="24" fill="#e7dfc8" stroke="#3c2e18" stroke-width="1.5" transform="rotate(-3 50 68)"/>
+    <path d="M34 64 H66 M34 72 H58" stroke="#8a2a20" stroke-width="2.5" transform="rotate(-3 50 68)"/>
+    <path d="M18 34 L76 30" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+    <path d="M60 120 L82 118" stroke="#3c2e18" stroke-width="3"/>
+  </symbol>
+
+  <symbol id="i-flash" viewBox="0 0 100 100">
+    <g transform="rotate(-35 50 50)">
+      <rect x="38" y="30" width="24" height="56" rx="5" fill="url(#gPoly)" stroke="#050505" stroke-width="2.5"/>
+      <rect x="41" y="12" width="18" height="20" fill="url(#gSteel)" stroke="#060606" stroke-width="2"/>
+      <rect x="45" y="17" width="4" height="4" fill="#222"/><rect x="51" y="17" width="4" height="4" fill="#222"/>
+      <path d="M42 34 V82" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+      <circle cx="50" cy="74" r="3" fill="#2fb0ff"/>
+    </g>
+  </symbol>
+
+  <symbol id="i-diary" viewBox="0 0 100 200">
+    <rect x="18" y="16" width="66" height="170" rx="4" fill="url(#gBrown)" stroke="#070402" stroke-width="2.5"/>
+    <rect x="14" y="16" width="10" height="170" rx="3" fill="#2a1a0c" stroke="#070402" stroke-width="2"/>
+    <path d="M84 24 V178" stroke="url(#gPaper)" stroke-width="4"/>
+    <rect x="32" y="40" width="40" height="20" fill="none" stroke="#c9a678" stroke-opacity=".6" stroke-width="1.5"/>
+    <path d="M28 22 H78" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+    <path d="M58 16 V70 L64 64 L70 70 V16" fill="#8a2a20" stroke="#2a0705"/>
+  </symbol>
+
+  <symbol id="i-ms2000" viewBox="0 0 100 100">
+    <rect x="28" y="34" width="44" height="56" rx="8" fill="url(#gYellow)" stroke="#2a1f02" stroke-width="2.5"/>
+    <rect x="34" y="42" width="32" height="20" rx="3" fill="url(#gGlass)" stroke="#000" stroke-width="1.5"/>
+    <path d="M38 46 L52 46 L40 58 Z" fill="#fff" opacity=".35"/>
+    <rect x="44" y="12" width="12" height="24" rx="2" fill="url(#gPoly)" stroke="#000" stroke-width="1.5"/>
+    <circle cx="50" cy="76" r="5" fill="url(#gPoly)" stroke="#000"/>
+    <path d="M32 40 V84" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+  </symbol>
+
+  <symbol id="i-jammer" viewBox="0 0 100 100">
+    <rect x="16" y="40" width="68" height="46" rx="4" fill="url(#gPoly)" stroke="#050505" stroke-width="2.5"/>
+    <path d="M24 12 L28 42 M42 6 L44 42 M58 6 L56 42 M76 12 L72 42" stroke="#050505" stroke-width="6" stroke-linecap="round"/>
+    <path d="M24 12 L28 42 M42 6 L44 42 M58 6 L56 42 M76 12 L72 42" stroke="#4a4e51" stroke-width="3" stroke-linecap="round"/>
+    <rect x="24" y="50" width="30" height="14" fill="#14201a" stroke="#000"/>
+    <circle cx="68" cy="58" r="4" fill="#3ad15a" stroke="#000"/>
+    <path d="M20 44 H80" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+  </symbol>
+
+  <!-- ghost line icons for empty slots -->
+  <symbol id="g-mask" viewBox="0 0 100 100"><path d="M50 10 C26 10 18 32 20 56 C22 80 36 92 50 92 C64 92 78 80 80 56 C82 32 74 10 50 10 Z M30 42 C38 36 46 38 46 46 C40 50 34 50 30 42 Z M70 42 C62 36 54 38 54 46 C60 50 66 50 70 42 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+  <symbol id="g-rifle" viewBox="0 0 320 100"><path d="M8 40 L60 34 L60 58 L30 68 L8 68 Z M60 40 H90 V52 H60 M88 30 H178 V44 H172 V58 L150 60 L144 64 L162 92 L144 96 L140 64 L122 64 L114 90 L96 88 L102 62 L88 56 Z M178 32 H250 V50 H178 M250 37 H312 V44 H250 M104 22 V10 H140 V22" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+  <symbol id="g-box" viewBox="0 0 100 100"><path d="M20 30 L50 16 L80 30 L80 70 L50 84 L20 70 Z M20 30 L50 44 L80 30 M50 44 V84" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+  <symbol id="g-grenade" viewBox="0 0 100 100"><path d="M26 54 C26 34 38 26 50 26 C62 26 74 34 74 54 C74 76 62 92 50 92 C38 92 26 76 26 54 Z M42 14 H58 V26 H42 Z M58 18 C70 20 74 34 72 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+
+  <!-- ui icons -->
+  <symbol id="u-shield" viewBox="0 0 16 18"><path d="M8 1 L15 3.5 V9 C15 13 11.5 16 8 17 C4.5 16 1 13 1 9 V3.5 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+</defs>
+</svg>
+
+<main class="stage">
+  <img class="frame" src="raid.jpg" alt="" width="1920" height="1080">
+  <div class="shade"></div>
+  <div class="ui">
+    <h1 class="sr">Inventory, gear tab, in raid</h1>
+
+    <nav class="topbar" aria-label="Character screens">
+      <div class="tabs">
+        <button class="tab" type="button"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="5.5" r="3"/><path d="M3 16 C3 11.5 15 11.5 15 16"/></svg>Overall</button>
+        <button class="tab" type="button" aria-current="page"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 2 L7 2 L8 5 L10 5 L11 2 L13 2 L14 6 L16 7 V16 H2 V7 L4 6 Z"/><path d="M5 10 V14 M9 10 V14 M13 10 V14"/></svg>Gear</button>
+        <button class="tab" type="button"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 2 H11 V7 H16 V11 H11 V16 H7 V11 H2 V7 H7 Z"/></svg>Health</button>
+        <button class="tab" type="button"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 15 L6 9 L10 12 L16 3"/><path d="M12 3 H16 V7"/></svg>Skills</button>
+        <button class="tab" type="button"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4 L6.5 2 L11.5 4 L16 2 V14 L11.5 16 L6.5 14 L2 16 Z M6.5 2 V14 M11.5 4 V16"/></svg>Map</button>
+        <button class="tab" type="button"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="2" width="12" height="14"/><path d="M6 6 H12 M6 9 H12 M6 12 H10"/></svg>Tasks</button>
+      </div>
+      <button class="back" type="button" id="back"><kbd>TAB</kbd>BACK</button>
+    </nav>
+
+    <!-- original operator silhouette behind the equipment column -->
+    <svg class="body" viewBox="0 0 560 880" aria-hidden="true">
+      <path d="M280 28 C244 28 228 52 228 78 C228 96 232 110 240 118 L240 138 C206 146 170 154 152 172 C126 198 120 250 116 300 L100 430 C96 460 92 500 96 520 L120 524 C126 494 134 460 142 430 L168 330 L174 420 C172 470 176 510 182 540 L176 640 L184 780 L178 840 L240 846 L246 790 L252 640 L270 556 L290 556 L306 640 L312 790 L318 846 L380 840 L374 780 L382 640 L376 540 C382 510 388 470 386 420 L392 330 L418 430 C426 460 434 494 440 524 L464 520 C468 500 464 460 460 430 L444 300 C440 250 434 198 408 172 C390 154 354 146 320 138 L320 118 C328 110 332 96 332 78 C332 52 316 28 280 28 Z" fill="url(#gBody)" stroke="#5a5d58" stroke-opacity=".35" stroke-width="2.5"/>
+      <path d="M232 70 C232 40 254 26 280 26 C306 26 328 40 328 70 L334 76 L226 76 Z" fill="#141615"/>
+      <path d="M182 180 L378 180 L384 330 L176 330 Z" fill="#101211" opacity=".9"/>
+      <path d="M190 200 H370 M190 240 H370 M190 280 H370" stroke="#232624" stroke-width="3"/>
+      <g fill="#4a0d0a" opacity=".8">
+        <path d="M300 214 C312 206 330 212 326 226 C338 230 334 246 320 242 C314 254 296 250 300 238 C288 236 288 220 300 214 Z"/>
+        <circle cx="338" cy="252" r="5"/><circle cx="292" cy="258" r="3.5"/><circle cx="344" cy="208" r="3"/>
+        <path d="M206 600 C216 590 236 596 232 612 C244 620 232 636 220 628 C210 640 196 630 202 618 C192 612 196 600 206 600 Z"/>
+        <circle cx="240" cy="640" r="4"/><circle cx="196" cy="648" r="3"/>
+        <path d="M360 470 C368 464 380 470 376 480 C384 488 372 496 364 490 C356 496 350 486 356 480 C350 474 354 468 360 470 Z"/>
+        <path d="M150 400 C156 396 164 400 162 408 C166 414 158 418 152 414 C146 418 142 410 146 406 C142 402 146 398 150 400 Z"/>
+      </g>
+    </svg>
+
+    <!-- ===== equipment column ===== -->
+    <section aria-label="Equipment">
+      <div class="blk" style="left:calc(var(--u)*88);top:calc(var(--u)*62)"><span class="head">Earpiece</span>
+        <button type="button" class="slot full it-like" data-name="Peltor ComTac 2 headset"><svg class="art" aria-hidden="true"><use href="#i-headset"/></svg><span class="nm">ComTac 2</span></button></div>
+      <div class="blk" style="left:calc(var(--u)*230);top:calc(var(--u)*62)"><span class="head">Headwear</span>
+        <button type="button" class="slot full" data-name="6B47 Ratnik-BSh helmet (Olive Drab)"><svg class="art" aria-hidden="true"><use href="#i-helmet"/></svg><svg class="shield" aria-hidden="true"><use href="#u-shield"/></svg><span class="nm">6B47</span><span class="dur num">27.4/30</span></button></div>
+      <div class="blk" style="left:calc(var(--u)*372);top:calc(var(--u)*62)"><span class="head">Face cover</span>
+        <div class="slot empty"><svg class="ghost" aria-hidden="true"><use href="#g-mask"/></svg><span class="sr">Empty</span></div></div>
+
+      <div class="blk" style="left:calc(var(--u)*88);top:calc(var(--u)*228)"><span class="head">Armband</span>
+        <button type="button" class="slot full" data-name="Armband (Blue)"><svg class="art" aria-hidden="true"><use href="#i-armband"/></svg><span class="nm">Blue</span></button></div>
+      <div class="blk" style="left:calc(var(--u)*230);top:calc(var(--u)*228)"><span class="head">Body armor</span>
+        <button type="button" class="slot full" data-name="6B13 assault armor (Digital Flora)"><svg class="art" aria-hidden="true"><use href="#i-armor"/></svg><svg class="shield" aria-hidden="true"><use href="#u-shield"/></svg><span class="nm">6B13</span><span class="dur num">41.6/47</span></button></div>
+      <div class="blk" style="left:calc(var(--u)*372);top:calc(var(--u)*228)"><span class="head">Eyewear</span>
+        <button type="button" class="slot full" data-name="6B34 anti-fragmentation glasses"><svg class="art" aria-hidden="true"><use href="#i-glasses"/></svg><svg class="shield" aria-hidden="true"><use href="#u-shield"/></svg><span class="nm">6B34</span><span class="dur num">7.0/8</span></button></div>
+
+      <div class="blk" style="left:calc(var(--u)*88);top:calc(var(--u)*394)"><span class="head">On sling</span>
+        <button type="button" class="slot wide full" data-name="Colt M4A1 5.56x45 assault rifle"><svg class="art" viewBox="0 0 320 100" aria-hidden="true"><use href="#i-m4"/></svg><span class="key">2</span><span class="nm">M4A1<small>556x45</small></span><span class="mode">AUTO</span><span class="ammo num"><b>?</b><span>/30</span></span></button></div>
+      <div class="blk" style="left:calc(var(--u)*88);top:calc(var(--u)*560)"><span class="head">On back</span>
+        <div class="slot wide empty"><svg class="ghost" viewBox="0 0 320 100" style="inset:14% 8%;width:84%;height:72%" aria-hidden="true"><use href="#g-rifle"/></svg><span class="key" style="background:#3a3b38;color:#9a988e">3</span><span class="sr">Empty</span></div></div>
+
+      <div class="blk" style="left:calc(var(--u)*88);top:calc(var(--u)*726)"><span class="head">Holster</span>
+        <button type="button" class="slot half full" data-name="Glock 17 9x19 pistol"><svg class="art" viewBox="0 0 160 100" style="inset:14% 12%;width:76%;height:72%" aria-hidden="true"><use href="#i-glock"/></svg><span class="key">1</span><span class="nm">GL17<small>9x19</small></span><span class="mode">SEMI</span><span class="ammo num"><b>17</b><span>/17</span></span></button></div>
+      <div class="blk" style="left:calc(var(--u)*301);top:calc(var(--u)*726)"><span class="head">Scabbard</span>
+        <button type="button" class="slot half full" data-name="6Kh5 Bayonet"><svg class="art" viewBox="0 0 200 100" style="inset:16% 8%;width:84%;height:68%" aria-hidden="true"><use href="#i-knife"/></svg><span class="key">V</span><span class="nm">6Kh5</span></button></div>
+    </section>
+
+    <!-- stats under the equipment column -->
+    <div class="stats num" aria-label="Character status">
+      <div class="stat over" title="Carry weight over the 40 kg limit"><svg viewBox="0 0 18 18" fill="none" stroke="#c9c7bd" stroke-width="1.6"><path d="M6 6 C6 2 12 2 12 6"/><path d="M4 6 H14 L16 16 H2 Z"/></svg><b>43.8</b><span>KG/40</span></div>
+      <div class="stat hpc" title="Health"><svg viewBox="0 0 18 18" fill="currentColor"><path d="M6.5 1.5 H11.5 V6.5 H16.5 V11.5 H11.5 V16.5 H6.5 V11.5 H1.5 V6.5 H6.5 Z"/></svg><b>412</b><span>/440</span></div>
+      <div class="stat wtc" title="Hydration"><svg viewBox="0 0 18 18" fill="currentColor"><path d="M9 1.5 C9 1.5 3.5 8 3.5 11.5 C3.5 14.5 6 16.5 9 16.5 C12 16.5 14.5 14.5 14.5 11.5 C14.5 8 9 1.5 9 1.5 Z"/></svg><b>72</b><span>/100</span></div>
+      <div class="stat enc" title="Energy"><svg viewBox="0 0 18 18" fill="currentColor"><path d="M10.5 1 L3.5 10 H8.5 L7 17 L14.5 7.5 H9.5 Z"/></svg><b>81</b><span>/100</span></div>
+    </div>
+
+    <!-- ===== containers column ===== -->
+    <section aria-label="Containers">
+      <div class="blk" style="left:calc(var(--u)*560);top:calc(var(--u)*62)"><span class="head">Tactical rig</span>
+        <div class="crow">
+          <button type="button" class="cbox" data-name="ANA Tactical Alpha chest rig"><svg class="art" aria-hidden="true"><use href="#i-rig"/></svg><span class="nm">Alpha</span></button>
+          <div class="subs">
+            <div class="grid" style="--w:1;--h:2"><button type="button" class="it" style="grid-area:1/1/span 2/span 1" data-name="5.56x45 Magpul PMAG 30 GEN M3 30-round magazine"><svg class="art" viewBox="0 0 100 200" aria-hidden="true"><use href="#i-pmag"/></svg><span class="nm">PMAG</span><span class="dur num">30/30</span></button></div>
+            <div class="grid" style="--w:1;--h:2"><button type="button" class="it" style="grid-area:1/1/span 2/span 1" data-name="5.56x45 Magpul PMAG 30 GEN M3 30-round magazine"><svg class="art" viewBox="0 0 100 200" aria-hidden="true"><use href="#i-pmag"/></svg><span class="nm">PMAG</span><span class="dur num">30/30</span></button></div>
+            <div class="grid" style="--w:1;--h:2"><button type="button" class="it" style="grid-area:1/1/span 2/span 1" data-name="5.56x45 Magpul PMAG 30 GEN M3 30-round magazine, not checked"><svg class="art" viewBox="0 0 100 200" aria-hidden="true"><use href="#i-pmag"/></svg><span class="nm">PMAG</span><span class="dur num chk">?/30</span></button></div>
+            <div class="grid" style="--w:1;--h:2"><button type="button" class="it o" style="grid-area:1/1/span 1/span 1" data-name="RGD-5 hand grenade"><svg class="art" aria-hidden="true"><use href="#i-rgd5"/></svg><span class="key">9</span><span class="nm">RGD-5</span></button></div>
+            <div class="stack">
+              <div class="grid" style="--w:1;--h:1"><button type="button" class="it o" data-name="F-1 hand grenade"><svg class="art" aria-hidden="true"><use href="#i-f1"/></svg><span class="key">8</span><span class="nm">F-1</span></button></div>
+              <div class="grid" style="--w:1;--h:1"><button type="button" class="it r" data-name="Esmarch tourniquet"><svg class="art" aria-hidden="true"><use href="#i-esmarch"/></svg><span class="key">6</span><span class="nm">Esm.</span><span class="dur num res">8/8</span></button></div>
+            </div>
+            <div class="stack">
+              <div class="grid" style="--w:1;--h:1"><button type="button" class="it" data-name="9x19 Glock 17 standard 17-round magazine"><svg class="art" aria-hidden="true"><use href="#i-glmag"/></svg><span class="nm">GL17</span><span class="dur num">17/17</span></button></div>
+              <div class="grid" style="--w:1;--h:1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk" style="left:calc(var(--u)*560);top:calc(var(--u)*212)"><span class="head">Pockets</span>
+        <div class="subs">
+          <div class="grid" style="--w:1;--h:1"><button type="button" class="it r" data-name="AFAK tactical individual first aid kit"><svg class="art" aria-hidden="true"><use href="#i-afak"/></svg><span class="key">4</span><span class="nm">AFAK</span><span class="dur num res">400/400</span></button></div>
+          <div class="grid" style="--w:1;--h:1"><button type="button" class="it r" data-name="CALOK-B hemostatic applicator"><svg class="art" aria-hidden="true"><use href="#i-calok"/></svg><span class="key">5</span><span class="nm">CALOK</span><span class="dur num res">3/3</span></button></div>
+          <div class="grid" style="--w:1;--h:1"><button type="button" class="it r" data-name="Morphine injector"><svg class="art" aria-hidden="true"><use href="#i-morphine"/></svg><span class="key">7</span><span class="nm">Morph.</span></button></div>
+          <div class="grid" style="--w:1;--h:1"></div>
+        </div>
+      </div>
+      <div class="blk" style="left:calc(var(--u)*836);top:calc(var(--u)*212)"><span class="head">Special slots</span>
+        <div class="subs">
+          <div class="grid" style="--w:1;--h:1"><button type="button" class="it k" data-name="MS2000 Marker"><svg class="art" aria-hidden="true"><use href="#i-ms2000"/></svg><span class="nm">MS2000</span></button></div>
+          <div class="grid" style="--w:1;--h:1"><button type="button" class="it k" data-name="Signal Jammer"><svg class="art" aria-hidden="true"><use href="#i-jammer"/></svg><span class="nm">Jammer</span></button></div>
+          <div class="grid" style="--w:1;--h:1;background-image:repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 calc(var(--u)*2), transparent calc(var(--u)*2) calc(var(--u)*8))"><svg class="ghost" aria-hidden="true"><use href="#g-box"/></svg></div>
+        </div>
+      </div>
+
+      <div class="blk" style="left:calc(var(--u)*560);top:calc(var(--u)*306)"><span class="head">Backpack</span>
+        <div class="crow">
+          <button type="button" class="cbox" data-name="Pilgrim tourist backpack"><svg class="art" aria-hidden="true"><use href="#i-backpack"/></svg><span class="nm">Pilgrim</span></button>
+          <div class="grid" style="--w:5;--h:7" id="pack">
+            <button type="button" class="it" style="grid-area:1/1/span 2/span 1" data-name="Bottle of water (0.6L)"><svg class="art" viewBox="0 0 100 200" aria-hidden="true"><use href="#i-water"/></svg><span class="nm">Water</span><span class="dur num">60/60</span></button>
+            <button type="button" class="it r" style="grid-area:1/2/span 2/span 1" data-name="Salewa first aid kit"><svg class="art" viewBox="0 0 100 200" aria-hidden="true"><use href="#i-salewa"/></svg><span class="nm">Salewa</span><span class="dur num res">400/400</span></button>
+            <button type="button" class="it v hot" id="docsItem" style="grid-area:1/3/span 1/span 2" data-name="Documents case" aria-expanded="true" aria-controls="docsWin"><svg class="art" viewBox="0 0 200 100" aria-hidden="true"><use href="#i-docs"/></svg><span class="nm">Docs</span></button>
+            <button type="button" class="it o" style="grid-area:1/5/span 1/span 1" data-name="Can of beef stew (Large)"><svg class="art" aria-hidden="true"><use href="#i-tushonka"/></svg><span class="nm">Tushonka</span></button>
+            <button type="button" class="it v" style="grid-area:2/3/span 1/span 2" data-name="Graphics card"><svg class="art" viewBox="0 0 200 100" aria-hidden="true"><use href="#i-gpu"/></svg><span class="nm">GPU</span></button>
+            <button type="button" class="it v" id="ledx" style="grid-area:2/5/span 1/span 1" data-name="LEDX Skin Transilluminator"><svg class="art" aria-hidden="true"><use href="#i-ledx"/></svg><span class="nm">LEDX</span></button>
+            <button type="button" class="it" style="grid-area:3/1/span 2/span 1" data-name="5.56x45 Magpul PMAG 30 GEN M3 30-round magazine, not checked"><svg class="art" viewBox="0 0 100 200" aria-hidden="true"><use href="#i-pmag"/></svg><span class="nm">PMAG</span><span class="dur num chk">?/30</span></button>
+            <button type="button" class="it v" style="grid-area:3/2/span 1/span 1" data-name="Physical Bitcoin"><svg class="art" aria-hidden="true"><use href="#i-btc"/></svg><span class="nm">0.2BTC</span></button>
+            <button type="button" class="it v" style="grid-area:3/3/span 1/span 1" data-name="Roler Submariner gold wrist watch"><svg class="art" aria-hidden="true"><use href="#i-roler"/></svg><span class="nm">Roler</span></button>
+            <button type="button" class="it a" style="grid-area:3/4/span 1/span 1" data-name="5.56x45mm M855A1"><svg class="art" aria-hidden="true"><use href="#i-ammo"/></svg><span class="nm">M855A1</span><span class="dur num">60</span></button>
+            <button type="button" class="it o" style="grid-area:3/5/span 2/span 1" data-name="Gas analyzer"><svg class="art" viewBox="0 0 100 200" aria-hidden="true"><use href="#i-gasan"/></svg><span class="nm">GasAn</span></button>
+            <button type="button" class="it o" style="grid-area:4/2/span 1/span 1" data-name="Bolts"><svg class="art" aria-hidden="true"><use href="#i-bolts"/></svg><span class="nm">Bolts</span></button>
+            <button type="button" class="it o" style="grid-area:4/3/span 1/span 1" data-name="Corrugated hose"><svg class="art" aria-hidden="true"><use href="#i-hose"/></svg><span class="nm">Hose</span></button>
+            <button type="button" class="it o" style="grid-area:4/4/span 1/span 1" data-name="Bundle of wires"><svg class="art" aria-hidden="true"><use href="#i-wires"/></svg><span class="nm">Wires</span></button>
+            <button type="button" class="it o" style="grid-area:5/1/span 1/span 1" data-name="Duct tape"><svg class="art" aria-hidden="true"><use href="#i-tape"/></svg><span class="nm">Tape</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="blk" style="left:calc(var(--u)*560);top:calc(var(--u)*736)"><span class="head">Pouch</span>
+        <div class="crow">
+          <button type="button" class="cbox" data-name="Secure container Gamma"><svg class="art" aria-hidden="true"><use href="#i-case"/></svg><span class="nm">Gamma</span></button>
+          <div class="grid" style="--w:3;--h:3">
+            <button type="button" class="it v" style="grid-area:1/1" data-name="Gingy keychain"><svg class="art" aria-hidden="true"><use href="#i-keytool"/></svg><span class="nm">Keytool</span></button>
+            <button type="button" class="it v" style="grid-area:1/2" data-name="Injector case"><svg class="art" aria-hidden="true"><use href="#i-injcase"/></svg><span class="nm">Injectors</span></button>
+            <button type="button" class="it r" style="grid-area:1/3" data-name="Propital regenerative stimulant injector"><svg class="art" aria-hidden="true"><use href="#i-propital"/></svg><span class="nm">Propital</span></button>
+            <button type="button" class="it k" style="grid-area:2/1" data-name="ZB-014 key"><svg class="art" aria-hidden="true"><use href="#i-key"/></svg><span class="nm">ZB-014</span></button>
+            <button type="button" class="it v" style="grid-area:2/2" data-name="Physical Bitcoin"><svg class="art" aria-hidden="true"><use href="#i-btc"/></svg><span class="nm">0.2BTC</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- opened container: floating window -->
+    <section class="win" id="docsWin" aria-labelledby="docsTitle">
+      <div class="win-top">
+        <svg viewBox="0 0 200 100" aria-hidden="true" style="width:calc(var(--u)*30)"><use href="#i-docs"/></svg>
+        <h2 id="docsTitle">Documents case</h2>
+        <button type="button" class="x" id="docsClose" aria-label="Close documents case"><svg viewBox="0 0 14 14" stroke="currentColor" stroke-width="2.4"><path d="M2 2 L12 12 M12 2 L2 12"/></svg></button>
+      </div>
+      <label class="search"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="4.2"/><path d="M9.2 9.2 L13 13"/></svg><span class="sr">Search in container</span><input type="search" placeholder="Search"></label>
+      <div class="grid" style="--w:4;--h:4">
+        <button type="button" class="it k" style="grid-area:1/1/span 2/span 1" data-name="Intelligence folder"><svg class="art" viewBox="0 0 100 200" aria-hidden="true"><use href="#i-intel"/></svg><span class="nm">Intel</span></button>
+        <button type="button" class="it k" style="grid-area:1/2" data-name="Secure Flash drive"><svg class="art" aria-hidden="true"><use href="#i-flash"/></svg><span class="nm">Flash</span></button>
+        <button type="button" class="it k" style="grid-area:1/3" data-name="ZB-016 key"><svg class="art" aria-hidden="true"><use href="#i-key2"/></svg><span class="nm">ZB-016</span></button>
+        <button type="button" class="it k" style="grid-area:1/4" data-name="Shturman's stash key"><svg class="art" aria-hidden="true"><use href="#i-key"/></svg><span class="nm">Shturman</span></button>
+        <button type="button" class="it k" style="grid-area:2/2/span 2/span 1" data-name="Diary"><svg class="art" viewBox="0 0 100 200" aria-hidden="true"><use href="#i-diary"/></svg><span class="nm">Diary</span></button>
+      </div>
+    </section>
+
+    <!-- quick use -->
+    <section class="qu" aria-label="Quick use">
+      <span class="head">Quick use</span>
+      <div class="q wpn"><div class="cell"><svg class="art" viewBox="0 0 200 100" aria-hidden="true"><use href="#i-knife"/></svg><span class="key">V</span></div><span class="lbl">6Kh5</span></div>
+      <div class="q wpn"><div class="cell"><svg class="art" viewBox="0 0 160 100" aria-hidden="true"><use href="#i-glock"/></svg><span class="key">1</span></div><span class="lbl">GL17</span></div>
+      <div class="q wpn"><div class="cell"><svg class="art" viewBox="0 0 320 100" aria-hidden="true"><use href="#i-m4"/></svg><span class="key">2</span></div><span class="lbl">M4A1</span></div>
+      <div class="q"><div class="cell empty"><span class="key" style="background:#3a3b38;color:#9a988e">3</span></div><span class="lbl">&nbsp;</span></div>
+      <div class="q"><div class="cell"><svg class="art" aria-hidden="true"><use href="#i-afak"/></svg><span class="key">4</span></div><span class="lbl">AFAK</span></div>
+      <div class="q"><div class="cell"><svg class="art" aria-hidden="true"><use href="#i-calok"/></svg><span class="key">5</span></div><span class="lbl">CALOK-B</span></div>
+      <div class="q"><div class="cell"><svg class="art" aria-hidden="true"><use href="#i-esmarch"/></svg><span class="key">6</span></div><span class="lbl">Esmarch</span></div>
+      <div class="q"><div class="cell"><svg class="art" aria-hidden="true"><use href="#i-morphine"/></svg><span class="key">7</span></div><span class="lbl">Morphine</span></div>
+      <div class="q"><div class="cell"><svg class="art" aria-hidden="true"><use href="#i-f1"/></svg><span class="key">8</span></div><span class="lbl">F-1</span></div>
+      <div class="q"><div class="cell"><svg class="art" aria-hidden="true"><use href="#i-rgd5"/></svg><span class="key">9</span></div><span class="lbl">RGD-5</span></div>
+      <div class="q"><div class="cell empty"><svg class="ghost" aria-hidden="true"><use href="#g-grenade"/></svg><span class="key" style="background:#3a3b38;color:#9a988e">0</span></div><span class="lbl">&nbsp;</span></div>
+    </section>
+
+    <footer class="bottombar">
+      <button class="bb" type="button"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3 H7 C8 3 8 4 8 4 V14 C8 13 7 13 7 13 H2 Z M14 3 H9 C8 3 8 4 8 4 V14 C8 13 9 13 9 13 H14 Z"/></svg>Handbook</button>
+      <button class="bb" type="button"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3 H14 V11 H6 L3 14 V11 H2 Z"/></svg>Messenger</button>
+      <button class="bb" type="button"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8 C3.5 4 12.5 4 14.5 8 C12.5 12 3.5 12 1.5 8 Z"/><circle cx="8" cy="8" r="2"/></svg>Watchlist</button>
+    </footer>
+
+    <div class="tip" id="tip" hidden></div>
+  </div>
+</main>
+
+<script>
+(() => {
+  const ui = document.querySelector('.ui');
+  const tip = document.getElementById('tip');
+  const win = document.getElementById('docsWin');
+  const docsItem = document.getElementById('docsItem');
+  const scale = () => ui.getBoundingClientRect().width / 1920;
+
+  // hover/focus name tag, as the game shows the full item name
+  function show(el) {
+    const name = el.dataset.name; if (!name) return;
+    const r = el.getBoundingClientRect(), p = ui.getBoundingClientRect(), s = scale();
+    tip.textContent = name; tip.hidden = false;
+    tip.style.left = ((r.right - p.left) / s + 8) * s + 'px';
+    tip.style.top = ((r.top - p.top) / s + 6) * s + 'px';
+  }
+  function hide() { tip.hidden = true; }
+  ui.addEventListener('pointerover', e => { const el = e.target.closest('[data-name]'); el ? show(el) : hide(); });
+  ui.addEventListener('pointerleave', hide);
+  ui.addEventListener('focusin', e => { const el = e.target.closest('[data-name]'); el ? show(el) : hide(); });
+
+  function setWin(open) {
+    win.hidden = !open;
+    docsItem.setAttribute('aria-expanded', String(open));
+    docsItem.classList.toggle('hot', open);
+  }
+  document.getElementById('docsClose').addEventListener('click', () => { setWin(false); docsItem.focus(); });
+  docsItem.addEventListener('dblclick', () => setWin(win.hidden));
+  docsItem.addEventListener('keydown', e => { if (e.key === 'Enter') setWin(win.hidden); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !win.hidden) { setWin(false); docsItem.focus(); } });
+
+  // initial state for the capture: name tag on the LEDX, as if hovered
+  const ledx = document.getElementById('ledx');
+  if (!matchMedia('(hover: none)').matches) { ledx.classList.add('hot'); show(ledx); }
+})();
+</script>
+</body>
+</html>

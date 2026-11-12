@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brasa — Argentine Wood-Fire Grill, Madrid</title>
+<meta name="description" content="Brasa is an Argentine parrilla in Madrid. Wood-fired cuts, wines from Mendoza and a counter facing the fire.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..600&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --coal:#120f0d;
+    --coal-2:#1b1714;
+    --coal-3:#26201c;
+    --bone:#efe6d6;
+    --bone-dim:#b9ad9a;
+    --ash:#7d7368;
+    --ember:#e0602c;
+    --ember-deep:#a63a17;
+    --line:rgba(239,230,214,.14);
+    --serif:"Fraunces", Georgia, serif;
+    --sans:"Inter Tight", system-ui, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, monospace;
+    --gutter:clamp(20px,5vw,72px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--coal);color:var(--bone);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--ember);color:var(--coal)}
+
+  .label{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ember)}
+  .wrap{padding-inline:var(--gutter);max-width:1440px;margin-inline:auto}
+
+  /* NAV */
+  nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px var(--gutter);transition:background .4s,padding .4s}
+  nav.solid{background:rgba(18,15,13,.88);backdrop-filter:blur(12px);padding-block:14px;border-bottom:1px solid var(--line)}
+  .logo{font-family:var(--serif);font-weight:600;font-size:26px;letter-spacing:-.02em;font-variation-settings:"opsz" 144}
+  .logo span{color:var(--ember)}
+  nav ul{display:flex;gap:36px;list-style:none;font-size:14px;letter-spacing:.04em}
+  nav ul a{opacity:.8;transition:opacity .2s}
+  nav ul a:hover{opacity:1}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:500;font-size:14px;letter-spacing:.06em;text-transform:uppercase;padding:14px 22px;border:1px solid var(--ember);color:var(--bone);background:transparent;cursor:pointer;transition:background .25s,color .25s}
+  .btn:hover{background:var(--ember);color:var(--coal)}
+  .btn.fill{background:var(--ember);color:var(--coal)}
+  .btn.fill:hover{background:var(--bone);border-color:var(--bone)}
+
+  /* HERO */
+  .hero{position:relative;min-height:100svh;display:grid;align-items:end;overflow:hidden}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:settle 2.4s cubic-bezier(.2,.7,.2,1) forwards;filter:saturate(1.1) contrast(1.05)}
+  @keyframes settle{to{transform:scale(1)}}
+  .hero::after{content:"";position:absolute;inset:0;background:
+      linear-gradient(180deg,rgba(18,15,13,.55) 0%,rgba(18,15,13,.1) 35%,rgba(18,15,13,.85) 80%,var(--coal) 100%),
+      radial-gradient(ellipse at 70% 60%,transparent 30%,rgba(18,15,13,.5) 100%)}
+  .hero-inner{position:relative;z-index:2;padding:0 var(--gutter) clamp(48px,8vh,96px);display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;max-width:1440px;margin-inline:auto;width:100%}
+  .hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(64px,13vw,220px);line-height:.86;letter-spacing:-.045em;font-variation-settings:"opsz" 144}
+  .hero h1 em{font-style:italic;color:var(--ember);font-weight:400}
+  .hero p.lede{max-width:440px;color:var(--bone-dim);font-size:18px;margin-top:28px}
+  .hero-meta{display:grid;gap:14px;text-align:right;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim)}
+  .hero-meta b{color:var(--bone);font-weight:500}
+
+  /* MARQUEE */
+  .ticker{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:18px 0;background:var(--coal)}
+  .ticker div{display:inline-block;animation:scroll 40s linear infinite;font-family:var(--serif);font-style:italic;font-size:24px;color:var(--bone-dim)}
+  .ticker span{color:var(--ember);margin:0 28px;font-style:normal}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* INTRO */
+  .intro{padding-block:clamp(90px,14vw,180px)}
+  .intro-grid{display:grid;grid-template-columns:200px 1fr;gap:48px}
+  .intro h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,64px);line-height:1.08;letter-spacing:-.025em;max-width:22ch}
+  .intro h2 em{color:var(--ember);font-style:italic}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);margin-top:80px;border-top:1px solid var(--line)}
+  .pillar{padding:32px 32px 0 0}
+  .pillar + .pillar{padding-left:32px;border-left:1px solid var(--line)}
+  .pillar .n{font-family:var(--mono);font-size:12px;color:var(--ash)}
+  .pillar h3{font-family:var(--serif);font-weight:400;font-size:26px;margin:14px 0 10px;letter-spacing:-.01em}
+  .pillar p{color:var(--bone-dim);font-size:15.5px;max-width:34ch}
+
+  /* CARTA */
+  .carta{background:var(--bone);color:var(--coal);padding-block:clamp(90px,12vw,160px)}
+  .carta .label{color:var(--ember-deep)}
+  .carta-head{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-bottom:72px}
+  .carta-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(56px,9vw,140px);line-height:.9;letter-spacing:-.04em;margin-top:16px}
+  .carta-head h2 em{font-style:italic;color:var(--ember-deep)}
+  .carta-head p{max-width:360px;color:#5a5048}
+  .carta-body{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,6vw,96px);align-items:start}
+  .carta-figure{position:sticky;top:100px}
+  .carta-figure img{aspect-ratio:4/5;object-fit:cover;width:100%}
+  .carta-figure figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7a6f64;margin-top:12px;display:flex;justify-content:space-between}
+  .menu-group + .menu-group{margin-top:56px}
+  .menu-group h3{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ember-deep);padding-bottom:14px;border-bottom:1px solid rgba(18,15,13,.85);margin-bottom:6px}
+  .dish{display:grid;grid-template-columns:1fr auto;gap:6px 24px;padding:22px 0;border-bottom:1px solid rgba(18,15,13,.14)}
+  .dish h4{font-family:var(--serif);font-weight:500;font-size:24px;letter-spacing:-.01em;line-height:1.2}
+  .dish h4 small{font-family:var(--sans);font-size:13px;font-weight:500;color:#8a7d70;margin-left:8px;letter-spacing:.02em}
+  .dish .price{font-family:var(--serif);font-size:22px;font-variant-numeric:oldstyle-nums}
+  .dish p{grid-column:1/-1;color:#5a5048;font-size:15.5px;max-width:52ch}
+  .dish.sig h4::before{content:"✦";color:var(--ember-deep);font-size:14px;margin-right:10px;vertical-align:3px}
+  .carta-note{margin-top:40px;font-size:14px;color:#7a6f64}
+
+  /* FUEGO */
+  .fuego{position:relative;padding-block:clamp(90px,12vw,170px);overflow:hidden}
+  .fuego::before{content:"";position:absolute;width:900px;height:900px;left:-300px;top:10%;background:radial-gradient(circle,rgba(224,96,44,.18),transparent 60%);pointer-events:none}
+  .fuego-top{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,96px);align-items:end;margin-bottom:96px}
+  .fuego h2{font-family:var(--serif);font-weight:300;font-size:clamp(56px,9vw,140px);line-height:.9;letter-spacing:-.04em;margin-top:16px}
+  .fuego h2 em{font-style:italic;color:var(--ember)}
+  .fuego-top p{color:var(--bone-dim);font-size:18px;max-width:46ch}
+  .fuego-media{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;margin-bottom:96px}
+  .fuego-media img{width:100%;height:100%;object-fit:cover}
+  .fuego-media .a{aspect-ratio:16/10}
+  .fuego-media .b{aspect-ratio:auto}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+  .step{padding:32px 28px 0 0;border-top:1px solid var(--line);position:relative}
+  .step::before{content:"";position:absolute;top:-1px;left:0;width:48px;height:2px;background:var(--ember)}
+  .step .t{font-family:var(--mono);font-size:12px;color:var(--ember);letter-spacing:.12em}
+  .step h3{font-family:var(--serif);font-weight:400;font-size:30px;margin:12px 0 12px;letter-spacing:-.015em}
+  .step p{color:var(--bone-dim);font-size:15.5px;max-width:30ch}
+  .temp{display:flex;align-items:baseline;gap:6px;margin-top:22px;font-family:var(--serif);font-size:44px;font-weight:300;color:var(--bone)}
+  .temp small{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ash);text-transform:uppercase}
+
+  /* BARRA + VINOS */
+  .barra{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;background:var(--coal-2)}
+  .barra-img{position:relative;overflow:hidden}
+  .barra-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .barra-copy{padding:clamp(56px,8vw,120px) var(--gutter);display:flex;flex-direction:column;justify-content:center}
+  .barra-copy h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.03em;margin:16px 0 24px}
+  .barra-copy h2 em{font-style:italic;color:var(--ember)}
+  .barra-copy > p{color:var(--bone-dim);max-width:44ch}
+  .wines{margin-top:44px;border-top:1px solid var(--line)}
+  .wine{display:grid;grid-template-columns:1fr auto;padding:16px 0;border-bottom:1px solid var(--line);gap:4px 20px}
+  .wine b{font-family:var(--serif);font-weight:400;font-size:20px}
+  .wine span{font-family:var(--mono);font-size:12px;color:var(--ash);letter-spacing:.08em;text-transform:uppercase}
+  .wine i{font-family:var(--serif);font-style:normal;font-size:18px;color:var(--bone-dim);grid-row:1/3;grid-column:2;align-self:center}
+
+  /* RESERVAS */
+  .reservas{padding-block:clamp(90px,12vw,170px);position:relative}
+  .res-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(40px,7vw,120px)}
+  .reservas h2{font-family:var(--serif);font-weight:300;font-size:clamp(56px,8vw,124px);line-height:.92;letter-spacing:-.04em;margin:16px 0 28px}
+  .reservas h2 em{font-style:italic;color:var(--ember)}
+  .info{display:grid;gap:28px;margin-top:48px}
+  .info div{border-top:1px solid var(--line);padding-top:16px;display:grid;grid-template-columns:120px 1fr;gap:20px}
+  .info dt{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);padding-top:3px}
+  .info dd{color:var(--bone)}
+  form{background:var(--coal-2);border:1px solid var(--line);padding:clamp(28px,4vw,52px)}
+  form h3{font-family:var(--serif);font-weight:400;font-size:28px;margin-bottom:6px}
+  form > p{color:var(--bone-dim);font-size:15px;margin-bottom:32px}
+  .row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .row.two{grid-template-columns:1fr 1fr}
+  .field{display:grid;gap:8px;margin-bottom:20px}
+  .field label{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim)}
+  .field input,.field select,.field textarea{background:transparent;border:0;border-bottom:1px solid rgba(239,230,214,.3);color:var(--bone);font:inherit;font-size:17px;padding:10px 0;border-radius:0;outline:none;transition:border-color .2s;color-scheme:dark;width:100%}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ember)}
+  .field select option{background:var(--coal-2)}
+  .seats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+  .seats input{position:absolute;opacity:0;pointer-events:none}
+  .seats label{flex:1;min-width:130px;border:1px solid var(--line);padding:14px 16px;cursor:pointer;transition:border-color .2s,background .2s}
+  .seats label b{display:block;font-family:var(--serif);font-weight:400;font-size:19px}
+  .seats label span{font-size:13px;color:var(--ash)}
+  .seats input:checked + label{border-color:var(--ember);background:rgba(224,96,44,.08)}
+  .seats input:focus-visible + label{outline:2px solid var(--ember);outline-offset:2px}
+  .form-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:8px}
+  .form-foot small{color:var(--ash);font-size:13px;max-width:32ch}
+  .confirm{display:none;margin-top:24px;padding:18px;border-left:2px solid var(--ember);background:rgba(224,96,44,.07);font-size:15px}
+  .confirm.show{display:block}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:64px var(--gutter) 40px;max-width:1440px;margin-inline:auto}
+  .foot-big{font-family:var(--serif);font-weight:300;font-size:clamp(80px,22vw,340px);line-height:.8;letter-spacing:-.06em;color:var(--coal-3);user-select:none}
+  .foot-big span{color:var(--ember-deep)}
+  .foot-row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:40px;font-size:14px;color:var(--ash)}
+  .foot-row a:hover{color:var(--bone)}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .rv{opacity:1;transform:none;transition:none}
+    .hero img,.ticker div{animation:none}
+  }
+
+  /* RESPONSIVE */
+  @media (max-width:960px){
+    nav ul{display:none}
+    .hero-inner{grid-template-columns:1fr}
+    .hero-meta{text-align:left;grid-template-columns:1fr 1fr}
+    .intro-grid{grid-template-columns:1fr;gap:20px}
+    .pillars{grid-template-columns:1fr}
+    .pillar,.pillar + .pillar{padding:28px 0;border-left:0;border-bottom:1px solid var(--line)}
+    .carta-body{grid-template-columns:1fr}
+    .carta-figure{position:static}
+    .carta-figure img{aspect-ratio:4/3}
+    .fuego-top{grid-template-columns:1fr}
+    .fuego-media{grid-template-columns:1fr}
+    .fuego-media .b{aspect-ratio:4/3}
+    .steps{grid-template-columns:1fr 1fr;gap:40px 24px}
+    .barra{grid-template-columns:1fr}
+    .barra-img{min-height:60vw}
+    .res-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    body{font-size:16px}
+    .steps{grid-template-columns:1fr}
+    .row,.row.two{grid-template-columns:1fr;gap:0}
+    .info div{grid-template-columns:1fr;gap:4px}
+    nav .btn{padding:10px 14px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#top" class="logo">Brasa<span>.</span></a>
+  <ul>
+    <li><a href="#carta">The Menu</a></li>
+    <li><a href="#fuego">The Fire</a></li>
+    <li><a href="#barra">The Bar</a></li>
+    <li><a href="#reservas">Visit</a></li>
+  </ul>
+  <a href="#reservas" class="btn">Book a table</a>
+</nav>
+
+<header class="hero" id="top">
+  <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=2400&q=80&auto=format&fit=crop" alt="Meat cooking over open flames on an iron grill">
+  <div class="hero-inner">
+    <div>
+      <p class="label">Parrilla argentina · Madrid</p>
+      <h1>Cooked<br>by <em>fire</em>,<br>nothing else.</h1>
+      <p class="lede">Argentine cuts over quebracho and holm oak embers, wines from Mendoza, and a counter so close to the grill you feel the heat on your face.</p>
+    </div>
+    <div class="hero-meta">
+      <div>Calle de Ponzano, Chamberí</div>
+      <div>Tue–Sun · <b>From 13:30</b></div>
+      <div><a href="#reservas" class="btn fill">Reserve →</a></div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div>Bife de chorizo <span>✦</span> Malbec de Luján de Cuyo <span>✦</span> Provoleta <span>✦</span> Chimichurri de la casa <span>✦</span> Asado de tira <span>✦</span> Mollejas <span>✦</span> Fuego de leña <span>✦</span> Bife de chorizo <span>✦</span> Malbec de Luján de Cuyo <span>✦</span> Provoleta <span>✦</span> Chimichurri de la casa <span>✦</span> Asado de tira <span>✦</span> Mollejas <span>✦</span> Fuego de leña <span>✦</span></div>
+</div>
+
+<section class="intro wrap">
+  <div class="intro-grid">
+    <p class="label rv">Est. 2024</p>
+    <div>
+      <h2 class="rv">No gas. No shortcuts. Just wood, iron, salt — and the patience of an <em>asador</em> who learned it in Buenos Aires.</h2>
+      <div class="pillars">
+        <div class="pillar rv"><span class="n">01</span><h3>Cuts a la leña</h3><p>Grass-fed beef, dry-aged in house for 30 to 45 days, cooked only over wood embers.</p></div>
+        <div class="pillar rv"><span class="n">02</span><h3>Wines of Mendoza</h3><p>Over 120 labels from Luján de Cuyo, Valle de Uco and beyond — many poured by the glass.</p></div>
+        <div class="pillar rv"><span class="n">03</span><h3>The fire counter</h3><p>Fourteen stools facing the grill. Watch every cut go on, turn and rest.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="carta" id="carta">
+  <div class="wrap">
+    <div class="carta-head">
+      <div>
+        <p class="label">The Menu</p>
+        <h2>La <em>carta</em></h2>
+      </div>
+      <p>A short menu that changes with the market and the butcher. Cuts are priced per piece and served with salt flakes and our chimichurri.</p>
+    </div>
+
+    <div class="carta-body">
+      <figure class="carta-figure rv">
+        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1400&q=80&auto=format&fit=crop" alt="Sliced grilled steak with rosemary">
+        <figcaption><span>Bife de chorizo, 400 g</span><span>Medium rare, always</span></figcaption>
+      </figure>
+
+      <div>
+        <div class="menu-group rv">
+          <h3>Para empezar</h3>
+          <div class="dish"><h4>Provoleta</h4><span class="price">14</span><p>Provolone melted on the iron, oregano, chilli flakes, grilled sourdough.</p></div>
+          <div class="dish"><h4>Empanadas salteñas <small>×2</small></h4><span class="price">9</span><p>Hand-cut beef, cumin, spring onion. Baked in the wood oven.</p></div>
+          <div class="dish"><h4>Mollejas</h4><span class="price">18</span><p>Crisp sweetbreads finished over embers, lemon and coarse salt.</p></div>
+        </div>
+
+        <div class="menu-group rv">
+          <h3>Del fuego</h3>
+          <div class="dish sig"><h4>Bife de chorizo <small>400 g</small></h4><span class="price">38</span><p>Argentine sirloin, 35-day dry age. The cut that built the house.</p></div>
+          <div class="dish"><h4>Ojo de bife <small>350 g</small></h4><span class="price">42</span><p>Ribeye with a deep marbling, seared hard and rested on the edge of the fire.</p></div>
+          <div class="dish sig"><h4>Asado de tira</h4><span class="price">29</span><p>Cross-cut short ribs, four hours over low embers. Smoky, sticky, unapologetic.</p></div>
+          <div class="dish"><h4>Entraña</h4><span class="price">31</span><p>Outside skirt, salted and grilled fast. Our cooks' favourite.</p></div>
+          <div class="dish"><h4>Tomahawk para compartir <small>1.2 kg</small></h4><span class="price">110</span><p>For two or three. Carved at the counter.</p></div>
+        </div>
+
+        <div class="menu-group rv">
+          <h3>Al lado</h3>
+          <div class="dish"><h4>Papas a la provenzal</h4><span class="price">8</span><p>Twice-cooked potatoes, garlic, parsley.</p></div>
+          <div class="dish"><h4>Verduras de la brasa</h4><span class="price">11</span><p>Seasonal vegetables charred in the ashes, salsa criolla.</p></div>
+        </div>
+
+        <p class="carta-note">Prices in euros, VAT included. Ask us about today's cuts on the board.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fuego wrap" id="fuego">
+  <div class="fuego-top">
+    <div>
+      <p class="label rv">How we cook</p>
+      <h2 class="rv">El <em>fuego</em></h2>
+    </div>
+    <p class="rv">The grill is lit at ten every morning and never touched by gas. Our asador builds the fire in one corner, then rakes the embers under the iron as each cut needs them — more heat for a crust, less for a long, slow render.</p>
+  </div>
+
+  <div class="fuego-media rv">
+    <img class="a" src="https://images.unsplash.com/photo-1558030006-450675393462?w=1800&q=80&auto=format&fit=crop" alt="Steaks searing on a grill">
+    <img class="b" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=1000&q=80&auto=format&fit=crop" alt="Grilled meat served on a wooden board">
+  </div>
+
+  <div class="steps">
+    <div class="step rv"><span class="t">10:00</span><h3>The wood</h3><p>Quebracho and holm oak, burned down for two hours until only glowing embers remain.</p><div class="temp">800°<small>at the core of the fire</small></div></div>
+    <div class="step rv"><span class="t">13:00</span><h3>The iron</h3><p>Embers raked under a V-grooved grill that channels fat away from the flame. No flare-ups, no soot.</p><div class="temp">300°<small>at the grill</small></div></div>
+    <div class="step rv"><span class="t">Each order</span><h3>The cut</h3><p>Salt only — coarse, just before it hits the iron. Turned once. Never pressed.</p><div class="temp">54°<small>inside, medium rare</small></div></div>
+    <div class="step rv"><span class="t">Before serving</span><h3>The rest</h3><p>Every piece rests on warm wood for as long as it cooked, so the juices stay in the meat.</p><div class="temp">8′<small>average rest</small></div></div>
+  </div>
+</section>
+
+<section class="barra" id="barra">
+  <div class="barra-img">
+    <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1600&q=80&auto=format&fit=crop" alt="Red wine being poured into a glass">
+  </div>
+  <div class="barra-copy">
+    <p class="label rv">The bar</p>
+    <h2 class="rv">A seat facing the <em>fire</em>, a glass of Mendoza.</h2>
+    <p class="rv">Fourteen stools along the grill, kept for walk-ins every night. Order a cut, a glass, and watch it cook. Our sommelier pours a rotating list straight from the Andes.</p>
+    <div class="wines rv">
+      <div class="wine"><b>Malbec, Luján de Cuyo</b><span>Old vines · 2020</span><i>9 / 48</i></div>
+      <div class="wine"><b>Cabernet Franc, Valle de Uco</b><span>Gualtallary · 2021</span><i>12 / 62</i></div>
+      <div class="wine"><b>Bonarda, San Rafael</b><span>Unoaked · 2022</span><i>8 / 40</i></div>
+      <div class="wine"><b>Torrontés, Cafayate</b><span>High-altitude white · 2023</span><i>8 / 38</i></div>
+    </div>
+  </div>
+</section>
+
+<section class="reservas wrap" id="reservas">
+  <div class="res-grid">
+    <div>
+      <p class="label rv">Reservations</p>
+      <h2 class="rv">Pull up<br>a <em>chair</em>.</h2>
+      <p class="rv" style="color:var(--bone-dim);max-width:40ch">Tables are released 30 days in advance. For groups of more than eight, or to book the whole fire counter, write to us.</p>
+      <dl class="info rv">
+        <div><dt>Address</dt><dd>Calle de Ponzano 47<br>28003 Madrid</dd></div>
+        <div><dt>Hours</dt><dd>Tue–Sat · 13:30–16:00, 20:00–00:00<br>Sun · 13:30–17:00 · Mon closed</dd></div>
+        <div><dt>Contact</dt><dd><a href="tel:+34910000000">+34 910 000 000</a><br><a href="mailto:hola@brasa.madrid">hola@brasa.madrid</a></dd></div>
+      </dl>
+    </div>
+
+    <form id="resForm" class="rv" novalidate>
+      <h3>Book a table</h3>
+      <p>We'll confirm by email within the hour.</p>
+
+      <div class="seats" role="radiogroup" aria-label="Seating">
+        <input type="radio" name="seat" id="s1" value="dining room" checked><label for="s1"><b>Dining room</b><span>Tables for 2–8</span></label>
+        <input type="radio" name="seat" id="s2" value="fire counter"><label for="s2"><b>Fire counter</b><span>Facing the grill</span></label>
+      </div>
+
+      <div class="row">
+        <div class="field"><label for="date">Date</label><input type="date" id="date" required></div>
+        <div class="field"><label for="time">Time</label>
+          <select id="time" required>
+            <option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option>
+            <option>20:00</option><option>20:30</option><option selected>21:00</option><option>21:30</option><option>22:00</option><option>22:30</option>
+          </select>
+        </div>
+        <div class="field"><label for="guests">Guests</label>
+          <select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
+        </div>
+      </div>
+      <div class="row two">
+        <div class="field"><label for="name">Name</label><input type="text" id="name" autocomplete="name" required></div>
+        <div class="field"><label for="email">Email</label><input type="email" id="email" autocomplete="email" required></div>
+      </div>
+      <div class="field"><label for="notes">Notes (optional)</label><input type="text" id="notes" placeholder="Allergies, celebrations…"></div>
+
+      <div class="form-foot">
+        <small>Cancellations free up to 24 hours before your booking.</small>
+        <button class="btn fill" type="submit">Request table →</button>
+      </div>
+      <div class="confirm" id="confirm" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-big" aria-hidden="true">Brasa<span>.</span></div>
+  <div class="foot-row">
+    <span>© 2026 Brasa Parrilla · Madrid</span>
+    <span><a href="#">Instagram</a> · <a href="#">Gift cards</a> · <a href="#">Private events</a></span>
+  </div>
+</footer>
+
+<script>
+  // nav background on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('solid', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // reveal on scroll
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  }), {threshold:.15});
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // reservation form
+  const date = document.getElementById('date');
+  const today = new Date(); const max = new Date(); max.setDate(max.getDate()+30);
+  const iso = d => d.toISOString().slice(0,10);
+  date.min = iso(today); date.max = iso(max); date.value = iso(today);
+
+  document.getElementById('resForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const f = e.target.elements, c = document.getElementById('confirm');
+    const name = f.name.value.trim(), email = f.email.value.trim();
+    if (!name || !/^\S+@\S+\.\S+$/.test(email) || !date.value){
+      c.textContent = 'Please add your name, a valid email and a date.';
+      c.classList.add('show'); return;
+    }
+    const seat = e.target.querySelector('input[name=seat]:checked').value;
+    const d = new Date(date.value + 'T12:00').toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+    c.textContent = `Thank you, ${name}. We've received your request for ${f.guests.value} at the ${seat} on ${d}, ${f.time.value}. A confirmation is on its way to ${email}.`;
+    c.classList.add('show');
+  });
+</script>
+</body>
+</html>

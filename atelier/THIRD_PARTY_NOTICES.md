@@ -14,3 +14,7 @@ Per-family measurements of Google Fonts typefaces (width, x-height, stem weight,
 
 Links to photographs hosted on Wikimedia Commons, each under CC0, public domain, CC BY or CC BY-SA. Every entry records its author, licence and source page; credit the author and licence wherever a photo is used.
 
+
+## Live media search (`scripts/media.mjs`)
+
+Searches public APIs at run time and stores nothing: Openverse and Wikimedia Commons (no key), and Pexels, Pixabay and Unsplash when the user supplies their own free API keys. Each result is under its source's licence (Creative Commons, public domain, or the Pexels, Pixabay and Unsplash licences) and is printed with its author, licence and source page; credit them wherever an asset is used.

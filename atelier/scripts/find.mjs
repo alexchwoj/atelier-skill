@@ -58,6 +58,32 @@ function score(e) {
   return s;
 }
 
+// The kind of thing the words ask for, when no --kind is given: "landing" should not rank a contact
+// form or a receipt email above real landings just because they share mood words.
+const IMPLIED = [
+  [/\b(landing|homepage|home page|website|site|one-?pager)\b/, ['landing', 'hero', 'page']],
+  [/\bhero\b|first screen|above the fold/, ['hero', 'landing']],
+  [/\b(pricing|faq|testimonials?|cta|features?|blog)\b/, ['section', 'landing']],
+  [/\b(button|card|modal|table|input|form|carousel|chat)\b/, ['component', 'section']],
+  [/\b(login|sign[- ]?in|sign[- ]?up|auth)\b/, ['auth']],
+  [/\bdashboard\b|admin panel/, ['dashboard']],
+  [/\bfooter\b/, ['footer']],
+  [/\b(navbar|nav|navigation|menu)\b/, ['navbar']],
+];
+const query = terms.join(' ');
+const wantKinds = opts.kind ? null : [...new Set(IMPLIED.filter(([re]) => re.test(query)).flatMap(([, k]) => k))];
+const OFF_TOPIC = /\b(e-?mail|receipt|newsletter|slide|deck|presentation|print|invoice)\b/;
+
+function quality(e) {
+  if (e.type !== 'prompt') return 0;
+  let q = (e.spec || 0);
+  if ((e.deco || 0) > 0.4) q -= Math.min(4, e.deco * 3); // leans on decorative numbering
+  if (wantKinds && wantKinds.length) q += wantKinds.includes(e.kind) ? 3 : -4;
+  if (e.media && (!wantKinds || wantKinds.some((k) => k === 'hero' || k === 'landing'))) q += 1;
+  if (!OFF_TOPIC.test(query) && OFF_TOPIC.test(`${e.title} ${e.category}`.toLowerCase())) q -= 5;
+  return q;
+}
+
 let rows = catalog.filter((e) =>
   (!opts.type || e.type === opts.type) &&
   (!opts.kind || e.kind === opts.kind) &&
@@ -65,7 +91,7 @@ let rows = catalog.filter((e) =>
   (!opts.mood || (e.moods || []).includes(opts.mood)) &&
   (!opts.stack || (e.stack || []).includes(opts.stack)));
 
-rows = rows.map((e) => ({ e, s: terms.length ? score(e) : 1 })).filter((r) => r.s > 0);
+rows = rows.map((e) => ({ e, s: terms.length ? score(e) : 1 })).filter((r) => r.s > 0).map((r) => ({ e: r.e, s: r.s + quality(r.e) }));
 rows.sort((a, b) => b.s - a.s || a.e.kb - b.e.kb);
 rows = rows.slice(0, Number(opts.limit) || 8);
 

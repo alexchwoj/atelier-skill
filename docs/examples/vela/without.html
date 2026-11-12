@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vela — Brand Identity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,50..100&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --harbor:#1E3B3A;   /* deep sea green: primary ink */
+    --tide:#2F5654;     /* secondary ink */
+    --linen:#F3EEE4;    /* paper */
+    --sailcloth:#E6DCCB;/* soft surface */
+    --ochre:#C58A3E;    /* the set-aside share */
+    --sage:#93A99B;     /* quiet support */
+    --night:#122423;    /* dark ground */
+    --serif:"Fraunces", Georgia, serif;
+    --sans:"Instrument Sans", system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-font-smoothing:antialiased}
+  body{background:var(--linen);color:var(--harbor);font-family:var(--sans);font-size:16px;line-height:1.55}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  .eyebrow{font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--tide);opacity:.8}
+
+  /* ---------- Hero: primary logo ---------- */
+  .hero{min-height:100vh;min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;padding:28px 0 32px}
+  .hero header,.hero footer{display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .hero-logo{display:flex;align-items:center;justify-content:center}
+  .lockup{display:flex;align-items:center;gap:clamp(18px,3vw,40px)}
+  .lockup .mark{width:clamp(110px,17vw,220px);height:auto}
+  .wordmark{font-family:var(--serif);font-weight:380;font-variation-settings:"opsz" 144,"SOFT" 100;
+    letter-spacing:-.035em;line-height:.8;font-size:clamp(112px,19vw,250px);color:var(--harbor);padding-bottom:.06em}
+  .hero footer p{max-width:34ch;color:var(--tide);font-size:15px}
+
+  section{padding:120px 0}
+  .sec-head{display:grid;grid-template-columns:220px 1fr;gap:32px;margin-bottom:56px;align-items:baseline}
+  .sec-head h2{font-family:var(--serif);font-weight:400;font-variation-settings:"opsz" 72,"SOFT" 100;font-size:clamp(32px,4vw,46px);letter-spacing:-.02em;line-height:1.05}
+  .sec-head p{grid-column:2;max-width:56ch;color:var(--tide);margin-top:14px}
+
+  /* ---------- Concept ---------- */
+  .concept{border-top:1px solid rgba(30,59,58,.15)}
+  .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .construct{background:var(--sailcloth);border-radius:4px;aspect-ratio:1;display:grid;place-items:center;position:relative}
+  .construct svg{width:62%}
+  .notes{display:grid;gap:28px}
+  .notes div{border-top:1px solid rgba(30,59,58,.18);padding-top:16px}
+  .notes h3{font:600 15px/1.3 var(--sans);margin-bottom:6px}
+  .notes p{color:var(--tide);font-size:15px;max-width:46ch}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:1px}
+
+  /* ---------- Dark ---------- */
+  .dark{background:var(--night);color:var(--linen)}
+  .dark .eyebrow,.dark .sec-head p{color:var(--sage)}
+  .dark-stage{display:flex;justify-content:center;padding:80px 0 40px}
+  .dark .wordmark{color:var(--linen);font-size:clamp(84px,12vw,160px)}
+  .dark .lockup .mark{width:clamp(84px,11vw,140px)}
+  .variants{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:64px}
+  .variant{border-radius:4px;padding:36px 24px 18px;display:flex;flex-direction:column;align-items:center;gap:28px}
+  .variant .lockup{gap:14px}
+  .variant .mark{width:52px}
+  .variant .wordmark{font-size:64px}
+  .variant small{font-size:12px;letter-spacing:.06em;opacity:.7;align-self:flex-start}
+  .v1{background:var(--harbor);color:var(--linen)} .v1 .wordmark{color:var(--linen)}
+  .v2{background:var(--ochre);color:var(--night)} .v2 .wordmark{color:var(--night)}
+  .v3{background:var(--linen);color:var(--harbor)} .v3 .wordmark{color:var(--harbor)}
+
+  /* ---------- App icon ---------- */
+  .icons{display:flex;flex-wrap:wrap;align-items:flex-end;gap:40px}
+  .icon{display:flex;flex-direction:column;align-items:center;gap:14px;font-size:13px;color:var(--tide)}
+  .app{border-radius:22.5%;display:grid;place-items:center;box-shadow:0 1px 2px rgba(18,36,35,.12),0 12px 30px -12px rgba(18,36,35,.35)}
+  .app svg{width:64%}
+  .app.light{background:var(--linen);outline:1px solid rgba(30,59,58,.1)}
+  .app.deep{background:radial-gradient(120% 90% at 30% 15%, #2A4C4A 0%, var(--harbor) 55%, var(--night) 100%)}
+  .phone{background:linear-gradient(180deg,#d9cfbd,#c9bfae);border-radius:28px;padding:28px 24px;display:grid;grid-template-columns:repeat(4,58px);gap:22px 18px}
+  .phone .slot{width:58px;height:58px;border-radius:13px;background:rgba(255,255,255,.35)}
+  .phone .app{width:58px;height:58px;border-radius:13px;box-shadow:0 4px 10px -4px rgba(0,0,0,.3)}
+  .phone .lbl{grid-column:auto;font-size:11px;text-align:center;margin-top:-16px;color:#3b3a35}
+
+  /* ---------- Palette ---------- */
+  .palette{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 1fr 1fr;gap:10px;min-height:340px}
+  .sw{border-radius:4px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;font-size:13px}
+  .sw b{font:500 17px/1.2 var(--serif);font-variation-settings:"opsz" 30,"SOFT" 100;display:block;margin-bottom:4px}
+  .sw span{opacity:.75;font-variant-numeric:tabular-nums}
+  .ratio{margin-top:28px;display:flex;height:14px;border-radius:7px;overflow:hidden}
+  .ratio div{height:100%}
+  .ratio-cap{display:flex;justify-content:space-between;font-size:13px;color:var(--tide);margin-top:10px}
+
+  /* ---------- Type ---------- */
+  .type-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .spec{background:var(--sailcloth);border-radius:4px;padding:36px}
+  .spec .big{font-size:120px;line-height:1;margin:18px 0 22px}
+  .spec .serif{font-family:var(--serif);font-weight:380;font-variation-settings:"opsz" 144,"SOFT" 100;letter-spacing:-.03em}
+  .spec .sans{font-family:var(--sans);font-weight:500;letter-spacing:-.02em}
+  .spec dl{display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:14px;color:var(--tide);border-top:1px solid rgba(30,59,58,.18);padding-top:16px}
+  .spec dt{font-weight:600;color:var(--harbor)}
+  .sample{grid-column:1/-1;background:var(--harbor);color:var(--linen);border-radius:4px;padding:56px;display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:center}
+  .sample h3{font-family:var(--serif);font-weight:350;font-variation-settings:"opsz" 144,"SOFT" 100;font-size:clamp(40px,5vw,64px);line-height:1.02;letter-spacing:-.025em}
+  .sample h3 em{font-style:italic;color:#E2B676}
+  .sample p{color:var(--sage);margin-top:18px;max-width:42ch}
+  .card{background:var(--linen);color:var(--harbor);border-radius:14px;padding:24px}
+  .card .row{display:flex;justify-content:space-between;font-size:14px;padding:10px 0;border-bottom:1px solid rgba(30,59,58,.12)}
+  .card .row:last-child{border:0}
+  .card .amt{font-family:var(--serif);font-size:44px;font-variation-settings:"opsz" 144,"SOFT" 100;letter-spacing:-.02em;font-weight:400;line-height:1;margin:6px 0 14px}
+  .card .tag{display:inline-flex;align-items:center;gap:6px}
+  .num{font-variant-numeric:tabular-nums;font-weight:500}
+
+  .foot{padding:48px 0;border-top:1px solid rgba(30,59,58,.15);display:flex;justify-content:space-between;font-size:13px;color:var(--tide)}
+
+  @media (max-width:860px){
+    .wrap{padding:0 20px}
+    section{padding:80px 0}
+    .sec-head,.concept-grid,.type-grid,.sample{grid-template-columns:1fr}
+    .sec-head p{grid-column:1}
+    .variants{grid-template-columns:1fr}
+    .palette{grid-template-columns:1fr 1fr;min-height:0}
+    .sw{min-height:110px}
+    .sw:first-child{grid-column:1/-1;min-height:160px}
+    .sample{padding:32px}
+    .spec .big{font-size:88px}
+    .hero footer{flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<!-- Mark definition: mast, mainsail, and a smaller jib = the share set aside -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="vela-mark" viewBox="0 0 64 64">
+      <!-- mainsail: what you keep -->
+      <path d="M29 7 C 25 18, 17 33, 9 47 L 29 47 Z" fill="var(--main, currentColor)"/>
+      <!-- jib: what you set aside -->
+      <path d="M34 17 C 39 26, 45 37, 51 47 L 34 47 Z" fill="var(--jib, #C58A3E)"/>
+      <!-- hull / horizon -->
+      <path d="M8 53 Q 31.5 60 56 53" fill="none" stroke="var(--main, currentColor)" stroke-width="3.2" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- HERO -->
+<div class="hero wrap">
+  <header>
+    <span class="eyebrow">Vela — Identity v1.0</span>
+    <span class="eyebrow">Primary lockup</span>
+  </header>
+  <div class="hero-logo">
+    <div class="lockup" role="img" aria-label="Vela logo">
+      <svg class="mark" style="--main:var(--harbor)"><use href="#vela-mark"/></svg>
+      <span class="wordmark">vela</span>
+    </div>
+  </div>
+  <footer>
+    <p>Set aside for taxes. Save the rest. Every payment, calmly divided.</p>
+    <span class="eyebrow">Scroll ↓</span>
+  </footer>
+</div>
+
+<!-- CONCEPT -->
+<section class="concept">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">01 — Concept</span>
+      <div>
+        <h2>One vessel, two sails.</h2>
+        <p>Vela means "sail." The mark is a small boat under steady wind: a mainsail for what you keep and a smaller jib for what you set aside. Both move the same boat forward — no alarms, no charts going up and to the right.</p>
+      </div>
+    </div>
+    <div class="concept-grid">
+      <div class="construct">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <g stroke="rgba(30,59,58,.25)" stroke-width=".25" fill="none">
+            <line x1="0" y1="47" x2="64" y2="47"/><line x1="0" y1="7" x2="64" y2="7"/>
+            <line x1="31.5" y1="0" x2="31.5" y2="64"/><line x1="0" y1="17" x2="64" y2="17"/>
+            <circle cx="31.5" cy="30" r="25"/>
+          </g>
+          <use href="#vela-mark" style="--main:var(--harbor)"/>
+        </svg>
+      </div>
+      <div class="notes">
+        <div><h3><span class="dot" style="background:var(--harbor)"></span>Mainsail — what's yours</h3><p>The larger, taller sail. Deep harbor green, the color of still, deep water. It always carries most of the weight.</p></div>
+        <div><h3><span class="dot" style="background:var(--ochre)"></span>Jib — what's set aside</h3><p>Lower and lighter, in warm ochre. It reads roughly a third of the composition — the share most freelancers reserve for tax.</p></div>
+        <div><h3><span class="dot" style="background:var(--sage)"></span>The gap — separation</h3><p>The open channel between sails is the product itself: two pots, clearly divided, never mixed up.</p></div>
+        <div><h3>Hull — steadiness</h3><p>A single soft curve grounds the mark. It's a horizon as much as a boat: calm water, no rush.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DARK -->
+<section class="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">02 — On dark</span>
+      <div>
+        <h2>Night watch.</h2>
+        <p>On dark grounds the mainsail turns to linen and the jib warms slightly so it keeps its glow without shouting.</p>
+      </div>
+    </div>
+    <div class="dark-stage">
+      <div class="lockup" role="img" aria-label="Vela logo, dark version">
+        <svg class="mark" style="--main:var(--linen);--jib:#D69B4E"><use href="#vela-mark"/></svg>
+        <span class="wordmark">vela</span>
+      </div>
+    </div>
+    <div class="variants">
+      <div class="variant v1">
+        <div class="lockup"><svg class="mark" style="--main:var(--linen);--jib:#D69B4E"><use href="#vela-mark"/></svg><span class="wordmark">vela</span></div>
+        <small>On Harbor</small>
+      </div>
+      <div class="variant v2">
+        <div class="lockup"><svg class="mark" style="--main:var(--night);--jib:var(--linen)"><use href="#vela-mark"/></svg><span class="wordmark">vela</span></div>
+        <small>On Ochre</small>
+      </div>
+      <div class="variant v3">
+        <div class="lockup"><svg class="mark" style="--main:var(--harbor);--jib:var(--harbor)"><use href="#vela-mark"/></svg><span class="wordmark">vela</span></div>
+        <small>One color</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP ICON -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">03 — App icon</span>
+      <div>
+        <h2>Small boat, big screen.</h2>
+        <p>The mark alone, sitting low in the tile so the sails have sky above them. Deep harbor is the default; linen is for the alternate icon.</p>
+      </div>
+    </div>
+    <div class="icons">
+      <div class="icon"><div class="app deep" style="width:180px;height:180px"><svg style="--main:var(--linen);--jib:#D69B4E"><use href="#vela-mark"/></svg></div>180 · Default</div>
+      <div class="icon"><div class="app light" style="width:180px;height:180px"><svg style="--main:var(--harbor)"><use href="#vela-mark"/></svg></div>180 · Alternate</div>
+      <div class="icon"><div class="app deep" style="width:88px;height:88px"><svg style="--main:var(--linen);--jib:#D69B4E"><use href="#vela-mark"/></svg></div>88</div>
+      <div class="icon"><div class="app deep" style="width:48px;height:48px"><svg style="--main:var(--linen);--jib:#D69B4E"><use href="#vela-mark"/></svg></div>48</div>
+      <div class="icon"><div class="app deep" style="width:29px;height:29px"><svg style="--main:var(--linen);--jib:#D69B4E"><use href="#vela-mark"/></svg></div>29</div>
+      <div class="icon">
+        <div class="phone" aria-hidden="true">
+          <div class="slot"></div><div class="slot"></div><div class="app deep"><svg style="--main:var(--linen);--jib:#D69B4E"><use href="#vela-mark"/></svg></div><div class="slot"></div>
+          <div class="lbl"></div><div class="lbl"></div><div class="lbl">Vela</div><div class="lbl"></div>
+          <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        </div>
+        On a home screen
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PALETTE -->
+<section style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">04 — Palette</span>
+      <div>
+        <h2>Harbor at dusk.</h2>
+        <p>Low-saturation greens and warm paper instead of electric blue and neon. Ochre is the only warm accent and is reserved for money set aside — so it always means the same thing.</p>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="sw" style="background:var(--harbor);color:var(--linen)"><b>Harbor</b><span>#1E3B3A · Primary ink</span></div>
+      <div class="sw" style="background:var(--tide);color:var(--linen)"><b>Tide</b><span>#2F5654</span></div>
+      <div class="sw" style="background:var(--ochre);color:var(--night)"><b>Ochre</b><span>#C58A3E · Set aside</span></div>
+      <div class="sw" style="background:var(--sage);color:var(--night)"><b>Sage</b><span>#93A99B</span></div>
+      <div class="sw" style="background:var(--sailcloth);color:var(--harbor)"><b>Sailcloth</b><span>#E6DCCB</span></div>
+      <div class="sw" style="background:var(--linen);color:var(--harbor);outline:1px solid rgba(30,59,58,.15);outline-offset:-1px"><b>Linen</b><span>#F3EEE4 · Paper</span></div>
+    </div>
+    <div class="ratio" aria-hidden="true">
+      <div style="flex:55;background:var(--linen);outline:1px solid rgba(30,59,58,.12)"></div>
+      <div style="flex:25;background:var(--harbor)"></div>
+      <div style="flex:10;background:var(--sailcloth)"></div>
+      <div style="flex:6;background:var(--sage)"></div>
+      <div style="flex:4;background:var(--ochre)"></div>
+    </div>
+    <div class="ratio-cap"><span>Usage ratio — mostly paper, ink for structure</span><span>Ochre ≤ 5%</span></div>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">05 — Typography</span>
+      <div>
+        <h2>A soft serif, a plain sans.</h2>
+        <p>Fraunces with its "soft" axis turned up gives the wordmark rounded terminals — friendly, bookish, unhurried. Instrument Sans handles everything functional with tabular figures for amounts.</p>
+      </div>
+    </div>
+    <div class="type-grid">
+      <div class="spec">
+        <span class="eyebrow">Display & wordmark</span>
+        <div class="big serif">Aa</div>
+        <dl><dt>Family</dt><dd>Fraunces</dd><dt>Settings</dt><dd>opsz 144 · SOFT 100 · wght 380</dd><dt>Use</dt><dd>Logo, headlines, large amounts</dd></dl>
+      </div>
+      <div class="spec">
+        <span class="eyebrow">Interface & text</span>
+        <div class="big sans">Aa</div>
+        <dl><dt>Family</dt><dd>Instrument Sans</dd><dt>Weights</dt><dd>400 · 500 · 600</dd><dt>Use</dt><dd>UI, body, labels, numbers</dd></dl>
+      </div>
+      <div class="sample">
+        <div>
+          <h3>You got paid.<br><em>We already set the tax aside.</em></h3>
+          <p>Every time a client pays you, Vela splits it into what you owe, what you save, and what's yours to spend.</p>
+        </div>
+        <div class="card">
+          <span class="eyebrow">Payment received · Oct 28</span>
+          <div class="amt">$4,200.00</div>
+          <div class="row"><span class="tag"><span class="dot" style="background:var(--ochre);margin:0"></span>Taxes (28%)</span><span class="num">$1,176.00</span></div>
+          <div class="row"><span class="tag"><span class="dot" style="background:var(--sage);margin:0"></span>Savings (10%)</span><span class="num">$420.00</span></div>
+          <div class="row"><span class="tag"><span class="dot" style="background:var(--harbor);margin:0"></span>Yours to spend</span><span class="num">$2,604.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap foot"><span>Vela brand identity</span><span>Calm money for people who work for themselves.</span></div>
+
+</body>
+</html>

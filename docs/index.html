@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier: websites that look designed, not generated</title>
+<meta name="description" content="Atelier is an agent skill for Claude Code, Codex, Cursor and Gemini CLI. The same request, built without and with it.">
+<link rel="icon" href="assets/atelier-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fbf9f8;
+    --card: #ffffff;
+    --ink: #141414;
+    --muted: #625c5a;
+    --line: #ebe5e2;
+    --red: #d3122b;
+    --red-hi: #ff7a5c;
+    --radius: 18px;
+    --ease: cubic-bezier(.2, .7, .2, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; overflow-x: clip; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 17px/1.55 "Inter Tight", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-synthesis: none;
+  }
+  ::selection { background: var(--red); color: #fff; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+
+  header { display: flex; align-items: center; justify-content: space-between; padding-block: 22px; }
+  header .logo img { display: block; height: 34px; width: auto; }
+  header nav a { text-decoration: none; font-weight: 500; font-size: 15px; color: var(--muted); padding: 10px 4px; }
+  header nav a:hover { color: var(--ink); }
+
+  .hero { padding-block: clamp(40px, 6vw, 72px) clamp(40px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px 48px; align-items: end; }
+  .hero h1 {
+    font-weight: 600; letter-spacing: -0.045em; line-height: 0.98;
+    font-size: clamp(44px, 6.6vw, 84px); margin: 0; max-width: 13ch; text-wrap: balance;
+  }
+  .hero h1 em { font-style: normal; color: var(--red); }
+  .hero p { color: var(--muted); font-size: clamp(17px, 1.6vw, 20px); max-width: 46ch; margin: 0; text-wrap: pretty; }
+  .install {
+    margin-top: 28px; display: inline-flex; align-items: center; gap: 4px; max-width: 100%;
+    background: var(--ink); color: #fff; border-radius: 14px; padding: 6px 6px 6px 18px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 14px 30px -18px rgba(20,20,20,.55);
+  }
+  .install code { font: 400 15px/1 "JetBrains Mono", ui-monospace, monospace; overflow-x: auto; white-space: nowrap; padding-block: 12px; }
+  .install code span { color: var(--red-hi); }
+  .install button {
+    font: 600 14px/1 "Inter Tight", sans-serif; color: #fff; border: 0; cursor: pointer; white-space: nowrap;
+    background: linear-gradient(160deg, var(--red-hi), var(--red)); border-radius: 10px; padding: 12px 16px; margin-left: 12px; min-height: 44px;
+    transition: transform .2s var(--ease), filter .2s var(--ease);
+  }
+  .install button:hover { filter: brightness(1.06); }
+  .install button:active { transform: scale(.97); }
+  .hero .agents { margin-top: 14px; font-size: 14px; }
+
+  .does ul { list-style: none; margin: 0 0 clamp(40px, 5vw, 64px); padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+  .does li { padding: 22px 24px 4px 0; font-size: 15px; color: var(--muted); text-wrap: pretty; }
+  .does li + li { padding-left: 24px; border-left: 1px solid var(--line); }
+  .does b { display: block; color: var(--ink); font-weight: 600; font-size: 17px; letter-spacing: -0.015em; margin-bottom: 6px; }
+  .does .ic { width: 40px; height: 40px; padding: 9px; border-radius: 11px; color: #fff; background: linear-gradient(160deg, var(--red-hi), var(--red)); box-shadow: 0 8px 18px -10px rgba(200,16,46,.6); display: block; margin-bottom: 14px; }
+  @media (max-width: 1100px) {
+    .does ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .does li:nth-child(odd) { padding-left: 0; border-left: 0; }
+  }
+  .vid { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--line); box-shadow: 0 0 0 1px var(--line); }
+  .vid video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .vid-toggle { position: absolute; right: 14px; bottom: 14px; font: 600 13px/1 inherit; font-family: inherit; padding: 9px 12px; border: 0; border-radius: 999px; background: rgba(20,20,20,.72); color: #fff; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .vid-toggle:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  @media (max-width: 520px) {
+    .does ul { grid-template-columns: minmax(0, 1fr); }
+    .does li, .does li + li { padding: 18px 0 2px; border-left: 0; }
+  }
+  .examples { border-top: 1px solid var(--line); padding-block: clamp(40px, 6vw, 72px); }
+  .examples > h2 { font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; font-size: clamp(30px, 4vw, 48px); margin: 0; max-width: 18ch; }
+  .examples > p { color: var(--muted); max-width: 58ch; margin: 16px 0 0; }
+
+  .ex { margin-top: clamp(48px, 6vw, 80px); }
+  .ex-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 12px 40px; align-items: end; margin-bottom: 20px; }
+  .ex-head h4 { font-weight: 600; letter-spacing: -0.03em; font-size: clamp(22px, 2.4vw, 28px); line-height: 1.15; margin: 0; }
+  .ex-head h4 small { display: block; font-weight: 400; letter-spacing: 0; font-size: 15px; color: var(--muted); margin-top: 4px; }
+  .ex-head blockquote { margin: 0; font-size: 15px; color: var(--muted); border-left: 2px solid var(--red); padding-left: 14px; text-wrap: pretty; }
+
+  .group { margin: clamp(56px, 7vw, 96px) 0 0; padding-top: 18px; border-top: 2px solid var(--ink); font-size: 15px; font-weight: 600; letter-spacing: 0; display: flex; align-items: center; gap: 10px; }
+  .group::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: linear-gradient(160deg, var(--red-hi), var(--red)); }
+  .group + .ex { margin-top: 24px; }
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .jump a { text-decoration: none; font-size: 14px; font-weight: 500; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); }
+  .jump a:hover { border-color: var(--ink); }
+  .ba {
+    --pos: 50%; position: relative; border-radius: var(--radius); overflow: hidden; background: var(--line);
+    aspect-ratio: 16 / 10; box-shadow: 0 0 0 1px var(--line), 0 30px 60px -40px rgba(20,20,20,.45); isolation: isolate;
+  }
+  .shot { border-radius: var(--radius); overflow: hidden; background: var(--line); box-shadow: 0 0 0 1px var(--line), 0 30px 60px -40px rgba(20,20,20,.45); }
+  .shot img { display: block; width: 100%; height: 100%; }
+  .ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .ba .before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); z-index: 1; }
+  .ba .bar { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: #fff; z-index: 2; pointer-events: none; box-shadow: 0 0 0 1px rgba(0,0,0,.12); }
+  .ba .knob {
+    position: absolute; top: 50%; left: var(--pos); z-index: 3; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%;
+    background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,.25); display: grid; place-items: center; pointer-events: none;
+  }
+  .ba .knob svg { width: 22px; height: 22px; color: var(--ink); }
+  .ba .tag {
+    position: absolute; top: 14px; z-index: 3; font-size: 13px; font-weight: 600; padding: 6px 10px; border-radius: 999px;
+    background: rgba(20,20,20,.72); color: #fff; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); pointer-events: none;
+  }
+  .ba .tag.l { left: 14px; }
+  .ba .tag.r { right: 14px; background: var(--red); }
+  .ba input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; z-index: 4; }
+  .ba:has(input:focus-visible) { outline: 2px solid var(--red); outline-offset: 4px; }
+
+  .ex-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 14px; font-size: 14px; color: var(--muted); }
+  .ex-foot a { text-underline-offset: 3px; text-decoration-color: var(--line); }
+  .ex-foot a:hover { color: var(--ink); text-decoration-color: currentColor; }
+  .ex-foot .links { display: flex; gap: 20px; }
+  .ex-foot .links a { padding-block: 10px; }
+
+  footer { background: var(--ink); color: #c9c3c0; margin-top: clamp(40px, 6vw, 72px); }
+  footer .wrap { padding-block: clamp(48px, 7vw, 88px) 32px; }
+  .foot-top { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px 64px; align-items: end; }
+  .foot-top img { height: clamp(44px, 5vw, 64px); width: auto; display: block; }
+  .foot-top p { margin: 22px 0 0; max-width: 40ch; font-size: 17px; color: #c9c3c0; }
+  .foot-cta .install { margin-top: 0; background: #262626; }
+  .foot-cta p { margin: 14px 0 0; font-size: 14px; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 56px; padding-top: 24px; border-top: 1px solid #2b2b2b; font-size: 15px; }
+  .foot-links a { color: #fff; text-decoration: none; padding-block: 10px; }
+  .foot-links a:hover { color: var(--red-hi); }
+  .foot-note { margin: 18px 0 0; font-size: 13px; color: #8e8784; }
+  footer :focus-visible { outline-color: var(--red-hi); }
+  @media (max-width: 760px) { .foot-top { grid-template-columns: minmax(0, 1fr); } }
+
+  @media (max-width: 760px) {
+    .ex-head, .hero { grid-template-columns: minmax(0, 1fr); }
+    .install code { font-size: 13px; }
+  }
+  /* Motion. Everything is visible without JS; the "motion" class is only added when motion is allowed. */
+  .h-line { display: block; overflow: clip; padding-bottom: .06em; margin-bottom: -.06em; }
+  .h-line > span { display: inline-block; }
+  .motion .h-line > span { animation: rise-line .95s cubic-bezier(.2,.75,.15,1) var(--d) both; }
+  .motion .hero-side > * { animation: rise .8s var(--ease) both; }
+  .motion .hero-side > :nth-child(1) { animation-delay: .35s; }
+  .motion .hero-side > :nth-child(2) { animation-delay: .5s; }
+  .motion .hero-side > :nth-child(3) { animation-delay: .62s; }
+  .motion .reveal { opacity: 0; transform: translateY(22px); }
+  .motion .reveal.in { opacity: 1; transform: none; transition: opacity .7s var(--ease), transform .85s var(--ease); transition-delay: var(--d, 0ms); }
+  .does .ic { transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
+  .does li:hover .ic { transform: translateY(-3px) rotate(-6deg) scale(1.06); }
+  .ba, .shot { transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+  .ex:hover .ba, .ex:hover .shot { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--line), 0 40px 70px -40px rgba(20,20,20,.55); }
+  .ba .knob { transition: transform .25s var(--ease); }
+  .ba:hover .knob { transform: scale(1.12); }
+  .install button.done { animation: pop .45s cubic-bezier(.3,1.6,.5,1); }
+  .jump a { transition: border-color .2s var(--ease), transform .2s var(--ease); }
+  .jump a:hover { transform: translateY(-2px); }
+  @keyframes rise-line { from { transform: translateY(105%); } to { transform: none; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes pop { 40% { transform: scale(1.1); } 100% { transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <a class="logo" href="./" aria-label="Atelier home"><img src="assets/atelier-logo-dark.svg" alt="Atelier" width="104" height="34"></a>
+  <nav aria-label="Main"><a href="https://github.com/alexchwoj/atelier-skill">GitHub</a></nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <h1><span class="h-line"><span style="--d:0ms">Websites that</span></span> <span class="h-line"><span style="--d:110ms">look <em>designed,</em></span></span> <span class="h-line"><span style="--d:220ms">not generated.</span></span></h1>
+    <div class="hero-side">
+    <p>Atelier is a design skill for coding agents. It follows proven design prompts, uses real photography and checks its own work in a browser before handing it back.</p>
+    <div class="install">
+      <code><span>$</span> npx github:alexchwoj/atelier-skill</code>
+      <button type="button" id="copy">Copy</button>
+    </div>
+    <p class="agents">Works with Claude Code, Codex, Cursor, OpenCode and Gemini CLI.</p>
+    </div>
+  </section>
+
+  <section class="does wrap" aria-label="What Atelier makes">
+    <ul>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M8 13h8M8 16h5"/></svg><b>Websites and apps</b>Landing pages, full sites, app screens and components, built from 1,200+ proven design prompts.</li>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h12a4 4 0 0 1 3.8 5.3l-.9 2.7a2 2 0 0 1-3.4.6L15 15H9l-2.5 2.6a2 2 0 0 1-3.4-.6l-.9-2.7A4 4 0 0 1 6 9Z"/><path d="M7.5 12v3M6 13.5h3M15.5 12.5h.01M17.5 14h.01"/></svg><b>Game interfaces</b>HUDs, menus, inventories and settings, with gamepad focus and readable type at TV distance.</li>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 10l3 9h8l3-9-7-7Z"/><path d="M12 3v9"/><circle cx="12" cy="13" r="1.5"/></svg><b>Logos and brand</b>A wordmark set in a real font and exported as SVG, with a palette, type pairing and favicon.</li>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17c3 0 4-10 9-10s6 10 9 10"/><circle cx="12" cy="7" r="1.6"/><path d="M3 21h18"/></svg><b>Motion</b>Micro-interactions, transitions, choreographed heroes, animated logos and Lottie files, timed by role and checked in a browser.</li>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 20 9.5-9.5M14 4l1.2 2.8L18 8l-2.8 1.2L14 12l-1.2-2.8L10 8l2.8-1.2L14 4ZM19 14l.7 1.3L21 16l-1.3.7L19 18l-.7-1.3L17 16l1.3-.7L19 14Z"/></svg><b>Reviews and fixes</b>Deslop takes out what reads as machine-made; critique, audit, polish and 17 more commands refine the UI you already have.</li>
+    </ul>
+  </section>
+
+  <section class="examples wrap" aria-labelledby="ex-title">
+    <h2 id="ex-title">Same model. Same request. Without and with Atelier.</h2>
+    <p>Each pair was built by Claude Opus from the exact words quoted, once on its own and once with Atelier installed. Drag across a picture to compare, or open both pages and scroll them. Requests written in Spanish are shown translated; nothing was edited by hand afterwards.</p>
+<!-- EXAMPLES -->
+    <nav class="jump" aria-label="Example types"><a href="#websites">Websites</a><a href="#game-interfaces">Game interfaces</a><a href="#logos-and-brand">Logos and brand</a><a href="#deslop">Deslop</a><a href="#motion">Motion</a></nav>
+    <h3 class="group" id="websites">Websites</h3>
+    <article class="ex" aria-labelledby="ex-kabel-roehre">
+      <div class="ex-head">
+        <h4 id="ex-kabel-roehre">Kabel &amp; Röhre<small>Vintage synth workshop, Berlin · full landing page</small></h4>
+        <blockquote>“Make a landing page for Kabel &amp; Röhre, a Berlin workshop that restores vintage analog synthesizers (Moog, Roland, Korg, ARP) and sells them with a one-year warranty. They also take in customers' gear for repair. I want it premium with lots of personality, nothing generic. Sections: hero, how we restore, instruments for sale, why us, and a form to book a slot and drop off gear.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/kabel-roehre/with.png" alt="Kabel &amp; Röhre built with Atelier" width="1280" height="800">
+        <img class="before" src="examples/kabel-roehre/without.png" alt="Kabel &amp; Röhre built without Atelier" width="1280" height="800">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Kabel &amp; Röhre without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/kabel-roehre/without.html">Open without</a><a href="examples/kabel-roehre/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-casa-lume">
+      <div class="ex-head">
+        <h4 id="ex-casa-lume">Casa Lume<small>Architecture studio, Lisbon · first screen</small></h4>
+        <blockquote>“Casa Lume is an architecture studio in Lisbon that designs concrete-and-timber houses facing the Atlantic. Build the first screen of their landing page (nav + hero). The one action: book a studio visit. Make it look premium.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/casa-lume/with.png" alt="Casa Lume built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/casa-lume/without.png" alt="Casa Lume built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Casa Lume without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/casa-lume/without.html">Open without</a><a href="examples/casa-lume/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-relay">
+      <div class="ex-head">
+        <h4 id="ex-relay">Relay<small>AI agents for freight dispatch · first screen</small></h4>
+        <blockquote>“Relay: AI agents that handle freight dispatch, carrier emails and load booking for logistics teams. Build the first screen of the landing page (nav + hero). The one action: request early access. Make it look premium.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/relay/with.png" alt="Relay built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/relay/without.png" alt="Relay built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Relay without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/relay/without.html">Open without</a><a href="examples/relay/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-koyo">
+      <div class="ex-head">
+        <h4 id="ex-koyo">Kōyō<small>Matcha subscription · first screen</small></h4>
+        <blockquote>“Kōyō: ceremonial-grade matcha from Uji, sold direct to consumers by monthly subscription. Build the first screen of the landing page (nav + hero). The one action: start a subscription. Make it look premium.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/koyo/with.png" alt="Kōyō built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/koyo/without.png" alt="Kōyō built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Kōyō without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/koyo/without.html">Open without</a><a href="examples/koyo/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-brasa">
+      <div class="ex-head">
+        <h4 id="ex-brasa">Brasa<small>Argentine grill, Madrid · full landing page</small></h4>
+        <blockquote>“Make the landing page for Brasa, an Argentine grill in Madrid: wood-fired cuts, Mendoza wines and a counter facing the fire. Make it premium with character. Sections: hero, the menu (a few dishes), the fire (how we cook) and bookings.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/brasa/with.png" alt="Brasa built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/brasa/without.png" alt="Brasa built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Brasa without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/brasa/without.html">Open without</a><a href="examples/brasa/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-cuaderno">
+      <div class="ex-head">
+        <h4 id="ex-cuaderno">Cuaderno<small>Study app for medical students · full landing page</small></h4>
+        <blockquote>“Landing page for Cuaderno, a study app for medical students: it turns notes and PDFs into spaced-repetition flashcards and asks exam-style questions. I want something modern that doesn't look like the typical SaaS. Sections: hero, how it works, a sample of the app, pricing (free and Pro at €6/month) and a final CTA.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/cuaderno/with.png" alt="Cuaderno built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/cuaderno/without.png" alt="Cuaderno built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Cuaderno without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/cuaderno/without.html">Open without</a><a href="examples/cuaderno/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-ines">
+      <div class="ex-head">
+        <h4 id="ex-ines">Inés Vidal<small>Architecture and landscape photographer · portfolio</small></h4>
+        <blockquote>“Portfolio for Inés Vidal, an architecture and landscape photographer in Barcelona. Very editorial, with the photos as the stars. Sections: cover, selected work (gallery), about, clients and commissions, and contact.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/ines/with.png" alt="Inés Vidal built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/ines/without.png" alt="Inés Vidal built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Inés Vidal without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/ines/without.html">Open without</a><a href="examples/ines/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <h3 class="group" id="game-interfaces">Game interfaces</h3>
+    <article class="ex" aria-labelledby="ex-tarkov-hud">
+      <div class="ex-head">
+        <h4 id="ex-tarkov-hud">Escape from Tarkov<small>Extraction shooter · in-raid HUD over a capture</small></h4>
+        <blockquote>“Make a HUD for Escape from Tarkov using this capture as the background. Build it in HTML/CSS at 16:9 to see how it looks.”</blockquote>
+      </div>
+      <div class="shot" style="aspect-ratio:1920/1080">
+        <img src="examples/tarkov-hud/with.png" alt="Escape from Tarkov built with Atelier" width="1920" height="1080" loading="lazy">
+      </div>
+      <div class="ex-foot">
+        <span>Background: a press screenshot of the game, used only as the stage for the mock. Game and screenshot belong to their studio.</span>
+        <span class="links"><a href="examples/tarkov-hud/with.html">Open it</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-dirt-rally">
+      <div class="ex-head">
+        <h4 id="ex-dirt-rally">DiRT Rally 2.0<small>Rallycross race · HUD over a capture</small></h4>
+        <blockquote>“Make a HUD for DiRT Rally 2.0, for this rallycross race. Use this capture as the background. Build it in HTML/CSS at 16:9 to see how it looks.”</blockquote>
+      </div>
+      <div class="shot" style="aspect-ratio:1920/1080">
+        <img src="examples/dirt-rally/with.png" alt="DiRT Rally 2.0 built with Atelier" width="1920" height="1080" loading="lazy">
+      </div>
+      <div class="ex-foot">
+        <span>Background: a press screenshot of the game, used only as the stage for the mock. Game and screenshot belong to their studio.</span>
+        <span class="links"><a href="examples/dirt-rally/with.html">Open it</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-tarkov-inventory">
+      <div class="ex-head">
+        <h4 id="ex-tarkov-inventory">Escape from Tarkov inventory<small>Extraction shooter · in-raid inventory screen</small></h4>
+        <blockquote>“Design the Escape from Tarkov inventory screen (what you see when you press Tab in a raid): the character's gear, the rig and the backpack with their item grids, and the health status. Build it in HTML/CSS at 16:9.”</blockquote>
+      </div>
+      <div class="shot" style="aspect-ratio:1920/1080">
+        <img src="examples/tarkov-inventory/with.png" alt="Escape from Tarkov inventory built with Atelier" width="1920" height="1080" loading="lazy">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/tarkov-inventory/with.html">Open it</a></span>
+      </div>
+    </article>
+
+    <h3 class="group" id="logos-and-brand">Logos and brand</h3>
+    <article class="ex" aria-labelledby="ex-molino">
+      <div class="ex-head">
+        <h4 id="ex-molino">Molino<small>Sourdough bakery that mills its own flour, Valencia · logo sheet</small></h4>
+        <blockquote>“Make the logo for Molino, a sourdough bakery in Valencia that mills its own flour. Show it on a page: the main logo large, the version on a dark background, the small icon (as a favicon or seal), the palette and the typography.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/molino/with.png" alt="Molino built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/molino/without.png" alt="Molino built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Molino without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/molino/without.html">Open without</a><a href="examples/molino/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-vela">
+      <div class="ex-head">
+        <h4 id="ex-vela">Vela<small>Tax and savings app for freelancers · logo sheet</small></h4>
+        <blockquote>“Logo for Vela, an app that helps freelancers set aside tax and save from every payment they receive. It has to feel calm and trustworthy, nothing like generic fintech. Show it on a page: main logo large, dark version, app icon, palette and typography.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/vela/with.png" alt="Vela built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/vela/without.png" alt="Vela built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Vela without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/vela/without.html">Open without</a><a href="examples/vela/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-ruido">
+      <div class="ex-head">
+        <h4 id="ex-ruido">Ruido<small>Three-day electronic music festival, Mexico City · logo sheet</small></h4>
+        <blockquote>“Logo for Ruido, a three-day electronic music festival in an abandoned factory in Mexico City. Strong, with attitude. Show it on a page: main logo large, versions on light and dark, the small icon (for wristbands and social), palette and typography.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/ruido/with.png" alt="Ruido built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/ruido/without.png" alt="Ruido built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Ruido without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/ruido/without.html">Open without</a><a href="examples/ruido/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-marea">
+      <div class="ex-head">
+        <h4 id="ex-marea">Marea<small>Surf school for beginners and families, Fuerteventura · logo sheet</small></h4>
+        <blockquote>“Make the logo for Marea, a surf school in Fuerteventura for beginners and families. Show it on a page: the main logo large, the version on a dark background, the small icon (favicon or board sticker), the palette and the typography.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/marea/with.png" alt="Marea built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/marea/without.png" alt="Marea built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Without</span><span class="tag r">With Atelier</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Marea without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span></span>
+        <span class="links"><a href="examples/marea/without.html">Open without</a><a href="examples/marea/with.html">Open with Atelier</a></span>
+      </div>
+    </article>
+
+    <h3 class="group" id="deslop">Deslop</h3>
+    <article class="ex" aria-labelledby="ex-deslop-kabel-roehre">
+      <div class="ex-head">
+        <h4 id="ex-deslop-kabel-roehre">Kabel &amp; Röhre, cleaned<small>An AI-made landing page, then deslop</small></h4>
+        <blockquote>“This landing was made by an AI and it shows. Take out everything that looks AI-made and leave it right, without changing the concept or the real content.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/deslop-kabel-roehre/with.png" alt="Kabel &amp; Röhre, cleaned built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/deslop-kabel-roehre/without.png" alt="Kabel &amp; Röhre, cleaned built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Before</span><span class="tag r">After deslop</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Kabel &amp; Röhre, cleaned without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span>Removed: Est. 2011, serial numbers, calibration dates, section counters, a marquee, a fake booking success. Concept and logo unchanged.</span>
+        <span class="links"><a href="examples/deslop-kabel-roehre/without.html">Open before</a><a href="examples/deslop-kabel-roehre/with.html">Open after deslop</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-deslop-brasa">
+      <div class="ex-head">
+        <h4 id="ex-deslop-brasa">Brasa, cleaned<small>An AI-made landing page, then deslop</small></h4>
+        <blockquote>“This landing was made by an AI and it shows. Take out everything that looks AI-made and leave it right, without changing the concept or the real content.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/deslop-brasa/with.png" alt="Brasa, cleaned built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/deslop-brasa/without.png" alt="Brasa, cleaned built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Before</span><span class="tag r">After deslop</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Brasa, cleaned without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span>Removed: Est. 2024, eyebrows on every section, a coloured word in every heading, a ticker, a glow, a fake reservation confirmation.</span>
+        <span class="links"><a href="examples/deslop-brasa/without.html">Open before</a><a href="examples/deslop-brasa/with.html">Open after deslop</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-deslop-ruido">
+      <div class="ex-head">
+        <h4 id="ex-deslop-ruido">Ruido, cleaned<small>An AI-made brand page, then deslop</small></h4>
+        <blockquote>“This brand identity page was made by an AI and it shows. Take out everything that looks AI-made and leave it right, without changing the logo or the concept.”</blockquote>
+      </div>
+      <div class="ba" style="aspect-ratio:1280/800">
+        <img class="after" src="examples/deslop-ruido/with.png" alt="Ruido, cleaned built with Atelier" width="1280" height="800" loading="lazy">
+        <img class="before" src="examples/deslop-ruido/without.png" alt="Ruido, cleaned built without Atelier" width="1280" height="800" loading="lazy">
+        <span class="tag l">Before</span><span class="tag r">After deslop</span>
+        <span class="bar"></span><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare Ruido, cleaned without and with Atelier">
+      </div>
+      <div class="ex-foot">
+        <span>Removed: coordinates, a serial number, numbered section labels, slogan triads, scanlines over the swatches. The logo is byte-identical.</span>
+        <span class="links"><a href="examples/deslop-ruido/without.html">Open before</a><a href="examples/deslop-ruido/with.html">Open after deslop</a></span>
+      </div>
+    </article>
+
+    <h3 class="group" id="motion">Motion</h3>
+    <article class="ex" aria-labelledby="ex-motion-halden">
+      <div class="ex-head">
+        <h4 id="ex-motion-halden">Halden &amp; Co.<small>Timber-house architects, Oslo · choreographed hero</small></h4>
+        <blockquote>“A landing page hero for 'Halden &amp; Co.', a small architecture studio in Oslo that designs timber houses, with a choreographed entrance animation.”</blockquote>
+      </div>
+      <div class="shot vid" style="aspect-ratio:1280/800">
+        <video src="examples/motion-halden/with.mp4" poster="examples/motion-halden/with.png" width="1280" height="800" muted loop playsinline preload="none" aria-label="Halden &amp; Co. built with Atelier, recorded in a browser"></video>
+        <button class="vid-toggle" type="button" aria-pressed="false">Pause</button>
+      </div>
+      <div class="ex-foot">
+        <span>The house is built on load: ground line, frame, then the cladding board by board, on a 120 BPM grid. The finished frame is what reduced motion and no-JS show.</span>
+        <span class="links"><a href="examples/motion-halden/with.html">Open it</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-motion-northline">
+      <div class="ex-head">
+        <h4 id="ex-motion-northline">Northline<small>Hiking-route app · animated logo and Lottie</small></h4>
+        <blockquote>“An animated logo reveal for 'Northline', a hiking-route app, shown on a simple brand page. Also deliver the same animation as a Lottie JSON file (northline.json) next to the page.”</blockquote>
+      </div>
+      <div class="shot vid" style="aspect-ratio:1280/800">
+        <video src="examples/motion-northline/with.mp4" poster="examples/motion-northline/with.png" width="1280" height="800" muted loop playsinline preload="none" aria-label="Northline built with Atelier, recorded in a browser"></video>
+        <button class="vid-toggle" type="button" aria-pressed="false">Pause</button>
+      </div>
+      <div class="ex-foot">
+        <span>The route draws the N up to its summit, then the name rises from the ground. The same timing ships as a Lottie file, checked frame by frame.</span>
+        <span class="links"><a href="examples/motion-northline/with.html">Open it</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-motion-roastery">
+      <div class="ex-head">
+        <h4 id="ex-motion-roastery">Roastery<small>Coffee shop · add-to-bag button</small></h4>
+        <blockquote>“An 'Add to bag' button for an online specialty coffee roaster's product page, with satisfying click feedback: press, a short loading state while the request runs, and an added state. Show it in context on a minimal product card.”</blockquote>
+      </div>
+      <div class="shot vid" style="aspect-ratio:1280/800">
+        <video src="examples/motion-roastery/with.mp4" poster="examples/motion-roastery/with.png" width="1280" height="800" muted loop playsinline preload="none" aria-label="Roastery built with Atelier, recorded in a browser"></video>
+        <button class="vid-toggle" type="button" aria-pressed="false">Pause</button>
+      </div>
+      <div class="ex-foot">
+        <span>Press, a loading label that only appears for real waits, a drawn check, and a bean that lands in the bag where the count rolls up.</span>
+        <span class="links"><a href="examples/motion-roastery/with.html">Open it</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-motion-uploads">
+      <div class="ex-head">
+        <h4 id="ex-motion-uploads">Uploads<small>File-upload app · stacked toasts</small></h4>
+        <blockquote>“A toast notification system for a file-upload app. Several toasts can be on screen at once and stack (upload complete, upload failed with retry, uploading with progress). Include demo buttons to trigger each kind.”</blockquote>
+      </div>
+      <div class="shot vid" style="aspect-ratio:1280/800">
+        <video src="examples/motion-uploads/with.mp4" poster="examples/motion-uploads/with.png" width="1280" height="800" muted loop playsinline preload="none" aria-label="Uploads built with Atelier, recorded in a browser"></video>
+        <button class="vid-toggle" type="button" aria-pressed="false">Pause</button>
+      </div>
+      <div class="ex-foot">
+        <span>A folded deck that fans out on hover; each notice changes state in place, a failure jumps to the front, and retry resumes from where it stopped.</span>
+        <span class="links"><a href="examples/motion-uploads/with.html">Open it</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-motion-garden">
+      <div class="ex-head">
+        <h4 id="ex-motion-garden">Kitchen garden planner<small>Task list · add, complete, reorder</small></h4>
+        <blockquote>“A task list for a vegetable-garden planner where tasks can be added, completed, deleted and reordered (drag, plus move up/down buttons), with animated list changes.”</blockquote>
+      </div>
+      <div class="shot vid" style="aspect-ratio:1280/800">
+        <video src="examples/motion-garden/with.mp4" poster="examples/motion-garden/with.png" width="1280" height="800" muted loop playsinline preload="none" aria-label="Kitchen garden planner built with Atelier, recorded in a browser"></video>
+        <button class="vid-toggle" type="button" aria-pressed="false">Pause</button>
+      </div>
+      <div class="ex-foot">
+        <span>Adding is instant; a ticked job travels to Done above the rows it passes; drag follows the pointer and settles on a spring.</span>
+        <span class="links"><a href="examples/motion-garden/with.html">Open it</a></span>
+      </div>
+    </article>
+
+    <article class="ex" aria-labelledby="ex-motion-calder">
+      <div class="ex-head">
+        <h4 id="ex-motion-calder">Ines Calder<small>Documentary photographer · page transitions</small></h4>
+        <blockquote>“A two-view portfolio for a documentary photographer in one HTML file: a work index (grid of projects) and a project detail view, with page transitions between them (open a project, go back).”</blockquote>
+      </div>
+      <div class="shot vid" style="aspect-ratio:1280/800">
+        <video src="examples/motion-calder/with.mp4" poster="examples/motion-calder/with.png" width="1280" height="800" muted loop playsinline preload="none" aria-label="Ines Calder built with Atelier, recorded in a browser"></video>
+        <button class="vid-toggle" type="button" aria-pressed="false">Pause</button>
+      </div>
+      <div class="ex-foot">
+        <span>The picture you click becomes the story: a shared-element transition in, a faster one back to the same spot in the grid.</span>
+        <span class="links"><a href="examples/motion-calder/with.html">Open it</a></span>
+      </div>
+    </article>
+<!-- /EXAMPLES -->
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <img src="assets/atelier-logo.svg" alt="Atelier" width="196" height="64">
+        <p>A design skill for coding agents. Open source, free, and it runs on the agent you already use.</p>
+      </div>
+      <div class="foot-cta">
+        <div class="install">
+          <code><span>$</span> npx github:alexchwoj/atelier-skill</code>
+          <button type="button" class="copy-btn">Copy</button>
+        </div>
+        <p>Claude Code, Codex, Cursor, OpenCode and Gemini CLI.</p>
+      </div>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="https://github.com/alexchwoj/atelier-skill">GitHub</a>
+      <a href="https://github.com/alexchwoj/atelier-skill#install">Install guide</a>
+      <a href="#websites">Websites</a>
+      <a href="#game-interfaces">Game interfaces</a>
+      <a href="#logos-and-brand">Logos and brand</a>
+      <a href="#deslop">Deslop</a>
+    </nav>
+    <p class="foot-note">Photographs in the examples are stand-ins from Wikimedia Commons and Openverse, credited on each page. Game screenshots belong to their studios and are used only as the stage for a mock.</p>
+  </div>
+</footer>
+
+<script>
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!calm) document.documentElement.classList.add('motion');
+
+  document.querySelectorAll('.ba input').forEach((r) => {
+    const ba = r.closest('.ba');
+    const set = () => ba.style.setProperty('--pos', r.value + '%');
+    r.addEventListener('input', set);
+    set();
+  });
+
+  if (!calm && 'IntersectionObserver' in window) {
+    document.querySelectorAll('.does li, .ex, .group, .examples > h2, .examples > p, .jump, .foot-top, .foot-links')
+      .forEach((el, i) => { el.classList.add('reveal'); if (el.matches('.does li')) el.style.setProperty('--d', (i * 90) + 'ms'); });
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add('in');
+      io.unobserve(en.target);
+    }), { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  }
+  // Motion clips: play only while on screen, never on their own under reduced motion; the button always works.
+  document.querySelectorAll('.vid').forEach((box) => {
+    const v = box.querySelector('video'), b = box.querySelector('.vid-toggle');
+    let paused = calm;
+    const label = () => { b.textContent = v.paused ? 'Play' : 'Pause'; b.setAttribute('aria-pressed', String(v.paused)); };
+    v.addEventListener('play', label); v.addEventListener('pause', label);
+    b.addEventListener('click', () => { paused = !v.paused; paused ? v.pause() : v.play().catch(() => {}); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => {
+      if (en.isIntersecting && !paused) { v.preload = 'auto'; v.play().catch(() => {}); } else if (!en.isIntersecting) v.pause();
+    }, { threshold: 0.35 }).observe(box);
+    label();
+  });
+  document.querySelectorAll('#copy, .copy-btn').forEach((btn) => btn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('npx github:alexchwoj/atelier-skill'); btn.textContent = 'Copied'; btn.classList.remove('done'); void btn.offsetWidth; btn.classList.add('done'); }
+    catch { btn.textContent = 'Select and copy'; }
+    setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
+  }));
+</script>
+</body>
+</html>

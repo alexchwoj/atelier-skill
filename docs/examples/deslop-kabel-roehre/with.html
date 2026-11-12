@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kabel &amp; Röhre: analog synthesizer restoration in Berlin</title>
+<meta name="description" content="Kabel & Röhre restores vintage analog synthesizers in Berlin-Kreuzberg: Moog, Roland, Korg and ARP, sold with a 12-month warranty. Repairs for your own instruments, by appointment.">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..500,0..100;1,9..144,300..400,0..100&family=Archivo:wght@400;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ece4d2;
+  --paper-2:#e3d9c3;
+  --ink:#1a1714;
+  --ink-2:#4a433b;
+  --ink-3:#655c51;
+  --panel:#171513;
+  --panel-2:#22201d;
+  --legend:#efe6d2;
+  --legend-2:rgba(239,230,210,.78);
+  --legend-3:rgba(239,230,210,.62);
+  --walnut:#6b4226;
+  --walnut-d:#3f2513;
+  --signal:#e2531c;
+  --signal-d:#b83e10;
+  --signal-ink:#fff7f0;
+  --phosphor:#a6f06a;
+  --rule:rgba(26,23,20,.18);
+  --serif:"Fraunces", Georgia, serif;
+  --sans:"Archivo", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, monospace;
+  --gut:clamp(16px,4vw,56px);
+  --ease-out:cubic-bezier(.23,1,.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+html{scrollbar-color:var(--walnut) var(--paper-2);accent-color:var(--signal)}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:17px;line-height:1.55;
+  font-synthesis:none;
+  -webkit-font-smoothing:antialiased;
+  caret-color:var(--signal);
+}
+::selection{background:var(--signal);color:var(--signal-ink)}
+body::before{ /* paper grain */
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .35  0 0 0 0 .3  0 0 0 .25 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+a{color:inherit;text-underline-offset:.2em;text-decoration-thickness:1px}
+img,svg,canvas{display:block;max-width:100%}
+.wrap{max-width:1320px;margin:0 auto;padding:0 var(--gut)}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+h1,h2,h3{text-wrap:balance;overflow-wrap:break-word;min-width:0}
+p{text-wrap:pretty}
+
+/* ---------- NAV ---------- */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--serif);font-weight:500;font-size:22px;letter-spacing:-.01em;font-variation-settings:"SOFT" 100,"opsz" 40}
+.logo em{font-style:italic;font-weight:300;color:var(--signal)}
+.nav ul{display:flex;gap:30px;list-style:none}
+.nav ul a{text-decoration:none;font-size:15px;color:var(--ink-2);padding:10px 0}
+.nav ul a:hover{color:var(--ink);text-decoration:underline}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;text-decoration:none;
+  font-family:var(--sans);font-size:15px;font-weight:600;line-height:1;white-space:nowrap;
+  min-height:48px;padding:0 22px;border-radius:2px;background:var(--ink);color:var(--paper);transition:background-color .15s}
+.btn:hover{background:var(--walnut-d)}
+.btn:active{transform:translateY(1px)}
+.btn.sig{background:var(--signal);color:var(--signal-ink)}
+.btn.sig:hover{background:var(--signal-d)}
+.btn .jack{width:11px;height:11px;border-radius:50%;border:2px solid currentColor;position:relative;flex:none}
+.btn .jack::after{content:"";position:absolute;inset:2px;border-radius:50%;background:currentColor}
+.nav .btn{min-height:44px;padding:0 16px}
+@media (max-width:860px){.nav ul{display:none}}
+
+/* ---------- HERO ---------- */
+.hero{padding:clamp(48px,7vw,104px) 0 clamp(56px,7vw,96px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,5vw,80px);align-items:center}
+h1{font-family:var(--serif);font-weight:350;font-size:clamp(52px,7.6vw,118px);line-height:.92;letter-spacing:-.035em;font-variation-settings:"SOFT" 50,"opsz" 144;text-wrap:initial}
+h1 em{font-style:italic;font-weight:300;color:var(--signal)}
+.hero-lede{max-width:31em;margin-top:32px;font-size:19px;color:var(--ink-2)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:36px;align-items:center}
+.link-u{display:inline-flex;align-items:center;min-height:44px;font-size:16px;font-weight:600;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:.3em}
+.link-u:hover{text-decoration-color:currentColor}
+
+/* The instrument module */
+.module{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr) 22px;border-radius:6px;box-shadow:0 40px 60px -30px rgba(40,25,10,.55)}
+.cheek{background:
+   repeating-linear-gradient(92deg,rgba(0,0,0,.0) 0 3px,rgba(0,0,0,.14) 3px 4px,rgba(0,0,0,0) 4px 9px),
+   linear-gradient(180deg,#7a4b2a,#5a341b 60%,#4a2a14);border-radius:6px 0 0 6px}
+.cheek.r{border-radius:0 6px 6px 0}
+.panel{background:linear-gradient(180deg,#1d1b18,#141210);color:var(--legend);padding:22px 24px 22px;position:relative}
+.panel::before{content:"";position:absolute;inset:6px;border:1px solid rgba(239,230,210,.12);pointer-events:none}
+.panel-head{margin-bottom:16px}
+.panel-head .name{font-family:var(--serif);font-style:italic;font-size:20px;font-variation-settings:"SOFT" 100}
+.scope{position:relative;background:radial-gradient(ellipse at center,#18230f 0%,#0b1007 80%);border-radius:10px;border:3px solid #2c2925;box-shadow:inset 0 0 30px rgba(0,0,0,.9);aspect-ratio:16/8;overflow:hidden}
+.scope canvas{width:100%;height:100%}
+.scope .readout{position:absolute;left:12px;bottom:8px;font-family:var(--mono);font-weight:500;font-size:12px;color:rgba(166,240,106,.85);font-variant-numeric:tabular-nums}
+.scope .readout.r{left:auto;right:12px}
+.knobs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:22px}
+.knob-cell{display:flex;flex-direction:column;align-items:center;gap:10px}
+.knob{width:64px;height:64px;position:relative;cursor:ns-resize;touch-action:none;border-radius:50%}
+.knob .scale{position:absolute;inset:-9px}
+.knob .cap{position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#4a4642,#1b1917 70%);
+  box-shadow:0 6px 10px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.18)}
+.knob .cap::before{content:"";position:absolute;inset:9px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#55504a,#25221f);box-shadow:inset 0 0 0 1px rgba(0,0,0,.6)}
+.knob .cap::after{content:"";position:absolute;left:50%;top:5px;width:3px;height:18px;margin-left:-1.5px;border-radius:2px;background:var(--legend)}
+.knob.accent .cap::after{background:var(--signal)}
+.knob-cell .kl{font-size:13px;color:var(--legend-2)}
+.panel-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:20px;padding-top:14px;border-top:1px solid rgba(239,230,210,.12)}
+.panel-foot p{font-size:13px;color:var(--legend-3)}
+.jacks{display:flex;gap:14px;flex:none}
+.jk{width:16px;height:16px;border-radius:50%;background:#bdb5a5;box-shadow:inset 0 0 0 3px #8e877a, inset 0 0 0 5px #111}
+@media (max-width:980px){.hero-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.knob{width:52px;height:52px}.panel{padding:18px 14px 18px}.jacks{display:none}}
+
+/* ---------- MODELS BAND ---------- */
+.models{background:var(--ink);color:var(--paper);padding:26px 0}
+.models p{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2vw,26px);line-height:1.35;font-variation-settings:"SOFT" 100;max-width:60em}
+.models p span{font-family:var(--sans);font-style:normal;font-size:15px;color:rgba(236,228,210,.7);margin-right:12px}
+
+/* ---------- SECTIONS ---------- */
+.sec{padding:clamp(80px,10vw,150px) 0}
+h2{font-family:var(--serif);font-weight:350;font-size:clamp(40px,5.2vw,78px);line-height:.98;letter-spacing:-.03em;font-variation-settings:"SOFT" 50,"opsz" 144;max-width:15ch}
+.lead{max-width:52ch;color:var(--ink-2)}
+
+/* PROCESS: head and paragraph side by side, bottom-aligned */
+.proc-head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px 64px;align-items:end;margin-bottom:clamp(44px,6vw,80px)}
+@media (max-width:860px){.proc-head{grid-template-columns:1fr}}
+
+.chain-wrap{position:relative;border-top:1px solid var(--ink)}
+.chain{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.stage{position:relative;padding:34px 22px 30px 0}
+.stage + .stage{padding-left:22px;border-left:1px dashed var(--rule)}
+.stage .pt{display:flex;align-items:center;gap:10px;margin-bottom:28px;font-size:14px;color:var(--ink-3)}
+.stage .pt i{width:22px;height:22px;border-radius:50%;background:#cfc6b3;box-shadow:inset 0 0 0 4px #a59c8a, inset 0 0 0 7px var(--ink);flex:none;position:relative;z-index:2}
+.stage h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.08;letter-spacing:-.015em;margin-bottom:12px}
+.stage p{font-size:16px;color:var(--ink-2)}
+.stage ul{list-style:none;margin-top:18px;font-size:14px;color:var(--ink-2)}
+.stage ul li{padding:6px 0;border-top:1px solid var(--rule)}
+.stage .hrs{margin-top:18px;font-size:14px;font-weight:600}
+.cable{position:absolute;left:0;right:0;top:-1px;height:80px;width:100%;pointer-events:none;z-index:1}
+.cable path{fill:none;stroke:var(--signal);stroke-width:5;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 2.4s cubic-bezier(.6,.1,.2,1)}
+.chain-wrap.in .cable path{stroke-dashoffset:0}
+@media (max-width:1060px){
+  .chain{grid-template-columns:1fr 1fr}
+  .stage,.stage + .stage{padding:30px 20px 30px 0;border-left:0;border-bottom:1px dashed var(--rule)}
+  .stage:nth-child(even){padding-left:20px;border-left:1px dashed var(--rule)}
+  .cable{display:none}
+}
+@media (max-width:600px){.chain{grid-template-columns:1fr}.stage:nth-child(even){padding-left:0;border-left:0}}
+
+.bench-note{margin-top:72px;max-width:900px;padding:36px 40px;background:var(--paper-2);border-radius:2px}
+.bench-note blockquote{font-family:var(--serif);font-size:clamp(22px,2.2vw,30px);font-style:italic;line-height:1.3;font-weight:350;font-variation-settings:"SOFT" 100}
+.bench-note figcaption{margin-top:16px;font-size:15px;color:var(--ink-2)}
+.bench-note figcaption b{font-weight:600;color:var(--ink)}
+@media (max-width:600px){.bench-note{padding:26px 22px}}
+
+/* ---------- STOCK ---------- */
+.stock{background:var(--panel);color:var(--legend)}
+.stock-head{margin-bottom:40px}
+.stock-head .lead{margin-top:24px;color:var(--legend-2)}
+.stock h2{max-width:none}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:34px;align-items:center}
+.filters button{min-height:44px;background:transparent;color:var(--legend);border:1px solid rgba(239,230,210,.3);border-radius:40px;padding:0 18px;font-family:var(--sans);font-size:15px;cursor:pointer;transition:border-color .15s,background-color .15s,color .15s}
+.filters button:hover{border-color:var(--legend)}
+.filters button[aria-pressed="true"]{background:var(--legend);color:var(--ink);border-color:var(--legend)}
+.filters .count{margin-left:auto;font-size:15px;color:var(--legend-3)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:1060px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel-2);border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
+.card.hide{display:none}
+.card .art{position:relative;aspect-ratio:4/3;background:#0e0d0c}
+.card .art img{width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;top:14px;left:14px;font-size:13px;font-weight:600;padding:5px 10px;border-radius:2px;background:var(--legend);color:var(--ink)}
+.tag.res{background:var(--panel);color:var(--legend)}
+.tag.new{background:var(--signal);color:var(--signal-ink)}
+.card .body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.card .brand{font-size:14px;color:var(--legend-3)}
+.card h3{font-family:var(--serif);font-weight:400;font-size:30px;letter-spacing:-.02em;line-height:1.05;margin:4px 0 16px}
+.specs{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 16px;font-size:14px;color:var(--legend-2);padding:14px 0;border-top:1px solid rgba(239,230,210,.14);border-bottom:1px solid rgba(239,230,210,.14)}
+.specs dt{color:var(--legend-3)}
+.card .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:20px}
+.price{font-family:var(--serif);font-size:28px;letter-spacing:-.02em;font-variant-numeric:lining-nums tabular-nums}
+.price small{display:block;font-family:var(--sans);font-size:13px;letter-spacing:0;color:var(--legend-3)}
+.card .foot a{display:inline-flex;align-items:center;min-height:44px;font-size:15px;font-weight:600;text-decoration:none;color:var(--legend);border:1px solid rgba(239,230,210,.35);padding:0 16px;border-radius:2px;transition:background-color .15s,border-color .15s,color .15s}
+.card .foot a:hover{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+.card .foot .held{font-size:15px;color:var(--legend-3)}
+.stock-note{margin-top:40px;display:flex;flex-wrap:wrap;gap:8px 36px;list-style:none;font-size:15px;color:var(--legend-2)}
+.credits{margin-top:28px;padding-top:18px;border-top:1px solid rgba(239,230,210,.14);font-size:13px;color:var(--legend-3);max-width:90ch}
+.credits a{color:var(--legend-2)}
+
+/* ---------- WARRANTY ---------- */
+.why-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(32px,5vw,80px);align-items:start}
+.warranty{position:sticky;top:100px;background:var(--legend);border:1px solid var(--ink);padding:34px;border-radius:2px}
+.warranty .top{font-size:15px;color:var(--ink-2);border-bottom:2px solid var(--ink);padding-bottom:14px}
+.warranty .big{font-family:var(--serif);font-weight:300;font-size:clamp(120px,15vw,210px);line-height:.8;letter-spacing:-.06em;margin:26px 0 10px;color:var(--signal);font-variation-settings:"SOFT" 30,"opsz" 144}
+.warranty .big span{font-size:.28em;letter-spacing:0;color:var(--ink);font-style:italic;margin-left:6px;vertical-align:.9em}
+.warranty h3{font-family:var(--serif);font-weight:400;font-size:28px;letter-spacing:-.015em;line-height:1.1}
+.warranty p{margin-top:12px;color:var(--ink-2);font-size:16px}
+.why-copy h2{margin-bottom:clamp(36px,4vw,56px)}
+.reasons{list-style:none}
+.reasons li{padding:28px 0;border-top:1px solid var(--ink)}
+.reasons li:last-child{border-bottom:1px solid var(--ink)}
+.reasons h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.3vw,30px);letter-spacing:-.015em;line-height:1.1}
+.reasons p{margin-top:10px;color:var(--ink-2)}
+@media (max-width:900px){.why-grid{grid-template-columns:1fr}.warranty{position:relative;top:0}}
+
+/* ---------- BOOK ---------- */
+.book{background:var(--walnut-d);color:var(--legend);position:relative;overflow:hidden}
+.book::before{content:"";position:absolute;inset:0;opacity:.45;background:repeating-linear-gradient(91deg,rgba(0,0,0,0) 0 7px,rgba(0,0,0,.18) 7px 8px,rgba(0,0,0,0) 8px 17px),linear-gradient(180deg,#5c371d,#3a2210);}
+.book .wrap{position:relative}
+.book-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:clamp(32px,5vw,72px);align-items:start}
+.book .lead{margin-top:24px;color:var(--legend-2)}
+.info{margin-top:48px}
+.info dl{display:grid;gap:22px}
+.info dt{font-size:14px;color:var(--legend-3)}
+.info dd{font-family:var(--serif);font-size:22px;line-height:1.3;margin-top:4px}
+.info dd small{display:block;font-family:var(--sans);font-size:15px;color:var(--legend-2);margin-top:4px}
+
+.ticket{background:var(--paper);color:var(--ink);border-radius:4px;position:relative;box-shadow:0 40px 60px -20px rgba(0,0,0,.6)}
+.ticket::before{ /* punched hole */
+  content:"";position:absolute;top:22px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--walnut-d);box-shadow:inset 0 2px 3px rgba(0,0,0,.5)}
+.ticket-head{padding:56px 32px 18px;border-bottom:2px solid var(--ink)}
+.ticket-head h3{font-family:var(--serif);font-weight:400;font-size:28px;letter-spacing:-.015em;line-height:1}
+.ticket-head p{margin-top:8px;font-size:15px;color:var(--ink-3)}
+form{padding:26px 32px 32px}
+.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--ink);border-radius:2px;margin-bottom:26px}
+.tabs label{position:relative;display:flex;align-items:center;justify-content:center;min-height:46px;text-align:center;padding:6px;cursor:pointer;font-size:15px;border-right:1px solid var(--ink);transition:background-color .15s,color .15s}
+.tabs label:last-child{border-right:0}
+.tabs input{position:absolute;opacity:0;pointer-events:none}
+.tabs label:has(input:checked){background:var(--ink);color:var(--paper)}
+.tabs label:has(input:focus-visible){outline:2px solid var(--signal);outline-offset:2px}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f.full{grid-column:1/-1}
+.f label,.f .lbl{font-size:14px;color:var(--ink-2)}
+.f input,.f select,.f textarea{font:inherit;font-size:16px;color:var(--ink);background:transparent;border:0;border-bottom:1.5px solid var(--ink);padding:8px 0 10px;border-radius:0;min-height:44px;transition:border-color .15s}
+.f textarea{resize:vertical;min-height:92px;border:1.5px solid var(--ink);padding:10px 12px;background:rgba(255,255,255,.25)}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--signal)}
+.f input:focus-visible,.f select:focus-visible,.f textarea:focus-visible{outline:2px solid var(--signal);outline-offset:4px}
+.f input::placeholder,.f textarea::placeholder{color:var(--ink-3)}
+.f select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%231a1714' stroke-width='1.6' fill='none'/></svg>");background-repeat:no-repeat;background-position:right 2px center;padding-right:22px}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slots label{display:inline-flex;align-items:center;min-height:44px;cursor:pointer;font-size:15px;font-variant-numeric:tabular-nums;color:var(--ink);border:1px solid var(--ink);padding:0 14px;border-radius:30px;transition:background-color .15s,border-color .15s,color .15s}
+.slots input{position:absolute;opacity:0;pointer-events:none}
+.slots label:has(input:checked){background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.slots label:has(input:focus-visible){outline:2px solid var(--signal);outline-offset:2px}
+.check{display:flex;flex-direction:row;gap:10px;align-items:flex-start;font-size:15px;color:var(--ink-2)}
+.check input{margin-top:4px;width:18px;height:18px;flex:none}
+.form-foot{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-top:28px;padding-top:22px;border-top:1px dashed var(--rule);flex-wrap:wrap}
+.form-foot p{color:var(--ink-3);max-width:36ch;font-size:14px}
+.status{margin-top:18px;font-size:15px;color:var(--ink-2)}
+.status:empty{display:none}
+.status{padding:14px 16px;background:var(--paper-2)}
+.perf{height:18px;background:radial-gradient(circle at 9px 9px,var(--walnut-d) 5px,transparent 5.5px) 0 0/22px 18px repeat-x;margin:0 6px}
+.err{color:var(--signal-d);font-size:14px;min-height:20px}
+@media (max-width:900px){.book-grid{grid-template-columns:1fr}}
+@media (max-width:560px){.row{grid-template-columns:minmax(0,1fr)}form{padding:22px 18px 26px}.ticket-head{padding:52px 18px 16px}.tabs label{font-size:14px}}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:var(--paper);padding:80px 0 32px}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:48px 64px;align-items:end}
+.foot-addr{font-family:var(--serif);font-weight:350;font-size:clamp(30px,3.6vw,52px);line-height:1.08;letter-spacing:-.02em;font-variation-settings:"SOFT" 100,"opsz" 144}
+.foot-addr small{display:block;margin-top:14px;font-family:var(--sans);font-size:16px;letter-spacing:0;color:rgba(236,228,210,.72)}
+.foot-list{display:grid;gap:14px;font-size:16px}
+.foot-list div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding-top:12px;border-top:1px solid rgba(236,228,210,.18)}
+.foot-list dt{color:rgba(236,228,210,.62)}
+.foot-list dd{color:rgba(236,228,210,.9)}
+.foot-list a{text-decoration-color:rgba(236,228,210,.35)}
+.foot-list a:hover{color:#ff8a54}
+.legal{margin-top:64px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:14px;color:rgba(236,228,210,.62)}
+.legal .logo{font-size:18px;color:var(--paper)}
+.legal nav{display:flex;gap:20px}
+.legal nav a{text-decoration-color:rgba(236,228,210,.35)}
+@media (max-width:760px){.foot-grid{grid-template-columns:1fr}.foot-list div{grid-template-columns:96px minmax(0,1fr)}}
+
+/* reveal: one language, section heads only, content visible without JS */
+.js .rv{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease-out), transform .7s var(--ease-out)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Kabel und Röhre, home">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+        <rect x="8" y="2" width="14" height="20" rx="7" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M11 9h8M15 9v8" stroke="#e2531c" stroke-width="1.8"/>
+        <path d="M10 22v3h10v-3M15 25v3" stroke="currentColor" stroke-width="1.8" fill="none"/>
+      </svg>
+      Kabel <em>&amp;</em> Röhre
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#process">How we restore</a></li>
+        <li><a href="#stock">For sale</a></li>
+        <li><a href="#why">Warranty</a></li>
+        <li><a href="#book">Visit</a></li>
+      </ul>
+    </nav>
+    <a class="btn" href="#book"><span class="jack" aria-hidden="true"></span>Book a slot</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" aria-labelledby="hero-h">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1 id="hero-h">Forty years old.<br>Tuned like it’s <em>Tuesday.</em></h1>
+        <p class="hero-lede">A Kreuzberg workshop for vintage analog synthesizers. We restore Moog, Roland, Korg and ARP component by component, and sell them with a full twelve-month warranty. Bring us yours, too. We’ll find the crackle.</p>
+        <div class="hero-actions">
+          <a class="btn sig" href="#stock"><span class="jack" aria-hidden="true"></span>See what’s for sale</a>
+          <a class="link-u" href="#book">Drop off a repair</a>
+        </div>
+      </div>
+
+      <div class="module" role="group" aria-label="Playable oscillator demo">
+        <div class="cheek" aria-hidden="true"></div>
+        <div class="panel">
+          <div class="panel-head"><span class="name">Bench oscillator</span></div>
+          <div class="scope">
+            <canvas id="scope" role="img" aria-label="Oscilloscope showing the current waveform"></canvas>
+            <span class="readout" id="ro-l" aria-hidden="true">220.0 Hz</span>
+            <span class="readout r" id="ro-r" aria-hidden="true">Saw</span>
+          </div>
+          <div class="knobs">
+            <div class="knob-cell"><div class="knob" data-k="wave" tabindex="0" role="slider" aria-label="Waveform" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg class="scale" viewBox="0 0 82 82"></svg><div class="cap"></div></div><span class="kl" aria-hidden="true">Wave</span></div>
+            <div class="knob-cell"><div class="knob" data-k="pitch" tabindex="0" role="slider" aria-label="Pitch" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35"><svg class="scale" viewBox="0 0 82 82"></svg><div class="cap"></div></div><span class="kl" aria-hidden="true">Pitch</span></div>
+            <div class="knob-cell"><div class="knob accent" data-k="cutoff" tabindex="0" role="slider" aria-label="Filter cutoff" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70"><svg class="scale" viewBox="0 0 82 82"></svg><div class="cap"></div></div><span class="kl" aria-hidden="true">Cutoff</span></div>
+            <div class="knob-cell"><div class="knob" data-k="res" tabindex="0" role="slider" aria-label="Filter resonance" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><svg class="scale" viewBox="0 0 82 82"></svg><div class="cap"></div></div><span class="kl" aria-hidden="true">Emphasis</span></div>
+          </div>
+          <div class="panel-foot">
+            <p>Drag a knob up or down, scroll it, or use the arrow keys.</p>
+            <span class="jacks" aria-hidden="true"><i class="jk"></i><i class="jk"></i><i class="jk"></i></span>
+          </div>
+        </div>
+        <div class="cheek r" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="models">
+  <div class="wrap">
+    <p><span>On the bench most weeks:</span>Minimoog Model D, Juno-60, MS-20, ARP Odyssey, Polysix, SH-101, Jupiter-8, ARP 2600, Prophet-5 and Korg Mono/Poly.</p>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section class="sec" id="process" aria-labelledby="proc-h">
+  <div class="wrap">
+    <div class="proc-head rv">
+      <h2 id="proc-h">Five stages. No shortcuts in the signal path.</h2>
+      <p class="lead">Every instrument goes through the same chain, whether it’s a €400 SH-101 or a Jupiter-8. We log each step (measurements, replaced parts, before-and-after scope captures) and the logbook ships with the synth.</p>
+    </div>
+
+    <div class="chain-wrap" id="chain">
+      <svg class="cable" viewBox="0 0 1000 80" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M11 0 C 60 70, 150 70, 211 0 S 360 70, 411 0 S 560 70, 611 0 S 760 70, 811 0 S 940 60, 990 10"/>
+      </svg>
+      <ol class="chain">
+        <li class="stage">
+          <div class="pt"><i aria-hidden="true"></i>Stage 1</div>
+          <h3>Intake &amp; diagnosis</h3>
+          <p>We power it up on an isolation transformer, listen, measure and photograph everything before a single screw turns.</p>
+          <ul><li>Rail voltages &amp; ripple</li><li>Oscillator drift test</li><li>Written estimate</li></ul>
+          <p class="hrs">About 2 hours</p>
+        </li>
+        <li class="stage">
+          <div class="pt"><i aria-hidden="true"></i>Stage 2</div>
+          <h3>Teardown &amp; deep clean</h3>
+          <p>Boards out, keybed out. Every pot and slider is cleaned and lubricated, not just sprayed. Cases are washed by hand.</p>
+          <ul><li>Pots &amp; sliders serviced</li><li>Contacts re-tinned</li><li>Wood cheeks oiled</li></ul>
+          <p class="hrs">About 6 hours</p>
+        </li>
+        <li class="stage">
+          <div class="pt"><i aria-hidden="true"></i>Stage 3</div>
+          <h3>Component work</h3>
+          <p>Electrolytics recapped, tired trimmers replaced, keybed bushings renewed. Original ICs kept wherever they still sing.</p>
+          <ul><li>Full recap (where due)</li><li>Battery &amp; leak repair</li><li>Original parts bagged</li></ul>
+          <p class="hrs">About 8 hours</p>
+        </li>
+        <li class="stage">
+          <div class="pt"><i aria-hidden="true"></i>Stage 4</div>
+          <h3>Calibration</h3>
+          <p>Factory service manual on the bench, frequency counter in hand. 1V/oct scaling across eight octaves, filter tracking, envelopes.</p>
+          <ul><li>Scaling to ±0.5 cent</li><li>Filter &amp; VCA trim</li><li>Voice matching (poly)</li></ul>
+          <p class="hrs">About 4 hours</p>
+        </li>
+        <li class="stage">
+          <div class="pt"><i aria-hidden="true"></i>Stage 5</div>
+          <h3>72-hour burn-in</h3>
+          <p>It stays switched on for three days in a warm room, then we recheck tuning cold. If it drifts, it goes back to stage four.</p>
+          <ul><li>Thermal cycling</li><li>Final play-test</li><li>Logbook signed</li></ul>
+          <p class="hrs">72 hours</p>
+        </li>
+      </ol>
+    </div>
+
+    <figure class="bench-note">
+      <blockquote>“A good restoration is invisible. You shouldn’t hear our work. You should hear the instrument the way it left the factory in 1979, minus the hum.”</blockquote>
+      <figcaption><b>Jonas Albrecht</b>, head technician, formerly at Doepfer</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- STOCK -->
+<section class="sec stock" id="stock" aria-labelledby="stock-h">
+  <div class="wrap">
+    <div class="stock-head rv">
+      <h2 id="stock-h">Ready to play, signed off and guaranteed.</h2>
+      <p class="lead">Every instrument below has been through all five stages. Prices include VAT, logbook and a 12-month warranty. Come and play any of them in the workshop before you buy.</p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter by maker">
+      <button type="button" aria-pressed="true" data-f="all">All makers</button>
+      <button type="button" aria-pressed="false" data-f="moog">Moog</button>
+      <button type="button" aria-pressed="false" data-f="roland">Roland</button>
+      <button type="button" aria-pressed="false" data-f="korg">Korg</button>
+      <button type="button" aria-pressed="false" data-f="arp">ARP</button>
+      <span class="count" id="count" aria-live="polite">6 instruments</span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <ul class="stock-note">
+      <li>Shipping worldwide in custom crates</li>
+      <li>Trade-ins considered</li>
+      <li>Stock changes weekly</li>
+    </ul>
+    <p class="credits">Photos show each model, not the unit for sale. Photos from Wikimedia Commons:
+      <a href="https://commons.wikimedia.org/wiki/File:Minimoog_Model_D_Synthesizer_at_SMEM_Playroom.jpg">Minimoog by 1904.CC</a> (CC BY 4.0),
+      <a href="https://commons.wikimedia.org/wiki/File:Roland_Juno-60_(6935222973).jpg">Juno-60 by deepsonic</a> (CC BY 2.0),
+      <a href="https://commons.wikimedia.org/wiki/File:Korg_Synthesizer_MS-20.jpg">MS-20 by Wilfredor</a> (CC0),
+      <a href="https://commons.wikimedia.org/wiki/File:ARP_Odyssey_Mk1_Black_Face.jpg">Odyssey by Alison Cassidy</a> (CC BY-SA 4.0),
+      <a href="https://commons.wikimedia.org/wiki/File:Roland_SH-101.jpg">SH-101 by eternal jamzzzz</a> (CC BY 2.0),
+      <a href="https://commons.wikimedia.org/wiki/File:KORG_Polysix.jpg">Polysix by Svuntutheysari</a> (CC BY-SA 3.0).</p>
+  </div>
+</section>
+
+<!-- WARRANTY -->
+<section class="sec" id="why" aria-labelledby="why-h">
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="warranty">
+        <p class="top">Garantieschein</p>
+        <p class="big">12<span>months</span></p>
+        <h3>Parts, labour, and the drive across town.</h3>
+        <p>If anything we touched fails within a year, we fix it, free, with no arguing about what counts. Inside Berlin we’ll even collect it from your studio.</p>
+      </div>
+
+      <div class="why-copy">
+        <h2 id="why-h" class="rv">Buying vintage shouldn’t feel like a gamble.</h2>
+        <ul class="reasons">
+          <li><h3>Originality over “upgrades”.</h3><p>No mystery mods, no swapped filters. If a part has to go, the original is bagged, labelled and returned with the instrument.</p></li>
+          <li><h3>A logbook, not a promise.</h3><p>Every synth leaves with a printed restoration log: what we measured, what we replaced, and scope captures before and after.</p></li>
+          <li><h3>Specialists, not generalists.</h3><p>We only work on analog synthesizers. Since 2011, four technicians with a bench each have restored 1,148 instruments here. Between them: 60 years at the bench, and a drawer of NOS parts most shops don’t have.</p></li>
+          <li><h3>Play before you pay.</h3><p>Every instrument is plugged in and waiting in the showroom. Book an hour, bring your headphones, take your time.</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="sec book" id="book" aria-labelledby="book-h">
+  <div class="wrap">
+    <div class="book-grid">
+      <div>
+        <div class="rv">
+          <h2 id="book-h">Bring it in. We’ll listen.</h2>
+          <p class="lead">Drop off a repair, book a play session for an instrument in stock, or get a quote by sending us the symptoms first. We reply within one working day.</p>
+        </div>
+        <div class="info">
+          <dl>
+            <div><dt>Workshop</dt><dd>Glogauer Straße 6, Hinterhof<small>10999 Berlin-Kreuzberg. Ring “K&amp;R”, 2nd floor.</small></dd></div>
+            <div><dt>Bench hours</dt><dd>Tuesday to Friday, 11:00 to 19:00<br>Saturday, 12:00 to 16:00<small>Drop-offs by appointment only.</small></dd></div>
+            <div><dt>Diagnosis fee</dt><dd>€65<small>Credited in full against the repair if you go ahead.</small></dd></div>
+            <div><dt>Typical turnaround</dt><dd>Two to four weeks<small>Express bench for touring musicians on request.</small></dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="ticket">
+        <div class="ticket-head">
+          <h3>Werkstattauftrag</h3>
+          <p>Your workshop request</p>
+        </div>
+
+        <form id="form" novalidate>
+          <div class="tabs" role="radiogroup" aria-label="Reason for visit">
+            <label><input type="radio" name="type" value="repair" checked>Repair</label>
+            <label><input type="radio" name="type" value="restore">Full restore</label>
+            <label><input type="radio" name="type" value="play">Try to buy</label>
+          </div>
+
+          <div class="row">
+            <div class="f"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required><span class="err" data-for="name"></span></div>
+            <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required><span class="err" data-for="email"></span></div>
+            <div class="f"><label for="maker">Maker</label>
+              <select id="maker" name="maker"><option>Moog</option><option>Roland</option><option>Korg</option><option>ARP</option><option>Sequential</option><option>Oberheim</option><option>Other</option></select>
+            </div>
+            <div class="f"><label for="model">Model &amp; year (if known)</label><input id="model" name="model" placeholder="e.g. Juno-60, 1982"></div>
+            <div class="f full"><label for="issue" id="issue-l">What’s it doing (or not doing)?</label><textarea id="issue" name="issue" placeholder="Voice 4 is silent, the cutoff slider crackles, it drifts after 20 minutes…"></textarea></div>
+            <div class="f"><label for="date">Preferred date</label><input id="date" name="date" type="date" required><span class="err" data-for="date"></span></div>
+            <div class="f"><span class="lbl" id="slot-l">Time slot</span>
+              <div class="slots" role="radiogroup" aria-labelledby="slot-l">
+                <label><input type="radio" name="slot" value="11:00" checked>11:00</label>
+                <label><input type="radio" name="slot" value="13:00">13:00</label>
+                <label><input type="radio" name="slot" value="15:00">15:00</label>
+                <label><input type="radio" name="slot" value="17:00">17:00</label>
+              </div>
+            </div>
+            <label class="check f full"><input type="checkbox" name="pickup"> I’m in Berlin and would like you to collect the instrument (€35 each way).</label>
+          </div>
+
+          <div class="form-foot">
+            <p>No payment now. We confirm by email and only start work once you approve the estimate.</p>
+            <button class="btn sig" type="submit"><span class="jack" aria-hidden="true"></span>Request appointment</button>
+          </div>
+          <p class="status" id="status" role="status"></p>
+        </form>
+        <div class="perf" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <p class="foot-addr">Glogauer Straße 6, Hinterhof, 10999 Berlin.<small>Ring “K&amp;R”, 2nd floor. Tuesday to Saturday, by appointment.</small></p>
+      <dl class="foot-list">
+        <div><dt>Write</dt><dd><a href="mailto:werkstatt@kabelundroehre.de">werkstatt@kabelundroehre.de</a></dd></div>
+        <div><dt>Call</dt><dd><a href="tel:+493061104472">+49 30 6110 4472</a></dd></div>
+        <div><dt>Follow</dt><dd><a href="#">Instagram</a>, <a href="#">bench sessions on YouTube</a></dd></div>
+        <div><dt>Newsletter</dt><dd>New stock, first Friday of the month.</dd></div>
+      </dl>
+    </div>
+    <div class="legal">
+      <a class="logo" href="#top" aria-label="Kabel und Röhre, back to top">Kabel <em>&amp;</em> Röhre</a>
+      <span>© 2026 Kabel &amp; Röhre GmbH</span>
+      <nav aria-label="Legal"><a href="#">Impressum</a><a href="#">Datenschutz</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Knobs + scope ---------- */
+(() => {
+  const state = {wave:50, pitch:35, cutoff:70, res:20};
+  const ARC = 270, START = -135;
+  document.querySelectorAll('.knob').forEach(k => {
+    const svg = k.querySelector('.scale');
+    let ticks = '';
+    for (let i=0;i<=10;i++){
+      const a = (START + ARC*i/10 - 90) * Math.PI/180;
+      const r1 = 36, r2 = i%5===0 ? 41 : 39;
+      ticks += `<line x1="${41+r1*Math.cos(a)}" y1="${41+r1*Math.sin(a)}" x2="${41+r2*Math.cos(a)}" y2="${41+r2*Math.sin(a)}" stroke="rgba(239,230,210,.55)" stroke-width="${i%5===0?1.6:1}"/>`;
+    }
+    svg.innerHTML = ticks;
+    const key = k.dataset.k, cap = k.querySelector('.cap');
+    const set = v => {
+      v = Math.max(0, Math.min(100, v));
+      state[key] = v; k.setAttribute('aria-valuenow', Math.round(v));
+      cap.style.transform = `rotate(${START + ARC*v/100}deg)`;
+    };
+    set(state[key]);
+    let y0, v0;
+    k.addEventListener('pointerdown', e => { k.setPointerCapture(e.pointerId); y0 = e.clientY; v0 = state[key]; });
+    k.addEventListener('pointermove', e => { if (y0 == null) return; set(v0 + (y0 - e.clientY) * 0.6); });
+    const up = () => { y0 = null; };
+    k.addEventListener('pointerup', up); k.addEventListener('pointercancel', up);
+    k.addEventListener('wheel', e => { e.preventDefault(); set(state[key] - Math.sign(e.deltaY)*4); }, {passive:false});
+    k.addEventListener('keydown', e => {
+      const d = {ArrowUp:5, ArrowRight:5, ArrowDown:-5, ArrowLeft:-5}[e.key];
+      if (d){ e.preventDefault(); set(state[key] + d); }
+    });
+  });
+
+  const cv = document.getElementById('scope'), ctx = cv.getContext('2d');
+  const roL = document.getElementById('ro-l'), roR = document.getElementById('ro-r');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){ const r = cv.getBoundingClientRect(), d = devicePixelRatio||1; cv.width = r.width*d; cv.height = r.height*d; }
+  size(); addEventListener('resize', size);
+
+  // band-limited waveform via additive synthesis with a resonant low-pass
+  function sample(ph){
+    const w = state.wave/100;              // 0 sine -> .5 saw -> 1 square
+    const fc = 1 + (state.cutoff/100)*22;  // harmonic index of cutoff
+    const q = state.res/100;
+    let s = 0;
+    for (let n=1;n<=28;n++){
+      const saw = 1/n, sq = n%2 ? 1/n : 0, sine = n===1 ? 1 : 0;
+      const a = w < .5 ? sine*(1-w*2) + saw*(w*2) : saw*(2-w*2) + sq*(w*2-1);
+      if (!a) continue;
+      const x = n/fc;
+      let g = 1/Math.sqrt(1 + Math.pow(x,8));
+      g *= 1 + q*6*Math.exp(-Math.pow((n-fc)/1.2,2));
+      s += a*g*Math.sin(n*ph);
+    }
+    return s;
+  }
+  // the scope only runs while it is on screen
+  let t = 0, visible = false, running = false;
+  new IntersectionObserver(es => {
+    visible = es[0].isIntersecting;
+    if (visible && !running){ running = true; requestAnimationFrame(draw); }
+  }).observe(cv);
+  function draw(){
+    if (!visible){ running = false; return; }
+    const W = cv.width, H = cv.height, d = devicePixelRatio||1;
+    ctx.fillStyle = 'rgba(10,16,7,.55)'; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle = 'rgba(166,240,106,.09)'; ctx.lineWidth = 1;
+    for (let i=1;i<10;i++){ ctx.beginPath(); ctx.moveTo(W*i/10,0); ctx.lineTo(W*i/10,H); ctx.stroke(); }
+    for (let i=1;i<6;i++){ ctx.beginPath(); ctx.moveTo(0,H*i/6); ctx.lineTo(W,H*i/6); ctx.stroke(); }
+    const cycles = 1.5 + state.pitch/100*4.5;
+    let pts = [], max = 0.001;
+    const N = 360;
+    for (let i=0;i<=N;i++){ const v = sample((i/N)*cycles*Math.PI*2 + t); pts.push(v); max = Math.max(max, Math.abs(v)); }
+    ctx.lineWidth = 2.2*d; ctx.strokeStyle = '#a6f06a'; ctx.shadowColor = 'rgba(166,240,106,.8)'; ctx.shadowBlur = 12*d;
+    ctx.beginPath();
+    pts.forEach((v,i) => { const x = i/N*W, y = H/2 - v/max*H*0.36; i ? ctx.lineTo(x,y) : ctx.moveTo(x,y); });
+    ctx.stroke(); ctx.shadowBlur = 0;
+    const hz = 55*Math.pow(2, state.pitch/100*4);
+    roL.textContent = `${hz.toFixed(1)} Hz`;
+    const w = state.wave;
+    roR.textContent = `${w<20?'Sine':w<70?'Saw':'Pulse'}, Q ${(state.res/10).toFixed(1)}`;
+    if (!reduce) t += 0.04;
+    requestAnimationFrame(draw);
+  }
+})();
+
+/* ---------- Stock ---------- */
+const IMG = 'https://upload.wikimedia.org/wikipedia/commons/thumb/';
+const stock = [
+  {maker:'moog', brand:'Moog Music', name:'Minimoog Model D', year:1978, grade:5, work:'Full recap, new keybed bushings, OSC 3 rebuilt', price:'7.900', tag:'new', img:'c/c5/Minimoog_Model_D_Synthesizer_at_SMEM_Playroom.jpg'},
+  {maker:'roland', brand:'Roland', name:'Juno-60', year:1982, grade:4, work:'Voice chips tested, new battery, slider service', price:'2.650', img:'0/0a/Roland_Juno-60_%286935222973%29.jpg'},
+  {maker:'korg', brand:'Korg', name:'MS-20', year:1979, grade:4, work:'Filter calibration, all jacks replaced, pots cleaned', price:'1.480', img:'7/72/Korg_Synthesizer_MS-20.jpg'},
+  {maker:'arp', brand:'ARP Instruments', name:'Odyssey Mk II', year:1977, grade:3, work:'Duophonic logic repaired, sliders replaced (NOS)', price:'4.200', tag:'res', img:'d/d5/ARP_Odyssey_Mk1_Black_Face.jpg'},
+  {maker:'roland', brand:'Roland', name:'SH-101 (grey)', year:1983, grade:5, work:'Recapped, modulator grip restored, keys rebushed', price:'1.590', img:'9/92/Roland_SH-101.jpg'},
+  {maker:'korg', brand:'Korg', name:'Polysix', year:1981, grade:4, work:'Battery-leak board repaired, KLM-367 voice rework', price:'1.950', img:'d/db/KORG_Polysix.jpg'},
+];
+
+(() => {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = stock.map(s => {
+    const file = s.img.split('/').pop();
+    const tag = s.tag==='new' ? '<span class="tag new">Just finished</span>' : s.tag==='res' ? '<span class="tag res">Reserved</span>' : '<span class="tag">Available</span>';
+    return `
+    <article class="card" data-maker="${s.maker}">
+      <div class="art">
+        ${tag}
+        <img src="${IMG}${s.img}/960px-${file}" srcset="${IMG}${s.img}/500px-${file} 500w, ${IMG}${s.img}/960px-${file} 960w" sizes="(max-width:640px) 100vw, (max-width:1060px) 50vw, 420px" width="960" height="720" loading="lazy" decoding="async" alt="A ${s.name.replace(/ \(.*\)/,'')} (model photo, not this unit)">
+      </div>
+      <div class="body">
+        <span class="brand">${s.brand}</span>
+        <h3>${s.name}</h3>
+        <dl class="specs">
+          <dt>Year</dt><dd>${s.year}</dd>
+          <dt>Condition</dt><dd>${s.grade} of 5, cosmetic</dd>
+          <dt>Work done</dt><dd>${s.work}</dd>
+        </dl>
+        <div class="foot">
+          <p class="price">€${s.price}<small>incl. VAT, 12-month warranty</small></p>
+          ${s.tag==='res' ? '<span class="held">Reserved</span>' : `<a href="#book" data-model="${s.name}" data-mk="${s.brand}">Book a play</a>`}
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+
+  const btns = document.querySelectorAll('.filters button'), count = document.getElementById('count');
+  btns.forEach(b => b.addEventListener('click', () => {
+    btns.forEach(x => x.setAttribute('aria-pressed', x===b));
+    let n = 0;
+    grid.querySelectorAll('.card').forEach(c => {
+      const show = b.dataset.f==='all' || c.dataset.maker===b.dataset.f;
+      c.classList.toggle('hide', !show); if (show) n++;
+    });
+    count.textContent = `${n} instrument${n===1?'':'s'}`;
+  }));
+
+  // "Book a play" prefills the form
+  grid.addEventListener('click', e => {
+    const a = e.target.closest('a[data-model]'); if (!a) return;
+    document.querySelector('input[name="type"][value="play"]').checked = true;
+    document.getElementById('model').value = a.dataset.model;
+    const mk = a.dataset.mk.split(' ')[0];
+    const sel = document.getElementById('maker');
+    [...sel.options].forEach(o => { if (o.text === mk) sel.value = o.text; });
+    updateType();
+  });
+})();
+
+/* ---------- Form ----------
+   No booking backend yet: a valid request opens the visitor's email app
+   with everything filled in, and the page says plainly that nothing was sent. */
+const dateEl = document.getElementById('date');
+const tmr = new Date(Date.now()+86400000); dateEl.min = tmr.toISOString().slice(0,10);
+function updateType(){
+  const v = document.querySelector('input[name="type"]:checked').value;
+  document.getElementById('issue-l').textContent = v==='play' ? 'Anything we should prepare?' : v==='restore' ? 'Tell us about its history' : 'What’s it doing (or not doing)?';
+  document.getElementById('issue').placeholder = v==='play' ? 'I’d like to A/B it against the Polysix, and I’ll bring my own headphones…' : v==='restore' ? 'Bought it in 1986, stored in a basement since 2004, powers on but…' : 'Voice 4 is silent, the cutoff slider crackles, it drifts after 20 minutes…';
+}
+document.querySelectorAll('input[name="type"]').forEach(r => r.addEventListener('change', updateType));
+document.getElementById('form').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target; let ok = true;
+  const msg = {name:'Please tell us your name.', email:'Enter an email address so we can confirm, e.g. name@example.com.', date:'We’re closed Sunday and Monday. Pick a day from Tuesday to Saturday.'};
+  ['name','email','date'].forEach(id => {
+    const el = document.getElementById(id), err = f.querySelector(`.err[data-for="${id}"]`);
+    let bad = !el.value.trim() || (id==='email' && !/^\S+@\S+\.\S+$/.test(el.value));
+    if (id==='date' && !el.value) msg.date = 'Pick a preferred day.';
+    if (id==='date' && el.value){ const d = new Date(el.value+'T12:00').getDay(); if (d===0||d===1){ bad = true; } }
+    err.textContent = bad ? msg[id] : ''; el.setAttribute('aria-invalid', bad);
+    if (bad && ok){ el.focus(); ok = false; }
+  });
+  if (!ok) return;
+  const d = new FormData(f);
+  const kind = {repair:'Repair', restore:'Full restore', play:'Try to buy'}[d.get('type')];
+  const body = [
+    `Reason: ${kind}`, `Name: ${d.get('name')}`, `Email: ${d.get('email')}`,
+    `Instrument: ${d.get('maker')} ${d.get('model')||''}`.trim(),
+    `Preferred: ${d.get('date')} at ${d.get('slot')}`,
+    `Collection in Berlin: ${d.get('pickup') ? 'yes' : 'no'}`, '', d.get('issue')||''
+  ].join('\n');
+  location.href = `mailto:werkstatt@kabelundroehre.de?subject=${encodeURIComponent(kind+' request: '+(d.get('model')||d.get('maker')))}&body=${encodeURIComponent(body)}`;
+  document.getElementById('status').textContent = 'Your email app should open with this request filled in. Nothing has been sent until you press send there. If it doesn’t open, write to werkstatt@kabelundroehre.de.';
+});
+
+/* ---------- Reveal ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12});
+document.querySelectorAll('.rv, #chain').forEach(el => io.observe(el));
+const cp = document.querySelector('.cable path'); cp.style.setProperty('--len', cp.getTotalLength());
+</script>
+</body>
+</html>

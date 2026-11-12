@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RUIDO identity guidelines</title>
+<meta name="description" content="The RUIDO identity: the interference wordmark, the cut R icon, the soot and sodium palette and the two typefaces, with the rules for using each.">
+<meta name="theme-color" content="#0E0E0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,400..900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0E0E0D;
+    --well:#161513;
+    --concrete:#2A2926;
+    --rule:#2B2A27;
+    --ash:#8C8982;
+    --text-2:#C9C5BB;
+    --bone:#ECE8DF;
+    --sodium:#FF4A1C;
+    --rust:#7A2E14;
+    --gutter:clamp(16px,4vw,56px);
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+    --sans:"Archivo",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--black);overflow-x:clip;scroll-behavior:smooth;scrollbar-color:var(--concrete) var(--black)}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--black);color:var(--bone);font-family:var(--sans);font-stretch:100%;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip;font-synthesis:none}
+  ::selection{background:var(--sodium);color:var(--black)}
+  a{color:inherit;text-underline-offset:.2em;text-decoration-thickness:1px}
+  a:hover{color:var(--sodium)}
+  :focus-visible{outline:2px solid var(--sodium);outline-offset:3px}
+  .mono{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums}
+  .wrap{padding-inline:var(--gutter)}
+  svg.logo{display:block;width:100%;height:auto;overflow:visible}
+
+  /* ---------- HERO ---------- */
+  .hero{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;padding-block:8px 28px;position:relative;
+    background:radial-gradient(120% 80% at 50% 110%,#1d1b18 0%,var(--black) 60%)}
+  /* film grain: the noise in RUIDO. Kept to the hero so the specimens below show true colour. */
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.09;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+  .bar{display:flex;justify-content:space-between;align-items:center;gap:0 24px;flex-wrap:wrap;font-size:14px;color:var(--ash);position:relative;z-index:1}
+  .bar strong{color:var(--bone);font-weight:800}
+  .bar ul{list-style:none;display:flex;flex-wrap:wrap;gap:0 20px}
+  .bar a{display:inline-block;padding:12px 6px;margin-inline:-6px;text-decoration:none}
+  .hero h1{align-self:center;color:var(--bone);--band:var(--sodium);padding-block:6vh}
+  .hero-foot{display:flex;justify-content:space-between;align-items:end;gap:12px 40px;flex-wrap:wrap;border-top:1px solid #33312d;padding-top:20px}
+  .hero-foot p{font-weight:800;font-stretch:62%;text-transform:uppercase;font-size:clamp(24px,2.6vw,36px);line-height:1;max-width:32ch;text-wrap:balance}
+  .hero-foot span{color:var(--ash);font-size:14px}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding-block:clamp(72px,10vw,140px);scroll-margin-top:16px}
+  h2{font-weight:900;font-stretch:62%;text-transform:uppercase;font-size:clamp(44px,7vw,96px);line-height:.9;letter-spacing:-.005em;text-wrap:balance;max-width:16ch}
+  .lede{max-width:56ch;color:var(--text-2);font-size:17px;text-wrap:pretty}
+  .stack{display:grid;gap:20px;margin-bottom:clamp(32px,5vw,64px)}
+
+  /* concept: head left, argument right, then the three rules as rows */
+  .concept{border-top:1px solid var(--rule)}
+  .split{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px 48px;align-items:end;margin-bottom:clamp(40px,6vw,80px)}
+  .rules{border-top:1px solid var(--rule)}
+  .rules > div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:12px 48px;padding-block:28px;border-bottom:1px solid var(--rule)}
+  .rules dt{font-weight:900;font-stretch:62%;font-size:clamp(26px,2.4vw,34px);text-transform:uppercase;line-height:1;text-wrap:balance}
+  .rules dd{color:#b8b4aa;max-width:60ch;text-wrap:pretty}
+
+  /* versions */
+  .versions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px 16px}
+  .versions figure{display:grid;gap:12px;align-content:start}
+  .versions figcaption{display:flex;justify-content:space-between;gap:4px 12px;flex-wrap:wrap;font-size:14px;color:var(--ash)}
+  .versions figcaption b{color:var(--bone);font-weight:700}
+  .panel{aspect-ratio:4/3;display:grid;place-items:center;padding:12%;overflow:hidden}
+  .panel.light{background:var(--bone);color:var(--black);--band:var(--sodium)}
+  .panel.dark{background:var(--well);color:var(--bone);--band:var(--sodium);outline:1px solid var(--rule);outline-offset:-1px}
+  .panel.sodium{background:var(--sodium);color:var(--black);--band:var(--bone)}
+  .panel.mono1{background:var(--concrete);color:var(--bone);--band:var(--bone)}
+  .lockup{width:100%}
+  /* the lockup's sub-line is part of the logo artwork: it scales with the mark and keeps its setting */
+  .lockup .sub{display:flex;justify-content:space-between;margin-top:3.5%;font-family:var(--mono);font-size:clamp(8px,1.05vw,13px);letter-spacing:.14em;text-transform:uppercase;border-top:2px solid currentColor;padding-top:2.5%}
+
+  /* icon */
+  .icon-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px}
+  .icon-sizes{background:var(--well);padding:32px;display:flex;align-items:flex-end;gap:clamp(16px,3vw,40px);flex-wrap:wrap}
+  .icon-sizes figure{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .icon-sizes figcaption{color:var(--ash)}
+  svg.icon{display:block}
+  .icon-a{--icon-bg:var(--black);--icon-fg:var(--bone);--icon-band:var(--sodium)}
+  .icon-b{--icon-bg:var(--sodium);--icon-fg:var(--black);--icon-band:var(--bone)}
+  .icon-c{--icon-bg:var(--bone);--icon-fg:var(--black);--icon-band:var(--sodium)}
+  .apps{display:grid;gap:16px}
+  .wristband-stage{background:var(--bone);color:var(--black);padding:40px 24px 28px;display:grid;gap:18px;overflow:hidden}
+  .wristband-stage p{font-size:14px;color:#55524c;margin-top:6px}
+  .band{height:58px;border-radius:6px;display:flex;align-items:center;gap:14px;padding:0 10px;overflow:hidden;white-space:nowrap;box-shadow:0 10px 24px rgba(0,0,0,.18)}
+  .band.b1{background:var(--sodium);color:var(--black);transform:rotate(-3deg)}
+  .band.b2{background:var(--black);color:var(--bone);transform:rotate(2deg)}
+  /* printed on the band itself: application artwork, set the way a woven band is printed */
+  .band .mono{font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+  .band .dash{flex:1;height:2px;background:currentColor;opacity:.4;min-width:20px}
+  .social{background:var(--well);padding:24px;display:flex;gap:18px;align-items:center}
+  .avatar{width:72px;height:72px;border-radius:50%;overflow:hidden;flex:none}
+  .avatar svg{width:100%;height:100%}
+  .social .handle{font-weight:800;font-size:18px}
+  .social .meta{color:var(--ash);font-size:14px}
+
+  /* palette */
+  .palette-head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px 48px;align-items:end;margin-bottom:clamp(32px,5vw,56px)}
+  .ratio{display:flex;height:10px;margin-top:16px}
+  .ratio i{display:block}
+  .palette{display:grid;grid-template-columns:2.2fr 1.4fr 1fr 1fr .8fr;min-height:340px}
+  .sw{padding:18px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-width:0}
+  .sw h3{font-weight:900;font-stretch:62%;font-size:clamp(26px,2.6vw,38px);text-transform:uppercase;line-height:1}
+  .sw .role{font-size:14px;margin-top:8px;max-width:26ch}
+  .sw .val{font-family:var(--mono);font-size:12px;line-height:1.6;font-variant-numeric:tabular-nums}
+  .sw.k{background:var(--black);outline:1px solid var(--rule);outline-offset:-1px}
+  .sw.k .role{color:var(--text-2)}
+  .sw.s{background:var(--sodium);color:var(--black)}
+  .sw.b{background:var(--bone);color:var(--black)}
+  .sw.c{background:var(--concrete)}
+  .sw.r{background:var(--rust)}
+
+  /* type */
+  .type{border-top:1px solid var(--rule)}
+  .type-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
+  .spec{background:var(--well);padding:28px;display:flex;flex-direction:column;gap:24px;overflow:hidden}
+  .spec .meta{display:flex;justify-content:space-between;gap:4px 12px;color:var(--ash);font-size:14px;border-bottom:1px solid var(--rule);padding-bottom:12px;flex-wrap:wrap}
+  .spec .meta b{color:var(--bone);font-weight:700}
+  .spec .big{font-weight:900;font-stretch:62%;font-size:clamp(84px,13vw,190px);line-height:.85;text-transform:uppercase;letter-spacing:-.01em}
+  .spec .alpha{font-weight:900;font-stretch:62%;font-size:clamp(22px,2.6vw,34px);line-height:1.1;text-transform:uppercase;overflow-wrap:anywhere;color:var(--text-2)}
+  .spec .monobig{font-family:var(--mono);font-size:clamp(24px,3vw,40px);font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+  .spec .rule-note{color:#b8b4aa;font-size:15px;max-width:52ch;text-wrap:pretty}
+  .scale{display:flex;flex-direction:column;gap:10px}
+  .scale div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-bottom:1px solid #24231f;padding-bottom:8px}
+  .scale span:last-child{color:var(--ash);font-family:var(--mono);font-size:12px;white-space:nowrap}
+  .s-head{font-weight:900;font-stretch:62%;text-transform:uppercase;line-height:.95;font-size:44px}
+  .s-sub{font-weight:700;font-size:20px}
+  .s-body{color:var(--text-2)}
+  .s-mono{font-family:var(--mono);font-size:12px;color:var(--sodium)}
+
+  footer{border-top:1px solid var(--rule);padding-block:16px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--ash);font-size:14px}
+  footer .mini{width:120px;color:var(--bone);--band:var(--sodium)}
+  footer a{display:inline-block;padding-block:12px}
+
+  @media (max-width:860px){
+    .split,.palette-head,.rules > div,.versions,.icon-row,.type-grid{grid-template-columns:minmax(0,1fr)}
+    .palette{grid-template-columns:1fr 1fr;min-height:0}
+    .palette .sw{min-height:150px}
+    .palette .sw.k{grid-column:1/-1}
+  }
+  @media (max-width:480px){
+    .icon-sizes,.spec{padding:20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Shared marks. Colors come from currentColor (letters), --band (the interference strip), and --icon-* vars. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Wordmark slices: viewBox 1000 x 300 -->
+    <clipPath id="w-top"><rect x="-100" y="-100" width="1300" height="224"/></clipPath>
+    <clipPath id="w-band"><rect x="-100" y="132" width="1300" height="34"/></clipPath>
+    <clipPath id="w-mid"><rect x="-100" y="174" width="1300" height="40"/></clipPath>
+    <clipPath id="w-thin"><rect x="-100" y="219" width="1300" height="7"/></clipPath>
+    <clipPath id="w-bot"><rect x="-100" y="231" width="1300" height="200"/></clipPath>
+
+    <symbol id="wordmark" viewBox="0 0 1000 300" overflow="visible">
+      <g font-family="Archivo, Impact, sans-serif" font-weight="900" font-size="372" style="font-stretch:62%">
+        <text x="0" y="286" textLength="1000" lengthAdjust="spacingAndGlyphs" clip-path="url(#w-top)" fill="currentColor">RUIDO</text>
+        <text x="38" y="286" textLength="1000" lengthAdjust="spacingAndGlyphs" clip-path="url(#w-band)" fill="var(--band, #FF4A1C)">RUIDO</text>
+        <text x="-6" y="286" textLength="1000" lengthAdjust="spacingAndGlyphs" clip-path="url(#w-mid)" fill="currentColor">RUIDO</text>
+        <text x="-22" y="286" textLength="1000" lengthAdjust="spacingAndGlyphs" clip-path="url(#w-thin)" fill="currentColor">RUIDO</text>
+        <text x="0" y="286" textLength="1000" lengthAdjust="spacingAndGlyphs" clip-path="url(#w-bot)" fill="currentColor">RUIDO</text>
+      </g>
+    </symbol>
+
+    <!-- Icon slices: viewBox 100 x 100 -->
+    <clipPath id="i-top"><rect x="-20" y="-20" width="140" height="64"/></clipPath>
+    <clipPath id="i-band"><rect x="-20" y="47" width="140" height="11"/></clipPath>
+    <clipPath id="i-bot"><rect x="-20" y="61" width="140" height="60"/></clipPath>
+
+    <symbol id="icon" viewBox="0 0 100 100">
+      <rect width="100" height="100" fill="var(--icon-bg, #0E0E0D)"/>
+      <g font-family="Archivo, Impact, sans-serif" font-weight="900" font-size="112" style="font-stretch:62%" text-anchor="middle">
+        <text x="48" y="90" clip-path="url(#i-top)" fill="var(--icon-fg, #ECE8DF)">R</text>
+        <text x="57" y="90" clip-path="url(#i-band)" fill="var(--icon-band, #FF4A1C)">R</text>
+        <text x="48" y="90" clip-path="url(#i-bot)" fill="var(--icon-fg, #ECE8DF)">R</text>
+      </g>
+      <!-- three days -->
+      <rect x="80" y="10" width="10" height="3" fill="var(--icon-band, #FF4A1C)"/>
+      <rect x="80" y="16" width="10" height="3" fill="var(--icon-band, #FF4A1C)"/>
+      <rect x="80" y="22" width="10" height="3" fill="var(--icon-band, #FF4A1C)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="hero wrap" id="top">
+  <nav class="bar" aria-label="Sections">
+    <span><strong>RUIDO</strong> identity guidelines</span>
+    <ul>
+      <li><a href="#idea">Idea</a></li>
+      <li><a href="#versions">Versions</a></li>
+      <li><a href="#icon">Icon</a></li>
+      <li><a href="#palette">Palette</a></li>
+      <li><a href="#type">Type</a></li>
+    </ul>
+  </nav>
+
+  <h1>
+    <svg class="logo" viewBox="0 0 1000 300" role="img" aria-labelledby="h1-title"><title id="h1-title">RUIDO</title><use href="#wordmark"/></svg>
+  </h1>
+
+  <div class="hero-foot">
+    <p>Three days of non-stop electronic music in an abandoned factory in Mexico City</p>
+  </div>
+</header>
+
+<main>
+<!-- ============ IDEA ============ -->
+<section class="concept wrap" id="idea" aria-labelledby="idea-h">
+  <div class="split">
+    <h2 id="idea-h">One strip slips out of line</h2>
+    <p class="lede">RUIDO means noise. The wordmark is a clean, heavy signal cut by interference: one strip of the letters slides sideways in sodium orange, the way a bad cable or an overdriven sound system shakes a picture apart.</p>
+  </div>
+  <dl class="rules">
+    <div>
+      <dt>Ultra-condensed, ultra-heavy</dt>
+      <dd>Archivo at 62% width and 900 weight. Tall letters packed together like steel shutters on a factory wall, legible on a stage banner and on a 2&nbsp;cm wristband.</dd>
+    </div>
+    <div>
+      <dt>One displaced strip</dt>
+      <dd>A strip through the middle shifts right and turns orange; a hairline below it shifts left. Nothing else moves, so the name reads before the effect does.</dd>
+    </div>
+    <div>
+      <dt>Sodium vapour orange</dt>
+      <dd>The colour of the old industrial street lamps in Mexico City at 4&nbsp;a.m. It is the only accent. Everything else is soot, concrete and bone.</dd>
+    </div>
+  </dl>
+</section>
+
+<!-- ============ VERSIONS ============ -->
+<section class="wrap" id="versions" aria-labelledby="versions-h" style="padding-top:0">
+  <div class="stack">
+    <h2 id="versions-h">The mark on four grounds</h2>
+  </div>
+  <div class="versions">
+    <figure>
+      <div class="panel light">
+        <div class="lockup" role="img" aria-label="RUIDO logo with the event line, on bone">
+          <svg class="logo" viewBox="0 0 1000 300"><use href="#wordmark"/></svg>
+          <div class="sub"><span>3 Days</span><span>Abandoned factory</span><span>CDMX</span></div>
+        </div>
+      </div>
+      <figcaption><span><b>Positive</b>, on bone <span class="mono">#ECE8DF</span></span><span>Print, tickets, signage</span></figcaption>
+    </figure>
+    <figure>
+      <div class="panel dark">
+        <div class="lockup" role="img" aria-label="RUIDO logo with the event line, on soot">
+          <svg class="logo" viewBox="0 0 1000 300"><use href="#wordmark"/></svg>
+          <div class="sub"><span>3 Days</span><span>Abandoned factory</span><span>CDMX</span></div>
+        </div>
+      </div>
+      <figcaption><span><b>Negative</b>, on soot <span class="mono">#0E0E0D</span></span><span>Screens, stage, social</span></figcaption>
+    </figure>
+    <figure>
+      <div class="panel sodium">
+        <div class="lockup" role="img" aria-label="RUIDO logo on sodium orange">
+          <svg class="logo" viewBox="0 0 1000 300"><use href="#wordmark"/></svg>
+        </div>
+      </div>
+      <figcaption><span><b>On sodium</b> <span class="mono">#FF4A1C</span>, strip in bone</span><span>Posters and merch</span></figcaption>
+    </figure>
+    <figure>
+      <div class="panel mono1">
+        <div class="lockup" role="img" aria-label="RUIDO logo in one colour">
+          <svg class="logo" viewBox="0 0 1000 300"><use href="#wordmark"/></svg>
+        </div>
+      </div>
+      <figcaption><span><b>One colour</b>, any surface</span><span>Stencil, screenprint, laser</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ ICON ============ -->
+<section class="wrap" id="icon" aria-labelledby="icon-h" style="padding-top:0">
+  <div class="stack">
+    <h2 id="icon-h">The cut R</h2>
+    <p class="lede">The same slip, reduced to one letter. Three bars in the corner stand for the three days. It sits on a square so it works on wristbands, profile pictures, favicons and stamped hands.</p>
+  </div>
+  <div class="icon-row">
+    <div class="icon-sizes">
+      <figure><svg class="icon icon-a" width="160" height="160" viewBox="0 0 100 100" role="img" aria-label="RUIDO icon on soot"><use href="#icon"/></svg><figcaption class="mono">160&nbsp;px</figcaption></figure>
+      <figure><svg class="icon icon-b" width="96" height="96" viewBox="0 0 100 100" role="img" aria-label="RUIDO icon on sodium"><use href="#icon"/></svg><figcaption class="mono">96&nbsp;px</figcaption></figure>
+      <figure><svg class="icon icon-c" width="64" height="64" viewBox="0 0 100 100" role="img" aria-label="RUIDO icon on bone"><use href="#icon"/></svg><figcaption class="mono">64&nbsp;px</figcaption></figure>
+      <figure><svg class="icon icon-a" width="32" height="32" viewBox="0 0 100 100" role="img" aria-label="RUIDO icon at 32 pixels"><use href="#icon"/></svg><figcaption class="mono">32&nbsp;px</figcaption></figure>
+      <figure><svg class="icon icon-b" width="16" height="16" viewBox="0 0 100 100" role="img" aria-label="RUIDO icon at 16 pixels"><use href="#icon"/></svg><figcaption class="mono">16&nbsp;px</figcaption></figure>
+    </div>
+    <div class="apps">
+      <div class="wristband-stage">
+        <div class="band b1">
+          <svg class="icon icon-a" width="40" height="40" viewBox="0 0 100 100" aria-hidden="true"><use href="#icon"/></svg>
+          <span class="mono">RUIDO</span><span class="dash"></span><span class="mono">3-day pass</span><span class="dash"></span><span class="mono">Fri to Sun</span>
+        </div>
+        <div class="band b2">
+          <svg class="icon icon-b" width="40" height="40" viewBox="0 0 100 100" aria-hidden="true"><use href="#icon"/></svg>
+          <span class="mono">RUIDO</span><span class="dash"></span><span class="mono">Backstage / crew</span><span class="dash"></span><span class="mono">All areas</span>
+        </div>
+        <p>Wristbands: sodium for guests, soot for crew.</p>
+      </div>
+      <div class="social">
+        <div class="avatar"><svg class="icon icon-b" viewBox="0 0 100 100" aria-hidden="true"><use href="#icon"/></svg></div>
+        <div>
+          <div class="handle">@ruido.cdmx</div>
+          <div class="meta">Profile picture: the icon on sodium, cropped to a circle.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PALETTE ============ -->
+<section class="wrap" id="palette" aria-labelledby="palette-h" style="padding-top:0">
+  <div class="palette-head">
+    <h2 id="palette-h">Soot, concrete, one lamp</h2>
+    <div>
+      <p class="lede">Mostly dark, with orange used sparingly. The bar shows roughly how much of each colour a poster or screen should carry.</p>
+      <div class="ratio" aria-hidden="true">
+        <i style="flex:55;background:var(--black);outline:1px solid #333"></i><i style="flex:18;background:var(--concrete)"></i><i style="flex:14;background:var(--bone)"></i><i style="flex:9;background:var(--sodium)"></i><i style="flex:4;background:var(--rust)"></i>
+      </div>
+    </div>
+  </div>
+  <div class="palette">
+    <div class="sw k"><div><h3>Soot</h3><p class="role">Base. Night, the factory floor, every dark surface.</p></div><p class="val">#0E0E0D<br>RGB 14 14 13<br>CMYK 0 0 7 95</p></div>
+    <div class="sw s"><div><h3>Sodium</h3><p class="role">The one accent: the interference strip, highlights, calls to action.</p></div><p class="val">#FF4A1C<br>RGB 255 74 28<br>PMS Orange 021 C</p></div>
+    <div class="sw b"><div><h3>Bone</h3><p class="role">Light ground, type on dark.</p></div><p class="val">#ECE8DF<br>RGB 236 232 223</p></div>
+    <div class="sw c"><div><h3>Concrete</h3><p class="role">Panels, secondary surfaces.</p></div><p class="val">#2A2926<br>RGB 42 41 38</p></div>
+    <div class="sw r"><div><h3>Rust</h3><p class="role">Rare. Tickets, merch.</p></div><p class="val">#7A2E14<br>RGB 122 46 20</p></div>
+  </div>
+</section>
+
+<!-- ============ TYPE ============ -->
+<section class="type wrap" id="type" aria-labelledby="type-h">
+  <div class="stack">
+    <h2 id="type-h">Shout in Archivo, list in mono</h2>
+  </div>
+  <div class="type-grid">
+    <div class="spec">
+      <div class="meta"><span><b>Display</b>: Archivo</span><span>Black 900, 62% width</span></div>
+      <p class="big">Bass in<br>the walls</p>
+      <p class="alpha">ABCDEFGHIJKLMNÑOPQRSTUVWXYZ 0123456789 &amp;!?/→</p>
+      <p class="rule-note">Headlines are always uppercase, always at 62% width, with leading between 0.85 and 0.9.</p>
+    </div>
+    <div class="spec">
+      <div class="meta"><span><b>Utility</b>: JetBrains Mono</span><span>400 and 700</span></div>
+      <p class="monobig">FRI–SUN<br>22:00 → 10:00</p>
+      <div class="scale">
+        <div><span class="s-head">Headline</span><span>Archivo 900 / 62%</span></div>
+        <div><span class="s-sub">Subhead, lineup names</span><span>Archivo 700</span></div>
+        <div><span class="s-body">Body copy for info and FAQs</span><span>Archivo 400</span></div>
+        <div><span class="s-mono">Turbine Hall, 23:30</span><span>Mono 12</span></div>
+      </div>
+      <p class="rule-note">The mono carries times, stages and gates, so it reads like the labels stencilled on factory machinery.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">
+  <div class="mini" role="img" aria-label="RUIDO"><svg class="logo" viewBox="0 0 1000 300" aria-hidden="true"><use href="#wordmark"/></svg></div>
+  <a href="#top">Back to top</a>
+</footer>
+
+</body>
+</html>

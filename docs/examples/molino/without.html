@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Molino Identity</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='96' fill='%23C8562A'/%3E%3Ccircle cx='100' cy='100' r='62' fill='%23F4EDE1'/%3E%3Ccircle cx='100' cy='100' r='16' fill='%23C8562A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --flour:#F4EDE1;
+    --crumb:#E6D9C3;
+    --crust:#8C4A22;
+    --ember:#C8562A;   /* Valencian clay / orange-blossom terracotta */
+    --stone:#6E6A62;
+    --rye:#1F1A16;
+    --ink:#1F1A16;
+    --muted:#6E6A62;
+    --line:rgba(31,26,22,.14);
+    --serif:"Young Serif", Georgia, serif;
+    --sans:"Hanken Grotesk", system-ui, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--flour)}
+  body{background:var(--flour);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- HERO: main logo ---------- */
+  .hero{min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto;position:relative;overflow:hidden}
+  .hero header,.hero footer{display:flex;justify-content:space-between;gap:16px;padding:28px 0}
+  .hero footer{border-top:1px solid var(--line)}
+  .hero .stage{display:grid;place-items:center;padding:24px 0}
+  .lockup{width:100%;max-width:980px;height:auto;color:var(--ink)}
+  .stacked{display:none;width:100%;max-width:340px;height:auto;color:var(--ink)}
+  .stacked .mark{color:var(--ember)}
+  @media (max-width:640px){.hero .lockup{display:none}.hero .stacked{display:block}}
+  .lockup .mark{color:var(--ember)}
+
+  section{padding:120px 0 0}
+  .sec-head{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:baseline;border-top:1px solid var(--line);padding-top:20px;margin-bottom:48px}
+  .sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-.01em}
+  .sec-head p{grid-column:2;color:var(--muted);max-width:56ch;margin-top:10px}
+
+  /* ---------- Dark ---------- */
+  .dark{background:var(--rye);color:var(--flour);border-radius:4px;padding:clamp(48px,9vw,120px) clamp(24px,6vw,80px);display:grid;place-items:center}
+  .dark{grid-template-columns:minmax(0,1fr)}
+  .dark .lockup{max-width:760px;color:var(--flour)}
+  .dark .lockup .mark{color:var(--flour)}
+  .dark-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .tile{border-radius:4px;display:grid;place-items:center;padding:56px 24px;min-height:260px}
+  .tile svg{width:min(380px,100%);height:auto}
+  .t-ember{background:var(--ember);color:var(--flour)}
+  .t-ember .mark{color:var(--flour)}
+  .t-crust{background:var(--crust);color:var(--flour)}
+  .t-crust .mark{color:var(--crumb)}
+
+  /* ---------- Icon ---------- */
+  .icons{display:grid;grid-template-columns:1.1fr 1fr;gap:16px}
+  .seal-box{background:var(--crumb);border-radius:4px;display:grid;place-items:center;padding:48px 24px}
+  .seal{width:min(340px,100%);height:auto}
+  .fav-box{border:1px solid var(--line);border-radius:4px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+  .sizes{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap}
+  .sizes figure{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .sizes figcaption{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .tab{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px 10px 0 0;padding:10px 16px;width:max-content;max-width:100%;font-size:13px;box-shadow:0 1px 0 #fff}
+  .tab-bar{background:var(--crumb);padding:10px 12px 0;border-radius:6px 6px 0 0}
+  .note{color:var(--muted);font-size:14px;max-width:44ch}
+
+  /* ---------- Palette ---------- */
+  .palette{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr;gap:12px}
+  .sw{border-radius:4px;min-height:260px;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;font-size:13px}
+  .sw b{font-family:var(--serif);font-weight:400;font-size:20px}
+  .sw span{font-family:var(--mono);font-size:11px;opacity:.8}
+  .sw i{font-style:normal;font-size:12.5px;opacity:.85;margin-top:6px;line-height:1.35}
+  .sw.light{color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+  .sw.darkc{color:var(--flour)}
+
+  /* ---------- Type ---------- */
+  .type{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+  .spec{border-top:1px solid var(--ink);padding-top:16px}
+  .spec .big{font-family:var(--serif);font-size:clamp(64px,9vw,128px);line-height:.95;letter-spacing:-.02em;margin:18px 0 20px}
+  .spec .sample{font-family:var(--serif);font-size:clamp(22px,2.4vw,30px);line-height:1.2;max-width:22ch}
+  .stack{display:grid;gap:16px}
+  .stack .spec .big{font-family:var(--sans);font-weight:500;font-size:56px;letter-spacing:-.02em}
+  .stack .mono .big{font-family:var(--mono);font-weight:400;font-size:28px;letter-spacing:.06em;text-transform:uppercase;line-height:1.3}
+  .meta{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+
+  /* ---------- Application ---------- */
+  .apps{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .bag{background:var(--crumb);border-radius:4px;padding:48px 24px;display:grid;place-items:center}
+  .bag-shape{width:min(260px,80%);aspect-ratio:3/4.2;background:#D8C6A6;border-radius:2px 2px 6px 6px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--crust);box-shadow:0 30px 40px -24px rgba(31,26,22,.35);background-image:linear-gradient(180deg,rgba(0,0,0,.06) 0 14px,transparent 14px)}
+  .bag-shape svg{width:46%}
+  .bag-shape .w{font-family:var(--serif);font-size:30px;color:var(--rye)}
+  .bag-shape .m{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--crust);text-align:center;line-height:1.7}
+  .sign{background:var(--ember);border-radius:4px;padding:40px;color:var(--flour);display:flex;flex-direction:column;justify-content:space-between;min-height:420px}
+  .sign h3{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1.02;letter-spacing:-.01em;max-width:12ch}
+  .sign p{max-width:36ch;opacity:.92}
+  .sign .row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+  .sign .row svg{width:72px;flex:none}
+
+  .end{padding:120px 0 48px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  @media (max-width:860px){
+    .wrap{padding:0 16px}
+    .sec-head{grid-template-columns:1fr;gap:4px}
+    .sec-head p{grid-column:1}
+    .dark-row,.icons,.type,.apps{grid-template-columns:1fr}
+    .palette{grid-template-columns:1fr 1fr}
+    .palette .sw:first-child{grid-column:1/-1}
+    .sw{min-height:150px}
+    section{padding-top:80px}
+    .hero header .eyebrow:last-child{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ SVG master definitions ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Millstone: 8 harps of dressing furrows, a grain of wheat in the eye -->
+    <mask id="stone-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+      <circle cx="100" cy="100" r="86" fill="#fff"/>
+      <path fill="none" stroke="#000" stroke-width="4.2" stroke-linecap="round"
+        d="M111.2 106.0L174.8 106.0M120.5 116.0L173.3 116.0M130.5 126.0L170.5 126.0M140.5 136.0L166.2 136.0M103.7 112.2L148.6 157.1M103.2 125.8L140.5 163.2M103.2 139.9L131.5 168.3M103.2 154.1L121.4 172.3M94.0 111.2L94.0 174.8M84.0 120.5L84.0 173.3M74.0 130.5L74.0 170.5M64.0 140.5L64.0 166.2M87.8 103.7L42.9 148.6M74.2 103.2L36.8 140.5M60.1 103.2L31.7 131.5M45.9 103.2L27.7 121.4M88.8 94.0L25.2 94.0M79.5 84.0L26.7 84.0M69.5 74.0L29.5 74.0M59.5 64.0L33.8 64.0M96.3 87.8L51.4 42.9M96.8 74.2L59.5 36.8M96.8 60.1L68.5 31.7M96.8 45.9L78.6 27.7M106.0 88.8L106.0 25.2M116.0 79.5L116.0 26.7M126.0 69.5L126.0 29.5M136.0 59.5L136.0 33.8M112.2 96.3L157.1 51.4M125.8 96.8L163.2 59.5M139.9 96.8L168.3 68.5M154.1 96.8L172.3 78.6"/>
+      <circle cx="100" cy="100" r="15" fill="#000"/>
+    </mask>
+    <symbol id="mark" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="86" fill="currentColor" mask="url(#stone-cut)"/>
+      <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="3"/>
+      <!-- wheat grain in the eye -->
+      <g transform="rotate(-45 100 100)">
+        <path d="M100 90.5c4.6 0 6.6 4.6 6.6 9.5s-2 9.5-6.6 9.5-6.6-4.6-6.6-9.5 2-9.5 6.6-9.5z" fill="currentColor"/>
+      </g>
+    </symbol>
+    <!-- Simplified icon for tiny sizes: fewer, heavier furrows -->
+    <mask id="icon-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+      <circle cx="100" cy="100" r="80" fill="#fff"/>
+      <path fill="none" stroke="#000" stroke-width="11" stroke-linecap="round"
+        d="M116 108L172 108M100 116L100 172M84 92L28 92M100 84L100 28M113 113L150 150M87 87L50 50M113 87L150 50M87 113L50 150"/>
+      <circle cx="100" cy="100" r="20" fill="#000"/>
+    </mask>
+    <symbol id="icon" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="80" fill="currentColor" mask="url(#icon-cut)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ 1. Main logo ============ -->
+<div class="hero wrap">
+  <header>
+    <span class="eyebrow">Molino — Identity, v1</span>
+    <span class="eyebrow">Sourdough bakery · Valencia</span>
+  </header>
+  <div class="stage">
+    <svg class="lockup" viewBox="0 0 980 300" role="img" aria-label="Molino — Sourdough, stone-milled in Valencia">
+      <use href="#mark" class="mark" x="0" y="20" width="260" height="260"/>
+      <text x="310" y="182" font-family="Young Serif, Georgia, serif" font-size="172" letter-spacing="-4" fill="currentColor">molino</text>
+      <text x="316" y="246" font-family="IBM Plex Mono, monospace" font-size="21" letter-spacing="5" fill="currentColor" opacity=".75">SOURDOUGH · STONE-MILLED · VALENCIA</text>
+    </svg>
+    <svg class="stacked" viewBox="0 0 400 440" role="img" aria-label="Molino, stacked lockup">
+      <use href="#mark" class="mark" x="110" y="0" width="180" height="180"/>
+      <text x="200" y="330" text-anchor="middle" font-family="Young Serif, Georgia, serif" font-size="120" letter-spacing="-3" fill="currentColor">molino</text>
+      <text x="200" y="392" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="3.4" fill="currentColor" opacity=".75">SOURDOUGH · STONE-MILLED · VALENCIA</text>
+    </svg>
+  </div>
+  <footer>
+    <span class="eyebrow">Primary lockup · Ember on Flour</span>
+    <span class="eyebrow">Scroll ↓</span>
+  </footer>
+</div>
+
+<main class="wrap">
+
+  <!-- ============ 2. Idea ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">01 — The mark</span>
+      <h2>A millstone, seen from above, with a grain at its heart.</h2>
+      <p>Molino means “mill”. The symbol is the face of a dressed millstone: eight harps of furrows cut the way millers have cut them for centuries, so the flour leaves the stone in a spiral. In the eye, where grain enters, sits a single wheat kernel. The bakery’s whole story — whole grain in, flour out, bread at the end — in one round shape that also works as a stamp on a paper bag.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3. On dark ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">02 — On dark</span>
+      <h2>Reversed and on colour.</h2>
+      <p>On Rye, everything goes Flour — a single colour, no orange. On Ember and Crust the lockup stays one colour too, so it can be screen-printed, stamped or burned onto a wooden peel.</p>
+    </div>
+    <div class="dark">
+      <svg class="lockup" viewBox="0 0 980 300" role="img" aria-label="Molino logo, reversed">
+        <use href="#mark" class="mark" x="0" y="20" width="260" height="260"/>
+        <text x="310" y="182" font-family="Young Serif, Georgia, serif" font-size="172" letter-spacing="-4" fill="currentColor">molino</text>
+        <text x="316" y="246" font-family="IBM Plex Mono, monospace" font-size="21" letter-spacing="5" fill="currentColor" opacity=".7">SOURDOUGH · STONE-MILLED · VALENCIA</text>
+      </svg>
+    </div>
+    <div class="dark-row">
+      <div class="tile t-ember">
+        <svg viewBox="0 0 980 300" role="img" aria-label="Molino logo on Ember">
+          <use href="#mark" class="mark" x="0" y="20" width="260" height="260"/>
+          <text x="310" y="200" font-family="Young Serif, Georgia, serif" font-size="172" letter-spacing="-4" fill="currentColor">molino</text>
+        </svg>
+      </div>
+      <div class="tile t-crust">
+        <svg viewBox="0 0 980 300" role="img" aria-label="Molino logo on Crust">
+          <use href="#mark" class="mark" x="0" y="20" width="260" height="260"/>
+          <text x="310" y="200" font-family="Young Serif, Georgia, serif" font-size="172" letter-spacing="-4" fill="currentColor">molino</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. Icon / seal ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">03 — Icon &amp; seal</span>
+      <h2>Small enough for a tab, round enough for a stamp.</h2>
+      <p>Below 48px the furrows are redrawn: eight heavy cuts instead of thirty-two fine ones, a bigger eye, no grain. The seal wraps the stone in a ring of text for bags, stickers and the wax-paper wrap.</p>
+    </div>
+    <div class="icons">
+      <div class="seal-box">
+        <svg class="seal" viewBox="0 0 300 300" role="img" aria-label="Molino seal">
+          <defs>
+            <path id="ring" d="M150 150m-118 0a118 118 0 1 1 236 0a118 118 0 1 1 -236 0"/>
+          </defs>
+          <circle cx="150" cy="150" r="146" fill="#8C4A22"/>
+          <circle cx="150" cy="150" r="140" fill="none" stroke="#F4EDE1" stroke-width="1.5"/>
+          <circle cx="150" cy="150" r="98" fill="none" stroke="#F4EDE1" stroke-width="1.5"/>
+          <text font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500" letter-spacing="3.3" fill="#F4EDE1">
+            <textPath href="#ring" startOffset="0">MOLINO · SOURDOUGH BAKERY · VALENCIA · MILLED IN HOUSE ·</textPath>
+          </text>
+          <use href="#mark" x="68" y="68" width="164" height="164" style="color:#F4EDE1"/>
+        </svg>
+      </div>
+      <div class="fav-box">
+        <div class="sizes">
+          <figure>
+            <svg width="96" height="96" viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#C8562A"/><use href="#icon" x="8" y="8" width="80" height="80" style="color:#F4EDE1"/></svg>
+            <figcaption>App · 96</figcaption>
+          </figure>
+          <figure>
+            <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#C8562A"/><use href="#icon" x="3" y="3" width="42" height="42" style="color:#F4EDE1"/></svg>
+            <figcaption>48</figcaption>
+          </figure>
+          <figure>
+            <svg width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#C8562A"/><use href="#icon" x="2" y="2" width="28" height="28" style="color:#F4EDE1"/></svg>
+            <figcaption>32</figcaption>
+          </figure>
+          <figure>
+            <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#C8562A"/><use href="#icon" x="1" y="1" width="14" height="14" style="color:#F4EDE1"/></svg>
+            <figcaption>16</figcaption>
+          </figure>
+          <figure>
+            <svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#1F1A16"/><use href="#icon" x="3" y="3" width="42" height="42" style="color:#F4EDE1"/></svg>
+            <figcaption>Dark</figcaption>
+          </figure>
+        </div>
+        <div>
+          <div class="tab-bar">
+            <div class="tab">
+              <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#C8562A"/><use href="#icon" x="1" y="1" width="14" height="14" style="color:#F4EDE1"/></svg>
+              Molino — Sourdough, Valencia
+            </div>
+          </div>
+        </div>
+        <p class="note">Icon ground is always Ember or Rye, never transparent — at 16px the colour does the recognising.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. Palette ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">04 — Palette</span>
+      <h2>Flour, crust, and one Valencian orange.</h2>
+      <p>Mostly Flour and Rye. Ember is the only loud colour and is used for one thing per surface: the mark, a price, a door.</p>
+    </div>
+    <div class="palette">
+      <div class="sw light" style="background:var(--flour)"><b>Flour</b><span>#F4EDE1</span><i>Ground. Paper, walls, page.</i></div>
+      <div class="sw light" style="background:var(--crumb)"><b>Crumb</b><span>#E6D9C3</span><i>Panels, bags, wrap.</i></div>
+      <div class="sw darkc" style="background:var(--ember)"><b>Ember</b><span>#C8562A</span><i>The mark. One per surface.</i></div>
+      <div class="sw darkc" style="background:var(--crust)"><b>Crust</b><span>#8C4A22</span><i>Seal, stamps, kraft print.</i></div>
+      <div class="sw darkc" style="background:var(--stone)"><b>Stone</b><span>#6E6A62</span><i>Secondary text.</i></div>
+      <div class="sw darkc" style="background:var(--rye)"><b>Rye</b><span>#1F1A16</span><i>Text, dark ground.</i></div>
+    </div>
+  </section>
+
+  <!-- ============ 6. Type ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">05 — Typography</span>
+      <h2>A warm serif, a plain sans, a miller’s stencil.</h2>
+      <p>Young Serif carries the name and the headlines — heavy, round-shouldered, a little old-fashioned, like a bakery sign painted by hand. Hanken Grotesk does the working text. IBM Plex Mono, in spaced capitals, is for labels: flour type, hydration, bake times.</p>
+    </div>
+    <div class="type">
+      <div class="spec">
+        <div class="meta"><span>Display</span><span>Young Serif · Regular</span></div>
+        <div class="big">molino</div>
+        <p class="sample">Our flour is milled every morning, a few metres from the oven.</p>
+      </div>
+      <div class="stack">
+        <div class="spec">
+          <div class="meta"><span>Text</span><span>Hanken Grotesk · 400/500</span></div>
+          <div class="big">Aa Bb 0123</div>
+          <p style="max-width:40ch">Whole-grain spelt and Valencian wheat, stone-milled on site and fermented for 36 hours. Open Tuesday to Sunday from 8:00.</p>
+        </div>
+        <div class="spec mono">
+          <div class="meta"><span>Label</span><span>IBM Plex Mono · 500</span></div>
+          <div class="big">Spelt · 78% · 36 h</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. In use ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">06 — In use</span>
+      <h2>On the bag, on the window.</h2>
+    </div>
+    <div class="apps">
+      <div class="bag">
+        <div class="bag-shape">
+          <svg viewBox="0 0 200 200"><use href="#mark" width="200" height="200"/></svg>
+          <div class="w">molino</div>
+          <div class="m">Stone-milled sourdough<br>Valencia</div>
+        </div>
+      </div>
+      <div class="sign">
+        <span class="eyebrow" style="color:var(--flour);opacity:.8">Today’s mill · Thursday</span>
+        <h3>Whole spelt, milled at 6:10 this morning.</h3>
+        <div class="row">
+          <p>Loaves out of the oven from 9:00. When the stone stops, we stop baking.</p>
+          <svg viewBox="0 0 200 200" style="color:var(--flour)"><use href="#mark" width="200" height="200"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="end">
+    <span class="eyebrow">Molino · Valencia</span>
+    <span class="eyebrow">Identity sheet, v1 — 2026</span>
+  </div>
+</main>
+</body>
+</html>

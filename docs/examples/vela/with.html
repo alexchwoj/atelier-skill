@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vela, logo and identity</title>
+<meta name="description" content="The Vela logo: a sail in three bands for the app that sets aside tax and savings from every payment a freelancer receives. Main logo, dark version, app icon, palette and type.">
+<meta name="theme-color" content="#F4EEE2">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-label%3D%22Vela%20app%20icon%22%3E%3Ctitle%3EVela%20app%20icon%3C%2Ftitle%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214.4%22%20fill%3D%22%231B2A38%22%2F%3E%3Cg%20transform%3D%22translate(12.4%2011)%20scale(0.68)%22%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A0%22%20fill%3D%22%23D2A462%22%20d%3D%22M14%206Q23.6%2011.91%2031.02%2020H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A1%22%20fill%3D%22%23F4EEE2%22%20d%3D%22M14%2024H34.45Q38.55%2029.12%2041.87%2035H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A2%22%20fill%3D%22%23F4EEE2%22%20d%3D%22M14%2039H44Q47.5%2046%2050%2054H14Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sailcloth:#F4EEE2; --sailcloth-2:#EAE3D4; --rule:#D9D1C1;
+  --harbour:#1B2A38; --night:#101A24; --tide:#3E6476;
+  --brass:#D2A462; --brass-deep:#8A6328; --stone:#6E6A60; --mist:#8FA9B6;
+  --serif:"Newsreader", Georgia, serif; --sans:"IBM Plex Sans", system-ui, sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gutter:clamp(16px, 4vw, 56px);
+}
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--sailcloth);color:var(--harbour);font:400 17px/1.6 var(--sans);font-synthesis:none;-webkit-font-smoothing:antialiased}
+::selection{background:var(--harbour);color:var(--sailcloth)}
+a{color:inherit;text-underline-offset:.22em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--tide);outline-offset:3px;border-radius:2px}
+.dark :focus-visible{outline-color:var(--brass)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;margin:0;overflow-wrap:break-word;min-width:0}
+h2{font-size:clamp(36px,5vw,56px);line-height:1.05}
+p{margin:0}
+.wrap{padding-inline:var(--gutter);max-width:1440px;margin-inline:auto}
+
+/* top bar */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:16px;font-size:16px}
+.bar .home{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:500;min-height:44px}
+.nav-mark{width:28px;height:28px}
+.bar nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.bar nav a{display:inline-block;padding:10px 12px;text-decoration:none;color:var(--stone)}
+.bar nav a:hover{color:var(--harbour)}
+
+/* hero */
+.hero{min-height:calc(100svh - 76px);display:grid;grid-template-rows:1fr auto}
+.hero-stage{display:grid;place-items:center;padding-block:clamp(16px,4vh,56px)}
+.hero-logo{width:clamp(280px,70vw,1000px);height:auto;display:block;overflow:visible}
+.hero-foot{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:end;padding-bottom:36px;border-top:1px solid var(--rule);padding-top:24px}
+.hero-foot h1{font-size:clamp(28px,3vw,36px);line-height:1.15;margin-bottom:8px}
+.hero-foot p{max-width:50ch}
+.actions{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-self:end}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--harbour);color:var(--sailcloth);text-decoration:none;font-weight:500;transition:background-color .2s var(--ease)}
+.btn:hover{background:#26394b}
+.btn svg{width:18px;height:18px}
+.link{min-height:48px;display:inline-flex;align-items:center}
+
+/* hero entrance: the bands settle into the sail, top to bottom */
+.hero-logo .band{transform-box:fill-box;animation:settle 1100ms var(--ease) both;animation-delay:calc(var(--i) * 140ms + 120ms)}
+@keyframes settle{from{opacity:0;transform:translateX(-14%)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.hero-logo .band{animation:none}}
+
+/* idea */
+.idea{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:center;padding-block:clamp(80px,12vw,160px)}
+.idea-figure{margin:0;background:var(--sailcloth-2);border-radius:24px;padding:clamp(24px,4vw,56px)}
+.idea-mark{width:100%;height:auto;display:block}
+.idea-copy h2{margin-bottom:28px}
+.idea-copy > p{max-width:44ch;margin-bottom:36px}
+.bands{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.bands li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:16px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.bands b{font-family:var(--serif);font-weight:500;font-size:22px;display:block;line-height:1.3}
+.bands span{color:var(--stone)}
+.swatch-dot{width:20px;height:20px;border-radius:50%;margin-top:5px}
+.note{margin-top:28px;color:var(--stone);max-width:52ch}
+
+/* dark */
+.dark{background:var(--night);color:var(--sailcloth)}
+.dark-inner{padding-block:clamp(72px,10vw,140px);display:grid;gap:clamp(48px,7vw,96px)}
+.dark-logo{width:clamp(260px,62vw,860px);height:auto;display:block;margin-inline:auto}
+.dark-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:end;border-top:1px solid #2A3A49;padding-top:28px}
+.dark-row p{color:var(--mist);max-width:50ch;margin-top:20px}
+.dark-row p strong{color:var(--brass);font-weight:500}
+.dark-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.dark-pair figure{margin:0;border-radius:16px;padding:28px 24px 20px;display:grid;gap:16px}
+.dark-pair figcaption{font-size:16px}
+.dark-pair .on-harbour{background:var(--harbour)}
+.dark-pair .on-tide{background:var(--tide)}
+.dark-pair svg{width:100%;height:auto}
+
+/* icon */
+.icon-sec{padding-block:clamp(80px,12vw,160px)}
+.icon-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:end;margin-bottom:56px}
+.icon-head p{max-width:46ch}
+.sizes{display:flex;flex-wrap:wrap;align-items:flex-end;gap:clamp(24px,4vw,56px);padding:clamp(28px,4vw,56px);background:var(--sailcloth-2);border-radius:24px}
+.sizes figure{margin:0;display:grid;justify-items:start;gap:12px}
+.sizes figcaption{font-size:16px;color:var(--stone);font-variant-numeric:tabular-nums}
+.sizes svg{display:block}
+.favicons{display:flex;gap:8px 28px;align-items:center;margin-top:24px;color:var(--stone);font-size:16px;flex-wrap:wrap}
+.favicons span{display:inline-flex;align-items:center;gap:10px}
+.favicons a{color:var(--harbour)}
+.m16{width:16px;height:16px}.m32{width:32px;height:32px}
+
+/* palette */
+.palette{padding-block:0 clamp(80px,12vw,160px)}
+.palette h2{margin-bottom:16px}
+.palette .lede{max-width:56ch;margin-bottom:48px}
+.swatches{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.sw{border-radius:16px;padding:20px;min-height:168px;display:flex;flex-direction:column;justify-content:space-between;gap:20px;grid-column:span 1}
+.sw.big{grid-column:span 3;min-height:280px}
+.sw.mid{grid-column:span 2}
+.sw b{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.2;display:block}
+.sw .hex{font-family:"IBM Plex Mono",monospace;font-size:16px}
+.sw .role{font-size:16px}
+.sw-line{border:1px solid var(--rule)}
+
+/* type */
+.type{background:var(--sailcloth-2);padding-block:clamp(80px,12vw,160px)}
+.type-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(40px,6vw,96px)}
+.specimen{font-family:var(--serif);font-size:clamp(48px,7.4vw,112px);line-height:.98;letter-spacing:-.025em;font-weight:400;margin:24px 0 32px}
+.face-name{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16px;border-bottom:1px solid var(--rule);padding-bottom:12px;color:var(--stone);font-size:16px}
+.face-name strong{color:var(--harbour);font-weight:500}
+.alpha{font-family:var(--serif);font-size:28px;line-height:1.35;overflow-wrap:anywhere}
+.body-sample{font-size:19px;line-height:1.6;margin:24px 0 32px;max-width:40ch}
+.split{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums lining-nums;font-size:17px}
+.split caption{text-align:left;color:var(--stone);font-size:16px;padding-bottom:10px}
+.split td,.split th{padding:12px 0;border-bottom:1px solid var(--rule);text-align:left;font-weight:400}
+.split td{text-align:right;font-weight:500}
+.split .tax th,.split .tax td{color:var(--brass-deep)}
+
+/* footer */
+.colophon{padding-block:48px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 32px;align-items:start;font-size:16px;color:var(--stone)}
+.colophon ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:0 24px;justify-content:flex-end}
+.colophon a{color:var(--harbour);display:inline-flex;min-height:44px;align-items:center}
+
+@media (max-width: 860px){
+  .bar nav{display:none}
+  .hero-foot,.idea,.dark-row,.icon-head,.type-grid,.colophon{grid-template-columns:minmax(0,1fr)}
+  .actions{justify-self:start}
+  .swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sw.big,.sw.mid{grid-column:span 2;min-height:168px}
+  .colophon ul{justify-content:flex-start}
+}
+@media (max-width: 480px){ .dark-pair{grid-template-columns:minmax(0,1fr)} }
+</style>
+</head>
+<body>
+<header class="wrap bar">
+  <a class="home" href="#top" aria-label="Vela, back to top"><svg class="nav-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vela"><title>Vela</title><g transform="translate(2.5 2)"><path class="band" style="--i:0" fill="currentColor" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="currentColor" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="currentColor" d="M14 39H44Q47.5 46 50 54H14Z"/></g></svg><span>Vela identity</span></a>
+  <nav aria-label="Sections"><ul>
+    <li><a href="#idea">The mark</a></li><li><a href="#dark">Dark</a></li><li><a href="#icon">App icon</a></li><li><a href="#palette">Palette</a></li><li><a href="#type">Type</a></li>
+  </ul></nav>
+</header>
+<main id="top">
+  <section class="hero wrap" aria-labelledby="h1">
+    <div class="hero-stage"><svg class="hero-logo" xmlns="http://www.w3.org/2000/svg" viewBox="-172 -168 538 190" role="img" aria-label="Vela"><title>Vela</title><g transform="translate(-195 -160.88) scale(2.9792)"><path class="band" style="--i:0" fill="var(--harbour)" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="var(--harbour)" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="var(--harbour)" d="M14 39H44Q47.5 46 50 54H14Z"/></g><g fill="var(--harbour)"><path d="M104.7 -83.2L94 -79.4L60.8 1.6L49.6 1.6L12.2 -78.4L-0.4 -83.2L-0.4 -88.5L46.6 -88.5L46.6 -83.2L33.7 -79.1L62.5 -16.3L59 -16.2L83.2 -79.4L70.5 -83.2L70.5 -88.5L104.7 -88.5L104.7 -83.2Z"/><path d="M154.9 -90.7L154.9 -90.7Q166.2 -90.7 174.05 -85.9Q181.9 -81.1 186.35 -71.9Q190.8 -62.7 191.7 -49.5L191.7 -49.5L127.2 -49.5L127.2 -57.9L179.7 -60L171.3 -55.6Q170.8 -63.8 168.7 -69.45Q166.6 -75.1 162.8 -78.05Q159 -81 153.3 -81L153.3 -81Q146.7 -81 141.750 -77.55Q136.8 -74.1 134.05 -66.95Q131.3 -59.8 131.3 -48.8L131.3 -48.8Q131.3 -37.3 135.45 -29.35Q139.6 -21.4 147.3 -17.2Q155 -13 165.5 -13L165.5 -13Q169.9 -13 173.95 -13.95Q178 -14.9 181.9 -16.75Q185.8 -18.6 189.5 -21.2L189.5 -21.2L191.8 -16.5Q186.3 -10.5 180.45 -6.3Q174.6 -2.1 168.3 0.05Q162 2.2 155.1 2.2L155.1 2.2Q142.3 2.2 132.6 -3.55Q122.9 -9.3 117.45 -19.5Q112 -29.7 112 -42.9L112 -42.9Q112 -56.3 117.15 -67.15Q122.3 -78 131.9 -84.35Q141.5 -90.7 154.9 -90.7Z"/><path d="M233.7 -124.7L233.7 -9.6L248.3 -4.8L248.3 0L199.4 0L199.4 -4.8L213.9 -9.6L213.9 -120.6Q212.5 -122.2 210.2 -123.8Q207.9 -125.4 204.7 -127.1Q201.5 -128.8 197.6 -130.4L197.6 -134.2L232.1 -143.2L235.1 -143.2Z"/><path d="M313 -56.2L313 -56.2L313.4 -47.6Q302 -45.3 294.8 -42.8Q287.6 -40.3 283.65 -37.6Q279.7 -34.9 278.25 -31.85Q276.8 -28.8 276.8 -25L276.8 -25Q276.8 -18.3 280.5 -14.9Q284.2 -11.5 290.1 -11.5L290.1 -11.5Q294.7 -11.5 298.45 -13.7Q302.2 -15.9 304.4 -19.450Q306.6 -23 306.6 -27.3L306.6 -27.3L306.6 -63.9Q306.6 -71.4 302.9 -75.6Q299.2 -79.8 290.4 -79.8L290.4 -79.8Q286.9 -79.8 283.1 -79Q279.3 -78.2 275.8 -76.7L275.8 -76.7L280.8 -82.4Q280.3 -78.6 279.65 -75.5Q279 -72.4 278.2 -70.15Q277.4 -67.9 276.3 -66.4L276.3 -66.4Q274.7 -64.3 272.05 -63.35Q269.4 -62.4 266.3 -62.4L266.3 -62.4Q262.4 -62.4 260.2 -64.05Q258 -65.7 258 -68.3L258 -68.3Q258 -71.8 261.35 -75.6Q264.7 -79.4 270.4 -82.7Q276.1 -86 283.3 -88.05Q290.5 -90.1 298.3 -90.1L298.3 -90.1Q308.6 -90.1 314.8 -87Q321 -83.9 323.7 -78.15Q326.4 -72.4 326.4 -64.3L326.4 -64.3L326.4 -19.1Q326.4 -16.1 327.3 -14.1Q328.2 -12.1 329.95 -11.1Q331.7 -10.1 334.3 -10.1L334.3 -10.1Q336.5 -10.1 339 -10.85Q341.5 -11.6 344 -13L344 -13L344 -7Q339.4 -2.6 334.25 -0.3Q329.1 2 324.5 2L324.5 2Q318.9 2 315 -0.4Q311.1 -2.8 309.15 -7.45Q307.2 -12.1 307 -18.5L307 -18.5L307.8 -19.2Q306.3 -12.6 302.55 -7.8Q298.8 -3 293.5 -0.4Q288.2 2.2 281.8 2.2L281.8 2.2Q270.6 2.2 263.75 -3.7Q256.9 -9.6 256.9 -20.9L256.9 -20.9Q256.9 -26.8 259.25 -31.6Q261.6 -36.4 267.7 -40.6Q273.8 -44.8 284.8 -48.6Q295.8 -52.4 313 -56.2Z"/></g></svg></div>
+    <div class="hero-foot">
+      <div>
+        <h1 id="h1">A sail, split before it sets out.</h1>
+        <p>The Vela logo is a sail in three bands: the tax, the savings and what is yours. Every payment, divided calmly the moment it lands.</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="data:image/svg+xml;charset=utf-8,%3Csvg%20class%3D%22%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-172%20-168%20538%20190%22%20role%3D%22img%22%20aria-label%3D%22Vela%22%3E%3Ctitle%3EVela%3C%2Ftitle%3E%3Cg%20transform%3D%22translate(-195%20-160.88)%20scale(2.9792)%22%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A0%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%206Q23.6%2011.91%2031.02%2020H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A1%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%2024H34.45Q38.55%2029.12%2041.87%2035H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A2%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%2039H44Q47.5%2046%2050%2054H14Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%231B2A38%22%3E%3Cpath%20d%3D%22M104.7%20-83.2L94%20-79.4L60.8%201.6L49.6%201.6L12.2%20-78.4L-0.4%20-83.2L-0.4%20-88.5L46.6%20-88.5L46.6%20-83.2L33.7%20-79.1L62.5%20-16.3L59%20-16.2L83.2%20-79.4L70.5%20-83.2L70.5%20-88.5L104.7%20-88.5L104.7%20-83.2Z%22%2F%3E%3Cpath%20d%3D%22M154.9%20-90.7L154.9%20-90.7Q166.2%20-90.7%20174.05%20-85.9Q181.9%20-81.1%20186.35%20-71.9Q190.8%20-62.7%20191.7%20-49.5L191.7%20-49.5L127.2%20-49.5L127.2%20-57.9L179.7%20-60L171.3%20-55.6Q170.8%20-63.8%20168.7%20-69.45Q166.6%20-75.1%20162.8%20-78.05Q159%20-81%20153.3%20-81L153.3%20-81Q146.7%20-81%20141.750%20-77.55Q136.8%20-74.1%20134.05%20-66.95Q131.3%20-59.8%20131.3%20-48.8L131.3%20-48.8Q131.3%20-37.3%20135.45%20-29.35Q139.6%20-21.4%20147.3%20-17.2Q155%20-13%20165.5%20-13L165.5%20-13Q169.9%20-13%20173.95%20-13.95Q178%20-14.9%20181.9%20-16.75Q185.8%20-18.6%20189.5%20-21.2L189.5%20-21.2L191.8%20-16.5Q186.3%20-10.5%20180.45%20-6.3Q174.6%20-2.1%20168.3%200.05Q162%202.2%20155.1%202.2L155.1%202.2Q142.3%202.2%20132.6%20-3.55Q122.9%20-9.3%20117.45%20-19.5Q112%20-29.7%20112%20-42.9L112%20-42.9Q112%20-56.3%20117.15%20-67.15Q122.3%20-78%20131.9%20-84.35Q141.5%20-90.7%20154.9%20-90.7Z%22%2F%3E%3Cpath%20d%3D%22M233.7%20-124.7L233.7%20-9.6L248.3%20-4.8L248.3%200L199.4%200L199.4%20-4.8L213.9%20-9.6L213.9%20-120.6Q212.5%20-122.2%20210.2%20-123.8Q207.9%20-125.4%20204.7%20-127.1Q201.5%20-128.8%20197.6%20-130.4L197.6%20-134.2L232.1%20-143.2L235.1%20-143.2Z%22%2F%3E%3Cpath%20d%3D%22M313%20-56.2L313%20-56.2L313.4%20-47.6Q302%20-45.3%20294.8%20-42.8Q287.6%20-40.3%20283.65%20-37.6Q279.7%20-34.9%20278.25%20-31.85Q276.8%20-28.8%20276.8%20-25L276.8%20-25Q276.8%20-18.3%20280.5%20-14.9Q284.2%20-11.5%20290.1%20-11.5L290.1%20-11.5Q294.7%20-11.5%20298.45%20-13.7Q302.2%20-15.9%20304.4%20-19.450Q306.6%20-23%20306.6%20-27.3L306.6%20-27.3L306.6%20-63.9Q306.6%20-71.4%20302.9%20-75.6Q299.2%20-79.8%20290.4%20-79.8L290.4%20-79.8Q286.9%20-79.8%20283.1%20-79Q279.3%20-78.2%20275.8%20-76.7L275.8%20-76.7L280.8%20-82.4Q280.3%20-78.6%20279.65%20-75.5Q279%20-72.4%20278.2%20-70.15Q277.4%20-67.9%20276.3%20-66.4L276.3%20-66.4Q274.7%20-64.3%20272.05%20-63.35Q269.4%20-62.4%20266.3%20-62.4L266.3%20-62.4Q262.4%20-62.4%20260.2%20-64.05Q258%20-65.7%20258%20-68.3L258%20-68.3Q258%20-71.8%20261.35%20-75.6Q264.7%20-79.4%20270.4%20-82.7Q276.1%20-86%20283.3%20-88.05Q290.5%20-90.1%20298.3%20-90.1L298.3%20-90.1Q308.6%20-90.1%20314.8%20-87Q321%20-83.9%20323.7%20-78.15Q326.4%20-72.4%20326.4%20-64.3L326.4%20-64.3L326.4%20-19.1Q326.4%20-16.1%20327.3%20-14.1Q328.2%20-12.1%20329.95%20-11.1Q331.7%20-10.1%20334.3%20-10.1L334.3%20-10.1Q336.5%20-10.1%20339%20-10.85Q341.5%20-11.6%20344%20-13L344%20-13L344%20-7Q339.4%20-2.6%20334.25%20-0.3Q329.1%202%20324.5%202L324.5%202Q318.9%202%20315%20-0.4Q311.1%20-2.8%20309.15%20-7.45Q307.2%20-12.1%20307%20-18.5L307%20-18.5L307.8%20-19.2Q306.3%20-12.6%20302.55%20-7.8Q298.8%20-3%20293.5%20-0.4Q288.2%202.2%20281.8%202.2L281.8%202.2Q270.6%202.2%20263.75%20-3.7Q256.9%20-9.6%20256.9%20-20.9L256.9%20-20.9Q256.9%20-26.8%20259.25%20-31.6Q261.6%20-36.4%20267.7%20-40.6Q273.8%20-44.8%20284.8%20-48.6Q295.8%20-52.4%20313%20-56.2Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" download="vela-logo.svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Download the logo</a>
+        <a class="link" href="#dark">See it on dark</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="idea" class="wrap idea" aria-labelledby="idea-h">
+    <figure class="idea-figure"><svg class="idea-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Vela sail, three bands"><title>The Vela sail, three bands</title><g transform="translate(2.5 2)"><path class="band" style="--i:0" fill="var(--brass-deep)" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="var(--harbour)" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="var(--harbour)" d="M14 39H44Q47.5 46 50 54H14Z"/></g></svg></figure>
+    <div class="idea-copy">
+      <h2 id="idea-h">Three bands, one sail</h2>
+      <p>Vela means sail. A sail is set before the wind arrives and then does its work quietly, which is how the app treats a freelancer's money: the shares are cut first, so spending what is left is never a guess.</p>
+      <ol class="bands">
+        <li><i class="swatch-dot" style="background:var(--brass-deep)" aria-hidden="true"></i><div><b>The top band, tax</b><span>Set aside first. The one band that turns brass in the colour versions.</span></div></li>
+        <li><i class="swatch-dot" style="background:var(--harbour)" aria-hidden="true"></i><div><b>The middle band, savings</b><span>Kept next, for the slow months.</span></div></li>
+        <li><i class="swatch-dot" style="background:var(--harbour)" aria-hidden="true"></i><div><b>The base, yours</b><span>The widest band. What is left is safe to spend.</span></div></li>
+      </ol>
+      <p class="note">The wordmark is Newsreader Medium, outlined and set slightly tight. The sail stands exactly as tall as the l, so the mast of the word and the mast of the sail share one line of height.</p>
+    </div>
+  </section>
+
+  <section id="dark" class="dark" aria-labelledby="dark-h">
+    <div class="wrap dark-inner">
+      <svg class="dark-logo" xmlns="http://www.w3.org/2000/svg" viewBox="-172 -168 538 190" role="img" aria-label="Vela, reversed on night harbour"><title>Vela, reversed on night harbour</title><g transform="translate(-195 -160.88) scale(2.9792)"><path class="band" style="--i:0" fill="#D2A462" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="#F4EEE2" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="#F4EEE2" d="M14 39H44Q47.5 46 50 54H14Z"/></g><g fill="#F4EEE2"><path d="M104.7 -83.2L94 -79.4L60.8 1.6L49.6 1.6L12.2 -78.4L-0.4 -83.2L-0.4 -88.5L46.6 -88.5L46.6 -83.2L33.7 -79.1L62.5 -16.3L59 -16.2L83.2 -79.4L70.5 -83.2L70.5 -88.5L104.7 -88.5L104.7 -83.2Z"/><path d="M154.9 -90.7L154.9 -90.7Q166.2 -90.7 174.05 -85.9Q181.9 -81.1 186.35 -71.9Q190.8 -62.7 191.7 -49.5L191.7 -49.5L127.2 -49.5L127.2 -57.9L179.7 -60L171.3 -55.6Q170.8 -63.8 168.7 -69.45Q166.6 -75.1 162.8 -78.05Q159 -81 153.3 -81L153.3 -81Q146.7 -81 141.750 -77.55Q136.8 -74.1 134.05 -66.95Q131.3 -59.8 131.3 -48.8L131.3 -48.8Q131.3 -37.3 135.45 -29.35Q139.6 -21.4 147.3 -17.2Q155 -13 165.5 -13L165.5 -13Q169.9 -13 173.95 -13.95Q178 -14.9 181.9 -16.75Q185.8 -18.6 189.5 -21.2L189.5 -21.2L191.8 -16.5Q186.3 -10.5 180.45 -6.3Q174.6 -2.1 168.3 0.05Q162 2.2 155.1 2.2L155.1 2.2Q142.3 2.2 132.6 -3.55Q122.9 -9.3 117.45 -19.5Q112 -29.7 112 -42.9L112 -42.9Q112 -56.3 117.15 -67.15Q122.3 -78 131.9 -84.35Q141.5 -90.7 154.9 -90.7Z"/><path d="M233.7 -124.7L233.7 -9.6L248.3 -4.8L248.3 0L199.4 0L199.4 -4.8L213.9 -9.6L213.9 -120.6Q212.5 -122.2 210.2 -123.8Q207.9 -125.4 204.7 -127.1Q201.5 -128.8 197.6 -130.4L197.6 -134.2L232.1 -143.2L235.1 -143.2Z"/><path d="M313 -56.2L313 -56.2L313.4 -47.6Q302 -45.3 294.8 -42.8Q287.6 -40.3 283.65 -37.6Q279.7 -34.9 278.25 -31.85Q276.8 -28.8 276.8 -25L276.8 -25Q276.8 -18.3 280.5 -14.9Q284.2 -11.5 290.1 -11.5L290.1 -11.5Q294.7 -11.5 298.45 -13.7Q302.2 -15.9 304.4 -19.450Q306.6 -23 306.6 -27.3L306.6 -27.3L306.6 -63.9Q306.6 -71.4 302.9 -75.6Q299.2 -79.8 290.4 -79.8L290.4 -79.8Q286.9 -79.8 283.1 -79Q279.3 -78.2 275.8 -76.7L275.8 -76.7L280.8 -82.4Q280.3 -78.6 279.65 -75.5Q279 -72.4 278.2 -70.15Q277.4 -67.9 276.3 -66.4L276.3 -66.4Q274.7 -64.3 272.05 -63.35Q269.4 -62.4 266.3 -62.4L266.3 -62.4Q262.4 -62.4 260.2 -64.05Q258 -65.7 258 -68.3L258 -68.3Q258 -71.8 261.35 -75.6Q264.7 -79.4 270.4 -82.7Q276.1 -86 283.3 -88.05Q290.5 -90.1 298.3 -90.1L298.3 -90.1Q308.6 -90.1 314.8 -87Q321 -83.9 323.7 -78.15Q326.4 -72.4 326.4 -64.3L326.4 -64.3L326.4 -19.1Q326.4 -16.1 327.3 -14.1Q328.2 -12.1 329.95 -11.1Q331.7 -10.1 334.3 -10.1L334.3 -10.1Q336.5 -10.1 339 -10.85Q341.5 -11.6 344 -13L344 -13L344 -7Q339.4 -2.6 334.25 -0.3Q329.1 2 324.5 2L324.5 2Q318.9 2 315 -0.4Q311.1 -2.8 309.15 -7.45Q307.2 -12.1 307 -18.5L307 -18.5L307.8 -19.2Q306.3 -12.6 302.55 -7.8Q298.8 -3 293.5 -0.4Q288.2 2.2 281.8 2.2L281.8 2.2Q270.6 2.2 263.75 -3.7Q256.9 -9.6 256.9 -20.9L256.9 -20.9Q256.9 -26.8 259.25 -31.6Q261.6 -36.4 267.7 -40.6Q273.8 -44.8 284.8 -48.6Q295.8 -52.4 313 -56.2Z"/></g></svg>
+      <div class="dark-row">
+        <div>
+          <h2 id="dark-h">On night harbour</h2>
+          <p>Reversed in sailcloth, with the tax band in <strong>brass</strong>. Brass appears only on dark grounds, where it holds 7.7 to 1 against night harbour. On light grounds the logo stays one colour.</p>
+        </div>
+        <div class="dark-pair">
+          <figure class="on-harbour"><svg class="dark-mono" xmlns="http://www.w3.org/2000/svg" viewBox="-172 -168 538 190" role="img" aria-label="Vela, one colour reversed"><title>Vela, one colour reversed</title><g transform="translate(-195 -160.88) scale(2.9792)"><path class="band" style="--i:0" fill="#F4EEE2" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="#F4EEE2" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="#F4EEE2" d="M14 39H44Q47.5 46 50 54H14Z"/></g><g fill="#F4EEE2"><path d="M104.7 -83.2L94 -79.4L60.8 1.6L49.6 1.6L12.2 -78.4L-0.4 -83.2L-0.4 -88.5L46.6 -88.5L46.6 -83.2L33.7 -79.1L62.5 -16.3L59 -16.2L83.2 -79.4L70.5 -83.2L70.5 -88.5L104.7 -88.5L104.7 -83.2Z"/><path d="M154.9 -90.7L154.9 -90.7Q166.2 -90.7 174.05 -85.9Q181.9 -81.1 186.35 -71.9Q190.8 -62.7 191.7 -49.5L191.7 -49.5L127.2 -49.5L127.2 -57.9L179.7 -60L171.3 -55.6Q170.8 -63.8 168.7 -69.45Q166.6 -75.1 162.8 -78.05Q159 -81 153.3 -81L153.3 -81Q146.7 -81 141.750 -77.55Q136.8 -74.1 134.05 -66.95Q131.3 -59.8 131.3 -48.8L131.3 -48.8Q131.3 -37.3 135.45 -29.35Q139.6 -21.4 147.3 -17.2Q155 -13 165.5 -13L165.5 -13Q169.9 -13 173.95 -13.95Q178 -14.9 181.9 -16.75Q185.8 -18.6 189.5 -21.2L189.5 -21.2L191.8 -16.5Q186.3 -10.5 180.45 -6.3Q174.6 -2.1 168.3 0.05Q162 2.2 155.1 2.2L155.1 2.2Q142.3 2.2 132.6 -3.55Q122.9 -9.3 117.45 -19.5Q112 -29.7 112 -42.9L112 -42.9Q112 -56.3 117.15 -67.15Q122.3 -78 131.9 -84.35Q141.5 -90.7 154.9 -90.7Z"/><path d="M233.7 -124.7L233.7 -9.6L248.3 -4.8L248.3 0L199.4 0L199.4 -4.8L213.9 -9.6L213.9 -120.6Q212.5 -122.2 210.2 -123.8Q207.9 -125.4 204.7 -127.1Q201.5 -128.8 197.6 -130.4L197.6 -134.2L232.1 -143.2L235.1 -143.2Z"/><path d="M313 -56.2L313 -56.2L313.4 -47.6Q302 -45.3 294.8 -42.8Q287.6 -40.3 283.65 -37.6Q279.7 -34.9 278.25 -31.85Q276.8 -28.8 276.8 -25L276.8 -25Q276.8 -18.3 280.5 -14.9Q284.2 -11.5 290.1 -11.5L290.1 -11.5Q294.7 -11.5 298.45 -13.7Q302.2 -15.9 304.4 -19.450Q306.6 -23 306.6 -27.3L306.6 -27.3L306.6 -63.9Q306.6 -71.4 302.9 -75.6Q299.2 -79.8 290.4 -79.8L290.4 -79.8Q286.9 -79.8 283.1 -79Q279.3 -78.2 275.8 -76.7L275.8 -76.7L280.8 -82.4Q280.3 -78.6 279.65 -75.5Q279 -72.4 278.2 -70.15Q277.4 -67.9 276.3 -66.4L276.3 -66.4Q274.7 -64.3 272.05 -63.35Q269.4 -62.4 266.3 -62.4L266.3 -62.4Q262.4 -62.4 260.2 -64.05Q258 -65.7 258 -68.3L258 -68.3Q258 -71.8 261.35 -75.6Q264.7 -79.4 270.4 -82.7Q276.1 -86 283.3 -88.05Q290.5 -90.1 298.3 -90.1L298.3 -90.1Q308.6 -90.1 314.8 -87Q321 -83.9 323.7 -78.15Q326.4 -72.4 326.4 -64.3L326.4 -64.3L326.4 -19.1Q326.4 -16.1 327.3 -14.1Q328.2 -12.1 329.95 -11.1Q331.7 -10.1 334.3 -10.1L334.3 -10.1Q336.5 -10.1 339 -10.85Q341.5 -11.6 344 -13L344 -13L344 -7Q339.4 -2.6 334.25 -0.3Q329.1 2 324.5 2L324.5 2Q318.9 2 315 -0.4Q311.1 -2.8 309.15 -7.45Q307.2 -12.1 307 -18.5L307 -18.5L307.8 -19.2Q306.3 -12.6 302.55 -7.8Q298.8 -3 293.5 -0.4Q288.2 2.2 281.8 2.2L281.8 2.2Q270.6 2.2 263.75 -3.7Q256.9 -9.6 256.9 -20.9L256.9 -20.9Q256.9 -26.8 259.25 -31.6Q261.6 -36.4 267.7 -40.6Q273.8 -44.8 284.8 -48.6Q295.8 -52.4 313 -56.2Z"/></g></svg><figcaption>One colour, on harbour</figcaption></figure>
+          <figure class="on-tide"><svg class="dark-mono" xmlns="http://www.w3.org/2000/svg" viewBox="-172 -168 538 190" role="img" aria-label="Vela, one colour reversed"><title>Vela, one colour reversed</title><g transform="translate(-195 -160.88) scale(2.9792)"><path class="band" style="--i:0" fill="#F4EEE2" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="#F4EEE2" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="#F4EEE2" d="M14 39H44Q47.5 46 50 54H14Z"/></g><g fill="#F4EEE2"><path d="M104.7 -83.2L94 -79.4L60.8 1.6L49.6 1.6L12.2 -78.4L-0.4 -83.2L-0.4 -88.5L46.6 -88.5L46.6 -83.2L33.7 -79.1L62.5 -16.3L59 -16.2L83.2 -79.4L70.5 -83.2L70.5 -88.5L104.7 -88.5L104.7 -83.2Z"/><path d="M154.9 -90.7L154.9 -90.7Q166.2 -90.7 174.05 -85.9Q181.9 -81.1 186.35 -71.9Q190.8 -62.7 191.7 -49.5L191.7 -49.5L127.2 -49.5L127.2 -57.9L179.7 -60L171.3 -55.6Q170.8 -63.8 168.7 -69.45Q166.6 -75.1 162.8 -78.05Q159 -81 153.3 -81L153.3 -81Q146.7 -81 141.750 -77.55Q136.8 -74.1 134.05 -66.95Q131.3 -59.8 131.3 -48.8L131.3 -48.8Q131.3 -37.3 135.45 -29.35Q139.6 -21.4 147.3 -17.2Q155 -13 165.5 -13L165.5 -13Q169.9 -13 173.95 -13.95Q178 -14.9 181.9 -16.75Q185.8 -18.6 189.5 -21.2L189.5 -21.2L191.8 -16.5Q186.3 -10.5 180.45 -6.3Q174.6 -2.1 168.3 0.05Q162 2.2 155.1 2.2L155.1 2.2Q142.3 2.2 132.6 -3.55Q122.9 -9.3 117.45 -19.5Q112 -29.7 112 -42.9L112 -42.9Q112 -56.3 117.15 -67.15Q122.3 -78 131.9 -84.35Q141.5 -90.7 154.9 -90.7Z"/><path d="M233.7 -124.7L233.7 -9.6L248.3 -4.8L248.3 0L199.4 0L199.4 -4.8L213.9 -9.6L213.9 -120.6Q212.5 -122.2 210.2 -123.8Q207.9 -125.4 204.7 -127.1Q201.5 -128.8 197.6 -130.4L197.6 -134.2L232.1 -143.2L235.1 -143.2Z"/><path d="M313 -56.2L313 -56.2L313.4 -47.6Q302 -45.3 294.8 -42.8Q287.6 -40.3 283.65 -37.6Q279.7 -34.9 278.25 -31.85Q276.8 -28.8 276.8 -25L276.8 -25Q276.8 -18.3 280.5 -14.9Q284.2 -11.5 290.1 -11.5L290.1 -11.5Q294.7 -11.5 298.45 -13.7Q302.2 -15.9 304.4 -19.450Q306.6 -23 306.6 -27.3L306.6 -27.3L306.6 -63.9Q306.6 -71.4 302.9 -75.6Q299.2 -79.8 290.4 -79.8L290.4 -79.8Q286.9 -79.8 283.1 -79Q279.3 -78.2 275.8 -76.7L275.8 -76.7L280.8 -82.4Q280.3 -78.6 279.65 -75.5Q279 -72.4 278.2 -70.15Q277.4 -67.9 276.3 -66.4L276.3 -66.4Q274.7 -64.3 272.05 -63.35Q269.4 -62.4 266.3 -62.4L266.3 -62.4Q262.4 -62.4 260.2 -64.05Q258 -65.7 258 -68.3L258 -68.3Q258 -71.8 261.35 -75.6Q264.7 -79.4 270.4 -82.7Q276.1 -86 283.3 -88.05Q290.5 -90.1 298.3 -90.1L298.3 -90.1Q308.6 -90.1 314.8 -87Q321 -83.9 323.7 -78.15Q326.4 -72.4 326.4 -64.3L326.4 -64.3L326.4 -19.1Q326.4 -16.1 327.3 -14.1Q328.2 -12.1 329.95 -11.1Q331.7 -10.1 334.3 -10.1L334.3 -10.1Q336.5 -10.1 339 -10.85Q341.5 -11.6 344 -13L344 -13L344 -7Q339.4 -2.6 334.25 -0.3Q329.1 2 324.5 2L324.5 2Q318.9 2 315 -0.4Q311.1 -2.8 309.15 -7.45Q307.2 -12.1 307 -18.5L307 -18.5L307.8 -19.2Q306.3 -12.6 302.55 -7.8Q298.8 -3 293.5 -0.4Q288.2 2.2 281.8 2.2L281.8 2.2Q270.6 2.2 263.75 -3.7Q256.9 -9.6 256.9 -20.9L256.9 -20.9Q256.9 -26.8 259.25 -31.6Q261.6 -36.4 267.7 -40.6Q273.8 -44.8 284.8 -48.6Q295.8 -52.4 313 -56.2Z"/></g></svg><figcaption>One colour, on tide</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="icon" class="wrap icon-sec" aria-labelledby="icon-h">
+    <div class="icon-head">
+      <h2 id="icon-h">The app icon</h2>
+      <p>The sail alone, in sailcloth on harbour, with the tax band in brass. It sits a touch right of the tile's centre on purpose: a sail's weight leans to the mast, so this is where the eye reads it as centred.</p>
+    </div>
+    <div class="sizes">
+      <figure><svg width="180" height="180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vela app icon"><title>Vela app icon</title><rect width="64" height="64" rx="14.4" fill="#1B2A38"/><g transform="translate(12.4 11) scale(0.68)"><path class="band" style="--i:0" fill="#D2A462" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="#F4EEE2" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="#F4EEE2" d="M14 39H44Q47.5 46 50 54H14Z"/></g></svg><figcaption>180 px, home screen</figcaption></figure>
+      <figure><svg width="120" height="120" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vela app icon"><title>Vela app icon</title><rect width="64" height="64" rx="14.4" fill="#1B2A38"/><g transform="translate(12.4 11) scale(0.68)"><path class="band" style="--i:0" fill="#D2A462" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="#F4EEE2" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="#F4EEE2" d="M14 39H44Q47.5 46 50 54H14Z"/></g></svg><figcaption>120 px</figcaption></figure>
+      <figure><svg width="64" height="64" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vela app icon"><title>Vela app icon</title><rect width="64" height="64" rx="14.4" fill="#1B2A38"/><g transform="translate(12.4 11) scale(0.68)"><path class="band" style="--i:0" fill="#D2A462" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="#F4EEE2" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="#F4EEE2" d="M14 39H44Q47.5 46 50 54H14Z"/></g></svg><figcaption>64 px</figcaption></figure>
+      <figure><svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vela app icon"><title>Vela app icon</title><rect width="64" height="64" rx="14.4" fill="#1B2A38"/><g transform="translate(12.4 11) scale(0.68)"><path class="band" style="--i:0" fill="#D2A462" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="#F4EEE2" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="#F4EEE2" d="M14 39H44Q47.5 46 50 54H14Z"/></g></svg><figcaption>32 px</figcaption></figure>
+      <figure><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vela app icon"><title>Vela app icon</title><rect width="64" height="64" rx="14.4" fill="#1B2A38"/><g transform="translate(12.4 11) scale(0.68)"><path class="band" style="--i:0" fill="#D2A462" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="#F4EEE2" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="#F4EEE2" d="M14 39H44Q47.5 46 50 54H14Z"/></g></svg><figcaption>16 px, favicon</figcaption></figure>
+    </div>
+    <div class="favicons">
+      <span><svg class="m32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vela mark"><title>Vela mark</title><g transform="translate(2.5 2)"><path class="band" style="--i:0" fill="var(--harbour)" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="var(--harbour)" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="var(--harbour)" d="M14 39H44Q47.5 46 50 54H14Z"/></g></svg> The mark alone, 32 px</span>
+      <span><svg class="m16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vela mark"><title>Vela mark</title><g transform="translate(2.5 2)"><path class="band" style="--i:0" fill="var(--harbour)" d="M14 6Q23.6 11.91 31.02 20H14Z"/><path class="band" style="--i:1" fill="var(--harbour)" d="M14 24H34.45Q38.55 29.12 41.87 35H14Z"/><path class="band" style="--i:2" fill="var(--harbour)" d="M14 39H44Q47.5 46 50 54H14Z"/></g></svg> 16 px, the gaps still open</span>
+      <a href="data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%221024%22%20height%3D%221024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-label%3D%22Vela%20app%20icon%22%3E%3Ctitle%3EVela%20app%20icon%3C%2Ftitle%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214.4%22%20fill%3D%22%231B2A38%22%2F%3E%3Cg%20transform%3D%22translate(12.4%2011)%20scale(0.68)%22%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A0%22%20fill%3D%22%23D2A462%22%20d%3D%22M14%206Q23.6%2011.91%2031.02%2020H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A1%22%20fill%3D%22%23F4EEE2%22%20d%3D%22M14%2024H34.45Q38.55%2029.12%2041.87%2035H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A2%22%20fill%3D%22%23F4EEE2%22%20d%3D%22M14%2039H44Q47.5%2046%2050%2054H14Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" download="vela-app-icon.svg" class="link">Download the icon</a>
+      <a href="data:image/svg+xml;charset=utf-8,%3Csvg%20class%3D%22%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-label%3D%22Vela%20mark%22%3E%3Ctitle%3EVela%20mark%3C%2Ftitle%3E%3Cg%20transform%3D%22translate(2.5%202)%22%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A0%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%206Q23.6%2011.91%2031.02%2020H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A1%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%2024H34.45Q38.55%2029.12%2041.87%2035H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A2%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%2039H44Q47.5%2046%2050%2054H14Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" download="vela-mark.svg" class="link">Download the mark</a>
+    </div>
+  </section>
+
+  <section id="palette" class="palette" aria-labelledby="pal-h">
+    <div class="wrap">
+      <h2 id="pal-h">Sailcloth, harbour, brass</h2>
+      <p class="lede">Taken from a harbour at first light: undyed canvas, deep water and the brass fittings on deck. No money green, no bank blue. Harbour carries the logo and all the type; brass is a signal, used only for what is set aside.</p>
+      <div class="swatches">
+        <div class="sw big sw-line" style="background:var(--sailcloth);color:var(--harbour)"><b>Sailcloth</b><div><div class="hex">#F4EEE2</div><div class="role">Paper. Every light surface.</div></div></div>
+        <div class="sw big" style="background:var(--harbour);color:var(--sailcloth)"><b>Harbour</b><div><div class="hex">#1B2A38</div><div class="role">Ink. The logo and all type, 12.7 to 1 on sailcloth.</div></div></div>
+        <div class="sw mid" style="background:var(--night);color:var(--sailcloth)"><b>Night harbour</b><div><div class="hex">#101A24</div><div class="role">Dark ground.</div></div></div>
+        <div class="sw mid" style="background:var(--tide);color:var(--sailcloth)"><b>Tide</b><div><div class="hex">#3E6476</div><div class="role">Links, focus, quiet fields.</div></div></div>
+        <div class="sw mid" style="background:var(--brass);color:var(--night)"><b>Brass</b><div><div class="hex">#D2A462</div><div class="role">Set aside, on dark.</div></div></div>
+        <div class="sw" style="background:var(--brass-deep);color:var(--sailcloth)"><b>Brass deep</b><div><div class="hex">#8A6328</div><div class="role">Set aside, on light.</div></div></div>
+        <div class="sw" style="background:var(--stone);color:var(--sailcloth)"><b>Stone</b><div><div class="hex">#6E6A60</div><div class="role">Quiet text.</div></div></div>
+        <div class="sw" style="background:var(--mist);color:var(--night)"><b>Mist</b><div><div class="hex">#8FA9B6</div><div class="role">Quiet text on dark.</div></div></div>
+        <div class="sw sw-line" style="background:var(--sailcloth-2);color:var(--harbour)"><b>Canvas</b><div><div class="hex">#EAE3D4</div><div class="role">Second surface.</div></div></div>
+        <div class="sw mid sw-line" style="background:var(--rule);color:var(--harbour)"><b>Rope</b><div><div class="hex">#D9D1C1</div><div class="role">Hairlines and dividers.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="type" class="type" aria-labelledby="type-h">
+    <div class="wrap type-grid">
+      <div>
+        <div class="face-name"><strong>Newsreader</strong><span>Display, 400 and 500</span></div>
+        <h2 id="type-h" class="specimen">Every payment, already sorted.</h2>
+        <p class="alpha">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz 0123456789</p>
+      </div>
+      <div>
+        <div class="face-name"><strong>IBM Plex Sans</strong><span>Text and figures, 400 and 500</span></div>
+        <p class="body-sample">A calm serif for what Vela says, a plain sans for what it counts. Plex has tabular figures, so amounts line up to the cent in every list.</p>
+        <table class="split">
+          <caption>Sample amounts, to show the figures</caption>
+          <tbody>
+            <tr><th scope="row">Payment received</th><td>$2,400.00</td></tr>
+            <tr class="tax"><th scope="row">Tax, set aside</th><td>$600.00</td></tr>
+            <tr><th scope="row">Savings, set aside</th><td>$240.00</td></tr>
+            <tr><th scope="row">Yours to spend</th><td>$1,560.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="wrap colophon">
+  <p>Vela identity, first round. Newsreader and IBM Plex are free under the SIL Open Font License, served by Google Fonts.</p>
+  <ul>
+    <li><a href="data:image/svg+xml;charset=utf-8,%3Csvg%20class%3D%22%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-172%20-168%20538%20190%22%20role%3D%22img%22%20aria-label%3D%22Vela%22%3E%3Ctitle%3EVela%3C%2Ftitle%3E%3Cg%20transform%3D%22translate(-195%20-160.88)%20scale(2.9792)%22%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A0%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%206Q23.6%2011.91%2031.02%2020H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A1%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%2024H34.45Q38.55%2029.12%2041.87%2035H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A2%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%2039H44Q47.5%2046%2050%2054H14Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%231B2A38%22%3E%3Cpath%20d%3D%22M104.7%20-83.2L94%20-79.4L60.8%201.6L49.6%201.6L12.2%20-78.4L-0.4%20-83.2L-0.4%20-88.5L46.6%20-88.5L46.6%20-83.2L33.7%20-79.1L62.5%20-16.3L59%20-16.2L83.2%20-79.4L70.5%20-83.2L70.5%20-88.5L104.7%20-88.5L104.7%20-83.2Z%22%2F%3E%3Cpath%20d%3D%22M154.9%20-90.7L154.9%20-90.7Q166.2%20-90.7%20174.05%20-85.9Q181.9%20-81.1%20186.35%20-71.9Q190.8%20-62.7%20191.7%20-49.5L191.7%20-49.5L127.2%20-49.5L127.2%20-57.9L179.7%20-60L171.3%20-55.6Q170.8%20-63.8%20168.7%20-69.45Q166.6%20-75.1%20162.8%20-78.05Q159%20-81%20153.3%20-81L153.3%20-81Q146.7%20-81%20141.750%20-77.55Q136.8%20-74.1%20134.05%20-66.95Q131.3%20-59.8%20131.3%20-48.8L131.3%20-48.8Q131.3%20-37.3%20135.45%20-29.35Q139.6%20-21.4%20147.3%20-17.2Q155%20-13%20165.5%20-13L165.5%20-13Q169.9%20-13%20173.95%20-13.95Q178%20-14.9%20181.9%20-16.75Q185.8%20-18.6%20189.5%20-21.2L189.5%20-21.2L191.8%20-16.5Q186.3%20-10.5%20180.45%20-6.3Q174.6%20-2.1%20168.3%200.05Q162%202.2%20155.1%202.2L155.1%202.2Q142.3%202.2%20132.6%20-3.55Q122.9%20-9.3%20117.45%20-19.5Q112%20-29.7%20112%20-42.9L112%20-42.9Q112%20-56.3%20117.15%20-67.15Q122.3%20-78%20131.9%20-84.35Q141.5%20-90.7%20154.9%20-90.7Z%22%2F%3E%3Cpath%20d%3D%22M233.7%20-124.7L233.7%20-9.6L248.3%20-4.8L248.3%200L199.4%200L199.4%20-4.8L213.9%20-9.6L213.9%20-120.6Q212.5%20-122.2%20210.2%20-123.8Q207.9%20-125.4%20204.7%20-127.1Q201.5%20-128.8%20197.6%20-130.4L197.6%20-134.2L232.1%20-143.2L235.1%20-143.2Z%22%2F%3E%3Cpath%20d%3D%22M313%20-56.2L313%20-56.2L313.4%20-47.6Q302%20-45.3%20294.8%20-42.8Q287.6%20-40.3%20283.65%20-37.6Q279.7%20-34.9%20278.25%20-31.85Q276.8%20-28.8%20276.8%20-25L276.8%20-25Q276.8%20-18.3%20280.5%20-14.9Q284.2%20-11.5%20290.1%20-11.5L290.1%20-11.5Q294.7%20-11.5%20298.45%20-13.7Q302.2%20-15.9%20304.4%20-19.450Q306.6%20-23%20306.6%20-27.3L306.6%20-27.3L306.6%20-63.9Q306.6%20-71.4%20302.9%20-75.6Q299.2%20-79.8%20290.4%20-79.8L290.4%20-79.8Q286.9%20-79.8%20283.1%20-79Q279.3%20-78.2%20275.8%20-76.7L275.8%20-76.7L280.8%20-82.4Q280.3%20-78.6%20279.65%20-75.5Q279%20-72.4%20278.2%20-70.15Q277.4%20-67.9%20276.3%20-66.4L276.3%20-66.4Q274.7%20-64.3%20272.05%20-63.35Q269.4%20-62.4%20266.3%20-62.4L266.3%20-62.4Q262.4%20-62.4%20260.2%20-64.05Q258%20-65.7%20258%20-68.3L258%20-68.3Q258%20-71.8%20261.35%20-75.6Q264.7%20-79.4%20270.4%20-82.7Q276.1%20-86%20283.3%20-88.05Q290.5%20-90.1%20298.3%20-90.1L298.3%20-90.1Q308.6%20-90.1%20314.8%20-87Q321%20-83.9%20323.7%20-78.15Q326.4%20-72.4%20326.4%20-64.3L326.4%20-64.3L326.4%20-19.1Q326.4%20-16.1%20327.3%20-14.1Q328.2%20-12.1%20329.95%20-11.1Q331.7%20-10.1%20334.3%20-10.1L334.3%20-10.1Q336.5%20-10.1%20339%20-10.85Q341.5%20-11.6%20344%20-13L344%20-13L344%20-7Q339.4%20-2.6%20334.25%20-0.3Q329.1%202%20324.5%202L324.5%202Q318.9%202%20315%20-0.4Q311.1%20-2.8%20309.15%20-7.45Q307.2%20-12.1%20307%20-18.5L307%20-18.5L307.8%20-19.2Q306.3%20-12.6%20302.55%20-7.8Q298.8%20-3%20293.5%20-0.4Q288.2%202.2%20281.8%202.2L281.8%202.2Q270.6%202.2%20263.75%20-3.7Q256.9%20-9.6%20256.9%20-20.9L256.9%20-20.9Q256.9%20-26.8%20259.25%20-31.6Q261.6%20-36.4%20267.7%20-40.6Q273.8%20-44.8%20284.8%20-48.6Q295.8%20-52.4%20313%20-56.2Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" download="vela-logo.svg">Logo, light</a></li>
+    <li><a href="data:image/svg+xml;charset=utf-8,%3Csvg%20class%3D%22%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-172%20-168%20538%20190%22%20role%3D%22img%22%20aria-label%3D%22Vela%22%3E%3Ctitle%3EVela%3C%2Ftitle%3E%3Cg%20transform%3D%22translate(-195%20-160.88)%20scale(2.9792)%22%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A0%22%20fill%3D%22%23D2A462%22%20d%3D%22M14%206Q23.6%2011.91%2031.02%2020H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A1%22%20fill%3D%22%23F4EEE2%22%20d%3D%22M14%2024H34.45Q38.55%2029.12%2041.87%2035H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A2%22%20fill%3D%22%23F4EEE2%22%20d%3D%22M14%2039H44Q47.5%2046%2050%2054H14Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23F4EEE2%22%3E%3Cpath%20d%3D%22M104.7%20-83.2L94%20-79.4L60.8%201.6L49.6%201.6L12.2%20-78.4L-0.4%20-83.2L-0.4%20-88.5L46.6%20-88.5L46.6%20-83.2L33.7%20-79.1L62.5%20-16.3L59%20-16.2L83.2%20-79.4L70.5%20-83.2L70.5%20-88.5L104.7%20-88.5L104.7%20-83.2Z%22%2F%3E%3Cpath%20d%3D%22M154.9%20-90.7L154.9%20-90.7Q166.2%20-90.7%20174.05%20-85.9Q181.9%20-81.1%20186.35%20-71.9Q190.8%20-62.7%20191.7%20-49.5L191.7%20-49.5L127.2%20-49.5L127.2%20-57.9L179.7%20-60L171.3%20-55.6Q170.8%20-63.8%20168.7%20-69.45Q166.6%20-75.1%20162.8%20-78.05Q159%20-81%20153.3%20-81L153.3%20-81Q146.7%20-81%20141.750%20-77.55Q136.8%20-74.1%20134.05%20-66.95Q131.3%20-59.8%20131.3%20-48.8L131.3%20-48.8Q131.3%20-37.3%20135.45%20-29.35Q139.6%20-21.4%20147.3%20-17.2Q155%20-13%20165.5%20-13L165.5%20-13Q169.9%20-13%20173.95%20-13.95Q178%20-14.9%20181.9%20-16.75Q185.8%20-18.6%20189.5%20-21.2L189.5%20-21.2L191.8%20-16.5Q186.3%20-10.5%20180.45%20-6.3Q174.6%20-2.1%20168.3%200.05Q162%202.2%20155.1%202.2L155.1%202.2Q142.3%202.2%20132.6%20-3.55Q122.9%20-9.3%20117.45%20-19.5Q112%20-29.7%20112%20-42.9L112%20-42.9Q112%20-56.3%20117.15%20-67.15Q122.3%20-78%20131.9%20-84.35Q141.5%20-90.7%20154.9%20-90.7Z%22%2F%3E%3Cpath%20d%3D%22M233.7%20-124.7L233.7%20-9.6L248.3%20-4.8L248.3%200L199.4%200L199.4%20-4.8L213.9%20-9.6L213.9%20-120.6Q212.5%20-122.2%20210.2%20-123.8Q207.9%20-125.4%20204.7%20-127.1Q201.5%20-128.8%20197.6%20-130.4L197.6%20-134.2L232.1%20-143.2L235.1%20-143.2Z%22%2F%3E%3Cpath%20d%3D%22M313%20-56.2L313%20-56.2L313.4%20-47.6Q302%20-45.3%20294.8%20-42.8Q287.6%20-40.3%20283.65%20-37.6Q279.7%20-34.9%20278.25%20-31.85Q276.8%20-28.8%20276.8%20-25L276.8%20-25Q276.8%20-18.3%20280.5%20-14.9Q284.2%20-11.5%20290.1%20-11.5L290.1%20-11.5Q294.7%20-11.5%20298.45%20-13.7Q302.2%20-15.9%20304.4%20-19.450Q306.6%20-23%20306.6%20-27.3L306.6%20-27.3L306.6%20-63.9Q306.6%20-71.4%20302.9%20-75.6Q299.2%20-79.8%20290.4%20-79.8L290.4%20-79.8Q286.9%20-79.8%20283.1%20-79Q279.3%20-78.2%20275.8%20-76.7L275.8%20-76.7L280.8%20-82.4Q280.3%20-78.6%20279.65%20-75.5Q279%20-72.4%20278.2%20-70.15Q277.4%20-67.9%20276.3%20-66.4L276.3%20-66.4Q274.7%20-64.3%20272.05%20-63.35Q269.4%20-62.4%20266.3%20-62.4L266.3%20-62.4Q262.4%20-62.4%20260.2%20-64.05Q258%20-65.7%20258%20-68.3L258%20-68.3Q258%20-71.8%20261.35%20-75.6Q264.7%20-79.4%20270.4%20-82.7Q276.1%20-86%20283.3%20-88.05Q290.5%20-90.1%20298.3%20-90.1L298.3%20-90.1Q308.6%20-90.1%20314.8%20-87Q321%20-83.9%20323.7%20-78.15Q326.4%20-72.4%20326.4%20-64.3L326.4%20-64.3L326.4%20-19.1Q326.4%20-16.1%20327.3%20-14.1Q328.2%20-12.1%20329.95%20-11.1Q331.7%20-10.1%20334.3%20-10.1L334.3%20-10.1Q336.5%20-10.1%20339%20-10.85Q341.5%20-11.6%20344%20-13L344%20-13L344%20-7Q339.4%20-2.6%20334.25%20-0.3Q329.1%202%20324.5%202L324.5%202Q318.9%202%20315%20-0.4Q311.1%20-2.8%20309.15%20-7.45Q307.2%20-12.1%20307%20-18.5L307%20-18.5L307.8%20-19.2Q306.3%20-12.6%20302.55%20-7.8Q298.8%20-3%20293.5%20-0.4Q288.2%202.2%20281.8%202.2L281.8%202.2Q270.6%202.2%20263.75%20-3.7Q256.9%20-9.6%20256.9%20-20.9L256.9%20-20.9Q256.9%20-26.8%20259.25%20-31.6Q261.6%20-36.4%20267.7%20-40.6Q273.8%20-44.8%20284.8%20-48.6Q295.8%20-52.4%20313%20-56.2Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" download="vela-logo-dark.svg">Logo, dark</a></li>
+    <li><a href="data:image/svg+xml;charset=utf-8,%3Csvg%20class%3D%22%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-label%3D%22Vela%20mark%22%3E%3Ctitle%3EVela%20mark%3C%2Ftitle%3E%3Cg%20transform%3D%22translate(2.5%202)%22%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A0%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%206Q23.6%2011.91%2031.02%2020H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A1%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%2024H34.45Q38.55%2029.12%2041.87%2035H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A2%22%20fill%3D%22%231B2A38%22%20d%3D%22M14%2039H44Q47.5%2046%2050%2054H14Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" download="vela-mark.svg">Mark</a></li>
+    <li><a href="data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%221024%22%20height%3D%221024%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-label%3D%22Vela%20app%20icon%22%3E%3Ctitle%3EVela%20app%20icon%3C%2Ftitle%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214.4%22%20fill%3D%22%231B2A38%22%2F%3E%3Cg%20transform%3D%22translate(12.4%2011)%20scale(0.68)%22%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A0%22%20fill%3D%22%23D2A462%22%20d%3D%22M14%206Q23.6%2011.91%2031.02%2020H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A1%22%20fill%3D%22%23F4EEE2%22%20d%3D%22M14%2024H34.45Q38.55%2029.12%2041.87%2035H14Z%22%2F%3E%3Cpath%20class%3D%22band%22%20style%3D%22--i%3A2%22%20fill%3D%22%23F4EEE2%22%20d%3D%22M14%2039H44Q47.5%2046%2050%2054H14Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" download="vela-app-icon.svg">App icon</a></li>
+  </ul>
+</footer>
+</body>
+</html>
