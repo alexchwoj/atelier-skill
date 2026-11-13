@@ -63,6 +63,53 @@
   .install button:active { transform: scale(.97); }
   .hero .agents { margin-top: 14px; font-size: 14px; }
 
+  .film { padding-bottom: clamp(40px, 5vw, 64px); }
+  .player { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: var(--ink); box-shadow: 0 0 0 1px var(--line), 0 30px 60px -40px rgba(20,20,20,.45); isolation: isolate; }
+  .player:fullscreen { border-radius: 0; aspect-ratio: auto; box-shadow: none; }
+  .player video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: contain; cursor: pointer; }
+  .player svg { display: block; width: 100%; height: 100%; }
+  .p-big {
+    position: absolute; left: 7.5%; bottom: 9%; z-index: 2; display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 22px 0 16px; border: 0; border-radius: 999px; cursor: pointer; color: #fff;
+    font: 600 16px/1 "Inter Tight", system-ui, sans-serif; letter-spacing: -0.005em; white-space: nowrap;
+    background: linear-gradient(160deg, var(--red-hi), var(--red)); box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 16px 30px -16px rgba(200,16,46,.8);
+    transition: transform .25s var(--ease), opacity .25s var(--ease), filter .2s var(--ease);
+  }
+  .p-big svg { width: 22px; height: 22px; flex: none; margin-left: 1px; }
+  .p-big:hover { filter: brightness(1.06); transform: translateY(-2px); }
+  .p-big:active { transform: scale(.97); }
+  .player:not([data-state="idle"]):not([data-state="ended"]) .p-big { opacity: 0; transform: translateY(6px); pointer-events: none; visibility: hidden; }
+  .p-bar {
+    position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 3; display: flex; align-items: center; gap: 6px; padding: 6px 8px;
+    background: rgba(20,20,20,.78); color: #fff; border-radius: 14px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    transition: opacity .3s var(--ease), transform .3s var(--ease);
+  }
+  .player[data-state="idle"] .p-bar { opacity: 0; pointer-events: none; transform: translateY(8px); }
+  .player.hide-ui[data-state="playing"] .p-bar { opacity: 0; transform: translateY(8px); pointer-events: none; }
+  .player.hide-ui[data-state="playing"] video { cursor: none; }
+  .player.hide-ui .p-bar:focus-within { opacity: 1; transform: none; pointer-events: auto; }
+  .p-btn { flex: none; width: 44px; height: 44px; padding: 11px; border: 0; border-radius: 10px; background: transparent; color: #fff; cursor: pointer; transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease); }
+  .p-btn:hover { background: rgba(255,255,255,.14); color: var(--red-hi); }
+  .p-btn:active { transform: scale(.92); }
+  .p-btn .i-pause, .p-btn .i-mute { display: none; }
+  .player[data-state="playing"] .p-play .i-play { display: none; }
+  .player[data-state="playing"] .p-play .i-pause { display: block; }
+  .player.muted .p-mute .i-vol { display: none; }
+  .player.muted .p-mute .i-mute { display: block; }
+  .p-time { flex: none; font: 400 13px/1 "JetBrains Mono", ui-monospace, monospace; color: #d9d3d0; padding-inline: 4px 8px; font-variant-numeric: tabular-nums; }
+  .p-seek { --p: 0%; flex: 1 1 auto; min-width: 0; height: 44px; margin: 0; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none; }
+  .p-seek::-webkit-slider-runnable-track { height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--red-hi), var(--red)) 0 / var(--p) 100% no-repeat, rgba(255,255,255,.26); }
+  .p-seek::-moz-range-track { height: 4px; border-radius: 4px; background: rgba(255,255,255,.26); }
+  .p-seek::-moz-range-progress { height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--red-hi), var(--red)); }
+  .p-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; margin-top: -5px; border-radius: 50%; background: #fff; border: 0; box-shadow: 0 2px 8px rgba(0,0,0,.4); transition: transform .2s var(--ease); }
+  .p-seek::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 0; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+  .p-seek:hover::-webkit-slider-thumb, .p-seek:active::-webkit-slider-thumb { transform: scale(1.3); }
+  .p-seek:focus-visible, .p-btn:focus-visible, .p-big:focus-visible { outline: 2px solid var(--red-hi); outline-offset: 2px; }
+  @media (max-width: 560px) {
+    .p-big { bottom: 8%; min-height: 40px; gap: 8px; padding: 0 16px 0 12px; font-size: 14px; }
+    .p-big svg { width: 18px; height: 18px; }
+    .p-bar { left: 8px; right: 8px; bottom: 8px; gap: 2px; padding: 4px; }
+    .p-time .p-dur, .p-time .sep { display: none; }
+  }
   .does ul { list-style: none; margin: 0 0 clamp(40px, 5vw, 64px); padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
   .does li { padding: 22px 24px 4px 0; font-size: 15px; color: var(--muted); text-wrap: pretty; }
   .does li + li { padding-left: 24px; border-left: 1px solid var(--line); }
@@ -186,6 +233,28 @@
       <button type="button" id="copy">Copy</button>
     </div>
     <p class="agents">Works with Claude Code, Codex, Cursor, OpenCode and Gemini CLI.</p>
+    </div>
+  </section>
+
+  <section class="film wrap" aria-label="Atelier in 30 seconds">
+    <div class="player" id="player" data-state="idle">
+      <video src="video/atelier.mp4" poster="video/poster.jpg" width="1920" height="1080" playsinline preload="none" aria-label="Atelier promo: four businesses, the same AI page without Atelier, then their own brand with it"></video>
+      <button type="button" class="p-big"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.8-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"/></svg><span class="p-big-t">Watch the film · 0:30</span></button>
+      <div class="p-bar">
+        <button type="button" class="p-btn p-play" aria-label="Play">
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.8-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" fill="currentColor"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4.2" height="14" rx="1.2" fill="currentColor"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.2" fill="currentColor"/></svg>
+        </button>
+        <span class="p-time"><span class="p-cur">0:00</span><span class="sep"> / </span><span class="p-dur">0:00</span></span>
+        <input class="p-seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">
+        <button type="button" class="p-btn p-mute" aria-label="Mute">
+          <svg class="i-vol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+          <svg class="i-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="m16 9.5 5 5M21 9.5l-5 5"/></svg>
+        </button>
+        <button type="button" class="p-btn p-full" aria-label="Fullscreen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -656,6 +725,46 @@
     }, { threshold: 0.35 }).observe(box);
     label();
   });
+  // Promo player: custom controls over a plain <video>.
+  (() => {
+    const box = document.getElementById('player'); if (!box) return;
+    const v = box.querySelector('video'), big = box.querySelector('.p-big'), play = box.querySelector('.p-play');
+    const seek = box.querySelector('.p-seek'), cur = box.querySelector('.p-cur'), dur = box.querySelector('.p-dur');
+    const mute = box.querySelector('.p-mute'), full = box.querySelector('.p-full');
+    const fmt = (s) => { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+    const toggle = () => { v.paused || v.ended ? v.play().catch(() => {}) : v.pause(); };
+    const state = (s) => { box.dataset.state = s; const p = s === 'playing'; play.setAttribute('aria-label', p ? 'Pause' : 'Play'); big.querySelector('.p-big-t').textContent = s === 'ended' ? 'Watch again' : 'Watch the film · 0:30'; };
+    const tick = () => {
+      const d = v.duration || 0, t = v.currentTime || 0;
+      cur.textContent = fmt(t); dur.textContent = fmt(d);
+      const r = d ? t / d : 0;
+      seek.value = Math.round(r * 1000); seek.style.setProperty('--p', (r * 100) + '%');
+      seek.setAttribute('aria-valuetext', fmt(t) + ' of ' + fmt(d));
+    };
+    let idle;
+    const wake = () => { box.classList.remove('hide-ui'); clearTimeout(idle); if (!v.paused) idle = setTimeout(() => box.classList.add('hide-ui'), 2400); };
+    v.addEventListener('play', () => { state('playing'); wake(); });
+    v.addEventListener('pause', () => { if (!v.ended) state('paused'); box.classList.remove('hide-ui'); });
+    v.addEventListener('ended', () => { state('ended'); box.classList.remove('hide-ui'); });
+    v.addEventListener('timeupdate', tick); v.addEventListener('loadedmetadata', tick); v.addEventListener('durationchange', tick);
+    v.addEventListener('click', toggle); big.addEventListener('click', toggle); play.addEventListener('click', toggle);
+    seek.addEventListener('input', () => { if (v.duration) v.currentTime = (seek.value / 1000) * v.duration; tick(); });
+    mute.addEventListener('click', () => { v.muted = !v.muted; });
+    v.addEventListener('volumechange', () => { box.classList.toggle('muted', v.muted); mute.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute'); });
+    full.addEventListener('click', () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (box.requestFullscreen) box.requestFullscreen().catch(() => {});
+      else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+    });
+    ['pointermove', 'pointerdown', 'keydown'].forEach((e) => box.addEventListener(e, wake));
+    box.addEventListener('keydown', (e) => {
+      if (e.target === seek || e.target.closest('button') || e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.key === ' ' || e.key === 'k') { e.preventDefault(); toggle(); }
+    });
+    // Pause when scrolled away, like the example clips.
+    if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => { if (!en.isIntersecting && !v.paused) v.pause(); }, { threshold: 0.1 }).observe(box);
+    state('idle'); tick();
+  })();
   document.querySelectorAll('#copy, .copy-btn').forEach((btn) => btn.addEventListener('click', async () => {
     try { await navigator.clipboard.writeText('npx github:alexchwoj/atelier-skill'); btn.textContent = 'Copied'; btn.classList.remove('done'); void btn.offsetWidth; btn.classList.add('done'); }
     catch { btn.textContent = 'Select and copy'; }
